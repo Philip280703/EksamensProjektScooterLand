@@ -101,3 +101,7 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+.nav-item a.active::after{
+    margin-left: 1em;
+}
