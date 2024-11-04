@@ -91,7 +91,7 @@
             buttonBackup.TabIndex = 5;
             buttonBackup.Text = "Back-up";
             buttonBackup.UseVisualStyleBackColor = true;
-            buttonBackup.Click += this.buttonBackup_Click;
+            buttonBackup.Click += buttonBackup_Click;
             // 
             // buttonSelectFolder
             // 

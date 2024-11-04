@@ -1,10 +1,12 @@
+using ScooterLandWinForms.Serivces;
+
 namespace ScooterLandWinForms
 {
     public partial class Form1 : Form
     {
         private readonly BackupKopieringService backupKopieringService;
         public Form1()
-        { 
+        {
             InitializeComponent();
             backupKopieringService = new BackupKopieringService();
         }
@@ -19,7 +21,7 @@ namespace ScooterLandWinForms
             }
         }
 
-        private void buttonBackupLocation_Click(object sender, EventArgs e) 
+        private void buttonBackupLocation_Click(object sender, EventArgs e)
         {
             string sourcePath = backupKopieringService.SelectFolder("vælg placering for back-up");
             if (sourcePath != null)
@@ -29,7 +31,7 @@ namespace ScooterLandWinForms
             }
         }
 
-        private void buttonBackup_Click(object sender, EventArgs e) 
+        private void buttonBackup_Click(object sender, EventArgs e)
         {
             if (backupKopieringService.CreateBatchFile())
             {
@@ -44,5 +46,6 @@ namespace ScooterLandWinForms
 
         }
 
+        
     }
 }
