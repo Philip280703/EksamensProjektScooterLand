@@ -15,20 +15,32 @@
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
+            <NavLink class="nav-link" href="Ordre">
+                <span class="bi bi-order-nav-menu" aria-hidden="true"></span> Ordre
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+            <NavLink class="nav-link" href="Mekaniker" @onclick="() =>expandNavMenu= !expandNavMenu">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Mekaniker
             </NavLink>
+
+            @if(expandNavMenu)
+            {
+                <ul class="nav flex-column">
+                    <li class="nav-item px-3">
+                <NavLink class="nav-link" href="Mekaniker/1">
+                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Mekaniker1
+                </NavLink>
+                    </li>
+                </ul>
+            }
         </div>
     </nav>
 </div>
 
 @code {
     private bool collapseNavMenu = true;
+    private bool expandNavMenu;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
