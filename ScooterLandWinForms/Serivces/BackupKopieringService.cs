@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScooterLandWinForms
+namespace ScooterLandWinForms.Serivces
 {
     public class BackupKopieringService
     {
-        public string FolderPlaceringPath {  get; private set; }
+        public string FolderPlaceringPath { get; private set; }
         public string DestinationPath { get; private set; }
         public string BatFilPath { get; set; }
 
@@ -48,10 +48,10 @@ namespace ScooterLandWinForms
 
 
 
-       /// <summary>
-       /// metode som laver en bat-fil til at kunne kalde og gennemføre et xcopy
-       /// </summary>
-       /// <returns></returns>
+        /// <summary>
+        /// metode som laver en bat-fil til at kunne kalde og gennemføre et xcopy
+        /// </summary>
+        /// <returns></returns>
         public bool CreateBatchFile()
         {
             if (string.IsNullOrEmpty(FolderPlaceringPath) || !Directory.Exists(FolderPlaceringPath))
