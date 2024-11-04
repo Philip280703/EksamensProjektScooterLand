@@ -12,6 +12,9 @@ namespace ScooterLandWinForms.Serivces
         public string DestinationPath { get; private set; }
         public string BatFilPath { get; set; }
 
+        private bool usb1 = false;
+        private bool usb2 = false;
+
         /// <summary>
         /// null-constructor instansiere bat-filens path, henter system mappe og kombinere de to, så batfilen kan placeres
         /// </summary>
@@ -60,6 +63,8 @@ namespace ScooterLandWinForms.Serivces
             if (string.IsNullOrEmpty(DestinationPath) || !Directory.Exists(DestinationPath))
                 return false;
 
+            CheckUsbstickName();
+
             string batchContent = $@"
             @echo off
             echo Copying {FolderPlaceringPath} to {DestinationPath}
@@ -88,5 +93,38 @@ namespace ScooterLandWinForms.Serivces
                 System.Diagnostics.Process.Start(BatFilPath);
             }
         }
+
+        /// <summary>
+        /// setter en bool af hvilket usb stik som sidder i computeren
+        /// </summary>
+        public void CheckUsbstickName()
+        {
+            DriveInfo[] drives = DriveInfo.GetDrives();
+
+            foreach (DriveInfo drive in drives)
+            {
+                if(drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel == "USB-DRIVE")
+                {
+                    usb1 = true;
+                }
+                if (drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel == "UsbStik")
+                {
+                    usb2 = true;
+                }
+
+            }
+
+        }
+
+
+        public bool PathVerify(string sourcePath)
+        {
+            if (!sourcePath.Contains("D:") || !sourcePath.Contains("E:") || !sourcePath.Contains("F:"))
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }
