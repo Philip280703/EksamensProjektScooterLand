@@ -116,7 +116,11 @@ namespace ScooterLandWinForms.Serivces
 
         }
 
-
+        /// <summary>
+        /// tjekker om den givende path til hvor backup skal placeres er på et D:, E: eller F: drev
+        /// </summary>
+        /// <param name="sourcePath"></param>
+        /// <returns></returns>
         public bool PathVerify(string sourcePath)
         {
             if (!sourcePath.Contains("D:") || !sourcePath.Contains("E:") || !sourcePath.Contains("F:"))
@@ -125,6 +129,8 @@ namespace ScooterLandWinForms.Serivces
             }
             return true;
         }
+
+
 
     }
 }
