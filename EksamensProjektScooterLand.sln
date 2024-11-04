@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScooterLandBlazorProjekt", "ScooterLandBlazorProjekt\ScooterLandBlazorProjekt.csproj", "{979775FC-B334-499B-B0D7-C1B426F02198}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScooterLandWinForms", "ScooterLandWinForms\ScooterLandWinForms.csproj", "{69E9CDAB-0C79-4A33-9561-F4E15ED7F96C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{979775FC-B334-499B-B0D7-C1B426F02198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{979775FC-B334-499B-B0D7-C1B426F02198}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{979775FC-B334-499B-B0D7-C1B426F02198}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{979775FC-B334-499B-B0D7-C1B426F02198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69E9CDAB-0C79-4A33-9561-F4E15ED7F96C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69E9CDAB-0C79-4A33-9561-F4E15ED7F96C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69E9CDAB-0C79-4A33-9561-F4E15ED7F96C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69E9CDAB-0C79-4A33-9561-F4E15ED7F96C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {805C5B3F-2502-47B3-BD32-8DC3A4F95794}
+	EndGlobalSection
+EndGlobal
