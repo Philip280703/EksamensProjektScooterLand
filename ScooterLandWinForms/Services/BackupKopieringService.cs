@@ -73,7 +73,7 @@ namespace ScooterLandWinForms.Serivces
 
 
         /// <summary>
-        /// metode som laver en bat-fil til at kunne kalde og gennemføre et xcopy
+        /// metode som laver en bat-fil til at kunne kalde og gennemføre et xcopy. dertil kalder den CheckUsbstickName() og returnere en bool
         /// </summary>
         /// <returns></returns>
         public bool CreateBatchFile()
@@ -133,10 +133,16 @@ namespace ScooterLandWinForms.Serivces
                 {
                     if(usb1 == false)
                     {
+                        // her opdatere der bool for hvilken er brugt, både i de private bools til usb1 og usb2, men også i txt-filen
                         usb1 = true;
                         usb2 = false;
-                        // add here
-                        
+                      
+                        using(StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.Create)))
+                        {
+                            writer.WriteLine("USB-1 er sidst brugte");
+                            writer.WriteLine("1");
+                            writer.WriteLine("0");
+                        }
 
                         return status = true;
                     }
@@ -148,8 +154,16 @@ namespace ScooterLandWinForms.Serivces
                 {
                     if(usb2 == false)
                     {
+                        // her opdatere der bool for hvilken er brugt, både i de private bools til usb1 og usb2, men også i txt-filen
                         usb2 = true;
                         usb1 = false;
+
+                        using (StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.Create)))
+                        {
+                            writer.WriteLine("USB-2 er sidst brugte");
+                            writer.WriteLine("0");
+                            writer.WriteLine("1");
+                        }
                         return status = true;
                     }
                     MessageBox.Show("Dette usb stik er der den seneste backup ligger på. brug derfor det andet usb stik", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -174,6 +188,12 @@ namespace ScooterLandWinForms.Serivces
             return false;
         }
 
+        /// <summary>
+        /// Denne statiske metode går ind og læser txt-filen, og insætter hver række til en liste
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         static List<string> GetTextFile(string filename) 
         { 
             List<string> result = new List<string>();
@@ -196,6 +216,9 @@ namespace ScooterLandWinForms.Serivces
 
         }
 
+        /// <summary>
+        /// Denne metode går ind og sætter de lokale bools til at være den tilsvarende værdi, som står i txt-filen
+        /// </summary>
         private void SetUsbStikBools()
         {
             if (int.Parse(UsbList[1]) == 0)
@@ -218,7 +241,7 @@ namespace ScooterLandWinForms.Serivces
 
         }
 
-       
+
 
 
     }
