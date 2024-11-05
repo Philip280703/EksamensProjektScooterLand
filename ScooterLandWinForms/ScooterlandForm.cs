@@ -26,8 +26,16 @@ namespace ScooterLandWinForms
             string sourcePath = backupKopieringService.SelectFolder("vælg placering for back-up");
             if (sourcePath != null)
             {
-                backupKopieringService.SetDestinationFolderPath(sourcePath);
-                textBoxUSB.Text = sourcePath;
+                if(backupKopieringService.PathVerify(sourcePath) == false)
+                {
+                    MessageBox.Show("Der skal vælges en mappe på et usb-stik som back-up skal ligge på", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    backupKopieringService.SetDestinationFolderPath(sourcePath);
+                    textBoxUSB.Text = sourcePath;
+                }
+            
             }
         }
 
