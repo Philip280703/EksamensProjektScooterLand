@@ -41,7 +41,7 @@ namespace ScooterLandWinForms
 
         private void buttonBackup_Click(object sender, EventArgs e)
         {
-            if (backupKopieringService.CreateBatchFile())
+            if (backupKopieringService.CreateBatFil())
             {
                 MessageBox.Show("Back-up er nu gennemført :).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 backupKopieringService.ExecuteBatchFile();

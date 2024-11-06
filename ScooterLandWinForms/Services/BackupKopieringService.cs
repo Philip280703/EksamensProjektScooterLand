@@ -76,7 +76,7 @@ namespace ScooterLandWinForms.Serivces
         /// metode som laver en bat-fil til at kunne kalde og gennemføre et xcopy. dertil kalder den CheckUsbstickName() og returnere en bool
         /// </summary>
         /// <returns></returns>
-        public bool CreateBatchFile()
+        public bool CreateBatFil()
         {
             if (string.IsNullOrEmpty(FolderPlaceringPath) || !Directory.Exists(FolderPlaceringPath))
                 return false;
@@ -240,8 +240,6 @@ namespace ScooterLandWinForms.Serivces
             }
 
         }
-
-
 
 
     }
