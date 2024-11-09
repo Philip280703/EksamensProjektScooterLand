@@ -60,6 +60,8 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
         public string Placering { get; set; }
 
+
+        // fremmednøgle
         public int PreferetMekanikerID { get; set; }
 
 

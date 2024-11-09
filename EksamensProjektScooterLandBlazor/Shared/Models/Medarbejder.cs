@@ -70,6 +70,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public string Efternavn { get; set; }
 
 
+        // fremmednøgle
         [Required(ErrorMessage = "Scooter brand ID af ekspertise er påkrævet. (0 for ikke mekaniker medarbejder)")]
         [Range(1, 100, ErrorMessage = "Indtast gyldigt ScooterBrandID.")]
         public int ScooterBrandIDEkspertise { get; set; }

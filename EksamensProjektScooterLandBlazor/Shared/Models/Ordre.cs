@@ -12,8 +12,9 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int OrdreID { get; set; }    
+        public int OrdreID { get; set; }
 
+        // fremmednøgle
         public int KundeID { get; set; }
 
 
@@ -24,6 +25,8 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Range(0, int.MaxValue, ErrorMessage ="Betalings sum skal være et positivt tal")]
         public decimal BetalingsSum { get; set; }
 
+
+        // fremmednøgle
         public int MedarbejderID { get; set; }
 
 
