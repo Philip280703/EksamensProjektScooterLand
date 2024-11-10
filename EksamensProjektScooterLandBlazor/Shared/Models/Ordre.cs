@@ -14,8 +14,9 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrdreID { get; set; }
 
-        // fremmednøgle
-        public int KundeID { get; set; }
+
+        [Required]
+        public DateTime SalgsDato { get; set; }
 
 
         [Range(0, int.MaxValue, ErrorMessage ="Samelt pris skal være et positivt tal")]
@@ -27,7 +28,19 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         // fremmednøgle
+        public int KundeID { get; set; }
+        // objekt relation til EF
+        public Kunde kunde { get; set; }
+
+
+        // fremmednøgle
         public int MedarbejderID { get; set; }
+        // objekt relation til EF
+        public Medarbejder medarbejder { get; set; }
+
+
+        //en ordre indeholder en liste af ordelinjer
+        public List<OrdreLinje> ordreLinjer { get; private set; } = new List<OrdreLinje>();
 
 
     }

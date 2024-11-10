@@ -65,5 +65,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public int PreferetMekanikerID { get; set; }
 
 
+
+
     }
 }

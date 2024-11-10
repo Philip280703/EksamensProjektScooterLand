@@ -23,14 +23,24 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Range(1, int.MaxValue, ErrorMessage ="Total skal være postivt.")]
         public int Total { get; set; }
 
+
         // fremmednøgle
         public int YdelseID { get; set; }
+        // objekt relation til EF
+        public Ydelse ydelse { get; set; }
+
 
         // fremmednøgle
         public int ProduktID { get; set; }
+        // objekt relation til EF
+        public Produkt produkt { get; set; }
+
 
         // fremmednøgle
         public int OrdreID { get; set; }
+
+        // objekt relation til EF
+        public Ordre ordre { get; set; }
 
 
 

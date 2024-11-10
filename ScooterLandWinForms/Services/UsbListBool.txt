@@ -1,3 +1,3 @@
-USB-1 er sidst brugte
-1
+-- usb --
+0
 0
