@@ -56,9 +56,9 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Required]
         public string HusNummer { get; set; }
 
-        public string Etage {  get; set; }
+        public string ?Etage {  get; set; }
 
-        public string Placering { get; set; }
+        public string ?Placering { get; set; }
 
 
         // fremmednøgle
