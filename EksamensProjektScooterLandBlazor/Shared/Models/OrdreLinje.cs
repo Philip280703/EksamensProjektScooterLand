@@ -37,6 +37,12 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         // fremmednøgle
+        public int ScooterLejeID { get; set; }
+        // objekt relation til EF
+        public ScooterLeje scooterLeje { get; set; }
+
+
+        // fremmednøgle
         public int OrdreID { get; set; }
 
         // objekt relation til EF
