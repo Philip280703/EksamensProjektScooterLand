@@ -21,7 +21,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         [Range(1, int.MaxValue, ErrorMessage ="Total skal være postivt.")]
-        public int Total { get; set; }
+        public decimal Total { get; set; }
 
 
         // fremmednøgle
@@ -47,7 +47,6 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
         // objekt relation til EF
         public Ordre ordre { get; set; }
-
 
 
     }
