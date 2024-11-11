@@ -34,7 +34,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         // fremmednøgle
-        public int MedarbejderID { get; set; }
+        public int MedarbejderCprNummer { get; set; }
         // objekt relation til EF
         public Medarbejder medarbejder { get; set; }
 

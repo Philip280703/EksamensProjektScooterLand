@@ -17,7 +17,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
         [Required(ErrorMessage = "Ydelsen skal have et navn")]
         [StringLength(30, ErrorMessage ="Ydelsesnavnet må maksimalt være på 30 tegn.")]
-        public string YdelseName { get; set; }
+        public string YdelseNavn { get; set; }
 
         [Required(ErrorMessage = "Estimeret tid for ydelsen skal udfyldes.")]
         [Range(0.25, 10, ErrorMessage ="Tiden skal være mellem 0,25 (15 min) og 10 (timer).")]

@@ -50,10 +50,10 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Range(1000, 9990, ErrorMessage = "Postnummeret skal være et gyldigt dansk postnummer")]
         public int PostNummer { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Vejnavn er påkrævet.")]
         public string VejNavn { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Husnummer er påkrævet.")]
         public string HusNummer { get; set; }
 
         public string ?Etage {  get; set; }
@@ -62,7 +62,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         // fremmednøgle
-        public int PreferetMekanikerID { get; set; }
+        public int PreferetMekanikerCprNummer { get; set; }
 
         // reference til postnummer og by objektet
         public PostNummerOgBy postNummerOgBy { get; set; }
