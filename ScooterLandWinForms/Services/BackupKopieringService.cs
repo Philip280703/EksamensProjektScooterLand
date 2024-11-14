@@ -221,21 +221,21 @@ namespace ScooterLandWinForms.Serivces
         /// </summary>
         private void SetUsbStikBools()
         {
-            if (int.Parse(UsbList[1]) == 0)
+            if (UsbList[1] == "0")
             {
                 usb1 = false;
             }
-            else 
-            { 
+            else if (UsbList[2] == "1")
+			{ 
                 usb1 = true;
             }
 
-            if (int.Parse(UsbList[2]) == 0)
+            if (UsbList[2] == "0")
             {
                 usb1 = false;
             }
-            else
-            {
+            else if (UsbList[2] == "1")
+			{
                 usb1 = true;
             }
 
