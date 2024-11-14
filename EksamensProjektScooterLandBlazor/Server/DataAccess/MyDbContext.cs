@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EksamensProjektScooterLandBlazor.Shared
+namespace EksamensProjektScooterLandBlazor.Server.DataAccess
 {
     public class MyDbContext : DbContext
     {
@@ -17,7 +17,7 @@ namespace EksamensProjektScooterLandBlazor.Shared
         }
 
         // EF komponenter
-        public DbSet<Kunde> Kunder {  get; set; }
+        public DbSet<Kunde> Kunder { get; set; }
         public DbSet<Medarbejder> Medarbejdere { get; set; }
         public DbSet<Ordre> Ordrer { get; set; }
         public DbSet<OrdreLinje> OrdreLinjer { get; set; }

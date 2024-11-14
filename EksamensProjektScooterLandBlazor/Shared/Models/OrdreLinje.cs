@@ -24,6 +24,10 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public int Total { get; set; }
 
 
+        [Range(1, 99, ErrorMessage ="Rabat skal være mellem 1 og 99 procent, skrives i hele tal")]
+        public int RabatProcent { get; set; }
+
+
         // fremmednøgle
         public int YdelseID { get; set; }
         // objekt relation til EF

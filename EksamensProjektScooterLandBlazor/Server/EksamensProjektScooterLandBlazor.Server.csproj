@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Client\EksamensProjektScooterLandBlazor.Client.csproj" />
     <ProjectReference Include="..\Shared\EksamensProjektScooterLandBlazor.Shared.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
 </Project>

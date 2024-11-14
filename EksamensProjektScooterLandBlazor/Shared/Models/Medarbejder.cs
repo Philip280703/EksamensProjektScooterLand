@@ -61,9 +61,6 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public string Fornavn { get; set; }
 
 
-        [StringLength(25, ErrorMessage = "Mellemnavn må ikke overstige 25 tegn.")]
-        public string MellemNavn { get; set; }
-
 
         [Required(ErrorMessage = "Efternavn er påkrævet.")]
         [StringLength(30, ErrorMessage = "Efternavn må maksimalt være 30 tegn langt.")]
