@@ -124,7 +124,7 @@ namespace ScooterLandWinForms.Serivces
         /// </summary>
         public bool CheckUsbstickName()
         {
-            bool status;
+            
             DriveInfo[] drives = DriveInfo.GetDrives();
             SetUsbStikBools();
             foreach (DriveInfo drive in drives)
@@ -144,7 +144,7 @@ namespace ScooterLandWinForms.Serivces
                             writer.WriteLine("0");
                         }
 
-                        return status = true;
+                        return true;
                     }
 
                     MessageBox.Show("Dette usb stik er der den seneste backup ligger på. brug derfor det andet usb stik", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -164,13 +164,13 @@ namespace ScooterLandWinForms.Serivces
                             writer.WriteLine("0");
                             writer.WriteLine("1");
                         }
-                        return status = true;
+                        return true;
                     }
                     MessageBox.Show("Dette usb stik er der den seneste backup ligger på. brug derfor det andet usb stik", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
-            return status = false;
+            return false;
 
         }
 
