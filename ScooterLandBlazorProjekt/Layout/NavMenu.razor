@@ -19,6 +19,7 @@
                 <span class="bi bi-order-nav-menu" aria-hidden="true"></span> Ordre
             </NavLink>
 
+            <!--  -->
             @if(showSubMenu[1])
             {
                 <ul class="nav flex-column">
@@ -60,6 +61,7 @@
         collapseNavMenu = !collapseNavMenu;
     }
 
+    
     private void ToggleSubMenu(int index)
     {
         for(int i = 0; i < showSubMenu.Length; i++)
