@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EksamensProjektScooterLandBlazor.Shared.Models
 {
-	internal class Mekaniker : Medarbejder 
+	public class Mekaniker : Medarbejder 
 	{
 		// fremmednøgle
 		[Required(ErrorMessage = "Scooter brand ID af ekspertise er påkrævet. (0 for ikke mekaniker medarbejder)")]

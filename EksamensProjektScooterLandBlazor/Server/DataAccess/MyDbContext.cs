@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EksamensProjektScooterLandBlazor.Client.Pages;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,7 @@ namespace EksamensProjektScooterLandBlazor.Server.DataAccess
         // EF komponenter
         public DbSet<Kunde> Kunder { get; set; }
         public DbSet<Medarbejder> Medarbejdere { get; set; }
+        public DbSet<Mekaniker> Mekanikere { get; set; }
         public DbSet<Ordre> Ordrer { get; set; }
         public DbSet<OrdreLinje> OrdreLinjer { get; set; }
         public DbSet<PostNummerOgBy> PostNummerOgByer { get; set; }
