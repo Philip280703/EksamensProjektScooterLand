@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EksamensProjektScooterLandBlazor.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialcreate : Migration
+    public partial class Creating : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -148,16 +148,16 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                     SalgsDato = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SamletPris = table.Column<double>(type: "float", nullable: false),
                     BetalingsSum = table.Column<double>(type: "float", nullable: false),
-                    KundeID = table.Column<int>(type: "int", nullable: false),
-                    MedarbejderCprNummer = table.Column<int>(type: "int", nullable: false),
+                    KundeiD = table.Column<int>(type: "int", nullable: false),
+                    MedarbejderCpr = table.Column<int>(type: "int", nullable: false),
                     medarbejderCprNummer = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ordrer", x => x.OrdreID);
                     table.ForeignKey(
-                        name: "FK_Ordrer_Kunder_KundeID",
-                        column: x => x.KundeID,
+                        name: "FK_Ordrer_Kunder_KundeiD",
+                        column: x => x.KundeiD,
                         principalTable: "Kunder",
                         principalColumn: "KundeID",
                         onDelete: ReferentialAction.Cascade);
@@ -242,9 +242,9 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                 column: "YdelseID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ordrer_KundeID",
+                name: "IX_Ordrer_KundeiD",
                 table: "Ordrer",
-                column: "KundeID");
+                column: "KundeiD");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ordrer_medarbejderCprNummer",

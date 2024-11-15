@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksamensProjektScooterLandBlazor.Server.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20241115102810_updateOrdreMedarbejderCpr")]
-    partial class updateOrdreMedarbejderCpr
+    [Migration("20241115103504_Creating")]
+    partial class Creating
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,10 +132,10 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                     b.Property<double>("BetalingsSum")
                         .HasColumnType("float");
 
-                    b.Property<int>("KundeID")
+                    b.Property<int>("KundeiD")
                         .HasColumnType("int");
 
-                    b.Property<int>("MedarbejderCprNum")
+                    b.Property<int>("MedarbejderCpr")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("SalgsDato")
@@ -149,7 +149,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.HasKey("OrdreID");
 
-                    b.HasIndex("KundeID");
+                    b.HasIndex("KundeiD");
 
                     b.HasIndex("medarbejderCprNummer");
 
@@ -341,7 +341,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                 {
                     b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.Kunde", "kunde")
                         .WithMany()
-                        .HasForeignKey("KundeID")
+                        .HasForeignKey("KundeiD")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

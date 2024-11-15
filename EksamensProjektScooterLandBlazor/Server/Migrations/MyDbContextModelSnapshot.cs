@@ -132,7 +132,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                     b.Property<int>("KundeiD")
                         .HasColumnType("int");
 
-                    b.Property<int>("MedarbejderCprNum")
+                    b.Property<int>("MedarbejderCpr")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("SalgsDato")
