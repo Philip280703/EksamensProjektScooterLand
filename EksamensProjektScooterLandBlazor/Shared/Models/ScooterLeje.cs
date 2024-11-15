@@ -23,11 +23,11 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         [Range(0, 20000, ErrorMessage ="Selvrisiko skal være mellem 0 og 20.000")]
-        public decimal SelvRisiko { get; set; }
+        public double SelvRisiko { get; set; }
 
 
         [Range(0.01, 15, ErrorMessage ="Forsikring skal være mellem 0,01 og 15,00 kr. pr. km. kørt")]
-        public decimal ForsikringPrKm { get; set; }
+        public double ForsikringPrKm { get; set; }
 
 
         [Range(1, 100, ErrorMessage ="Antal dage scooteren er lejet skal være mellem 1 og 100")]
@@ -35,11 +35,11 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         [Range(0.1, 1000, ErrorMessage ="DagsLejePrisen skal være mellem 0.1 og 1000 kr. pr. dag.")]
-        public decimal DagsLejePris { get; set; }
+        public double DagsLejePris { get; set; }
 
 
         [Range(1, 10000, ErrorMessage ="Prisen for scooterLeje skal være mellem 1 og 10000 kr.")]
-        public decimal Pris { get; set; }
+        public double Pris { get; set; }
 
 
     }

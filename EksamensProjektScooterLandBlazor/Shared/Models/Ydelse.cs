@@ -26,7 +26,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
         [Required(ErrorMessage = "Pris er påkrævet.")]
         [Range(1, int.MaxValue, ErrorMessage ="Prisen skal være positiv")]
-        public decimal Pris {  get; set; }
+        public double Pris {  get; set; }
 
         
     }

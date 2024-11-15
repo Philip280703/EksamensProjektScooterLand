@@ -23,6 +23,6 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
         [Required(ErrorMessage = "Produkt prisen er påkrævet")]
         [Range(0.1 ,double.MaxValue, ErrorMessage ="Prisen skal være positiv.")]
-        public decimal ProduktPris { get; set; } = 0;
+        public double ProduktPris { get; set; } = 0;
     }
 }
