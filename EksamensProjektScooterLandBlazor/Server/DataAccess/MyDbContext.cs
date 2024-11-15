@@ -14,7 +14,7 @@ namespace EksamensProjektScooterLandBlazor.Server.DataAccess
         // connectionString til den relationelle database EF skal gemme i.
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(" -- DatabaseServerNavnHer -- ;TrustServerCertificate=true;Trusted_Connection=True");
+            optionsBuilder.UseSqlServer("Server=ucl2024.database.windows.net; Database=ScooterLandDB; User Id=Camacho; Password=sologsommer2022+");
         }
 
         // EF komponenter

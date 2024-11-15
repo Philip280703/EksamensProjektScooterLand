@@ -10,7 +10,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
     public class PostNummerOgBy
     {
         [Key]
-        public int PostNummer {  get; set; }
+        public int Postnummer {  get; set; }
 
         public string ByNavn { get; set; }
     }
