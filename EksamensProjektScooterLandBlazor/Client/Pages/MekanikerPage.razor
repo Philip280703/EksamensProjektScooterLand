@@ -1,8 +1,41 @@
 ﻿@page "/Mekaniker"
 @page "/Mekaniker/1"
+@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Interfaces;
+@using EksamensProjektScooterLandBlazor.Client.ChildComponents;
 
 <h3>Mekaniker</h3>
+<br />
+
+<table class="table">
+    <tr>
+        <th>CPR-nummer</th>
+        <th>Fornavn</th>
+        <th>Efternavn</th>
+        <th>Rolle</th>
+        <th>Scooter brand ekspertise</th>
+    </tr>
+
+    @foreach(var item in MekanikerList)
+    {
+        <RenderMekaniker mekaniker ="@item"/>
+    }
+
+</table>
 
 @code {
+
+    private List<Mekaniker> MekanikerList = new List<Mekaniker> ();
+
+    [Inject]
+    public IMekanikerService Service { get; set; }
+
+    private int ErrorCode { get; set; } = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        MekanikerList = (await Service.GetAllMekaniker()).ToList(); 
+    }
+   
 
 }
