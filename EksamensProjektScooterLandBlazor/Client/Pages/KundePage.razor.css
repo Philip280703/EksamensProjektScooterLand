@@ -1,2 +1,41 @@
-﻿body {
+﻿br{
+    background-color: black;
 }
+
+th{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    border-top: 1px solid gray;
+    
+}
+
+.Left-Side-Tabel{
+    border: 1px solid gray;
+}
+
+.Kunde-Tabel{
+    width: 100%;
+    table-layout: fixed;
+}
+
+.Kunde-Tabel-Område{
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.Tabel-Header-Text {
+    color: black;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.Tabel-Header{
+    background-color: lightgray;
+    padding: 5px 15px 5px 15px;
+    border-bottom: 1px solid gray;
+}
+
+

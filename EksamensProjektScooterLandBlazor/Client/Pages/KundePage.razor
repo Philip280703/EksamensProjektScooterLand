@@ -1,15 +1,27 @@
 ﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
 @page "/Kundepage"
 
-<table>
-	<tr>
-		<th>Id</th>
-		<th>Name</th>
-		<th>Email</th>
-		<th>TelefonNummer</th>
-		<th>Prefereret Mekaniker</th>
-		<th>Scooter brand</th>
-	</tr>
-	
-</table>
+<div class="Left-Side-Tabel">
+	<div class="Tabel-Header">
+		<p class="Tabel-Header-Text">Kunde tabel</p>
+	</div>
+	<div class="Kunde-Tabel-Område">
+		<br class="Divider" />
+		<table class="Kunde-Tabel">
+			<tr class="Kunde-Tabel-Række">
+				<th>Id</th>
+				<th>Navn</th>
+				<th>Email</th>
+				<th>Tlf</th>
+				<th>Pref. M</th>
+				<th>Scooter</th>
+				<th>Action</th>
+			</tr>
+			@foreach(var kunde in kundeListe)
+			{
+				<EksamensProjektScooterLandBlazor.Client.ChildComponents.RenderKunde kunde="kunde" />	
+			}
+		</table>
+	</div>
+</div>
 
