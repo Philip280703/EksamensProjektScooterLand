@@ -1,2 +1,4 @@
-﻿body {
+﻿.Left-Side-Table{
+    width: 50%;
+    border: 1px solid black;
 }
