@@ -14,7 +14,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
 		public KundeController(IKundeRepository kundeRepository)
 		{
 			if (Repository == null && kundeRepository != null)
-			{
+			{ 
 				Repository = kundeRepository;
 				Console.WriteLine("Repository initialiseret");
 			}
