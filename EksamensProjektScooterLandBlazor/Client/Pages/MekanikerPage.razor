@@ -15,13 +15,33 @@
         <th>Scooter brand ekspertise</th>
     </tr>
 
-    @foreach(var item in MekanikerList)
+    @foreach (var item in MekanikerList)
     {
-        <RenderMekaniker mekaniker ="@item"/>
+        <RenderMekaniker mekaniker="@item"/>
     }
+
+    @* @foreach(var item in mekanikerWithBrands)
+    {
+        <RenderMekaniker mekaniker ="@item.mekaniker" scooterBrandNavn="@item.scooterBrandNavnet"/>
+        
+    } *@
 
 </table>
 
+<div></div>
+
+@* <table class="table">
+    <tr>
+        <th>Scooter brand ID</th>
+        <th>Scooter mærke</th>
+    </tr>
+
+    @foreach(var item in ScooterBrandList)
+    {
+        <RenderScooterbrand scooterBrand ="@item"/>
+    }
+</table>
+ *@
 <!-- display errorcode-->
 <label>return code: @ErrorCode</label>
 
@@ -29,15 +49,38 @@
 
     private List<Mekaniker> MekanikerList = new List<Mekaniker> ();
 
+    private List<ScooterBrand> ScooterBrandList = new List<ScooterBrand>();
+
+    // private List<MekanikerWithBrand> mekanikerWithBrands = new List<MekanikerWithBrand>();
+
     [Inject]
     public IMekanikerService service { get; set; }
+
+    [Inject]
+    public IScooterBrandService brandService { get; set; }
 
     private int ErrorCode { get; set; } = 0;
 
     protected override async Task OnInitializedAsync()
     {
-        MekanikerList = (await service.GetAllMekaniker()).ToList(); 
+        MekanikerList = (await service.GetAllMekaniker()).ToList();
+        // ScooterBrandList = (await brandService.GetAll()).ToList();
+
+    //     mekanikerWithBrands =
+    //     (from Mekaniker in MekanikerList
+    //      join ScooterBrand in ScooterBrandList
+    //  on Mekaniker.ScooterBrandId equals ScooterBrand.ScooterBrandID
+    //      select new MekanikerWithBrand { mekaniker = Mekaniker, scooterBrandNavnet = ScooterBrand.ScooterBrandNavn }
+    // ).ToList();
     }
-   
+
+
+
+
+    // public class MekanikerWithBrand
+    // {
+    //     public Mekaniker mekaniker { get; set; }
+    //     public string scooterBrandNavnet { get; set; }
+    // }
 
 }

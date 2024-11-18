@@ -1,0 +1,21 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+
+<h3>RenderScooterbrand</h3>
+
+<tr>
+	<td>
+		@scooterBrand.ScooterBrandID
+	</td>
+	<td>
+		@scooterBrand.ScooterBrandNavn
+	</td>
+
+
+</tr>
+
+
+@code {
+
+	[Parameter]
+	public ScooterBrand scooterBrand { get; set; }
+}

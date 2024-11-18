@@ -15,6 +15,8 @@ builder.Services.AddScoped<IKundeRepository, KundeRepositorySql>();
 
 builder.Services.AddScoped<IMekanikerRepository, MekanikerRepositorySql>();
 
+builder.Services.AddScoped<IScooterBrandRepository, ScooterBrandRepositorySql>();
+
 
 
 
