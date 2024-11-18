@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Json;
-
+using EksamensProjektScooterLandBlazor.Client.Services;
 namespace EksamensProjektScooterLandBlazor.Shared.Models;
 
 	public class KundeService : IKundeService

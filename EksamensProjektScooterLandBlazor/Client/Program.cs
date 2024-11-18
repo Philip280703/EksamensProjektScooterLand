@@ -1,5 +1,6 @@
 using EksamensProjektScooterLandBlazor.Client;
 using EksamensProjektScooterLandBlazor.Client.Services;
+using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -11,6 +12,14 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-builder.Services.AddHttpClient
+builder.Services.AddHttpClient<IKundeService, KundeService>(client =>
+{
+	client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
+builder.Services.AddHttpClient<IMekanikerService, MekanikerService>(client =>
+{
+	client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
 
 await builder.Build().RunAsync();
