@@ -5,13 +5,13 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScooterLandWinForms", "ScooterLandWinForms\ScooterLandWinForms.csproj", "{69E9CDAB-0C79-4A33-9561-F4E15ED7F96C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EksamensProjektScooterLandBlazor.Server", "EksamensProjektScooterLandBlazor\Server\EksamensProjektScooterLandBlazor.Server.csproj", "{24C5465F-B6D7-433F-B0D0-21A9577EBD27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EksamensProjektScooterLandBlazor.Server", "EksamensProjektScooterLandBlazor\Server\EksamensProjektScooterLandBlazor.Server.csproj", "{24C5465F-B6D7-433F-B0D0-21A9577EBD27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EksamensProjektScooterLandBlazor.Client", "EksamensProjektScooterLandBlazor\Client\EksamensProjektScooterLandBlazor.Client.csproj", "{F5434A03-BC5B-4B76-9510-9EAC991E41DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EksamensProjektScooterLandBlazor.Client", "EksamensProjektScooterLandBlazor\Client\EksamensProjektScooterLandBlazor.Client.csproj", "{F5434A03-BC5B-4B76-9510-9EAC991E41DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EksamensProjektScooterLandBlazor.Shared", "EksamensProjektScooterLandBlazor\Shared\EksamensProjektScooterLandBlazor.Shared.csproj", "{7DB84D82-C082-42CF-A1EB-3EA3A1F17589}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EksamensProjektScooterLandBlazor.Shared", "EksamensProjektScooterLandBlazor\Shared\EksamensProjektScooterLandBlazor.Shared.csproj", "{7DB84D82-C082-42CF-A1EB-3EA3A1F17589}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTestingScooterLand", "NUnitTestingScooterLand\NUnitTestingScooterLand.csproj", "{74724097-0F32-49AA-BAB8-C89BA08CE40A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnitTestingScooterLand", "NUnitTestingScooterLand\NUnitTestingScooterLand.csproj", "{74724097-0F32-49AA-BAB8-C89BA08CE40A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

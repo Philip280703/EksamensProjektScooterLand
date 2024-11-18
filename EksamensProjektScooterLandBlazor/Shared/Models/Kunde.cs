@@ -14,17 +14,17 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int KundeID { get; set; }
+        public int KundeID { get; set; } 
 
 
         [Required(ErrorMessage ="Fornavn er påkrævet")]
         [StringLength(30, ErrorMessage = "Fornavn må maksimalt være 30 tegn langt.")]
-        public string Fornavn { get; set; }
+        public string Fornavn { get; set; } // --
 
 
         [Required(ErrorMessage = "Efternavn er påkrævet.")]
         [StringLength(30, ErrorMessage = "Efternavn må maksimalt være 30 tegn langt.")]
-        public string Efternavn { get; set; }
+        public string Efternavn { get; set; } // --
 
 
         [Required(ErrorMessage ="Scooter brand ID er påkrævet.")] 
