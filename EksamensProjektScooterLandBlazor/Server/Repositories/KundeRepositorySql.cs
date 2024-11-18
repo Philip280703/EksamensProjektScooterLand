@@ -11,8 +11,6 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
             
         }
 
-        private static readonly List<Kunde> KundeListe;
-
         public void AddKunde(Kunde kunde)
         {
             db.Kunder.Add(kunde);
@@ -50,6 +48,25 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
             currentkunde.Placering = kunde.Placering;
             currentkunde.PostNummer = kunde.PostNummer;
             currentkunde.ScooterBrandID = kunde.ScooterBrandID;
+            db.SaveChanges();
+            return true;
+        }
+
+        public List<Kunde> GetAllKunder()
+        {
+            return db.Kunder.ToList();
+        }
+
+        public Kunde FindKunde(int id)
+        {
+            var Kunde = db.Kunder.Single(k => k.KundeID == id);
+
+            if (Kunde != null)
+            {
+                return Kunde;
+            }
+            Kunde = new Kunde { KundeID = -1 };
+            return Kunde;
         }
     }
 }
