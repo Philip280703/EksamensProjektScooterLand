@@ -31,7 +31,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         [Range(1, 100, ErrorMessage ="Antal dage scooteren er lejet skal være mellem 1 og 100")]
-        public int AntalDage { get; set; }
+        public int ?AntalDage { get; set; }
 
 
         [Range(0.1, 1000, ErrorMessage ="DagsLejePrisen skal være mellem 0.1 og 1000 kr. pr. dag.")]
@@ -39,7 +39,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         [Range(1, 10000, ErrorMessage ="Prisen for scooterLeje skal være mellem 1 og 10000 kr.")]
-        public double Pris { get; set; }
+        public double ?Pris { get; set; }
 
 
     }

@@ -20,23 +20,23 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         [Range(0, int.MaxValue, ErrorMessage ="Samelt pris skal være et positivt tal")]
-        public double SamletPris {  get; set; }
+        public double ?SamletPris {  get; set; }
 
 
         [Range(0, int.MaxValue, ErrorMessage ="Betalings sum skal være et positivt tal")]
-        public double BetalingsSum { get; set; }
+        public double ?BetalingsSum { get; set; }
 
 
         // fremmednøgle
-        public int KundeiD { get; set; }
+        public int ?KundeiD { get; set; }
         // objekt relation til EF
-        public Kunde kunde { get; set; }
+        public Kunde ?kunde { get; set; }
 
 
         // fremmednøgle
-        public int MedarbejderCpr { get; set; }
+        public int ?MedarbejderCpr { get; set; }
         // objekt relation til EF
-        public Medarbejder medarbejder { get; set; }
+        public Medarbejder ?medarbejder { get; set; }
 
 
         //en ordre indeholder en liste af ordelinjer

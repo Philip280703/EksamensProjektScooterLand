@@ -46,13 +46,17 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Range(1000, 9990, ErrorMessage = "Postnummeret skal være et gyldigt dansk postnummer")]
         public int PostNummer { get; set; }
 
+
         [Required(ErrorMessage ="Vejnavn er påkrævet.")]
         public string VejNavn { get; set; }
+
 
         [Required(ErrorMessage ="Husnummer er påkrævet.")]
         public string HusNummer { get; set; }
 
+
         public string ?Etage {  get; set; }
+
 
         public string ?Placering { get; set; }
 
