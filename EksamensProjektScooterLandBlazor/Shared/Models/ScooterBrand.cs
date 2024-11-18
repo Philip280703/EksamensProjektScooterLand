@@ -15,5 +15,14 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Required]
         public string ScooterBrandNavn { get; set;}
 
-    }
+        public List<Mekaniker> mekanikers { get; set; }
+
+
+		public override string ToString()
+		{
+			return $"{ScooterBrandID}, {ScooterBrandNavn}";
+		}
+
+	}
+
 }
