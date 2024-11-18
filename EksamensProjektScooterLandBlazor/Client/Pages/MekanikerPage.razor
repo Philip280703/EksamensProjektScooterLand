@@ -1,7 +1,7 @@
 ﻿@page "/Mekaniker"
 @using EksamensProjektScooterLandBlazor.Shared.Models;
-@using EksamensProjektScooterLandBlazor.Client.Interfaces;
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents;
+@using EksamensProjektScooterLandBlazor.Client.Services;
 
 <h3>Mekaniker</h3>
 <br />
@@ -30,13 +30,13 @@
     private List<Mekaniker> MekanikerList = new List<Mekaniker> ();
 
     [Inject]
-    public IMekanikerService Service { get; set; }
+    public IMekanikerService service { get; set; }
 
     private int ErrorCode { get; set; } = 0;
 
     protected override async Task OnInitializedAsync()
     {
-        MekanikerList = (await Service.GetAllMekaniker()).ToList(); 
+        MekanikerList = (await service.GetAllMekaniker()).ToList(); 
     }
    
 
