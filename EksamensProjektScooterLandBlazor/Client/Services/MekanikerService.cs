@@ -1,10 +1,10 @@
-﻿using EksamensProjektScooterLandBlazor.Client.Interfaces;
-using EksamensProjektScooterLandBlazor.Shared.Models;
+﻿using EksamensProjektScooterLandBlazor.Shared.Models;
 using System.Net.Http.Json;
+using Microsoft.Extensions;
 
 namespace EksamensProjektScooterLandBlazor.Client.Services
 {
-	public class MekanikerService : IMekanikerService
+    public class MekanikerService : IMekanikerService
 	{
 		private readonly HttpClient httpClient;
 

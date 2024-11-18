@@ -1,5 +1,6 @@
 using EksamensProjektScooterLandBlazor.Server.Repositories;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IKundeRepository, KundeRepositorySql>();
+
+
+// tilføj I repositoy med det givende repository her!!
+
+builder.Services.AddScoped<IMekanikerRepository, MekanikerRepositorySql>();
+
+
+
 
 var app = builder.Build();
 
