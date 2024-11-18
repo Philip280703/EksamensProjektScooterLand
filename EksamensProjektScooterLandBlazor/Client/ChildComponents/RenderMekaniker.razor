@@ -17,7 +17,7 @@
 		@mekaniker.Rolle
 	</td>
 	<td>
-		@mekaniker.scooterBrand
+		@mekaniker.scooterBrand?.ScooterBrandNavn
 	</td>
 
 
@@ -29,5 +29,9 @@
 @code 
 {
 	[Parameter]
-	public Mekaniker mekaniker; 
+	public Mekaniker mekaniker { get; set; }
+
+	
+
+
 }
