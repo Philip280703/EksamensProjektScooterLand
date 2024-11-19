@@ -5,16 +5,41 @@
 <tr class="hoverable-row" >
 	<td>@produkt.ProduktID</td>
 	<td>@produkt.ProduktNavn</td>
-	<td>@produkt.ProduktPris</td>
+	<td>@produkt.ProduktPris kr.</td>
 </tr>
+
 
 
 <style>
 	.hoverable-row:hover {
 		background-color: #f0f0f0;
 		cursor: pointer;
+		
 	}
 </style>
+
+<style>
+	.table-container {
+		max-height: 300px;
+		overflow-y: auto;
+		border: 1px solid #ccc;
+		position: relative;
+	}
+
+	.table thead th {
+		position: sticky;
+		top: 0;
+		background-color: lightgray;
+		color: black;
+		z-index: 1;
+		padding: 8px;
+		border-bottom: 1px solid #ddd;
+		
+	}
+</style>
+
+
+
 
 
 
