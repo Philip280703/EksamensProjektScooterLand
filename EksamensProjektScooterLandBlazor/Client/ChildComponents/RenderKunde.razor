@@ -6,7 +6,13 @@
 	<td>@kunde.Fornavn @kunde.Efternavn</td>
 	<td>@kunde.Email</td>
 	<td>@kunde.TelefonNummer</td>
-	<td>@kunde.PreferetMekanikerCprNummer</td>
+	@foreach (var mekaniker in mekanikerList)
+	{
+		if (kunde.PreferetMekanikerCprNummer == mekaniker.CprNummer)
+		{
+			<td>@mekaniker.Fornavn</td>
+		}
+	}
 	<td>@kunde.ScooterBrandID</td>
 </tr>
 
