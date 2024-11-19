@@ -1,5 +1,6 @@
 ﻿using EksamensProjektScooterLandBlazor.Server.DataAccess;
 using EksamensProjektScooterLandBlazor.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EksamensProjektScooterLandBlazor.Server.Repositories
 {
@@ -13,7 +14,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
 		/// <returns></returns>
 		public List<Mekaniker> GetAllMekaniker()
 		{
-			return db.Mekanikere.ToList();
+			return db.Mekanikere.Include(x=>x.scooterBrand).ToList();
 		}
 
 		/// <summary>
