@@ -1,18 +1,21 @@
-﻿using EksamensProjektScooterLandBlazor.Client.Interfaces;
-using EksamensProjektScooterLandBlazor.Shared.Models;
+﻿using EksamensProjektScooterLandBlazor.Shared.Models;
 using System.Net.Http.Json;
+using Microsoft.Extensions;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace EksamensProjektScooterLandBlazor.Client.Services
 {
-	public class MekanikerService : IMekanikerService
+    public class MekanikerService : IMekanikerService
 	{
 		private readonly HttpClient httpClient;
-
+		
 		private string path = "api/mekaniker";
 
 		public MekanikerService(HttpClient httpClient)
 		{
 			this.httpClient = httpClient;
+
 		}
 
 		/// <summary>
@@ -36,7 +39,8 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 			var result = await httpClient.GetFromJsonAsync<Mekaniker>(path + "/" + id);
 			return result;
 		}
-		
+
+
 
 	}
 }

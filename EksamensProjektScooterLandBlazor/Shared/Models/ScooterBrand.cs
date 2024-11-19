@@ -15,5 +15,8 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Required]
         public string ScooterBrandNavn { get; set;}
 
-    }
+		
+
+	}
+
 }

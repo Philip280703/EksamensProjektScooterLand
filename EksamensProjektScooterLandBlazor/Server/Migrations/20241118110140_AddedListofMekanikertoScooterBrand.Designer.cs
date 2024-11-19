@@ -4,6 +4,7 @@ using EksamensProjektScooterLandBlazor.Server.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksamensProjektScooterLandBlazor.Server.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241118110140_AddedListofMekanikertoScooterBrand")]
+    partial class AddedListofMekanikertoScooterBrand
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -312,10 +315,10 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                 {
                     b.HasBaseType("EksamensProjektScooterLandBlazor.Shared.Models.Medarbejder");
 
-                    b.Property<int>("ScooterBrandId")
+                    b.Property<int?>("ScooterBrandID")
                         .HasColumnType("int");
 
-                    b.HasIndex("ScooterBrandId");
+                    b.HasIndex("ScooterBrandID");
 
                     b.HasDiscriminator().HasValue("Mekaniker");
                 });
@@ -379,9 +382,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                 {
                     b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.ScooterBrand", "scooterBrand")
                         .WithMany("mekanikers")
-                        .HasForeignKey("ScooterBrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ScooterBrandID");
 
                     b.Navigation("scooterBrand");
                 });

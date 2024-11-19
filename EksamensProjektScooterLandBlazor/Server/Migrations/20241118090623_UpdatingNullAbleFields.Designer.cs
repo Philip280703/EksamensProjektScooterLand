@@ -4,6 +4,7 @@ using EksamensProjektScooterLandBlazor.Server.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksamensProjektScooterLandBlazor.Server.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241118090623_UpdatingNullAbleFields")]
+    partial class UpdatingNullAbleFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -312,10 +315,14 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                 {
                     b.HasBaseType("EksamensProjektScooterLandBlazor.Shared.Models.Medarbejder");
 
-                    b.Property<int>("ScooterBrandId")
+                    b.Property<int?>("ScooterBrandID")
                         .HasColumnType("int");
 
-                    b.HasIndex("ScooterBrandId");
+                    b.Property<int?>("ScooterBrandIDEkspertise")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.HasIndex("ScooterBrandID");
 
                     b.HasDiscriminator().HasValue("Mekaniker");
                 });
@@ -378,10 +385,8 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Mekaniker", b =>
                 {
                     b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.ScooterBrand", "scooterBrand")
-                        .WithMany("mekanikers")
-                        .HasForeignKey("ScooterBrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("ScooterBrandID");
 
                     b.Navigation("scooterBrand");
                 });
@@ -389,11 +394,6 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Ordre", b =>
                 {
                     b.Navigation("ordreLinjer");
-                });
-
-            modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.ScooterBrand", b =>
-                {
-                    b.Navigation("mekanikers");
                 });
 #pragma warning restore 612, 618
         }

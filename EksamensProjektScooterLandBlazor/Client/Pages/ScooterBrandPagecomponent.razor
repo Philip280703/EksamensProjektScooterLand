@@ -1,0 +1,44 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+
+
+<h3>Scooter brands:</h3>
+
+<table class="table">
+    <tr>
+        <th>Scooter brand ID</th>
+        <th>Scooter mærke</th>
+    </tr>
+
+    @foreach(var item in ScooterBrandList)
+    {
+        <tr>
+            <td>
+                @item.ScooterBrandID
+            </td>
+            <td>
+                @item.ScooterBrandNavn
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+
+
+@code {
+
+    private List<ScooterBrand> ScooterBrandList = new List<ScooterBrand>();
+
+    [Inject]
+    public IScooterBrandService services { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ScooterBrandList = (await services.GetAll()).ToList();
+    }
+
+
+
+}
