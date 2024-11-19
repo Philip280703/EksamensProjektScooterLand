@@ -1,0 +1,38 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client;
+
+
+@if (YdelseList == null || !YdelseList.Any())
+{
+    <p>Ingen ydelser fundet.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ydelse ID</th>
+                <th>Navn</th>
+                <th>Estimeret Tid</th>
+                <th>Pris</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ydelse in YdelseList)
+            {
+                <tr>
+                    <td>@ydelse.YdelseID</td>
+                    <td>@ydelse.YdelseNavn</td>
+                    <td>@ydelse.EstimeretTid timer</td>
+                    <td>@ydelse.Pris kr.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    [Parameter]
+    public List<Ydelse> YdelseList { get; set; } = new List<Ydelse>();
+}

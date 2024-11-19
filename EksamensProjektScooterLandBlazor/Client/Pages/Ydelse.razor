@@ -1,0 +1,26 @@
+﻿@* @using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Interfaces;
+@using EksamensProjektScooterLandBlazor.Client.ChildComponents;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+
+@page "/ydelse"
+
+<h3>Ydelse</h3>
+
+@page "/ydelse"
+
+@code {
+    // private List<Ydelse> YdelseList = new List<Ydelse>();
+
+    // [Inject]
+    // public IYdelseService service { get; set; }
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     YdelseList = (await service.GetAllYdelser()).ToList();
+    }
+}
+
+<RenderYdelseList YdelseList="@YdelseList" />
+
+ *@
