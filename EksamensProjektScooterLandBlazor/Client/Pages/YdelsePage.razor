@@ -14,21 +14,14 @@
         <th>Pris</th>
     </tr>
 
-  @*   @foreach (var item in YdelsesList)
-    {
-        <RenderYdelse ydelse ="@item" />
-    } *@
-</table>
-
-    <div>
     @foreach (var ydelse in YdelsesList)
     {
-        <li>@ydelse.YdelseID (@ydelse.YdelseNavn) - (@ydelse.EstimeretTid) - (@ydelse.Pris) </li>
+        <RenderYdelse ydelser ="@ydelse" />
     }
-    </div>
+</table>
+
 
     <br />
-
 
 <EditForm Model="newYdelse" OnValidSubmit="AddYdelseHandler">
     <div>
@@ -48,36 +41,13 @@
 </EditForm>
 
 
+
 @if (ErrorCode != 0)
 {
     <p>@(ErrorCode == 200 ? "Ydelse successfully added!" : $"Error adding Ydelse. Code: {ErrorCode}")</p>
 }
 
 
-
 @code {
 
-    [Inject]
-    public IYdelseService Service { get; set; }
-
-    private List<Ydelse> YdelsesList = new List<Ydelse>();
-
-    private int ErrorCode { get; set; } = 0;
-
-    protected override async Task OnInitializedAsync()
-    {
-        YdelsesList = (await Service.GetAllYdelser()).ToList();
-    }
-
-    // Nyt item som oprettes gennem formen
-    private Ydelse newYdelse = new Ydelse();
-
-    public async Task AddYdelseHandler()
-    {
-        ErrorCode = await Service.AddYdelse(newYdelse);
-        Console.WriteLine("Shopping item added: return code: " + ErrorCode);
-
-        // Ryd formen efter tilføjelse
-        newYdelse = new Ydelse();
-    }
 }
