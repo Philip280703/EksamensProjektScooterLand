@@ -13,22 +13,46 @@
         <th>EstimeretTid</th>
         <th>Pris</th>
     </tr>
+
+  @*   @foreach (var item in YdelsesList)
+    {
+        <RenderYdelse ydelse ="@item" />
+    } *@
 </table>
 
-@* @foreach (var ydelse in YdelsesList)
-{
-    <RenderYdelse ydelser="@ydelse" />
-} *@
-
+    <div>
     @foreach (var ydelse in YdelsesList)
     {
         <li>@ydelse.YdelseID (@ydelse.YdelseNavn) - (@ydelse.EstimeretTid) - (@ydelse.Pris) </li>
     }
+    </div>
+
+    <br />
 
 
+<EditForm Model="newYdelse" OnValidSubmit="AddYdelseHandler">
+    <div>
+        <label for="name">Ydelse:</label>
+        <InputText id="navn" @bind-Value="newYdelse.YdelseNavn" />
+    </div>
+    <div>
+        <label for="EstimeretTid">EstimeretTid:</label>
+        <InputNumber id="EstimeretTid" @bind-Value="newYdelse.EstimeretTid" />
+    </div>
+    <div>
+        <label for="Pris">Pris:</label>
+        <InputNumber id="Pris" @bind-Value="newYdelse.Pris" />
+    </div>
+    <br />
+    <button type="submit">Tilføj Ydelse </button>
+</EditForm>
 
-<div></div>
-<br />
+
+@if (ErrorCode != 0)
+{
+    <p>@(ErrorCode == 200 ? "Ydelse successfully added!" : $"Error adding Ydelse. Code: {ErrorCode}")</p>
+}
+
 
 
 @code {
@@ -43,5 +67,17 @@
     protected override async Task OnInitializedAsync()
     {
         YdelsesList = (await Service.GetAllYdelser()).ToList();
+    }
+
+    // Nyt item som oprettes gennem formen
+    private Ydelse newYdelse = new Ydelse();
+
+    public async Task AddYdelseHandler()
+    {
+        ErrorCode = await Service.AddYdelse(newYdelse);
+        Console.WriteLine("Shopping item added: return code: " + ErrorCode);
+
+        // Ryd formen efter tilføjelse
+        newYdelse = new Ydelse();
     }
 }
