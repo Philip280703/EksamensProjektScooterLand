@@ -62,7 +62,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         // fremmednøgle
-        public int PreferetMekanikerCprNummer { get; set; }
+        public string PreferetMekanikerCprNummer { get; set; }
 
         // reference til postnummer og by objektet
         public PostNummerOgBy postNummerOgBy { get; set; }
