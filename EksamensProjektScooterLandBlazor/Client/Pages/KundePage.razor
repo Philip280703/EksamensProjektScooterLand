@@ -1,4 +1,5 @@
 ﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.ChildComponents
 @page "/Kundepage"
 
 <div class="Left-Side-Tabel">
@@ -7,7 +8,7 @@
 	</div>
 	<div class="Kunde-Tabel-Område">
 		<br class="Divider" />
-		<table class="Kunde-Tabel">
+		<table class="table">
 			<tr class="Kunde-Tabel-Række">
 				<th>Id</th>
 				<th>Navn</th>
@@ -19,7 +20,7 @@
 			</tr>
 			@foreach(var kunde in kundeListe)
 			{
-				<EksamensProjektScooterLandBlazor.Client.ChildComponents.RenderKunde kunde="kunde" />	
+				<RenderKunde kunde="kunde" />	
 			}
 		</table>
 	</div>

@@ -3,9 +3,14 @@
 }
 
 
+
 td{
     padding: 8px;
     word-wrap: break-word;
+}
+
+tr:nth-child(2n){
+    background-color: gray;
 }
 
 .Left-Side-Tabel{
@@ -15,10 +20,12 @@ td{
 .Kunde-Tabel{
     width: 100%;
     border-collapse: collapse;
+
 }
 
 .Kunde-Tabel-Område{
-    width: auto;
+    max-height: 300px;
+    overflow-y: auto;
     padding-left: 20px;
     padding-right: 20px;
 }

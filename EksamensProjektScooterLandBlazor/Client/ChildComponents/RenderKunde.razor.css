@@ -1,0 +1,18 @@
+﻿.hoverable-row:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+tr{
+    height: 50px;
+}
+
+.table thead th {
+    position: sticky;
+    top: 0;
+    background-color: lightgray;
+    color: black;
+    z-index: 1;
+    padding 8px;
+    border-bottom: 1px solid #ddd;
+}
