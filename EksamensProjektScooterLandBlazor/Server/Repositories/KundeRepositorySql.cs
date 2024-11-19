@@ -1,5 +1,6 @@
 ﻿using EksamensProjektScooterLandBlazor.Server.DataAccess;
 using EksamensProjektScooterLandBlazor.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 namespace EksamensProjektScooterLandBlazor.Server.Repositories
 {
 	public class KundeRepositorySql : IKundeRepository
