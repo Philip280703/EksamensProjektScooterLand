@@ -15,11 +15,11 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
         [Required(ErrorMessage = "Scooterens kilometertal er påkrævet.")]
         [Range(1, int.MaxValue, ErrorMessage = "Kilometer tal skal være postivt.")]
-        public int KmTalDifference {  get; set; }
+        public int ?KmTalDifference {  get; set; }
 
 
         [Range(0, 1, ErrorMessage ="Ledigheden skal enten være 0 for optaget eller 1 for ledig")]
-        public bool Ledig {  get; set; }
+        public bool ?Ledig {  get; set; }
 
 
         [Range(0, 20000, ErrorMessage ="Selvrisiko skal være mellem 0 og 20.000")]
