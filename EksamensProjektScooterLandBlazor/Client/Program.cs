@@ -24,6 +24,11 @@ builder.Services.AddHttpClient<IMekanikerService, MekanikerService>(client =>
 
 builder.Services.AddHttpClient<IScooterBrandService, ScooterBrandService>(client =>
 {
+	client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
+builder.Services.AddHttpClient<IYdelseService, YdelseService>(client =>
+{
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
 
@@ -36,6 +41,7 @@ builder.Services.AddHttpClient<IProduktService, ProduktService>(client =>
 {
 	client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
+
 
 
 await builder.Build().RunAsync();
