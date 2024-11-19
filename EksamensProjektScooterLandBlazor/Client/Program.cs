@@ -32,5 +32,10 @@ builder.Services.AddHttpClient<IScooterLejeService, ScooterLejeService>(client =
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
 
+builder.Services.AddHttpClient<IProduktService, ProduktService>(client =>
+{
+	client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
 
 await builder.Build().RunAsync();
