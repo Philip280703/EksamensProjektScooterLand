@@ -11,10 +11,13 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
             
         }
 
+        private static readonly List<Kunde> Kundeliste;
+
         public void AddKunde(Kunde kunde)
         {
             db.Kunder.Add(kunde);
             db.SaveChanges();
+            Console.WriteLine("saving kunde");
         }
 
         public bool DeleteKunde(int id)
@@ -37,12 +40,12 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
             {
                 return false;
             }
-            currentkunde.Fornavn = kunde.Fornavn; 
-            currentkunde.Efternavn = kunde.Efternavn; 
-            currentkunde.TelefonNummer = kunde.TelefonNummer; 
-            currentkunde.VejNavn = kunde.VejNavn; 
-            currentkunde.Email = kunde.Email; 
-            currentkunde.PreferetMekanikerCprNummer = kunde.PreferetMekanikerCprNummer; 
+            currentkunde.Fornavn = kunde.Fornavn;
+            currentkunde.Efternavn = kunde.Efternavn;
+            currentkunde.TelefonNummer = kunde.TelefonNummer;
+            currentkunde.VejNavn = kunde.VejNavn;
+            currentkunde.Email = kunde.Email;
+            currentkunde.PreferetMekanikerCprNummer = kunde.PreferetMekanikerCprNummer;
             currentkunde.HusNummer = kunde.HusNummer;
             currentkunde.Etage = kunde.Etage;
             currentkunde.Placering = kunde.Placering;
@@ -66,7 +69,20 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
                 return Kunde;
             }
             Kunde = new Kunde { KundeID = -1 };
-            return Kunde;
+            return new Kunde();
+        }
+
+        static KundeRepositorySql()
+        {
+            Kundeliste = new List<Kunde>();
+            Kundeliste.Clear();
+            InsertTestData();
+            
+        }
+
+        public static void InsertTestData()
+        {
+            //Kundeliste.Add(new Kunde { KundeID = 1, Fornavn = "Mark", Efternavn = "Ruge", Email = "Mark.ruge5@gmail.com", Etage = "1", HusNummer = "14", Placering = "Venstre", PostNummer = 8000, PreferetMekanikerCprNummer = "123", ScooterBrandID = 1, TelefonNummer = "29906377", VejNavn = "Chr jensensvej 14", postNummerOgBy = new PostNummerOgBy {Postnummer = 6064, ByNavn ="jordrup" });
         }
     }
 }

@@ -23,6 +23,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
 		[HttpGet]
 		public IEnumerable<Kunde> GetAllKunder()
 		{
+			Console.WriteLine("Get all kunder kaldet");
 			return Repository.GetAllKunder();
 		}
 
