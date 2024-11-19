@@ -4,6 +4,7 @@ using EksamensProjektScooterLandBlazor.Server.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksamensProjektScooterLandBlazor.Server.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241119092536_updatingScooterlejemodel")]
+    partial class updatingScooterlejemodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +75,12 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("postNummerOgByPostnummer")
+                        .HasColumnType("int");
+
                     b.HasKey("KundeID");
+
+                    b.HasIndex("postNummerOgByPostnummer");
 
                     b.ToTable("Kunder");
                 });
@@ -315,6 +323,17 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                     b.HasIndex("ScooterBrandId");
 
                     b.HasDiscriminator().HasValue("Mekaniker");
+                });
+
+            modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Kunde", b =>
+                {
+                    b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.PostNummerOgBy", "postNummerOgBy")
+                        .WithMany()
+                        .HasForeignKey("postNummerOgByPostnummer")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("postNummerOgBy");
                 });
 
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Ordre", b =>

@@ -7,7 +7,7 @@ using System.Net;
 namespace EksamensProjektScooterLandBlazor.Server.Controllers
 {
 	[ApiController]
-	[Route("api/produktapi")]
+	[Route("api/produkt")]
 	public class ProduktController : ControllerBase
 	{
 		private readonly IProduktRepository repository = new ProduktRepositorySql();
