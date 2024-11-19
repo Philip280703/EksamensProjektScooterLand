@@ -22,4 +22,10 @@ builder.Services.AddHttpClient<IMekanikerService, MekanikerService>(client =>
 	client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
 
+builder.Services.AddHttpClient<IScooterBrandService, ScooterBrandService>(client =>
+{
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
+
 await builder.Build().RunAsync();

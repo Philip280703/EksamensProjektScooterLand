@@ -15,12 +15,16 @@
         <th>Scooter brand ekspertise</th>
     </tr>
 
-    @foreach(var item in MekanikerList)
+    @foreach (var item in MekanikerList)
     {
-        <RenderMekaniker mekaniker ="@item"/>
+        <RenderMekaniker mekaniker="@item"/>
     }
 
 </table>
+
+<div></div>
+<br />
+
 
 <!-- display errorcode-->
 <label>return code: @ErrorCode</label>
@@ -29,15 +33,19 @@
 
     private List<Mekaniker> MekanikerList = new List<Mekaniker> ();
 
+   
     [Inject]
     public IMekanikerService service { get; set; }
+
 
     private int ErrorCode { get; set; } = 0;
 
     protected override async Task OnInitializedAsync()
     {
-        MekanikerList = (await service.GetAllMekaniker()).ToList(); 
+        MekanikerList = (await service.GetAllMekaniker()).ToList();
+        
+    
     }
-   
+
 
 }

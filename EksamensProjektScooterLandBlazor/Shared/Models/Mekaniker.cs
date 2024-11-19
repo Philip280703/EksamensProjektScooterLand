@@ -9,7 +9,9 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 {
 	public class Mekaniker : Medarbejder 
 	{
+		public int ScooterBrandId { get; set; }
+
 		// fremmed reference
-		public ScooterBrand ?scooterBrand { get; set; }
+		public ScooterBrand scooterBrand { get; set; }
 	}
 }
