@@ -60,8 +60,6 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
         public string ?Placering { get; set; } 
 
-
-        // fremmednøgle
         public string PreferetMekanikerCprNummer { get; set; }
 
         // reference til postnummer og by objektet
