@@ -1,26 +1,47 @@
-﻿@* 
-@using EksamensProjektScooterLandBlazor.Client.Interfaces;
-@using EksamensProjektScooterLandBlazor.Client.ChildComponents;
+﻿@using EksamensProjektScooterLandBlazor.Client.ChildComponents;
+@using EksamensProjektScooterLandBlazor.Shared.Models;
 @using EksamensProjektScooterLandBlazor.Client.Services;
 
-@page "/ydelse"
+@page "/YdelsePage"
 
 <h3>Ydelse</h3>
 
-@page "/ydelse"
+<table class="table">
+    <tr>
+        <th>YdelseID</th>
+        <th>Ydelsesnavn</th>
+        <th>EstimeretTid</th>
+        <th>Pris</th>
+    </tr>
+</table>
+
+@* @foreach (var ydelse in YdelsesList)
+{
+    <RenderYdelse ydelser="@ydelse" />
+} *@
+
+    @foreach (var ydelse in YdelsesList)
+    {
+        <li>@ydelse.YdelseID (@ydelse.YdelseNavn) - (@ydelse.EstimeretTid) - (@ydelse.Pris) </li>
+    }
+
+
+
+<div></div>
+<br />
+
 
 @code {
-    // private List<Ydelse> YdelseList = new List<Ydelse>();
 
-    // [Inject]
-    // public IYdelseService service { get; set; }
+    [Inject]
+    public IYdelseService Service { get; set; }
 
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     YdelseList = (await service.GetAllYdelser()).ToList();
+    private List<Ydelse> YdelsesList = new List<Ydelse>();
+
+    private int ErrorCode { get; set; } = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        YdelsesList = (await Service.GetAllYdelser()).ToList();
     }
 }
-
-<RenderYdelseList YdelseList="@YdelseList" />
-
- *@
