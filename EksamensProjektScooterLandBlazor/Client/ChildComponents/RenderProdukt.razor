@@ -1,0 +1,26 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+
+
+<tr class="hoverable-row" >
+	<td>@produkt.ProduktID</td>
+	<td>@produkt.ProduktNavn</td>
+	<td>@produkt.ProduktPris</td>
+</tr>
+
+
+<style>
+	.hoverable-row:hover {
+		background-color: #f0f0f0;
+		cursor: pointer;
+	}
+</style>
+
+
+
+
+@code {
+	[Parameter]
+	public Produkt produkt { get; set; }
+
+}

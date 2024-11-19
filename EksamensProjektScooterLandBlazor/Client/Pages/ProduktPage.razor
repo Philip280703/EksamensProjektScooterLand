@@ -1,0 +1,55 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+@using EksamensProjektScooterLandBlazor.Client.ChildComponents;
+
+@page "/Produkt"
+
+
+<h3>Produkter</h3>
+<br/>
+
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th> Id</th>
+				<th> Produktnavn</th>
+				<th>Produktpris</th>
+			</tr>
+		</thead>
+
+		<thead>
+
+			@foreach (var item in produktListe)
+			{
+				<RenderProdukt produkt="@item" />
+			}
+
+		</thead>
+	</table>
+
+	<div></div>
+	<br/>
+
+
+	
+
+@code
+{
+	private List<Produkt> produktListe = new List<Produkt>();
+
+
+
+	[Inject]
+	public IProduktService Service {get; set;}
+
+	protected override async Task OnInitializedAsync()
+	{
+		produktListe = (await Service.GetAllProdukt()).ToList();
+	}
+
+	
+
+	
+
+}

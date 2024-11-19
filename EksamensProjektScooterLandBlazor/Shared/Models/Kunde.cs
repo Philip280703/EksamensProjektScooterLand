@@ -33,7 +33,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         [Required(ErrorMessage ="Telefonnummer er påkrævet")]
-        [Phone(ErrorMessage = "Telefonnummeret er ugyldigt.")]
+        [StringLength(10, ErrorMessage = "Telefonnummeret er ugyldigt.")]
         public string TelefonNummer { get; set; } 
 
 
