@@ -4,6 +4,7 @@ using EksamensProjektScooterLandBlazor.Server.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksamensProjektScooterLandBlazor.Server.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241120081156_ReftoMekanikerInKunde")]
+    partial class ReftoMekanikerInKunde
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,15 +54,21 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MekanikerCprNummer")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Placering")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PostNummer")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PostNummerOgByPostnummer")
+                        .HasColumnType("int");
+
                     b.Property<string>("PreferetMekanikerCprNummer")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ScooterBrandID")
                         .HasColumnType("int");
@@ -74,9 +83,9 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.HasKey("KundeID");
 
-                    b.HasIndex("PostNummer");
+                    b.HasIndex("MekanikerCprNummer");
 
-                    b.HasIndex("PreferetMekanikerCprNummer");
+                    b.HasIndex("PostNummerOgByPostnummer");
 
                     b.ToTable("Kunder");
                 });
@@ -323,17 +332,13 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Kunde", b =>
                 {
-                    b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.PostNummerOgBy", "PostNummerOgBy")
-                        .WithMany()
-                        .HasForeignKey("PostNummer")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.Mekaniker", "Mekaniker")
                         .WithMany()
-                        .HasForeignKey("PreferetMekanikerCprNummer")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MekanikerCprNummer");
+
+                    b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.PostNummerOgBy", "PostNummerOgBy")
+                        .WithMany()
+                        .HasForeignKey("PostNummerOgByPostnummer");
 
                     b.Navigation("Mekaniker");
 

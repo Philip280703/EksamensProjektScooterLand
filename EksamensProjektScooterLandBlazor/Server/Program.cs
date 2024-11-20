@@ -23,6 +23,7 @@ builder.Services.AddScoped<IScooterLejeRepository, ScooterLejeRepositorySql>();
 
 builder.Services.AddScoped<IProduktRepository, ProduktRepositorySql>();
 
+builder.Services.AddScoped<IOrdreRepository, OrdreRepositorySql>();
 
 
 
