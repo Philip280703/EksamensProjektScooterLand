@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 	{
 		public int ScooterBrandId { get; set; }
 
-		// fremmed reference
-		public ScooterBrand scooterBrand { get; set; }
+		[ForeignKey("ScooterBrandId")]
+		public ScooterBrand ?scooterBrand { get; set; }
 	}
 }
