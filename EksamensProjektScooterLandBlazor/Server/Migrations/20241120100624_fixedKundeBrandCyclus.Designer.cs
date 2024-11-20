@@ -4,6 +4,7 @@ using EksamensProjektScooterLandBlazor.Server.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksamensProjektScooterLandBlazor.Server.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241120100624_fixedKundeBrandCyclus")]
+    partial class fixedKundeBrandCyclus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +114,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.HasKey("CprNummer");
 
-                    b.ToTable("Medarbejdere", (string)null);
+                    b.ToTable("Medarbejdere");
 
                     b.HasDiscriminator().HasValue("Medarbejder");
 
@@ -150,7 +153,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.HasIndex("medarbejderCprNummer");
 
-                    b.ToTable("Ordrer", (string)null);
+                    b.ToTable("Ordrer");
                 });
 
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.OrdreLinje", b =>
@@ -192,7 +195,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.HasIndex("YdelseID");
 
-                    b.ToTable("OrdreLinjer", (string)null);
+                    b.ToTable("OrdreLinjer");
                 });
 
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.PostNummerOgBy", b =>
@@ -209,7 +212,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.HasKey("Postnummer");
 
-                    b.ToTable("PostNummerOgByer", (string)null);
+                    b.ToTable("PostNummerOgByer");
                 });
 
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Produkt", b =>
@@ -230,7 +233,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.HasKey("ProduktID");
 
-                    b.ToTable("Produkter", (string)null);
+                    b.ToTable("Produkter");
                 });
 
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.ScooterBrand", b =>
@@ -247,7 +250,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.HasKey("ScooterBrandID");
 
-                    b.ToTable("ScooterBrands", (string)null);
+                    b.ToTable("ScooterBrands");
                 });
 
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.ScooterLeje", b =>
@@ -282,7 +285,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.HasKey("ScooterID");
 
-                    b.ToTable("ScooterLejer", (string)null);
+                    b.ToTable("ScooterLejer");
                 });
 
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Ydelse", b =>
@@ -306,7 +309,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.HasKey("YdelseID");
 
-                    b.ToTable("Ydelser", (string)null);
+                    b.ToTable("Ydelser");
                 });
 
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Mekaniker", b =>
