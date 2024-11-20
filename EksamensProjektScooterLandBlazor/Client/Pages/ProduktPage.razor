@@ -32,17 +32,39 @@
 
 </div>
 
-	<div></div>
-	<br/>
+<EditForm Model="newProdukt">
+	<div>
+		<label for="name">Produkt:</label>
+		<InputText id="navn" @bind-Value="newProdukt.ProduktNavn"/>
+	</div>
+	<div>
+		<label for="estimeretTid">Estimeret tid:</label>
+		<InputNumber id="estimeretTid" @bind-Value="newProdukt.ProduktPris"
+		class="form-control"
+		min="0"
+		@oninput="EnsureNonNegative"/> 
+
+	</div>
+	<br />
+	<button type="submit">Tilføj produkt</button>
+</EditForm>
 
 
-	
+
+
+
+
+
+
+
+
+
 
 @code
 {
 	private List<Produkt> produktListe = new List<Produkt>();
 
-
+	private Produkt newProdukt = new Produkt();
 
 	[Inject]
 	public IProduktService Service {get; set;}
@@ -52,7 +74,12 @@
 		produktListe = (await Service.GetAllProdukt()).ToList();
 	}
 
-	
+	private void EnsureNonNegative(ChangeEventArgs e)
+	{
+		if (newProdukt.ProduktPris < 0){
+			newProdukt.ProduktPris = 0;
+		}
+	}
 
 	
 
