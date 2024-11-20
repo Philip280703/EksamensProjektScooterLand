@@ -16,5 +16,11 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		{
 			kundeListe = (await KundeService.GetAllKunder()).ToList();
 		}
+
+		public async void Seeddata()
+		{
+			var kunde = new Kunde { Fornavn = "Mark", Efternavn = "Ruge", Email = "Mark.ruge5@gmail.com", Etage = "S", HusNummer = "14", Placering = "Gul hus i indhak", PostNummer = 6064, ScooterBrandID = 1, PreferetMekanikerCprNummer = "20202020", TelefonNummer = "29906377", VejNavn = "chr jensensvej" };
+			ErrorCode = await KundeService.AddKunde(kunde);
+		}
 	}
 }

@@ -2,7 +2,11 @@
     background-color: black;
 }
 
-
+th {
+    padding-top: 15px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
 
 td{
     padding: 8px;
