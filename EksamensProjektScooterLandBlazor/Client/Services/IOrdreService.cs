@@ -8,5 +8,6 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
         Task<Ordre?> GetOrdre(int id);
         Task<int> AddOrdre(Ordre ordre);
         Task<int> UpdateOrdre(Ordre ordre);
+        Task<int> DeleteOrdre(int id);
     }
 }

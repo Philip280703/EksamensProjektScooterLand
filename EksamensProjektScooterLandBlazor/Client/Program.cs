@@ -3,6 +3,7 @@ using EksamensProjektScooterLandBlazor.Client.Services;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 
@@ -45,6 +46,11 @@ builder.Services.AddHttpClient<IProduktService, ProduktService>(client =>
 builder.Services.AddHttpClient<IOrdreService, OrdreService>(client =>
 {
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
+builder.Services.AddHttpClient<IOrdreLinjeService, OrdreLinjeService>(client =>
+{
+	client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
 
 

@@ -38,6 +38,12 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
             return (int)svarStatusKode;
         }
 
+        public async Task<int> DeleteOrdre(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-    }
+
+
+	}
 }

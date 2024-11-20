@@ -56,6 +56,11 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
             return new Ordre();
         }
 
+        public bool DeleteOrdre(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         
     }
 }
