@@ -9,7 +9,22 @@
 }
 
 .ydelse-table thead th {
-   border-bottom: 1px solid
+   border-bottom: 1px solid;
 }
 
+.Tabel-Header {
+    background-color: lightgray;
+    padding: 5px 15px 5px 15px;
+    border-bottom: 1px solid gray;
+    font-size: 20px;
+}
 
+Tabel-Header-Text {
+    color: black;
+    vertical-align: middle;
+    display: table-cell;
+    font-size: 16px;
+    font-weight: bold; 
+    text-align: center; 
+    padding: 10px; 
+}
