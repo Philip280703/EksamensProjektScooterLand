@@ -32,17 +32,53 @@
 
 </div>
 
-	<div></div>
-	<br/>
+
+<br/>
+
+<EditForm Model="newProdukt" OnValidSubmit="AddProduktHandler">
+	<div>
+		<label for="name">Produkt:</label>
+		<InputText id="navn" @bind-Value="newProdukt.ProduktNavn"/>
+	</div>
+	<div>
+		<label for="pris">Pris:</label>
+		<InputNumber id="Pris" @bind-Value="newProdukt.ProduktPris"
+		class="form-control"
+		style="width: 100px;"
+		min="0"
+		@oninput="EnsureNonNegative"/> 
+
+	</div>
+	<br />
+	<button type="submit">Tilføj produkt</button>
+</EditForm>
 
 
-	
+<style>
+	.small-input {
+	width: 100px;
+	height: auto;
+	}
+</style>
+
+
+
+
+
+
+
+
+
+
 
 @code
 {
 	private List<Produkt> produktListe = new List<Produkt>();
 
+	// Nyt item som oprettes gennem formen
+	private Produkt newProdukt = new Produkt();
 
+	private int ErrorCode { get; set; } = 0;
 
 	[Inject]
 	public IProduktService Service {get; set;}
@@ -52,7 +88,22 @@
 		produktListe = (await Service.GetAllProdukt()).ToList();
 	}
 
-	
+	private void EnsureNonNegative(ChangeEventArgs e)
+	{
+		if (newProdukt.ProduktPris < 0){
+			newProdukt.ProduktPris = 0;
+		}
+	}
+
+	public async Task AddProduktHandler()
+	{
+		ErrorCode = await Service.AddProdukt(newProdukt);
+		Console.WriteLine("Shopping item added: return code: " + ErrorCode);
+
+		// Ryd formen efter tilføjelse
+		newProdukt = new Produkt();
+		StateHasChanged();
+	}
 
 	
 

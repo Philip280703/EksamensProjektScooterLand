@@ -4,6 +4,7 @@ using EksamensProjektScooterLandBlazor.Server.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksamensProjektScooterLandBlazor.Server.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241120090933_AllowingNullAble")]
+    partial class AllowingNullAble
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,6 +80,8 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                     b.HasIndex("PostNummer");
 
                     b.HasIndex("PreferetMekanikerCprNummer");
+
+                    b.HasIndex("ScooterBrandID");
 
                     b.ToTable("Kunder");
                 });
@@ -326,18 +331,26 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                     b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.PostNummerOgBy", "PostNummerOgBy")
                         .WithMany()
                         .HasForeignKey("PostNummer")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.Mekaniker", "Mekaniker")
                         .WithMany()
                         .HasForeignKey("PreferetMekanikerCprNummer")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.ScooterBrand", "ScooterBrand")
+                        .WithMany()
+                        .HasForeignKey("ScooterBrandID")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Mekaniker");
 
                     b.Navigation("PostNummerOgBy");
+
+                    b.Navigation("ScooterBrand");
                 });
 
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Ordre", b =>

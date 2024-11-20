@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Identity.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -60,15 +61,21 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
         public string? Placering { get; set; } = "";
 
+     
         public string PreferetMekanikerCprNummer { get; set; } = "";
 
-      
-        public Mekaniker ?Mekaniker { get; set; }
+
+		[ForeignKey("PreferetMekanikerCprNummer")]
+		public Mekaniker ?Mekaniker { get; set; }
+
+
+        [ForeignKey("PostNummer")]
         public PostNummerOgBy ?PostNummerOgBy { get; set; }
+
 
         public Kunde()
         {
-            
+           
         }
 
         public override string ToString()

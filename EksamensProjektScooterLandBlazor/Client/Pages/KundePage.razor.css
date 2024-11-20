@@ -18,17 +18,17 @@ tr:nth-child(2n){
 }
 
 .Left-Side-Tabel{
+    width: 100%;
     border: 1px solid gray;
 }
 
 .Kunde-Tabel{
-    width: 100%;
     border-collapse: collapse;
 
 }
 
 .Kunde-Tabel-Område{
-    max-height: 300px;
+    max-height: 500px;
     overflow-y: auto;
     padding-left: 20px;
     padding-right: 20px;
