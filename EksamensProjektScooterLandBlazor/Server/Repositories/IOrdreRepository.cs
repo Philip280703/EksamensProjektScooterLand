@@ -7,7 +7,6 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
         List<Ordre> GetAllOrdrer();
         Ordre FindOrdre(int id);
         void AddOrdre(Ordre ordre);
-        bool DeleteOrdre(int id);
         bool UpdateOrdre(Ordre ordre);
     }
 }
