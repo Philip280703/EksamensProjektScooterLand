@@ -4,6 +4,7 @@ using EksamensProjektScooterLandBlazor.Server.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksamensProjektScooterLandBlazor.Server.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241120165624_foreignkeySpecInOrdre")]
+    partial class foreignkeySpecInOrdre
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,6 +141,9 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                     b.Property<DateTime>("SalgsDato")
                         .HasColumnType("datetime2");
 
+                    b.Property<double?>("SamletPris")
+                        .HasColumnType("float");
+
                     b.HasKey("OrdreID");
 
                     b.HasIndex("KundeiD");
@@ -169,6 +175,9 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.Property<int?>("ScooterLejeID")
                         .HasColumnType("int");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
 
                     b.Property<int?>("YdelseID")
                         .HasColumnType("int");
@@ -249,6 +258,9 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScooterID"));
 
+                    b.Property<int?>("AntalDage")
+                        .HasColumnType("int");
+
                     b.Property<double>("DagsLejePris")
                         .HasColumnType("float");
 
@@ -258,6 +270,12 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                     b.Property<int?>("KmTalDifference")
                         .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<bool?>("Ledig")
+                        .HasColumnType("bit");
+
+                    b.Property<double?>("Pris")
+                        .HasColumnType("float");
 
                     b.Property<double>("SelvRisiko")
                         .HasColumnType("float");
