@@ -18,18 +18,17 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
             YdelsesList = (await Service.GetAllYdelser()).ToList();
         }
 
-        // Nyt item som oprettes gennem formen
+        // Nyt ydelse oprettes
         private Ydelse newYdelse = new Ydelse();
 
         public async Task AddYdelseHandler()
         {
             ErrorCode = await Service.AddYdelse(newYdelse);
-            Console.WriteLine("Shopping item added: return code: " + ErrorCode);
+            Console.WriteLine("Ydelse tilføjet: return code: " + ErrorCode);
 
-            // Ryd formen efter tilføjelse
+            // Ryder formen efter tilføjelse
             newYdelse = new Ydelse();
         }
-
 
         public async Task RemoveYdelseHandler()
         {
@@ -38,7 +37,11 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
         public async Task UpdateYdelseHandler()
         {
+            ErrorCode = await Service.UpdateYdelse(newYdelse);
+            Console.WriteLine("Ydelse opdateret: return code: " + ErrorCode);
 
+            
+            newYdelse = new Ydelse();
         }
 
     }

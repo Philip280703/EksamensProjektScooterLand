@@ -1,0 +1,15 @@
+﻿
+.ydelse-table {
+    max-height: 400px;
+    width: 100%;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    position: relative;
+    border-top: solid;
+}
+
+.ydelse-table thead th {
+   border-bottom: 1px solid
+}
+
+

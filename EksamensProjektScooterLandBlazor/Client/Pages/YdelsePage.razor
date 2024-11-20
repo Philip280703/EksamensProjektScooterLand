@@ -6,19 +6,24 @@
 
 <h3>Ydelse</h3>
 
-<table class="table">
-    <tr>
-        <th>YdelseID</th>
-        <th>Ydelsesnavn</th>
-        <th>EstimeretTid</th>
-        <th>Pris</th>
-    </tr>
-
-    @foreach (var ydelse in YdelsesList)
-    {
-        <RenderYdelse ydelser ="@ydelse" />
-    }
-</table>
+<div class="table-container">
+    <table class="ydelse-table">
+        <thead>
+            <tr>
+                <th>Ydelse ID</th>
+                <th>Ydelsesnavn</th>
+                <th>Estimeret Tid</th>
+                <th>Pris</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ydelse in YdelsesList)
+            {
+                <RenderYdelse ydelser="@ydelse" />
+            }
+        </tbody>
+    </table>
+</div>
 
 
     <br />
@@ -48,6 +53,3 @@
 }
 
 
-@code {
-
-}
