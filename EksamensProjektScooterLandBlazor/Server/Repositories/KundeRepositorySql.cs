@@ -58,7 +58,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
 
         public List<Kunde> GetAllKunder()
         {
-            return db.Kunder.ToList();
+            return db.Kunder.Include(x=>x.Mekaniker).Include(i=>i.PostNummerOgBy).ToList();
         }
 
         public Kunde FindKunde(int id)

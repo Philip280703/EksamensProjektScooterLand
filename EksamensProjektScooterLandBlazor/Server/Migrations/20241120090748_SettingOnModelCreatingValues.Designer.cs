@@ -4,6 +4,7 @@ using EksamensProjektScooterLandBlazor.Server.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksamensProjektScooterLandBlazor.Server.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241120090748_SettingOnModelCreatingValues")]
+    partial class SettingOnModelCreatingValues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -338,7 +341,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                         .IsRequired();
 
                     b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.ScooterBrand", "ScooterBrand")
-                        .WithMany("KundeListe")
+                        .WithMany()
                         .HasForeignKey("ScooterBrandID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -408,11 +411,6 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Ordre", b =>
                 {
                     b.Navigation("ordreLinjer");
-                });
-
-            modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.ScooterBrand", b =>
-                {
-                    b.Navigation("KundeListe");
                 });
 #pragma warning restore 612, 618
         }

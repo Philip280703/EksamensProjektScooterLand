@@ -15,6 +15,8 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Required]
         public string ScooterBrandNavn { get; set;}
 
+        public List<Kunde> KundeListe { get; set;}
+
 		
 
 	}

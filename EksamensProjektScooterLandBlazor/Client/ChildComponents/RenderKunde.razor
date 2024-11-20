@@ -1,22 +1,16 @@
 ﻿@using EksamensProjektScooterLandBlazor.Shared.Models
 @using EksamensProjektScooterLandBlazor.Client.Services;
 
-@if(mekanikerListe != null)
-{
+
 <tr class="hoverable-row">
 	<td>@kunde.KundeID</td>
 	<td>@kunde.Fornavn @kunde.Efternavn</td>
 	<td>@kunde.Email</td>
 	<td>@kunde.TelefonNummer</td>
-	@foreach (var mekaniker in mekanikerListe)
-	{
-		if (kunde.PreferetMekanikerCprNummer == mekaniker.CprNummer)
-		{
-			<td>@mekaniker.Fornavn @mekaniker.Efternavn</td>
-		}
-	}
-	<td>@kunde.ScooterBrandID</td>
+	<td>@kunde.Mekaniker.Fornavn @kunde.Mekaniker.Efternavn</td>
+	@* <td>@kunde.PostNummerOgBy.ByNavn</td>  *@
+@* 	<td>@kunde.ScooterBrand.ScooterBrandNavn</td> *@
 </tr>	
-}
+
 
 

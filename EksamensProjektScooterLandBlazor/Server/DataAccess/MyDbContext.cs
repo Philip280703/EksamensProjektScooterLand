@@ -29,5 +29,31 @@ namespace EksamensProjektScooterLandBlazor.Server.DataAccess
         public DbSet<ScooterLeje> ScooterLejer { get; set; }
         public DbSet<Ydelse> Ydelser { get; set; }
 
-    }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			base.OnModelCreating(modelBuilder);
+			modelBuilder.Entity<Kunde>()
+				   .HasOne(k => k.ScooterBrand)           // A Kunde has one ScooterBrand
+				   .WithMany(sb => sb.KundeListe)             // A ScooterBrand has many Kunder
+				   .HasForeignKey(k => k.ScooterBrandID)  // The foreign key is ScooterBrandID in Kunde
+				   .OnDelete(DeleteBehavior.Restrict);    // Prevent cascade delete
+
+			// Configure Kunde - Mekaniker relationship
+			modelBuilder.Entity<Kunde>()
+				.HasOne(k => k.Mekaniker)
+				.WithMany() // If Mekaniker doesn't have a navigation property for Kunde
+				.HasForeignKey(k => k.PreferetMekanikerCprNummer)
+				.OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
+
+			// Configure Kunde - PostNummerOgBy relationship
+			modelBuilder.Entity<Kunde>()
+				.HasOne(k => k.PostNummerOgBy)
+				.WithMany() // If PostNummerOgBy doesn't have a navigation property for Kunde
+				.HasForeignKey(k => k.PostNummer)
+				.OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
+		}
+
+
+	}
 }
