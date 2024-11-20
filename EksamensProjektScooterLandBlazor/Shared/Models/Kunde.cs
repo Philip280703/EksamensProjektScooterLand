@@ -73,7 +73,6 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public PostNummerOgBy ?PostNummerOgBy { get; set; }
 
 
-
         public Kunde()
         {
            

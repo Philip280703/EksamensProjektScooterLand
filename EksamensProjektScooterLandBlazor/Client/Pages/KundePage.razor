@@ -1,6 +1,7 @@
 ﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents
 @page "/Kundepage"
+<button onclick="@Add">Add</button>
 
 <div class="Left-Side-Tabel">
 	<div class="Tabel-Header">
@@ -20,13 +21,15 @@
 			</tr>
 			@foreach(var kunde in kundeListe)
 			{
-				<RenderKunde kunde="kunde" />	
+				<RenderKunde kunde="kunde" deleteKunde="DeleteKunde" />	
 			}
 		</table>
 	</div>
 </div>
 
-<button onclick="@Seeddata">Seeddata</button>
+
+
+
 
 
 
