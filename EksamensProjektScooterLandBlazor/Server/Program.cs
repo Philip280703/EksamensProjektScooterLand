@@ -25,6 +25,7 @@ builder.Services.AddScoped<IProduktRepository, ProduktRepositorySql>();
 
 builder.Services.AddScoped<IOrdreRepository, OrdreRepositorySql>();
 
+builder.Services.AddScoped<IOrdreLinjeRepository, OrdreLinjeRepositorySql>();
 
 
 var app = builder.Build();
