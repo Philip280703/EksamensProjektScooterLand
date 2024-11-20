@@ -31,7 +31,5 @@ namespace EksamensProjektScooterLandBlazor.Server.DataAccess
 
 
 		
-
-
 	}
 }
