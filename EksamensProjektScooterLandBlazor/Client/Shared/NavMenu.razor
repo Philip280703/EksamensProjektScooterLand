@@ -7,50 +7,71 @@
     </div>
 </div>
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+<div class="@NavMenuCssClass nav-scrollable">
     <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+        <div class="nav-item px-3 d-flex align-items-center justify-content-between">
+            <NavLink class="nav-link flex-grow-1" href="" Match="NavLinkMatch.All">
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Ordre" @onclick="() => ToggleSubMenu(1)">
+
+        <div class="nav-item px-3 d-flex align-items-center justify-content-between">
+            <NavLink class="nav-link flex-grow-1" href="Ordre" Match="NavLinkMatch.All">
                 <span class="bi bi-order-nav-menu" aria-hidden="true"></span> Ordre
             </NavLink>
-
-            @if (showSubMenu[1])
-            {
-                <ul class="nav flex-column">
-                    <li class="nav-item px-3">
-                        <NavLink class="nav-link" href="">
-                            <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Ordre 1
-                        </NavLink>
-                    </li>
-                </ul>
-            }
+            <button class="btn btn-sm btn-link p-0" @onclick="() => ToggleSubMenu(1)" title="Toggle submenu">
+                <span class="bi @(showSubMenu[1] ? "bi-chevron-up" : "bi-chevron-down")" aria-hidden="true"></span>
+            </button>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Mekaniker" @onclick="() => ToggleSubMenu(2)">
+        @if (showSubMenu[1])
+        {
+            <ul class="nav flex-column">
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="AddKundePage" Match="NavLinkMatch.All">
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Ordre 1
+                    </NavLink>
+                </li>
+            </ul>
+        }
+
+        <div class="nav-item px-3 d-flex align-items-center justify-content-between">
+            <NavLink class="nav-link flex-grow-1" href="Mekaniker" Match="NavLinkMatch.All">
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Mekaniker
             </NavLink>
-
-            @if (showSubMenu[2])
-            {
-                <ul class="nav flex-column">
-                    <li class="nav-item px-3">
-                        <NavLink class="nav-link" href="">
-                            <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Mekaniker1
-                        </NavLink>
-                    </li>
-                </ul>
-            }
+            <button class="btn btn-sm btn-link p-0" @onclick="() => ToggleSubMenu(2)" title="Toggle submenu">
+                <span class="bi @(showSubMenu[2] ? "bi-chevron-up" : "bi-chevron-down")" aria-hidden="true"></span>
+            </button>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Kundepage">
+        @if (showSubMenu[2])
+        {
+            <ul class="nav flex-column">
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Mekaniker1
+                    </NavLink>
+                </li>
+            </ul>
+        }
+
+        <div class="nav-item px-3 d-flex align-items-center justify-content-between">
+            <NavLink class="nav-link flex-grow-1" href="Kundepage" Match="NavLinkMatch.All">
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Kunde
             </NavLink>
+            <button class="btn btn-sm btn-link p-0" @onclick="() => ToggleSubMenu(3)" title="Toggle submenu">
+                <span class="bi @(showSubMenu[3] ? "bi-chevron-up" : "bi-chevron-down") text-white fw-bold" aria-hidden="true"></span>
+            </button>
         </div>
+        @if (showSubMenu[3])
+        {
+            <ul class="nav flex-column">
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Opret Kunde
+                    </NavLink>
+                </li>
+            </ul>
+        }
+
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="YdelsePage">
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Ydelse
@@ -66,7 +87,7 @@
 
 @code {
     private bool collapseNavMenu = true;
-    private bool[] showSubMenu = new bool[3];
+    private bool[] showSubMenu = new bool[4];
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
@@ -79,14 +100,7 @@
     {
         for (int i = 0; i < showSubMenu.Length; i++)
         {
-            if (i == index)
-            {
-                showSubMenu[i] = !showSubMenu[i];
-            }
-            else
-            {
-                showSubMenu[i] = false;
-            }
+            showSubMenu[i] = i == index ? !showSubMenu[i] : false;
         }
     }
 }

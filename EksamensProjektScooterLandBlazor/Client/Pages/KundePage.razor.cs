@@ -17,10 +17,25 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 			kundeListe = (await KundeService.GetAllKunder()).ToList();
 		}
 
-		public async void Seeddata()
+		public async void DeleteKunde(Kunde kunde)
 		{
-			var kunde = new Kunde { Fornavn = "Mark", Efternavn = "Ruge", Email = "Mark.ruge5@gmail.com", Etage = "S", HusNummer = "14", Placering = "Gul hus i indhak", PostNummer = 6064, ScooterBrandID = 1, PreferetMekanikerCprNummer = "20202020", TelefonNummer = "29906377", VejNavn = "chr jensensvej" };
+			kundeListe.Remove(kunde);
+			ErrorCode = await KundeService.DeleteKunde(kunde.KundeID);
+		}
+
+		public async void UpdateKunde(Kunde kunde)
+		{
+
+		}
+
+		public async void Add()
+		{
+			var kunde = new Kunde { Fornavn = "mark", Efternavn = "ruge", Email = "mark.ruge5@gmail.com", Etage = "2", HusNummer = "14", Placering = "venstre", PostNummer = 6064, PreferetMekanikerCprNummer = "2904881243", ScooterBrandID = 1, TelefonNummer = "29906377", VejNavn = "Chr jensensvej" };
 			ErrorCode = await KundeService.AddKunde(kunde);
+			if(ErrorCode == 200)
+			{
+				kundeListe.Add(kunde);
+			}
 		}
 	}
 }

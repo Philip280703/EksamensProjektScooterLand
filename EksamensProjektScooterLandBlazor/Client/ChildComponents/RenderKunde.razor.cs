@@ -14,9 +14,17 @@ namespace EksamensProjektScooterLandBlazor.Client.ChildComponents
 		[Inject]
 		public IMekanikerService Service { get; set; }
 
+		[Parameter]
+		public EventCallback<Kunde> deleteKunde { get; set; }
+
 		protected override async Task OnInitializedAsync()
 		{
 			mekanikerListe = (await Service.GetAllMekaniker()).ToList();
+		}
+
+		private async Task DeleteKunde()
+		{
+			await deleteKunde.InvokeAsync(kunde);
 		}
 	}
 }
