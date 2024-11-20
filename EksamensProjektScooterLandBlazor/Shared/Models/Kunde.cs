@@ -72,7 +72,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [ForeignKey("PostNummer")]
         public PostNummerOgBy ?PostNummerOgBy { get; set; }
 
-        public ScooterBrand ?ScooterBrand { get; set; }
+
 
         public Kunde()
         {

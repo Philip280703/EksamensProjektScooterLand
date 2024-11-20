@@ -24,6 +24,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
 		public IEnumerable<Kunde> GetAllKunder()
 		{
 			Console.WriteLine("Get all kunder kaldet");
+			
 			return Repository.GetAllKunder();
 		}
 
