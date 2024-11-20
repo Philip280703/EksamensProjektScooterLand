@@ -9,11 +9,14 @@ namespace EksamensProjektScooterLandBlazor.Client.ChildComponents
 		[Parameter]
 		public Kunde kunde { get; set; }
 
-		[Parameter]
-		public Mekaniker mekaniker { get; set; }
+		private List<Mekaniker> mekanikerListe { get; set; }
 
 		[Inject]
 		public IMekanikerService Service { get; set; }
 
+		protected override async Task OnInitializedAsync()
+		{
+			mekanikerListe = (await Service.GetAllMekaniker()).ToList();
+		}
 	}
 }

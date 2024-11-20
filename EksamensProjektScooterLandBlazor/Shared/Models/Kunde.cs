@@ -62,7 +62,9 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
         public string PreferetMekanikerCprNummer { get; set; } = "";
 
-
+      
+        public Mekaniker ?Mekaniker { get; set; }
+        public PostNummerOgBy ?PostNummerOgBy { get; set; }
 
         public Kunde()
         {
