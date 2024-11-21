@@ -57,13 +57,13 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public string HusNummer { get; set; }
 
         [StringLength(2, ErrorMessage ="Skal være gyldig etage. maks 2 tegn.")]
-        public string? Etage { get; set; } = "";
+        public string ?Etage { get; set; } 
 
         [StringLength(2, ErrorMessage = "Skal være gyldig placering. maks 2 tegn. (tv, th, mf)")]
-        public string? Placering { get; set; } = "";
+        public string ?Placering { get; set; } 
 
      
-        public string PreferetMekanikerCprNummer { get; set; } = "";
+        public string PreferetMekanikerCprNummer { get; set; } 
 
 
 		[ForeignKey("PreferetMekanikerCprNummer")]

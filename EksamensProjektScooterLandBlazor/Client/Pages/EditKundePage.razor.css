@@ -114,6 +114,7 @@
 
 /* Input styling */
 .form-input {
+    border-radius: 10px;
     padding: 10px 12px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -171,5 +172,12 @@
         outline: none; /* Fjern standard kant ved fokus */
         box-shadow: 0 0 5px rgba(76, 175, 80, 0.6); /* Grøn skygge ved fokus */
     }
+
+    .button-save:hover {
+        background-color: #0056b3; /* Ændrer baggrundsfarven når man hover */
+    }
+
+
+
 
 

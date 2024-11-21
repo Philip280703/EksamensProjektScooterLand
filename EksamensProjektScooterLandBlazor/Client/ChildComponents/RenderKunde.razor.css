@@ -17,9 +17,17 @@ tr{
     border-bottom: 1px solid #ddd;
 }
 
-.Slet-knap:hover {
-    
+button{
+    border-radius: 10px;
+    transition: background-color 0.5s ease;
 }
 
-.Rediger-knap{
+/* Hover-effekt for knapper */
+.Rediger-knap:hover {
+    background-color: #8ab6ff; /* Lys blå nuance */
 }
+
+.Slet-knap:hover {
+    background-color: #ffb3b3; /* Blid lys rød farve */
+}
+
