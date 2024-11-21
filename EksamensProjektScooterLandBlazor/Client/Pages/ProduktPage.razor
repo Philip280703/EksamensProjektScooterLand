@@ -17,6 +17,7 @@
 				<th> Id</th>
 				<th> Produktnavn</th>
 				<th>Produktpris</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 
@@ -24,7 +25,7 @@
 
 			@foreach (var item in produktListe)
 			{
-				<RenderProdukt produkt="@item" />
+				<RenderProdukt produkt="@item" deleteProdukt="DeleteProdukt" />
 			}
 
 		</thead>
@@ -35,10 +36,22 @@
 
 <br/>
 
-<EditForm Model="newProdukt" OnValidSubmit="AddProduktHandler">
+<EditForm EditContext="@EditContext"
+OnValidSubmit="HandleValidSubmit"
+OnInvalidSubmit="HandleInvalidSubmit">
+
+
+
+	<!-- ValidatorsCall-->
+
+	<ValidationSummary/>
+	<DataAnnotationsValidator/>
+
+
 	<div>
 		<label for="name">Produkt:</label>
 		<InputText id="navn" @bind-Value="newProdukt.ProduktNavn"/>
+		<ValidationMessage For="@(() => newProdukt.ProduktNavn)" />
 	</div>
 	<div>
 		<label for="pris">Pris:</label>
@@ -50,7 +63,9 @@
 
 	</div>
 	<br />
-	<button type="submit">Tilføj produkt</button>
+	<div class="col-12 mb-3">
+		<button type="submit" class="btn btn-outline-primary">Submit</button>
+	</div>
 </EditForm>
 
 
@@ -80,31 +95,61 @@
 
 	private int ErrorCode { get; set; } = 0;
 
+	private EditContext EditContext;
+
 	[Inject]
 	public IProduktService Service {get; set;}
+
+
+	protected override void OnInitialized()
+	{
+		EditContext = new EditContext(newProdukt);
+	}
+
+	public async void DeleteProdukt(Produkt produkt)
+	{
+		produktListe.Remove(produkt);
+		ErrorCode = await Service.DeleteProdukt(produkt.ProduktID);
+	}
+
+
 
 	protected override async Task OnInitializedAsync()
 	{
 		produktListe = (await Service.GetAllProdukt()).ToList();
+
 	}
 
 	private void EnsureNonNegative(ChangeEventArgs e)
 	{
-		if (newProdukt.ProduktPris < 0){
-			newProdukt.ProduktPris = 0;
+		if (double.TryParse(e.Value?.ToString(), out var value))
+		{
+			if (value < 0)
+			{
+				newProdukt.ProduktPris = 0;
+			}
+			else 
+			{
+				newProdukt.ProduktPris = value;
+			}
 		}
 	}
 
-	public async Task AddProduktHandler()
+	public async Task HandleValidSubmit()
 	{
+
 		ErrorCode = await Service.AddProdukt(newProdukt);
 		Console.WriteLine("Shopping item added: return code: " + ErrorCode);
 
 		// Ryd formen efter tilføjelse
 		newProdukt = new Produkt();
+		EditContext = new EditContext(newProdukt);
 		StateHasChanged();
 	}
 
 	
-
+	public async Task HandleInvalidSubmit()
+	{
+		Console.WriteLine("HandleInvalidSubmit Called...");
+	}
 }

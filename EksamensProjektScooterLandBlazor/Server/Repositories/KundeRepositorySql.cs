@@ -64,7 +64,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
 
         public Kunde FindKunde(int id)
         {
-            var Kunde = db.Kunder.Single(k => k.KundeID == id);
+            var Kunde = db.Kunder.Include(i => i.PostNummerOgBy).Include(x => x.Mekaniker).ThenInclude(y => y.scooterBrand).Single(k => k.KundeID == id);
 
             if (Kunde != null)
             {
