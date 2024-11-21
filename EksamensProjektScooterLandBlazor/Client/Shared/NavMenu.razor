@@ -20,7 +20,7 @@
                 <span class="bi bi-order-nav-menu" aria-hidden="true"></span> Ordre
             </NavLink>
             <button class="btn btn-sm btn-link p-0" @onclick="() => ToggleSubMenu(1)" title="Toggle submenu">
-                <span class="bi @(showSubMenu[1] ? "bi-chevron-up" : "bi-chevron-down")" aria-hidden="true"></span>
+                <span class="bi @(showSubMenu[1] ? "bi-chevron-up" : "bi-chevron-down") text-white fw-bold" aria-hidden="true"></span>
             </button>
         </div>
         @if (showSubMenu[1])
@@ -39,7 +39,7 @@
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Mekaniker
             </NavLink>
             <button class="btn btn-sm btn-link p-0" @onclick="() => ToggleSubMenu(2)" title="Toggle submenu">
-                <span class="bi @(showSubMenu[2] ? "bi-chevron-up" : "bi-chevron-down")" aria-hidden="true"></span>
+                <span class="bi @(showSubMenu[2] ? "bi-chevron-up" : "bi-chevron-down") text-white fw-bold"  aria-hidden="true"></span>
             </button>
         </div>
         @if (showSubMenu[2])

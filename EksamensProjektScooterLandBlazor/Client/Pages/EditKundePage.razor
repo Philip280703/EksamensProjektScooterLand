@@ -1,0 +1,21 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@page "/Editkundepage"
+
+<div class="Enkelt-kunde">
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Navn</th>
+			<th>Email</th>
+			<th>Tlf</th>
+			<th>Pref. M</th>
+			<th>Scooter</th>
+			<th>Action</th>
+		</tr>	
+	</table>
+</div>
+
+@code {
+	[Parameter]
+	public Kunde kunde { get; set; }
+}
