@@ -26,5 +26,10 @@ namespace EksamensProjektScooterLandBlazor.Client.ChildComponents
 		{
 			await deleteKunde.InvokeAsync(kunde);
 		}
+
+		private void NavigateToEditKundeComponenet(int kundeID)
+		{
+			NavigationManager.NavigateTo($"/Editkundepage/{kundeID}");
+		}
 	}
 }

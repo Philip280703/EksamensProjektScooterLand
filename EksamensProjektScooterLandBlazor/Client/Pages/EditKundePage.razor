@@ -1,0 +1,124 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+@page "/Editkundepage/{kundeID:int}"
+
+@if(kunde == null)
+{
+	<p>Indlæser Kunde....</p>
+}
+else
+{
+    <div class="Enkelt-kunde">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Navn</th>
+                    <th>Email</th>
+                    <th>Tlf</th>
+                    <th>Pref. M</th>
+                    <th>Scooter</th>
+                    <th>Postnr</th>
+                    <th>By</th>
+                    <th>Adresse</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@kunde.KundeID</td>
+                    <td>@kunde.Fornavn @kunde.Efternavn</td>
+                    <td>@kunde.Email</td>
+                    <td>+45 @kunde.TelefonNummer</td>
+                    <td>@kunde.Mekaniker.Fornavn @kunde.Mekaniker.Efternavn</td>
+                    <td>@kunde.Mekaniker.scooterBrand.ScooterBrandNavn</td>
+                    <td>@kunde.PostNummer</td>
+                    <td>@kunde.PostNummerOgBy.ByNavn</td>
+                    <td>@kunde.VejNavn @kunde.HusNummer</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+<EditForm EditContext="@editContext" class="row p-3"
+           OnValidSubmit="@HandleValidSubmit"
+           OnInvalidSubmit="@HandleInvalidSubmit">
+    <DataAnnotationsValidator />
+    <div class="Rediger-kunde">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="Fornavn" class="form-label">Fornavn</label>
+                <InputText id="Fornavn" @bind-Value="kunde.Fornavn" placeholder="@kunde.Fornavn" class="form-input" />
+                <ValidationMessage For ="@(() => kunde.Fornavn)" />
+            </div>
+            <div class="form-group">
+                <label for="Efternavn" class="form-label">Efternavn</label>
+                <InputText id="Efternavn" @bind-Value="kunde.Efternavn" placeholder="@kunde.Efternavn" class="form-input" />
+                <ValidationMessage For ="@(() => kunde.Efternavn)" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="Email" class="form-label">Email</label>
+                <InputText id="Email" @bind-Value="kunde.Email" placeholder="@kunde.Email" class="form-input" />
+                <ValidationMessage For="@(() => kunde.Email)" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="Postnummer" class="form-label">Postnummer</label>
+                <InputNumber id="Postnummer" @bind-Value="kunde.PostNummer" placeholder="@kunde.PostNummer" class="form-input" />
+                <ValidationMessage For="@(() => kunde.PostNummer)" />
+            </div>
+            <div class="form-group">
+                <label for="Vejnavn" class="form-label">Vejnavn</label>
+                <InputText id="Vejnavn" @bind-Value="kunde.VejNavn" placeholder="@kunde.VejNavn" class="form-input" />
+                <ValidationMessage For="@(() => kunde.VejNavn)" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="Husnummer" class="form-label">Husnummer</label>
+                <InputText id="Husnummer" @bind-Value="kunde.HusNummer" placeholder="@kunde.HusNummer" class="form-input" />
+                <ValidationMessage For="@(() => kunde.HusNummer)" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="button-save">Gem</button>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+
+}
+
+
+
+@code {
+    [Inject]
+    public IKundeService KundeService { get; set; }
+
+    [Parameter]
+    public int KundeId { get; set; }
+
+    private Kunde? kunde;
+
+    private EditContext editContext;
+
+    protected override async Task OnInitializedAsync()
+    {
+        kunde = await KundeService.GetKunde(KundeId);
+
+        editContext = new EditContext(kunde);
+    }
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("HandlevalidSubmit called...");
+    }
+
+    private void HandleInvalidSubmit()
+    {
+        Console.WriteLine("HandleInvalidSubmit called...");
+    }
+
+}

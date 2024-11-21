@@ -1,0 +1,175 @@
+﻿/* Wrapper styling */
+.Enkelt-kunde {
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+/* Table styling */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+}
+
+    .styled-table thead tr {
+        background-color: #4CAF50;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+    }
+
+    .styled-table tbody tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+        /* Row hover effect */
+        .styled-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Alternate row colors */
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+    /* Action button styling */
+    .styled-table td:last-child {
+        text-align: center;
+    }
+
+    .styled-table button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+
+        .styled-table button:hover {
+            background-color: #45a049;
+        }
+
+/* Responsive table */
+@media (max-width: 768px) {
+    .styled-table {
+        font-size: 14px;
+    }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 8px 10px;
+        }
+}
+
+/* Container styling */
+.Rediger-kunde {
+    max-width: 80%; /* Matches table width */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Row styling */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+/* Group styling */
+.form-group {
+    flex: 1; /* Allow fields to scale evenly */
+    min-width: 200px; /* Prevent fields from shrinking too small */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    margin-top: auto;
+}
+
+/* Label styling */
+.form-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Input styling */
+.form-input {
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+    .form-input:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+    }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column; /* Stack inputs vertically on smaller screens */
+    }
+
+    .form-group {
+        min-width: 100%;
+    }
+
+    .form-label {
+        font-size: 14px;
+    }
+
+    .form-input {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+}
+
+/* Button styling */
+.button-save {
+    padding: 12px 20px; /* Polstring for knappen */
+    font-size: 16px; /* Størrelse af teksten */
+    background-color: #4CAF50; /* Grøn baggrund */
+    color: white; /* Hvid tekst */
+    border: none; /* Fjern kantlinje */
+    border-radius: 4px; /* Rundede hjørner */
+    cursor: pointer; /* Skift musemarkør */
+    transition: background-color 0.3s ease; /* Smidig overgang ved hover */
+    width: 100%; /* Sørg for at knappen fylder hele bredden af form-group */
+    margin-top: auto;
+}
+
+    /* Hover effekt på knappen */
+    .button-save:hover {
+        background-color: #45a049; /* Mørkere grøn ved hover */
+    }
+
+    /* Fokus effekt på knappen */
+    .button-save:focus {
+        outline: none; /* Fjern standard kant ved fokus */
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.6); /* Grøn skygge ved fokus */
+    }
+
+

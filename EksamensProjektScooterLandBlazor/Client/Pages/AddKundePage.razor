@@ -1,6 +1,143 @@
 ﻿@page "/AddKundePage"
-<h2>hej</h2>
+@inject HttpClient httpClient;
+@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+
+<h2>Tilføj kunde</h2>
+
+<EditForm EditContext="@editContext" class="row p-3"
+          OnValidSubmit="@HandleValidSubmit"
+          OnInvalidSubmit="@HandleInvalidSubmit">
+    <DataAnnotationsValidator />
+    <div class="col-6 mb-3">
+        <label for="fornavn">Fornavn</label>
+        <InputText id="fornavn" @bind-Value="KundeModel.Fornavn" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.Fornavn)" />
+    </div>
+    <div class="col-6 mb-3">
+        <label for="efternavn">Efternavn</label>
+        <InputText id="efternavn" @bind-Value="KundeModel.Efternavn" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.Efternavn)" />
+    </div>
+    <div class="col-6 mb-3">
+        <label for="TelefonNummer">TelefonNummer</label>
+        <InputText id="TelefonNummer" @bind-Value="KundeModel.TelefonNummer" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.TelefonNummer)" />
+    </div>
+    <div class="col-6 mb-3">
+        <label for="Email">Email</label>
+        <InputText id="Email" @bind-Value="KundeModel.Email" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.Email)" />
+    </div>
+    <div class="col-6 mb-3">
+        <label for="VejNavn">VejNavn</label>
+        <InputText id="VejNavn" @bind-Value="KundeModel.VejNavn" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.VejNavn)" />
+    </div>
+    <div class="col-2 mb-3">
+        <label for="HusNummer">HusNummer</label>
+        <InputText id="HusNummer" @bind-Value="KundeModel.HusNummer" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.HusNummer)" />
+    </div>
+    <div class="col-2 mb-3">
+        <label for="Etage">Etage</label>
+        <InputText id="Etage" @bind-Value="KundeModel.Etage" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.Etage)" />
+    </div>
+    <div class="col-2 mb-3">
+        <label for="Placering">Placering</label>
+        <InputText id="Placering" @bind-Value="KundeModel.Placering" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.Placering)" />
+    </div>
+       <div class="col-2 mb-3">
+        <label for="Postnummer">Postnummer</label>
+        <InputNumber id="PostNummer" @bind-Value="KundeModel.PostNummer" @oninput="UpdateBynavn" class="form-control" />
+    </div>
+
+    <div class="col-3 mb-3">
+        <label for="Bynavn">Bynavn</label>
+        <input id="Bynavn" type="text" value="@Bynavn" class="form-control" readonly />
+    </div>
+
+
+    <div class="d-block">
+        <label for="Scooter" class="col-sm-2 col-form-label">Scooter</label>
+        <div class="col-sm-10">
+            <InputSelect id="Scooter" @bind-Value="KundeModel.ScooterBrandID" class="form-control">
+                @foreach (var item in scooterBrandListe)
+                {
+                    <option value="@item.ScooterBrandID">@item.ScooterBrandNavn</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+
+
+</EditForm>
+
+<br />
+<div></div>
+
 
 @code {
+
+    private Kunde KundeModel = new Kunde();
+    private EditContext editContext;
+
+
+
+    private List<ScooterBrand> scooterBrandListe = new List<ScooterBrand>();
+    private List<PostNummerOgBy> postNummerOgByListe = new List<PostNummerOgBy>();
+
+    [Inject]
+    public IScooterBrandService ScooterService { get; set; }
+
+    [Inject]
+    public IPostnummerOgByService postnummerOgByService { get; set; }
+
+
+
+    protected override async void OnInitialized()
+    {
+        editContext = new EditContext(KundeModel);
+        
+        scooterBrandListe = (await ScooterService.GetAll()).ToList();
+        postNummerOgByListe = (await postnummerOgByService.GetAllPostnummerOgByer()).ToList();
+    }
+
+	private void HandleValidSubmit()
+	{
+		Console.WriteLine("HandkevalidSubmit called..");
+
+	}
+
+	private void HandleInvalidSubmit()
+	{
+		Console.WriteLine("HandleInvalidSubmit called...");
+	}
+
+    private string Bynavn { get; set; } = string.Empty;
+
+
+    private void UpdateBynavn(ChangeEventArgs e)
+    {
+        // Parse the new value from the event arguments
+        if (int.TryParse(e.Value?.ToString(), out int postNummer))
+        {
+            KundeModel.PostNummer = postNummer;
+
+            // Find the corresponding city name
+            var match = postNummerOgByListe.FirstOrDefault(x => x.Postnummer == postNummer);
+            Bynavn = match?.ByNavn ?? string.Empty; // Default to empty if not found
+            Console.WriteLine($"PostNummer: {postNummer}, Found ByNavn: {Bynavn}");
+        }
+        else
+        {
+            Bynavn = string.Empty;
+            Console.WriteLine("Invalid PostNummer input.");
+        }
+    }
+
 
 }
