@@ -48,6 +48,12 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
 			Repository.UpdateOrdreLinje(ordreLinje);
 		}
 
+		[HttpDelete]
+		public void DeleteOrdreLinje(int id)
+		{
+			Repository.DeleteOrdreLinje(id);
+		}
+
 
 
 	}

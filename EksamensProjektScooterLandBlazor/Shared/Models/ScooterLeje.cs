@@ -18,8 +18,8 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public int ?KmTalDifference {  get; set; }
 
 
-        [Range(0, 1, ErrorMessage ="Ledigheden skal enten være 0 for optaget eller 1 for ledig")]
-        public bool ?Ledig {  get; set; }
+        //[Range(0, 1, ErrorMessage ="Ledigheden skal enten være 0 for optaget eller 1 for ledig")]
+        //public bool ?Ledig {  get; set; }
 
 
         [Range(0, 20000, ErrorMessage ="Selvrisiko skal være mellem 0 og 20.000")]
@@ -30,16 +30,16 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public double ForsikringPrKm { get; set; }
 
 
-        [Range(1, 100, ErrorMessage ="Antal dage scooteren er lejet skal være mellem 1 og 100")]
-        public int ?AntalDage { get; set; }
+        //[Range(1, 100, ErrorMessage ="Antal dage scooteren er lejet skal være mellem 1 og 100")]
+        //public int ?AntalDage { get; set; }
 
 
         [Range(0.1, 1000, ErrorMessage ="DagsLejePrisen skal være mellem 0.1 og 1000 kr. pr. dag.")]
         public double DagsLejePris { get; set; }
 
 
-        [Range(1, 10000, ErrorMessage ="Prisen for scooterLeje skal være mellem 1 og 10000 kr.")]
-        public double ?Pris { get; set; }
+        //[Range(1, 10000, ErrorMessage ="Prisen for scooterLeje skal være mellem 1 og 10000 kr.")]
+        //public double ?Pris { get; set; }
 
 
     }

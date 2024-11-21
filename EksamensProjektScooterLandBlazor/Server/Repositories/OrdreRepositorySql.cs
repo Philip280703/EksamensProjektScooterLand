@@ -31,7 +31,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
                 return false;
             }
             currentOrdre.MedarbejderCpr = Ordre.MedarbejderCpr;
-            currentOrdre.SamletPris = Ordre.SamletPris;
+            currentOrdre.BetalingsSum = Ordre.BetalingsSum;
             
            
             db.SaveChanges();
