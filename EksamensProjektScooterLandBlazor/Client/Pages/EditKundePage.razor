@@ -4,7 +4,7 @@
 
 @if(kunde == null)
 {
-	<p>Indlæser Kunde....</p>
+    <p>Indlæser Kunde....</p>
 }
 else
 {
@@ -39,54 +39,60 @@ else
         </table>
     </div>
 
-<EditForm EditContext="@editContext" class="row p-3"
-           OnValidSubmit="@HandleValidSubmit"
-           OnInvalidSubmit="@HandleInvalidSubmit">
-    <DataAnnotationsValidator />
-    <div class="Rediger-kunde">
-        <div class="form-row">
-            <div class="form-group">
-                <label for="Fornavn" class="form-label">Fornavn</label>
-                <InputText id="Fornavn" @bind-Value="kunde.Fornavn" placeholder="@kunde.Fornavn" class="form-input" />
-                <ValidationMessage For ="@(() => kunde.Fornavn)" />
+    <EditForm EditContext="@editContext" class="row p-3"
+    OnValidSubmit="@HandleValidSubmit"
+    OnInvalidSubmit="@HandleInvalidSubmit">
+        <DataAnnotationsValidator />
+        <div class="Rediger-kunde">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Fornavn" class="form-label">Fornavn</label>
+                    <InputText id="Fornavn" @bind-Value="kunde.Fornavn" placeholder="@kunde.Fornavn" class="form-input" />
+                    <ValidationMessage For ="@(() => kunde.Fornavn)" />
+                </div>
+                <div class="form-group">
+                    <label for="Efternavn" class="form-label">Efternavn</label>
+                    <InputText id="Efternavn" @bind-Value="kunde.Efternavn" placeholder="@kunde.Efternavn" class="form-input" />
+                    <ValidationMessage For ="@(() => kunde.Efternavn)" />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="Efternavn" class="form-label">Efternavn</label>
-                <InputText id="Efternavn" @bind-Value="kunde.Efternavn" placeholder="@kunde.Efternavn" class="form-input" />
-                <ValidationMessage For ="@(() => kunde.Efternavn)" />
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Email" class="form-label">Email</label>
+                    <InputText id="Email" @bind-Value="kunde.Email" placeholder="@kunde.Email" class="form-input" />
+                    <ValidationMessage For="@(() => kunde.Email)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Postnummer" class="form-label">Postnummer</label>
+                    <InputNumber id="Postnummer" @bind-Value="kunde.PostNummer" placeholder="@kunde.PostNummer" class="form-input" />
+                    <ValidationMessage For="@(() => kunde.PostNummer)" />
+                </div>
+                <div class="form-group">
+                    <label for="Vejnavn" class="form-label">Vejnavn</label>
+                    <InputText id="Vejnavn" @bind-Value="kunde.VejNavn" placeholder="@kunde.VejNavn" class="form-input" />
+                    <ValidationMessage For="@(() => kunde.VejNavn)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Husnummer" class="form-label">Husnummer</label>
+                    <InputText id="Husnummer" @bind-Value="kunde.HusNummer" placeholder="@kunde.HusNummer" class="form-input" />
+                    <ValidationMessage For="@(() => kunde.HusNummer)" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="button-save">Gem</button>
+                </div>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="Email" class="form-label">Email</label>
-                <InputText id="Email" @bind-Value="kunde.Email" placeholder="@kunde.Email" class="form-input" />
-                <ValidationMessage For="@(() => kunde.Email)" />
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="Postnummer" class="form-label">Postnummer</label>
-                <InputNumber id="Postnummer" @bind-Value="kunde.PostNummer" placeholder="@kunde.PostNummer" class="form-input" />
-                <ValidationMessage For="@(() => kunde.PostNummer)" />
-            </div>
-            <div class="form-group">
-                <label for="Vejnavn" class="form-label">Vejnavn</label>
-                <InputText id="Vejnavn" @bind-Value="kunde.VejNavn" placeholder="@kunde.VejNavn" class="form-input" />
-                <ValidationMessage For="@(() => kunde.VejNavn)" />
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="Husnummer" class="form-label">Husnummer</label>
-                <InputText id="Husnummer" @bind-Value="kunde.HusNummer" placeholder="@kunde.HusNummer" class="form-input" />
-                <ValidationMessage For="@(() => kunde.HusNummer)" />
-            </div>
-            <div class="form-group">
-                <button type="submit" class="button-save">Gem</button>
-            </div>
-        </div>
-    </div>
-</EditForm>
+    </EditForm>
+
+
+    @if(ErrorCode == 200)
+    {
+        <label>Kunde er opdateret</label>
+    }
 
 
 }
@@ -97,12 +103,21 @@ else
     [Inject]
     public IKundeService KundeService { get; set; }
 
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
     [Parameter]
     public int KundeId { get; set; }
 
     private Kunde? kunde;
 
     private EditContext editContext;
+
+    
+
+
+
+    private int ErrorCode { get; set; } = 0;
 
     protected override async Task OnInitializedAsync()
     {
@@ -111,10 +126,25 @@ else
         editContext = new EditContext(kunde);
     }
 
-    private void HandleValidSubmit()
+    private async Task HandleValidSubmit()
     {
-        Console.WriteLine("HandlevalidSubmit called...");
-    }
+        ErrorCode = await KundeService.UpdateKunde(kunde);
+        Console.WriteLine("Kunde updated: return code: " + ErrorCode);
+
+        if (ErrorCode == 200)
+        {
+            Console.WriteLine("Kunde opdateret");
+
+            NavigationManager.NavigateTo("/Kundepage");
+        }
+        else 
+        {
+            Console.WriteLine($"fejl ved update, statuskode: {ErrorCode}");
+        }
+     }
+
+        
+    
 
     private void HandleInvalidSubmit()
     {
