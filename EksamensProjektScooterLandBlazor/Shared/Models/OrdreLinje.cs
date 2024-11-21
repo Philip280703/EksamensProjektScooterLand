@@ -20,10 +20,6 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public int Antal {  get; set; }
 
 
-        [Range(1, int.MaxValue, ErrorMessage ="Total skal være postivt.")]
-        public double Total { get; set; }
-
-
         [Range(1, 99, ErrorMessage ="Rabat skal være mellem 1 og 99 procent, skrives i hele tal")]
         public int ?RabatProcent { get; set; }
 
@@ -50,7 +46,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public int OrdreID { get; set; }
 
         // objekt relation til EF
-        public Ordre ordre { get; set; }
+        public Ordre ?ordre { get; set; }
 
 
     }

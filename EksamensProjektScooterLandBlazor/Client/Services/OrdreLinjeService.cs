@@ -20,7 +20,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 
 		public async Task<OrdreLinje?> GetOrdreLinje(int id)
 		{
-			var ordreLinje = await httpClient.GetFromJsonAsync<OrdreLinje>("api/ordrelinjeapi");
+			var ordreLinje = await httpClient.GetFromJsonAsync<OrdreLinje>("api/ordrelinjeapi/" + id);
 			return ordreLinje;
 		}
 
@@ -33,7 +33,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 
 		public async Task<int> DeleteOrdreLinje(int id)
 		{
-			var svar = await httpClient.DeleteAsync("api/ordrelinjeapi" +  id);
+			var svar = await httpClient.DeleteAsync("api/ordrelinjeapi/" +  id);
 			var svarStatusCode = svar.StatusCode;
 			return (int)svarStatusCode;
 		}
