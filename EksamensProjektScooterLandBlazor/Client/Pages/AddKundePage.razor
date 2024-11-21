@@ -30,12 +30,12 @@
         <ValidationMessage For="@(() => KundeModel.Email)" />
     </div>
     <div class="col-6 mb-3">
-        <label for="VejNavn">VejNavn</label>
+        <label for="VejNavn">Vejnavn</label>
         <InputText id="VejNavn" @bind-Value="KundeModel.VejNavn" class="form-control" />
         <ValidationMessage For="@(() => KundeModel.VejNavn)" />
     </div>
     <div class="col-2 mb-3">
-        <label for="HusNummer">HusNummer</label>
+        <label for="HusNummer">Husnummer</label>
         <InputText id="HusNummer" @bind-Value="KundeModel.HusNummer" class="form-control" />
         <ValidationMessage For="@(() => KundeModel.HusNummer)" />
     </div>
@@ -55,15 +55,15 @@
     </div>
 
     <div class="col-3 mb-3">
-        <label for="Bynavn">Bynavn</label>
+        <label for="Bynavn">By</label>
         <input id="Bynavn" type="text" value="@Bynavn" class="form-control" readonly />
     </div>
 
-
     <div class="d-block">
         <label for="Scooter" class="col-sm-2 col-form-label">Scooter</label>
-        <div class="col-sm-10">
+        <div class="col-sm-5"> 
             <InputSelect id="Scooter" @bind-Value="KundeModel.ScooterBrandID" class="form-control">
+                <option value="">-- Vælg en scooter --</option>
                 @foreach (var item in scooterBrandListe)
                 {
                     <option value="@item.ScooterBrandID">@item.ScooterBrandNavn</option>
@@ -72,23 +72,54 @@
         </div>
     </div>
 
+    <div>
+        <button class="btn btn-primary" @onclick="FilterMekaniker">load</button>
+    </div>
 
+
+    <div class="d-block">
+        <label for="PreferetMekanikerCprNummer" class="col-sm-2 col-form-label">Ønsket mekaniker</label>
+        <div class="col-sm-10">
+            <InputSelect id="PreferetMekanikerCprNummer" @bind-Value="KundeModel.PreferetMekanikerCprNummer" class="form-control">
+                <option value="">-- Vælg en mekaniker --</option>
+                @foreach (var item in filteredMekanikerListe)
+                {
+                    <option value="@item.CprNummer">@item.Fornavn @item.Efternavn</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+    <br />
+    <div>
+
+    </div>
+    <div class="col-6 mb-3">
+        <button type="submit" class="btn btn-primary">Tilføj kunde</button>
+    </div>
 
 </EditForm>
+
 
 <br />
 <div></div>
 
+@if (ErrorCode == 200)
+{
+    <label>Kunden er nu tilføjet til databasen! :)</label>
+}
+
+
 
 @code {
-
     private Kunde KundeModel = new Kunde();
     private EditContext editContext;
 
-
-
     private List<ScooterBrand> scooterBrandListe = new List<ScooterBrand>();
     private List<PostNummerOgBy> postNummerOgByListe = new List<PostNummerOgBy>();
+    private List<Mekaniker> mekanikerListe = new List<Mekaniker>();
+
+    private List<Mekaniker> filteredMekanikerListe = new List<Mekaniker>();
 
     [Inject]
     public IScooterBrandService ScooterService { get; set; }
@@ -96,40 +127,46 @@
     [Inject]
     public IPostnummerOgByService postnummerOgByService { get; set; }
 
+    [Inject]
+    public IKundeService kundeService { get; set; }
 
+    [Inject]
+    public IMekanikerService mekanikerService { get; set; }
 
-    protected override async void OnInitialized()
+    public int ErrorCode { get; set; }
+
+    protected override async Task OnInitializedAsync()
     {
         editContext = new EditContext(KundeModel);
-        
+
         scooterBrandListe = (await ScooterService.GetAll()).ToList();
         postNummerOgByListe = (await postnummerOgByService.GetAllPostnummerOgByer()).ToList();
+        mekanikerListe = (await mekanikerService.GetAllMekaniker()).ToList();
+        
+
     }
 
-	private void HandleValidSubmit()
-	{
-		Console.WriteLine("HandkevalidSubmit called..");
+    private async void HandleValidSubmit()
+    {
+        Console.WriteLine("HandleValidSubmit called..");
+        ErrorCode = await kundeService.AddKunde(KundeModel);
+    }
 
-	}
-
-	private void HandleInvalidSubmit()
-	{
-		Console.WriteLine("HandleInvalidSubmit called...");
-	}
+    private void HandleInvalidSubmit()
+    {
+        Console.WriteLine("HandleInvalidSubmit called...");
+    }
 
     private string Bynavn { get; set; } = string.Empty;
 
-
     private void UpdateBynavn(ChangeEventArgs e)
     {
-        // Parse the new value from the event arguments
         if (int.TryParse(e.Value?.ToString(), out int postNummer))
         {
             KundeModel.PostNummer = postNummer;
 
-            // Find the corresponding city name
             var match = postNummerOgByListe.FirstOrDefault(x => x.Postnummer == postNummer);
-            Bynavn = match?.ByNavn ?? string.Empty; // Default to empty if not found
+            Bynavn = match?.ByNavn ?? "Ikke gyldigt postnummer";
             Console.WriteLine($"PostNummer: {postNummer}, Found ByNavn: {Bynavn}");
         }
         else
@@ -139,5 +176,27 @@
         }
     }
 
+    private async Task FilterMekaniker()
+    {
+        var selectedScooterBrandID = KundeModel.ScooterBrandID;
 
+        if (selectedScooterBrandID != null)
+        {
+            filteredMekanikerListe = mekanikerListe
+                .Where(m => m.ScooterBrandId == selectedScooterBrandID)
+                .ToList();
+        }
+        else
+        {
+            filteredMekanikerListe = new List<Mekaniker>();
+        }
+
+        filteredMekanikerListe = filteredMekanikerListe
+            .OrderBy(m => m.Fornavn)
+            .ThenBy(m => m.Efternavn)
+            .ToList();
+
+        StateHasChanged();
+    }
 }
+
