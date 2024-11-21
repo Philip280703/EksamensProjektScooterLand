@@ -19,7 +19,7 @@
     font-size: 20px;
 }
 
-Tabel-Header-Text {
+.Tabel-Header {
     color: black;
     vertical-align: middle;
     display: table-cell;
@@ -28,3 +28,4 @@ Tabel-Header-Text {
     text-align: center; 
     padding: 10px; 
 }
+

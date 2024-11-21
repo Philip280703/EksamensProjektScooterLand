@@ -1,6 +1,7 @@
 ﻿using EksamensProjektScooterLandBlazor.Client.Services;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace EksamensProjektScooterLandBlazor.Client.Pages
 {
@@ -11,38 +12,60 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
         private List<Ydelse> YdelsesList = new List<Ydelse>();
 
+        private EditContext EditContext;
+
+      
+        private Ydelse YdelseModel = new Ydelse();
+
         private int ErrorCode { get; set; } = 0;
 
         protected override async Task OnInitializedAsync()
         {
+            EditContext = new EditContext(YdelseModel);
             YdelsesList = (await Service.GetAllYdelser()).ToList();
         }
 
+        private async void HandleValidSubmit()
+        {
+            Console.WriteLine("HandleValidSubmit Called...");
+
+            YdelsesList.Add(YdelseModel);
+            YdelseModel = new Ydelse();
+            EditContext = new EditContext(YdelseModel);
+            await AddYdelseHandler();
+
+            StateHasChanged();
+        }
+        private void HandleInvalidSubmit()
+        {
+            Console.WriteLine("HandleInvalidSubmit Called...");
+
+        }
+
         // Nyt ydelse oprettes
-        private Ydelse newYdelse = new Ydelse();
+       
 
         public async Task AddYdelseHandler()
         {
-            ErrorCode = await Service.AddYdelse(newYdelse);
+            ErrorCode = await Service.AddYdelse(YdelseModel);
             Console.WriteLine("Ydelse tilføjet: return code: " + ErrorCode);
-
             // Ryder formen efter tilføjelse
-            newYdelse = new Ydelse();
+            YdelseModel = new Ydelse();
+            StateHasChanged();
         }
 
-        public async Task RemoveYdelseHandler()
+        public async Task HideYdelseHandler()
         {
 
         }
 
         public async Task UpdateYdelseHandler()
         {
-            ErrorCode = await Service.UpdateYdelse(newYdelse);
+            ErrorCode = await Service.UpdateYdelse(YdelseModel);
             Console.WriteLine("Ydelse opdateret: return code: " + ErrorCode);
 
-            
-            newYdelse = new Ydelse();
+            YdelseModel = new Ydelse();
+           
         }
-
     }
 }

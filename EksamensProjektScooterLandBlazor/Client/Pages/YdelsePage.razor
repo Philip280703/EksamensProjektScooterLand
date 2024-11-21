@@ -21,7 +21,7 @@
         <tbody>
             @foreach (var ydelse in YdelsesList)
             {
-                <RenderYdelse ydelser="@ydelse" />
+                <RenderYdelse ydelser="ydelse" />
             }
         </tbody>
     </table>
@@ -30,21 +30,34 @@
 
     <br />
 
-<EditForm Model="newYdelse" OnValidSubmit="AddYdelseHandler">
-    <div>
-        <label for="name">Ydelse:</label>
-        <InputText id="navn" @bind-Value="newYdelse.YdelseNavn" />
+<EditForm EditContext="@EditContext"
+          OnValidSubmit="@HandleValidSubmit"
+          OnInvalidSubmit="@HandleInvalidSubmit"
+          class="row p-3">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="col-md-12 mb-3">
+        <label for="Name">Name</label>
+        <InputText id="Name" @bind-Value="YdelseModel.YdelseNavn" class="form-control" />
+        <ValidationMessage For="@(() => YdelseModel.YdelseNavn)" />
     </div>
-    <div>
-        <label for="EstimeretTid">EstimeretTid:</label>
-        <InputNumber id="EstimeretTid" @bind-Value="newYdelse.EstimeretTid" />
+    <div class="col-md-6 mb-3">
+        <label for="Pris">Pris</label>
+        <InputNumber id="Pris" @bind-Value="YdelseModel.Pris" class="form-control"
+                     ParsingErrorMessage="The {0} field has an invalid value." />
+        <ValidationMessage For="@(() => YdelseModel.Pris)" />
     </div>
-    <div>
-        <label for="Pris">Pris:</label>
-        <InputNumber id="Pris" @bind-Value="newYdelse.Pris" />
+    <div class="col-md-6 mb-3">
+        <label for="EstimeretTid">EstimeretTid</label>
+        <InputNumber id="EstimeretTid" @bind-Value="YdelseModel.EstimeretTid" class="form-control"
+                     ParsingErrorMessage="The {0} field has an invalid value." />
+        <ValidationMessage For="@(() => YdelseModel.EstimeretTid)" />
     </div>
-    <br />
-    <button type="submit">Tilføj Ydelse </button>
+
+    <div class="col-12 mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
 </EditForm>
 
 
