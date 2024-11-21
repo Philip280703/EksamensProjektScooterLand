@@ -27,6 +27,7 @@ builder.Services.AddScoped<IOrdreRepository, OrdreRepositorySql>();
 
 builder.Services.AddScoped<IOrdreLinjeRepository, OrdreLinjeRepositorySql>();
 
+builder.Services.AddScoped<IPostnummerOgByRepostitory, PostnummerOgByRepositorySql>();
 
 var app = builder.Build();
 

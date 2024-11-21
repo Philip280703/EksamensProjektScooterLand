@@ -54,5 +54,11 @@ builder.Services.AddHttpClient<IOrdreLinjeService, OrdreLinjeService>(client =>
 });
 
 
+builder.Services.AddHttpClient<IPostnummerOgByService, PostnummerOgByService>(client =>
+{
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
+
 
 await builder.Build().RunAsync();

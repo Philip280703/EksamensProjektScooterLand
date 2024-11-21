@@ -53,12 +53,13 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         [Required(ErrorMessage = "Husnummer er påkrævet.")]
+        [StringLength(4, ErrorMessage = "Skal være et gyldigt husnummer")]
         public string HusNummer { get; set; }
 
-
+        [StringLength(2, ErrorMessage ="Skal være gyldig etage. maks 2 tegn.")]
         public string? Etage { get; set; } = "";
 
-
+        [StringLength(2, ErrorMessage = "Skal være gyldig placering. maks 2 tegn. (tv, th, mf)")]
         public string? Placering { get; set; } = "";
 
      
