@@ -166,13 +166,13 @@
             KundeModel.PostNummer = postNummer;
 
             var match = postNummerOgByListe.FirstOrDefault(x => x.Postnummer == postNummer);
-            Bynavn = match?.ByNavn ?? "Ikke gyldigt postnummer";
-            Console.WriteLine($"PostNummer: {postNummer}, Found ByNavn: {Bynavn}");
+            Bynavn = match?.ByNavn ?? "Ikke gyldigt postnummer"; 
+            Console.WriteLine($"PostNummer: {postNummer}, ByNavn: {Bynavn}");
         }
         else
         {
             Bynavn = string.Empty;
-            Console.WriteLine("Invalid PostNummer input.");
+            Console.WriteLine("Ugyldigt indtastet PostNummer.");
         }
     }
 
@@ -184,7 +184,7 @@
         {
             filteredMekanikerListe = mekanikerListe
                 .Where(m => m.ScooterBrandId == selectedScooterBrandID)
-                .ToList();
+                .ToList(); // sotere listen til kun de mekaniker som har det scooter mærke som ekspertise
         }
         else
         {
@@ -194,7 +194,7 @@
         filteredMekanikerListe = filteredMekanikerListe
             .OrderBy(m => m.Fornavn)
             .ThenBy(m => m.Efternavn)
-            .ToList();
+            .ToList(); // udskriver listen af objektet mekaniker kun med for- og efternavn til combobox.
 
         StateHasChanged();
     }
