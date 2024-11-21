@@ -49,11 +49,17 @@
         <InputText id="Placering" @bind-Value="KundeModel.Placering" class="form-control" />
         <ValidationMessage For="@(() => KundeModel.Placering)" />
     </div>
-    <div class="col-3 mb-3">
-        <label for="PostNummer">PostNummer</label>
-        <InputNumber id="PostNummer" @bind-Value="KundeModel.PostNummer" class="form-control" />
-        <ValidationMessage For="@(() => KundeModel.PostNummer)" />
+       <div class="col-2 mb-3">
+        <label for="Postnummer">Postnummer</label>
+        <InputNumber id="PostNummer" @bind-Value="KundeModel.PostNummer" @oninput="UpdateBynavn" class="form-control" />
     </div>
+
+    <div class="col-3 mb-3">
+        <label for="Bynavn">Bynavn</label>
+        <input id="Bynavn" type="text" value="@Bynavn" class="form-control" readonly />
+    </div>
+
+
     <div class="d-block">
         <label for="Scooter" class="col-sm-2 col-form-label">Scooter</label>
         <div class="col-sm-10">
@@ -65,6 +71,7 @@
             </InputSelect>
         </div>
     </div>
+
 
 
 </EditForm>
@@ -87,14 +94,16 @@
     public IScooterBrandService ScooterService { get; set; }
 
     [Inject]
-    public 
+    public IPostnummerOgByService postnummerOgByService { get; set; }
 
 
 
     protected override async void OnInitialized()
     {
         editContext = new EditContext(KundeModel);
+        
         scooterBrandListe = (await ScooterService.GetAll()).ToList();
+        postNummerOgByListe = (await postnummerOgByService.GetAllPostnummerOgByer()).ToList();
     }
 
 	private void HandleValidSubmit()
@@ -107,5 +116,28 @@
 	{
 		Console.WriteLine("HandleInvalidSubmit called...");
 	}
+
+    private string Bynavn { get; set; } = string.Empty;
+
+
+    private void UpdateBynavn(ChangeEventArgs e)
+    {
+        // Parse the new value from the event arguments
+        if (int.TryParse(e.Value?.ToString(), out int postNummer))
+        {
+            KundeModel.PostNummer = postNummer;
+
+            // Find the corresponding city name
+            var match = postNummerOgByListe.FirstOrDefault(x => x.Postnummer == postNummer);
+            Bynavn = match?.ByNavn ?? string.Empty; // Default to empty if not found
+            Console.WriteLine($"PostNummer: {postNummer}, Found ByNavn: {Bynavn}");
+        }
+        else
+        {
+            Bynavn = string.Empty;
+            Console.WriteLine("Invalid PostNummer input.");
+        }
+    }
+
 
 }
