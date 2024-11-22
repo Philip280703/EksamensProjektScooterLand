@@ -54,7 +54,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
             StateHasChanged();
         }
 
-        public async Task HideYdelseHandler()
+        public async Task DeleteYdelseHandler()
         {
 
         }

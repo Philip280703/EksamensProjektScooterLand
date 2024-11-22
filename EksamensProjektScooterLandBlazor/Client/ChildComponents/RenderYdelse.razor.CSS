@@ -1,4 +1,36 @@
-﻿.hoverable-row:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
+﻿tr.hoverable-row {
+    font-size: 14px;
+    height: 50px;
+    border-top: 3px solid #ccc;
 }
+
+    tr.hoverable-row td:first-child {
+        vertical-align: middle; /* Vertically centers the content */
+        padding-left: 5px; /* Adds padding to the left */
+        padding-right: 5px; /* Adds padding to the right */
+    }
+
+tr.hoverable-row:hover {
+    background-color: #f0f0f0; 
+    cursor: pointer; 
+}
+
+
+/* Default button styling */
+button {
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.5s ease;
+}
+
+.Rediger-knap:hover {
+    background-color: #8ab6ff; /* blå farve når du hover */
+}
+
+
+.Slet-knap:hover {
+    background-color: #ffb3b3; /* rød farve når du hover */
+}
+
+
