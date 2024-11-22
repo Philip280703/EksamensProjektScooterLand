@@ -14,6 +14,9 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrdreLinjeID { get; set; }
 
+        [Required]
+        public DateTime OrdreLinjeDato { get; set; }
+
 
         [Required(ErrorMessage ="Antal er påkrævet.")]
         [Range(1,1000, ErrorMessage = "Antal skal være mellem 1 og 1000")]
