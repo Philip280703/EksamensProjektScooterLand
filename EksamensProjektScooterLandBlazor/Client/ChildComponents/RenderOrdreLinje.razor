@@ -1,0 +1,78 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client;
+
+<tr>
+	<td>
+		@ordreLinje?.OrdreLinjeID
+	</td>
+	<td>
+		@if (ordreLinje?.YdelseID != null)
+		{
+			<p>Ydelse</p>
+		}
+		else if (ordreLinje?.ProduktID != null)
+		{
+			<p>Produkt</p>
+		}
+	</td>
+	<td>
+		@if(ordreLinje?.YdelseID != null)
+		{ @ordreLinje?.ydelse?.YdelseNavn }
+		else if(ordreLinje?.ProduktID != null)
+		{ @ordreLinje?.produkt?.ProduktNavn }
+	</td>
+	<td>
+		@ordreLinje.OrdreLinjeDato.ToShortDateString()
+	</td>
+	<td>
+		@if (ordreLinje?.YdelseID != null)
+		{
+			@($"{ordreLinje.ydelse?.Pris} kr.")
+		}
+		@if (ordreLinje?.ProduktID != null)
+		{
+			@($"{ordreLinje.produkt?.ProduktPris} kr.")
+		}
+	</td>
+	<td>
+		@ordreLinje?.Antal stk.
+	</td>
+	<td>
+		@ordreLinje?.RabatProcent % 
+	</td>
+	<td>
+		@BeregnOrdreLinjeSum() kr.
+	</td>
+
+</tr>
+
+
+
+
+
+
+@code {
+	[Parameter]
+	public OrdreLinje ordreLinje { get; set; }
+
+	private double BeregnOrdreLinjeSum()
+	{
+		if (ordreLinje == null) return 0; // Return 0 if ordreLinje is null
+
+		double pris = 0;
+		int antal = ordreLinje.Antal; 
+		int rabat = ordreLinje.RabatProcent ?? 0;
+
+		if (ordreLinje.ProduktID != null && ordreLinje.produkt != null)
+		{
+			pris = ordreLinje.produkt.ProduktPris;
+		}
+		else if (ordreLinje.YdelseID != null && ordreLinje.ydelse != null)
+		{
+			pris = ordreLinje.ydelse.Pris;
+		}
+
+		double total = pris * antal * (1 - (rabat / 100.0));
+		return total;
+	}
+}

@@ -1,7 +1,50 @@
 ﻿@page "/Ordre"
+@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+@using EksamensProjektScooterLandBlazor.Client.ChildComponents;
 
 <h3>Ordre</h3>
 
+
+
+<table class="table">
+    <tr>
+        <th>Ordre ID</th>
+        <th>Salgsdato</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th>Kunde ID</th>
+        <th>Medarbejder</th>
+        <th>Ordre info</th>
+    </tr>
+
+    @foreach (var item in ordreListe)
+    {
+        <RenderOrdre ordre="@item"/>
+    }
+
+</table>
+
+<div></div>
+<br />
+
+
+
 @code {
+
+	private List<Ordre> ordreListe = new List<Ordre>();
+
+	[Inject]
+	public IOrdreService ordreService { get; set; }
+
+	private int ErrorCode { get; set; } = 0;
+
+	protected override async Task OnInitializedAsync()
+	{
+		ordreListe = (await ordreService.GetAllOrdrer()).ToList();
+
+	}
+
+
 
 }

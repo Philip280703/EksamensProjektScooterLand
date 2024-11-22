@@ -1,0 +1,69 @@
+﻿@using EksamensProjektScooterLandBlazor.Client.Services;
+@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.ChildComponents;
+@page "/OrdreLinjePage/{OrdreID:int}"
+
+<h3>OrdreLinjePage</h3>
+
+<table class="table">
+	<th>Ordrelinje ID</th>
+	<th>Type</th>
+	<th>Navn</th>
+	<th>Dato</th>
+	<th>Pris</th>
+	<th>Antal</th>
+	<th>Rabat</th>
+	<th>Total</th>
+
+	@foreach(var item in ordreLinjeListe)
+	{
+		<RenderOrdreLinje ordreLinje="@item"/>
+	}
+
+</table>
+
+<h6>sum: @BeregnSum() kr.</h6>
+
+
+
+
+@code {
+
+	private List<OrdreLinje> ordreLinjeListe = new List<OrdreLinje>();
+
+	[Inject]
+	public IOrdreLinjeService OrdreLinjeService { get; set;}
+
+	[Parameter]
+	public int OrdreId { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		ordreLinjeListe = (await OrdreLinjeService.GetAllOrdreLinjer()).Where(l => l.OrdreID == OrdreId).ToList();
+	}
+
+	private double BeregnSum()
+	{
+		double sum = 0;
+
+		foreach (var linje in ordreLinjeListe)
+		{
+			double pris = 0;
+
+
+			if (linje.ProduktID != null)
+				pris = linje.produkt.ProduktPris;
+			else if (linje.YdelseID != null)
+				pris = linje.ydelse.Pris;
+
+
+			int antal = linje.Antal;
+			int rabat = linje.RabatProcent ?? 0; ;
+
+			sum += pris * antal * (1 - (rabat / 100.0));
+		}
+
+		return sum;
+	}
+
+}
