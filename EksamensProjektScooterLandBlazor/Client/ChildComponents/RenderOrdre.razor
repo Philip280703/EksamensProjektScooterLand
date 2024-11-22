@@ -1,5 +1,6 @@
 ﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
 @using EksamensProjektScooterLandBlazor.Client;
+@inject NavigationManager navigationManager;
 
 <tr>
 	<td>
@@ -7,6 +8,9 @@
 	</td>
 	<td>
 		@ordre.SalgsDato.ToShortDateString()
+	</td>
+	<td>
+		<input type="checkbox" checked="@ordre.Afsluttet" disabled />
 	</td>
 	<td>
 		@ordre.BetalingsSum kr.
@@ -17,6 +21,14 @@
 	<td>
 		@ordre.medarbejder.Fornavn @ordre.medarbejder.Efternavn
 	</td>
+	<td>
+		<button class="Rediger-knap" style="border: none;" @onclick="() => NavigateToOrdeLinjeComponent(ordre.OrdreID)">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
+				<path d="M11 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path>
+				<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+			</svg>
+		</button>
+	</td>
 </tr>
 
 
@@ -26,5 +38,10 @@
 
 	[Parameter]
 	public Ordre ordre { get; set; }
+
+	private void NavigateToOrdeLinjeComponent(int OrdreID)
+	{
+		navigationManager.NavigateTo($"/OrdreLinjePage/{OrdreID}");
+	}
 
 }

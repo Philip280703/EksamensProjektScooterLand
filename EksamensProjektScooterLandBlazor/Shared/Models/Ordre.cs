@@ -18,6 +18,9 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Required]
         public DateTime SalgsDato { get; set; }
 
+        [Required]
+        public bool Afsluttet { get; set; }
+
 
 
         [Range(0, int.MaxValue, ErrorMessage ="Betalings sum skal være et positivt tal")]
