@@ -1,0 +1,30 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client;
+
+<tr>
+	<td>
+		@ordre.OrdreID
+	</td>
+	<td>
+		@ordre.SalgsDato.ToShortDateString()
+	</td>
+	<td>
+		@ordre.BetalingsSum kr.
+	</td>
+	<td>
+		@ordre.kunde.Fornavn @ordre.kunde.Efternavn
+	</td>
+	<td>
+		@ordre.medarbejder.Fornavn @ordre.medarbejder.Efternavn
+	</td>
+</tr>
+
+
+
+
+@code {
+
+	[Parameter]
+	public Ordre ordre { get; set; }
+
+}

@@ -1,5 +1,6 @@
 ﻿using EksamensProjektScooterLandBlazor.Server.DataAccess;
 using EksamensProjektScooterLandBlazor.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EksamensProjektScooterLandBlazor.Server.Repositories
 {
@@ -40,7 +41,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
 
         public List<Ordre> GetAllOrdrer()
         {
-            var result = db.Ordrer.OrderBy(s => s.OrdreID).ToList();
+            var result = db.Ordrer.OrderBy(s => s.OrdreID).Include(x=>x.medarbejder).Include(i=>i.kunde).ToList();
             return result;
         }
 
