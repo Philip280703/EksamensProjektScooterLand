@@ -17,7 +17,7 @@
                 <option value="">-- Vælg en kunde --</option>
                 @foreach (var item in kundeListe)
                 {
-                    <option value="@item.KundeID">@item.Fornavn @item.Efternavn</option>
+                    <option value="@item.KundeID">@item.Fornavn @item.Efternavn, tlf: @item.TelefonNummer</option>
                 }
             </InputSelect>
         </div>
