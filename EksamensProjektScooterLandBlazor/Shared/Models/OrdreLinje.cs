@@ -23,7 +23,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public int Antal {  get; set; }
 
 
-        [Range(1, 99, ErrorMessage ="Rabat skal være mellem 1 og 99 procent, skrives i hele tal")]
+        [Range(0, 99, ErrorMessage ="Rabat skal være mellem 0 og 99 procent, skrives i hele tal")]
         public int ?RabatProcent { get; set; }
 
 

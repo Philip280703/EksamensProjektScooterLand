@@ -33,7 +33,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 
         public async Task<int> UpdateOrdre(Ordre ordre)
         {
-            var svar = await httpClient.PostAsJsonAsync("api/Ordre/", ordre);
+            var svar = await httpClient.PutAsJsonAsync("api/Ordre/", ordre);
             var svarStatusKode = svar.StatusCode;
             return (int)svarStatusKode;
         }
