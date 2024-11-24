@@ -1,0 +1,76 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+
+@page "/AddProduktPage"
+<h2>Tilføj produkt</h2>
+
+<br />
+<EditForm EditContext ="@editContext" class="row p-3"
+OnValidSubmit="@HandleValidSubmit"
+OnInvalidSubmit="@HandleInvalidSubmit">
+	<DataAnnotationsValidator/>
+
+	<div class="col-6 mb-3">
+		<label for="produkt">Produkt</label>
+		<InputText id="produkt" @bind-Value="ProduktModel.ProduktNavn" class="form-control"/>
+		<ValidationMessage For="@(() => ProduktModel.ProduktNavn)" />
+	</div>
+	<div class="col-6 mb-3">
+		<label for="pris">Pris</label>
+		<InputNumber id="pris" @bind-Value="ProduktModel.ProduktPris" class="form-control"/>
+		<ValidationMessage For="@(() => ProduktModel.ProduktPris)" />
+	</div>
+
+	<br />
+	<div>
+
+	</div>
+	<div class="col-6 mb-3">
+		<button type="submit" class="btn btn-primary">Tilføj produkt</button>
+	</div>
+
+</EditForm>
+
+
+@if (ErrorCode == 200)
+{
+	<label>Produktet er nu tilføjet til databasen! :)</label>
+}
+
+
+
+
+@code {
+
+	private Produkt ProduktModel = new Produkt();
+	private EditContext editContext;
+
+	[Inject]
+	public IProduktService produktService { get; set; }
+
+	public int ErrorCode { get; set; }
+
+	protected override async Task OnInitializedAsync(){
+		editContext = new EditContext(ProduktModel);
+
+	}
+
+	private async void HandleValidSubmit()
+	{
+		Console.WriteLine("HandleValidSubmit called...");
+		ErrorCode = await produktService.AddProdukt(ProduktModel);
+
+		if (ErrorCode == 200)
+		{
+			ProduktModel = new Produkt();
+			editContext = new EditContext(ProduktModel);
+		}
+		
+	}
+
+	private void HandleInvalidSubmit()
+	{
+		Console.WriteLine("HandleInvalidSubmit called..");
+	}
+
+}

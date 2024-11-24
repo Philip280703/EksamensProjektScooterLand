@@ -7,7 +7,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 	{
 		private readonly HttpClient httpClient;
 
-		private string path = "api/produkt";
+		private string path = "api/produktapi";
 
 		public ProduktService(HttpClient httpClient)
 		{
@@ -69,7 +69,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 		/// <returns></returns>
 		public async Task<int> UpdateProdukt(Produkt produkt)
 		{
-			var response = await httpClient.PostAsJsonAsync("api/produktapi", produkt);
+			var response = await httpClient.PutAsJsonAsync($"api/produktapi",produkt);
 			var responseStatusCode = response.StatusCode;
 			return (int)responseStatusCode;
 		}
