@@ -3,12 +3,10 @@
 @using EksamensProjektScooterLandBlazor.Client.Services;
 
 @page "/YdelsePage"
-
+<br />
 <div class="Tabel-Header">
     <p class="Tabel-Header-Text">Ydelser</p>
 </div>
-
-<br />
 
 <div class="table-container">
     <table class="ydelse-table">
@@ -24,7 +22,7 @@
         <tbody>
             @foreach (var ydelse in YdelsesList)
             {
-                <RenderYdelse ydelser="ydelse" />
+                <RenderYdelse ydelser="ydelse" OrdreAddBool="AddingOrdreBool" />
             }
         </tbody>
     </table>
