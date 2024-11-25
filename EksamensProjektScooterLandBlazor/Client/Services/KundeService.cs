@@ -24,7 +24,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models;
 
     public async Task<int> AddKunde(Kunde kunde)
     {
-        var svar = await httpClient.PostAsJsonAsync("api/kundeapi", kunde);
+        var svar = await httpClient.PostAsJsonAsync("api/kundeapi/", kunde);
         var svarStatusKode = svar.StatusCode;
         return (int)svarStatusKode;
     }
@@ -38,6 +38,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models;
 
     public async Task<int> UpdateKunde(Kunde kunde)
     {
+        kunde.Mekaniker = null;
         var svar = await httpClient.PutAsJsonAsync("api/kundeapi/", kunde);
         var svarStatusKode = svar.StatusCode;
         return (int)svarStatusKode;
