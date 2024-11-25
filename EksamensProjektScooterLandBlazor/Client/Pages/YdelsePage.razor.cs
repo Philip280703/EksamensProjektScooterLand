@@ -17,6 +17,10 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
       
         private Ydelse YdelseModel = new Ydelse();
 
+        [Parameter]
+        public bool AddingOrdreBool { get; set; }
+
+
         private int ErrorCode { get; set; } = 0;
 
         protected override async Task OnInitializedAsync()

@@ -3,12 +3,10 @@
 @using EksamensProjektScooterLandBlazor.Client.Services;
 
 @page "/YdelsePage"
-
+<br />
 <div class="Tabel-Header">
     <p class="Tabel-Header-Text">Ydelser</p>
 </div>
-
-<br />
 
 <div class="table-container">
     <table class="ydelse-table">
@@ -24,60 +22,11 @@
         <tbody>
             @foreach (var ydelse in YdelsesList)
             {
-                <RenderYdelse ydelser="ydelse" />
+                <RenderYdelse ydelser="ydelse" OrdreAddBool="AddingOrdreBool" />
             }
         </tbody>
     </table>
 </div>
 
-
-    <br />
-
-<EditForm EditContext="@EditContext"
-          OnValidSubmit="@HandleValidSubmit"
-          OnInvalidSubmit="@HandleInvalidSubmit"
-          class="row p-3">
-    <DataAnnotationsValidator />
-    <ValidationSummary class="text-danger mb-3" />
-
-    <div class="col-md-12 p-3 border-green bg-light rounded">
-        <!-- Use row for input fields -->
-        <div class="row mb-3">
-            <div class="col-md-4 mb-3">
-                <label for="Name" class="form-label">Name</label>
-                <InputText id="Name" @bind-Value="YdelseModel.YdelseNavn" class="form-control form-control-sm" />
-                <ValidationMessage For="@(() => YdelseModel.YdelseNavn)" class="text-danger" />
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label for="Pris" class="form-label">Pris</label>
-                <InputNumber id="Pris" @bind-Value="YdelseModel.Pris" class="form-control form-control-sm"
-                             ParsingErrorMessage="The {0} field has an invalid value." />
-                <ValidationMessage For="@(() => YdelseModel.Pris)" class="text-danger" />
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label for="EstimeretTid" class="form-label">Estimeret Tid</label>
-                <InputNumber id="EstimeretTid" @bind-Value="YdelseModel.EstimeretTid" class="form-control form-control-sm"
-                             ParsingErrorMessage="The {0} field has an invalid value." />
-                <ValidationMessage For="@(() => YdelseModel.EstimeretTid)" class="text-danger" />
-            </div>
-        </div>
-
-        <!-- Submit button -->
-        <div class="col-12 mb-3">
-            <button type="submit" class="btn btn-primary col-12">Tilføj</button>
-        </div>
-    </div>
-</EditForm>
-
-
-
-
-
-@if (ErrorCode != 0)
-{
-    <p>@(ErrorCode == 200 ? "Ydelse successfully added!" : $"Error adding Ydelse. Code: {ErrorCode}")</p>
-}
 
 
