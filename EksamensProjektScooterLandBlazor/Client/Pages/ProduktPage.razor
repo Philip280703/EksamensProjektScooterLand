@@ -34,51 +34,6 @@
 </div>
 
 
-<br/>
-
-@* <EditForm EditContext="@EditContext"
-OnValidSubmit="HandleValidSubmit"
-OnInvalidSubmit="HandleInvalidSubmit">
-
-
-
-	<!-- ValidatorsCall-->
-
-	<ValidationSummary/>
-	<DataAnnotationsValidator/>
-
-
-	<div>
-		<label for="name">Produkt:</label>
-		<InputText id="navn" @bind-Value="newProdukt.ProduktNavn"/>
-		<ValidationMessage For="@(() => newProdukt.ProduktNavn)" />
-	</div>
-	<div>
-		<label for="pris">Pris:</label>
-		<InputNumber id="Pris" @bind-Value="newProdukt.ProduktPris"
-		class="form-control"
-		style="width: 100px;"
-		min="0"
-		@oninput="EnsureNonNegative"/> 
-
-	</div>
-	<br />
-	<div class="col-12 mb-3">
-		<button type="submit" class="btn btn-outline-primary">Submit</button>
-	</div>
-</EditForm> *@
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @code
