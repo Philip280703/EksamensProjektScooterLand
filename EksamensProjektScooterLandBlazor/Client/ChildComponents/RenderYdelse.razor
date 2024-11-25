@@ -53,8 +53,11 @@
     [Parameter]
     public bool OrdreAddBool { get; set; } = false;
 
-  
+
     private void DeleteYdelseHandler(int YdelseID)
+    {
+        
+    }
     private OrdreLinje ordreLinje = new OrdreLinje();
 
     [Inject]
@@ -63,7 +66,7 @@
     private void UpdateYdelseHandler(Ydelse ydelse)
     {
         // Logic to delete the ydelse with ydelseId
-        Console.WriteLine($"Deleting YdelseID: {YdelseID}");
+        Console.WriteLine($"Deleting YdelseID: {ydelse.YdelseID}");
     }
 
     private void NavigateToEditYdelseComponent(int YdelseID)
