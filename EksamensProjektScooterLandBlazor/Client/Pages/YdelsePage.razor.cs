@@ -17,6 +17,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
       
         private Ydelse YdelseModel = new Ydelse();
 
+
         private int ErrorCode { get; set; } = 0;
 
         protected override async Task OnInitializedAsync()
