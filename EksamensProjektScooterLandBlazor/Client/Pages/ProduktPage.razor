@@ -22,7 +22,7 @@
 
 			@foreach (var item in produktListe)
 			{
-				<RenderProdukt produkt="@item" deleteProdukt="DeleteProdukt" OrdreAddBool="@AddingOrdreBool" />
+				<RenderProdukt produkt="@item" deleteProdukt="DeleteProdukt" OrdreAddBool="@AddingOrdreBool" OrdreId="@OrdreID" />
 			}
 
 		</thead>
@@ -49,6 +49,9 @@
 
 	[Parameter]
 	public bool AddingOrdreBool { get; set; }
+
+	[Parameter]
+	public int OrdreID { get; set; }
 
 
 	protected override void OnInitialized()
