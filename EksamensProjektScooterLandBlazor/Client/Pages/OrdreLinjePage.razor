@@ -14,15 +14,37 @@
 	<th>Antal</th>
 	<th>Rabat</th>
 	<th>Total</th>
-
-	@foreach(var item in ordreLinjeListe)
+	<th>Action</th>
+	@if(ordreLinjeListe.Count > 0)
 	{
-		<RenderOrdreLinje ordreLinje="@item"/>
+		@foreach (var item in ordreLinjeListe)
+		{
+			<RenderOrdreLinje ordreLinje="@item" currentOrdre="@currentOrdre"  />
+		}
 	}
-
+	
 </table>
 
-<h6>sum: @BeregnSum() kr.</h6>
+@if(ordreLinjeListe.Count == 0){
+<h5><b>Ingen ordrelinjer i ordren</b></h5>
+}
+
+<h4><b>sum: @BeregnSum() kr.</b></h4>
+<br />
+
+@if(currentOrdre.Afsluttet == false)
+{
+	<button class="btn btn-primary">Tilføj produkt</button>
+	<button class="btn btn-primary">Tilføj ydelse</button>
+	<button class="btn btn-primary">Tilføj scooterleje</button>
+}
+else
+{
+	<button class="btn btn-primary">Faktura</button>
+}
+
+
+
 
 
 
@@ -31,8 +53,14 @@
 
 	private List<OrdreLinje> ordreLinjeListe = new List<OrdreLinje>();
 
+	private Ordre currentOrdre = new Ordre();
+
+
 	[Inject]
 	public IOrdreLinjeService OrdreLinjeService { get; set;}
+
+	[Inject]
+	public IOrdreService ordreService { get; set; }
 
 	[Parameter]
 	public int OrdreId { get; set; }
@@ -40,9 +68,10 @@
 	protected override async Task OnInitializedAsync()
 	{
 		ordreLinjeListe = (await OrdreLinjeService.GetAllOrdreLinjer()).Where(l => l.OrdreID == OrdreId).ToList();
+		currentOrdre = (await ordreService.GetOrdre(OrdreId));
 	}
 
-	private double BeregnSum()
+	public double BeregnSum()
 	{
 		double sum = 0;
 
