@@ -63,36 +63,36 @@
 	}
 
 	.hoverable-row:hover {
-		background-color: #f0f0f0;
-		cursor: pointer;
+	background-color: #f0f0f0;
+	cursor: pointer;
 	}
 
 	tr {
-		height: 50px;
+	height: 50px;
 	}
 
 	.table thead th {
-		position: sticky;
-		top: 0;
-		background-color: lightgray;
-		color: black;
-		z-index: 1;
-		padding 8px;
-		border-bottom: 1px solid #ddd;
+	position: sticky;
+	top: 0;
+	background-color: lightgray;
+	color: black;
+	z-index: 1;
+	padding 8px;
+	border-bottom: 1px solid #ddd;
 	}
 
 	button {
-		border-radius: 10px;
-		transition: background-color 0.5s ease;
+	border-radius: 10px;
+	transition: background-color 0.5s ease;
 	}
 
 	/* Hover-effekt for knapper */
 	.Rediger-knap:hover {
-		background-color: #8ab6ff; /* Lys blå nuance */
+	background-color: #8ab6ff; /* Lys blå nuance */
 	}
 
 	.Slet-knap:hover {
-		background-color: #ffb3b3; /* Blid lys rød farve */
+	background-color: #ffb3b3; /* Blid lys rød farve */
 	}
 </style>
 
@@ -115,7 +115,10 @@
 
 	private async Task DeleteProdukt()
 	{
-		await deleteProdukt.InvokeAsync(produkt);
+		// await deleteProdukt.InvokeAsync(produkt);
+		var placeholder = "intet at se her...";
+		Console.WriteLine(placeholder);
+
 	}
 
 
