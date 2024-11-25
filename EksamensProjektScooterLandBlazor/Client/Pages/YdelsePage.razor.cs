@@ -20,6 +20,9 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         [Parameter]
         public bool AddingOrdreBool { get; set; }
 
+        [Parameter]
+        public int Ordreid {  get; set; }
+
 
         private int ErrorCode { get; set; } = 0;
 
