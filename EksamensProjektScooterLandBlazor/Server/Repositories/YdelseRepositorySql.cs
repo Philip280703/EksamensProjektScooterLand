@@ -21,8 +21,8 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
 
         public void AddYdelse(Ydelse ydelse)
         {
-            //db.Ydelser.Add(ydelse);
-            //db.SaveChanges();
+            db.Ydelser.Add(ydelse);
+            db.SaveChanges();
         }
 
         public bool DeleteYdelse(int id)

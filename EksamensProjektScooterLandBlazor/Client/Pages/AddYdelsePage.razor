@@ -13,8 +13,7 @@
           OnInvalidSubmit="@HandleInvalidSubmit"
           class="row p-3">
     <DataAnnotationsValidator />
-    <ValidationSummary class="text-danger mb-3" />
-
+ 
     <div class="col-md-12 p-3 border-green bg-light rounded">
         <!-- Use row for input fields -->
         <div class="row mb-3">
@@ -54,7 +53,7 @@
 
 @code{
 
-    [Inject]
+        [Inject]
         public IYdelseService Service { get; set; }
 
         private List<Ydelse> YdelsesList = new List<Ydelse>();
@@ -73,13 +72,10 @@
 
         private async void HandleValidSubmit()
         {
-            Console.WriteLine("HandleValidSubmit Called...");
-
-            YdelsesList.Add(YdelseModel);
+            ErrorCode = await Service.AddYdelse(YdelseModel);
+            Console.WriteLine("Ydelse tilføjet: return code: " + ErrorCode);
+            // Ryder formen efter tilføjelse
             YdelseModel = new Ydelse();
-            EditContext = new EditContext(YdelseModel);
-            await AddYdelseHandler();
-
             StateHasChanged();
         }
         private void HandleInvalidSubmit()
@@ -91,14 +87,6 @@
         // Nyt ydelse oprettes
        
 
-        public async Task AddYdelseHandler()
-        {
-            ErrorCode = await Service.AddYdelse(YdelseModel);
-            Console.WriteLine("Ydelse tilføjet: return code: " + ErrorCode);
-            // Ryder formen efter tilføjelse
-            YdelseModel = new Ydelse();
-            StateHasChanged();
-        }
 
         public async Task DeleteYdelseHandler()
         {
