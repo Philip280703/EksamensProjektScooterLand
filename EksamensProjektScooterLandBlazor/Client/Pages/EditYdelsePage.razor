@@ -1,0 +1,79 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+@inject NavigationManager NavigationManager
+
+@page "/EditYdelsePage/{YdelseID:int}"
+
+
+<h3>EditYdelsePage</h3>
+
+@if (ydelse == null)
+{
+    <p>indlæser ydelser</p>
+}
+
+else
+{
+    <div class="table-container">
+    <table class="ydelse-table">
+        <thead>
+            <tr>
+                <th>YdelseID</th>
+                <th>Ydelsesnavn</th>
+                <th>Estimeret Tid</th>
+                <th>Pris</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr>
+                    <td>@ydelse.YdelseID</td>
+                    <td><InputText @bind-Value="ydelse.YdelseNavn" /></td>
+                    <td><InputNumber @bind-Value="ydelse.EstimeretTid" /></td>
+                    <td><InputNumber @bind-Value="ydelse.Pris" /></td>
+                </tr>
+            </tbody>
+      </table>
+</div>
+    
+}
+
+@code {
+    [Inject]
+    public IYdelseService YdelseService { get; set; }
+
+    [Parameter]
+    public int YdelseID { get; set; }
+
+    private Ydelse? ydelse;
+
+    private EditContext EditContext;
+    public int ErrorCode { get; set; }
+    private string ErrorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ydelse = await YdelseService.GetYdelse(YdelseID);
+       EditContext = new EditContext(ydelse);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        Console.WriteLine("HandlevalidSubmit called...");
+        ErrorCode = await YdelseService.UpdateYdelse(ydelse);
+
+        if (ErrorCode == 200)
+        {
+            NavigationManager.NavigateTo("/YdelsePage");
+        }
+        else
+        {
+            ErrorMessage = "Der opstod en fejl under opdatering af kunde. Prøv igen";
+        }
+    }
+
+    private void HandleInvalidSubmit()
+    {
+        Console.WriteLine("HandleInvalidSubmit called...");
+    }
+}

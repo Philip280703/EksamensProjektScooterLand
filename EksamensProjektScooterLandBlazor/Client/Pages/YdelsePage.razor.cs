@@ -67,9 +67,8 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         {
             ErrorCode = await Service.UpdateYdelse(YdelseModel);
             Console.WriteLine("Ydelse opdateret: return code: " + ErrorCode);
-
             YdelseModel = new Ydelse();
-           
+            StateHasChanged();
         }
     }
 }
