@@ -84,6 +84,8 @@
             <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit">
                 <button type="submit" class="btn btn-primary">Opdater ordrelinje</button>
             </EditForm>
+
+            <button class="btn btn-primary" @onclick="@FjernOrdrelinje">Fjern</button>
         }
         
     </td>
@@ -147,6 +149,12 @@
     private void HandleInValidSubmit()
     {
         Console.WriteLine("HandeInValidSubmit Called ...");
+    }
+
+    private async void FjernOrdrelinje()
+    {
+        int ordreLinjeid = ordreLinje.OrdreLinjeID;
+        ErrorCode = (await ordreLinjeService.DeleteOrdreLinje(ordreLinjeid));
     }
 
 }

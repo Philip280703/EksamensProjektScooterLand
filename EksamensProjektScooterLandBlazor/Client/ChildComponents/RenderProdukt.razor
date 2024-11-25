@@ -29,12 +29,11 @@
 		}
 		else if(OrdreAddBool == true)
 		{
-			<button class="btn btn-primary" >Tilføj til ordrelinje</button>
+			<button class="btn btn-primary" @onclick="AddProductToOrdre">Tilføj til ordrelinje</button>
 		}
 
 	</td>
 </tr>
-
 
 
 
@@ -107,18 +106,25 @@
 
 
 
-
 @code {
 	[Parameter]
 	public Produkt produkt { get; set; }
+
+	private OrdreLinje ordreLinje = new OrdreLinje();
 
 	//bliver brugt nede i Deleteprodukt metoden men den bliver ikke brugt lige nu da det ikke skal kunnes
 	//implementeres at man kan slette et produkt
 	[Parameter]
 	public EventCallback<Produkt> deleteProdukt { get; set; }
 
+	[Parameter]
+	public int OrdreId { get; set; }
+
 	[Inject]
 	public IProduktService Service { get; set; }
+
+	[Inject]
+	public IOrdreLinjeService ordreLinjeService { get; set; }
 
 	[Parameter]
 	public bool OrdreAddBool { get; set; } = false;
@@ -132,6 +138,22 @@
 		var placeholder = "intet at se her...";
 		Console.WriteLine(placeholder);
 
+	}
+
+	private async Task AddProductToOrdre()
+	{
+
+		ordreLinje.ProduktID = produkt.ProduktID;
+		ordreLinje.Antal = 1;
+		ordreLinje.OrdreLinjeDato = DateTime.Now;
+		ordreLinje.RabatProcent = 0;
+		ordreLinje.OrdreID = OrdreId;
+		ErrorCode = await ordreLinjeService.AddOrdreLinje(ordreLinje);
+
+		if(ErrorCode == 200)
+		{
+			NavigationsManager.NavigateTo($"/OrdreLinjePage/{OrdreId}", true);
+		}
 	}
 
 

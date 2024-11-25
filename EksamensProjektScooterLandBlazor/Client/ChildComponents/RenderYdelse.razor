@@ -1,6 +1,7 @@
 ﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
 @using EksamensProjektScooterLandBlazor.Client;
 @inject NavigationManager NavigationManager
+@using EksamensProjektScooterLandBlazor.Client.Services;
 
 
 
@@ -32,7 +33,7 @@
         }
         else if(OrdreAddBool == true)
         {
-            <button class="btn btn-primary">Tilføj til ordrelinje</button>
+            <button class="btn btn-primary" @onclick="AddYdelseToOrdrelinje">Tilføj til ordrelinje</button>
         }
 
     </td>
@@ -45,10 +46,21 @@
     public Ydelse ydelser { get; set; }
 
     [Parameter]
+    public int Ordreid { get; set; }
+
+    private int Errorcode { get; set; }
+
+    [Parameter]
     public bool OrdreAddBool { get; set; } = false;
 
   
     private void DeleteYdelseHandler(int YdelseID)
+    private OrdreLinje ordreLinje = new OrdreLinje();
+
+    [Inject]
+    public IOrdreLinjeService ordreLinjeService { get; set; }
+
+    private void UpdateYdelseHandler(Ydelse ydelse)
     {
         // Logic to delete the ydelse with ydelseId
         Console.WriteLine($"Deleting YdelseID: {YdelseID}");
@@ -57,6 +69,17 @@
     private void NavigateToEditYdelseComponent(int YdelseID)
     {
         NavigationManager.NavigateTo($"/EditYdelsePage/{YdelseID}");
+    }
+
+    private async void AddYdelseToOrdrelinje()
+    {
+        ordreLinje.YdelseID = ydelser.YdelseID;
+        ordreLinje.Antal = 1;
+        ordreLinje.OrdreLinjeDato = DateTime.Now;
+        ordreLinje.RabatProcent = 0;
+        ordreLinje.OrdreID = Ordreid;
+        Errorcode = await ordreLinjeService.AddOrdreLinje(ordreLinje);
+        StateHasChanged();
     }
 }
 
