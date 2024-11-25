@@ -1,0 +1,81 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+
+@page "/OpretOrdre"
+
+<h3>Opret ordre</h3>
+
+<EditForm EditContext="@editContext" class="row p-3"
+          OnValidSubmit="@HandleValidSubmit"
+          OnInvalidSubmit="@HandleInValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="d-block">
+        <label for="kunde" class="col-sm-2 col-form-label">kunde</label>
+        <div class="col-sm-5">
+            <InputSelect id="kunde" @bind-Value="ordreModel.KundeiD" class="form-control">
+                <option value="">-- Vælg en kunde --</option>
+                @foreach (var item in kundeListe)
+                {
+                    <option value="@item.KundeID">@item.Fornavn @item.Efternavn, tlf: @item.TelefonNummer</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+    <br />
+    <div>
+    </div>
+    <div class="col-6 mb-3">
+        <button type="submit" class="btn btn-primary">Tilføj ordre</button>
+    </div>
+
+</EditForm>
+
+
+
+
+@code {
+    private Ordre ordreModel = new Ordre();
+    private EditContext editContext;
+
+    private List<Ordre> ordreListe = new List<Ordre>();
+    private List<Kunde> kundeListe = new List<Kunde>();
+
+    [Inject]
+    private IOrdreService ordreService { get; set; }
+
+    [Inject]
+    private IKundeService kundeService { get; set; }
+
+    private int ErrorCode { get; set; }
+
+    private bool showMessage { get; set; } = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        editContext = new EditContext(ordreModel);
+        kundeListe = (await kundeService.GetAllKunder()).ToList();
+
+    }
+
+    private async void HandleValidSubmit()
+    {
+        Console.WriteLine("HandeValidSubmit called...");
+
+        var kunde = kundeListe.Single(k => k.KundeID == ordreModel.KundeiD);
+
+        ordreModel.MedarbejderCpr = kunde.Mekaniker.CprNummer;
+
+        ordreModel.Afsluttet = false;
+        ordreModel.BetalingsSum = 0;
+        ordreModel.SalgsDato = DateTime.Now;
+        ErrorCode = (await ordreService.AddOrdre(ordreModel));
+    }
+
+    private async void HandleInValidSubmit()
+    {
+        Console.WriteLine("HandeInValidSubmit called...");
+        
+    }
+}

@@ -1,0 +1,98 @@
+﻿@using EksamensProjektScooterLandBlazor.Client.Services;
+@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.ChildComponents;
+@page "/OrdreLinjePage/{OrdreID:int}"
+
+<h3>OrdreLinjePage</h3>
+
+<table class="table">
+	<th>Ordrelinje ID</th>
+	<th>Type</th>
+	<th>Navn</th>
+	<th>Dato</th>
+	<th>Pris</th>
+	<th>Antal</th>
+	<th>Rabat</th>
+	<th>Total</th>
+	<th>Action</th>
+	@if(ordreLinjeListe.Count > 0)
+	{
+		@foreach (var item in ordreLinjeListe)
+		{
+			<RenderOrdreLinje ordreLinje="@item" currentOrdre="@currentOrdre"  />
+		}
+	}
+	
+</table>
+
+@if(ordreLinjeListe.Count == 0){
+<h5><b>Ingen ordrelinjer i ordren</b></h5>
+}
+
+<h4><b>sum: @BeregnSum() kr.</b></h4>
+<br />
+
+@if(currentOrdre.Afsluttet == false)
+{
+	<button class="btn btn-primary">Tilføj produkt</button>
+	<button class="btn btn-primary">Tilføj ydelse</button>
+	<button class="btn btn-primary">Tilføj scooterleje</button>
+}
+else
+{
+	<button class="btn btn-primary">Faktura</button>
+}
+
+
+
+
+
+
+
+@code {
+
+	private List<OrdreLinje> ordreLinjeListe = new List<OrdreLinje>();
+
+	private Ordre currentOrdre = new Ordre();
+
+
+	[Inject]
+	public IOrdreLinjeService OrdreLinjeService { get; set;}
+
+	[Inject]
+	public IOrdreService ordreService { get; set; }
+
+	[Parameter]
+	public int OrdreId { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		ordreLinjeListe = (await OrdreLinjeService.GetAllOrdreLinjer()).Where(l => l.OrdreID == OrdreId).ToList();
+		currentOrdre = (await ordreService.GetOrdre(OrdreId));
+	}
+
+	public double BeregnSum()
+	{
+		double sum = 0;
+
+		foreach (var linje in ordreLinjeListe)
+		{
+			double pris = 0;
+
+
+			if (linje.ProduktID != null)
+				pris = linje.produkt.ProduktPris;
+			else if (linje.YdelseID != null)
+				pris = linje.ydelse.Pris;
+
+
+			int antal = linje.Antal;
+			int rabat = linje.RabatProcent ?? 0; ;
+
+			sum += pris * antal * (1 - (rabat / 100.0));
+		}
+
+		return sum;
+	}
+
+}
