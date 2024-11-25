@@ -97,12 +97,17 @@ else
     [Inject]
     public IKundeService KundeService { get; set; }
 
+    [Inject]
+    public NavigationManager navigationManager { get; set; }
+
     [Parameter]
     public int KundeId { get; set; }
 
     private Kunde? kunde;
 
     private EditContext editContext;
+    public int ErrorCode { get; set; }
+    private string ErrorMessage;
 
     protected override async Task OnInitializedAsync()
     {
@@ -111,9 +116,19 @@ else
         editContext = new EditContext(kunde);
     }
 
-    private void HandleValidSubmit()
+    private async void HandleValidSubmit()
     {
         Console.WriteLine("HandlevalidSubmit called...");
+        ErrorCode = await KundeService.UpdateKunde(kunde);
+
+        if (ErrorCode == 200)
+        {
+            navigationManager.NavigateTo("/Kundepage");
+        }
+        else
+        {
+            ErrorMessage = "Der opstod en fejl under opdatering af kunde. Prøv igen";
+        }
     }
 
     private void HandleInvalidSubmit()
