@@ -41,7 +41,7 @@ else
 {
 	<button class="btn btn-primary" @onclick="AddProduktKnap">Tilføj produkt</button>
 	<button class="btn btn-primary" @onclick="AddYdelseKnap">Tilføj ydelse</button>
-	<button class="btn btn-primary">Tilføj scooterleje</button>
+	<button class="btn btn-primary" @onclick="AddScooterLejeKnap">Tilføj scooterleje</button>
 }
 
 
@@ -53,6 +53,11 @@ else
 @if(YdelseKnap == true)
 {
 	<YdelsePage AddingOrdreBool="@YdelseKnap"Ordreid="@OrdreId" />
+}
+
+@if(ScooterLejeKnap == true)
+{
+	<!-- Tilføj scooterlejepage her med samme parametre som de foregående metoder-->
 }
 
 
@@ -72,14 +77,15 @@ else
 	[Inject]
 	public IOrdreService ordreService { get; set; }
 
-
-
 	[Parameter]
 	public int OrdreId { get; set; }
+
 
 	private bool ProduktKnap = false;
 
 	private bool YdelseKnap = false;
+
+	private bool ScooterLejeKnap = false;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -117,6 +123,7 @@ else
 		if(YdelseKnap == true)
 		{
 			YdelseKnap = false;
+			ScooterLejeKnap = false;
 		}
 
 		StateHasChanged();
@@ -127,6 +134,18 @@ else
 		YdelseKnap = !YdelseKnap;
 		if(ProduktKnap == true)
 		{
+			ProduktKnap = false;
+			ScooterLejeKnap = false;
+		}
+		StateHasChanged();
+	}
+
+	private async void AddScooterLejeKnap()
+	{
+		ScooterLejeKnap = !ScooterLejeKnap;
+		if(ScooterLejeKnap == true)
+		{
+			YdelseKnap = false;
 			ProduktKnap = false;
 		}
 		StateHasChanged();
