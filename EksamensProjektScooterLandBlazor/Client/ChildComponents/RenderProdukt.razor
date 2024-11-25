@@ -149,7 +149,11 @@
 		ordreLinje.RabatProcent = 0;
 		ordreLinje.OrdreID = OrdreId;
 		ErrorCode = await ordreLinjeService.AddOrdreLinje(ordreLinje);
-		StateHasChanged();
+
+		if(ErrorCode == 200)
+		{
+			NavigationsManager.NavigateTo($"/OrdreLinjePage/{OrdreId}", true);
+		}
 	}
 
 

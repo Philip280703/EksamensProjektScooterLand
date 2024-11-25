@@ -33,7 +33,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 
 		public async Task<int> DeleteOrdreLinje(int id)
 		{
-			var svar = await httpClient.DeleteAsync("api/ordrelinjeapi/" +  id);
+			var svar = await httpClient.DeleteAsync("api/ordrelinjeapi/" + id);
 			var svarStatusCode = svar.StatusCode;
 			return (int)svarStatusCode;
 		}
