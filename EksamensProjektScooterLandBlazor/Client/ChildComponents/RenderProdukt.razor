@@ -120,6 +120,9 @@
 	[Parameter]
 	public int OrdreId { get; set; }
 
+	[Parameter]
+	public List<OrdreLinje> ordreLinjeList { get; set; }
+
 	[Inject]
 	public IProduktService Service { get; set; }
 
@@ -129,6 +132,8 @@
 	[Parameter]
 	public bool OrdreAddBool { get; set; } = false;
 
+	[Parameter]
+	public EventCallback Produkttilføjet { get; set; }
 
 	private int ErrorCode { get; set; } = 0;
 
@@ -150,10 +155,7 @@
 		ordreLinje.OrdreID = OrdreId;
 		ErrorCode = await ordreLinjeService.AddOrdreLinje(ordreLinje);
 
-		if(ErrorCode == 200)
-		{
-			NavigationsManager.NavigateTo($"/OrdreLinjePage/{OrdreId}", true);
-		}
+		await Produkttilføjet.InvokeAsync();
 	}
 
 

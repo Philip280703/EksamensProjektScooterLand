@@ -108,6 +108,9 @@
     [Parameter]
     public Ordre currentOrdre { get; set; }
 
+    [Parameter]
+    public EventCallback slettetProduktEllerYdelse { get; set; }
+
     [Inject]
     public IOrdreLinjeService ordreLinjeService { get; set; }
 
@@ -155,7 +158,7 @@
     {
         int ordreLinjeid = ordreLinje.OrdreLinjeID;
         ErrorCode = (await ordreLinjeService.DeleteOrdreLinje(ordreLinjeid));
-        StateHasChanged();
+        await slettetProduktEllerYdelse.InvokeAsync();
     }
 
 }
