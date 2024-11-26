@@ -1,0 +1,68 @@
+﻿
+.Tabel-Header h4 {
+    background-color: #f8f9fa;
+    font-size: 16px;
+    font-weight: bold;
+    color: #343a40;
+    text-align: left;
+    vertical-align: middle;
+    padding: 5px 15px;
+    margin: 0;
+
+}
+
+/* Style the table container */
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the table */
+.ScooterLeje-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+    /* Style the table header */
+    .ScooterLeje-table thead th {
+        background-color: #007bff;
+        color: #fff;
+        text-align: left;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+    }
+
+    /* Style the table body rows */
+    .ScooterLeje-table tbody tr {
+        border-bottom: 1px solid #ddd;
+        transition: background-color 0.3s ease;
+    }
+
+        /* Add hover effect for rows */
+        .ScooterLeje-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    /* Style table data cells */
+    .ScooterLeje-table tbody td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    /* Add alternating row colors for better readability */
+    .ScooterLeje-table tbody tr:nth-child(odd) {
+        background-color: #fdfdfd;
+    }
+
+    /* Make sure the last row's border is removed */
+    .ScooterLeje-table tbody tr:last-child {
+        border-bottom: none;
+    }
