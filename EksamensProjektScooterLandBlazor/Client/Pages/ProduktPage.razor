@@ -22,7 +22,7 @@
 
 			@foreach (var item in produktListe)
 			{
-				<RenderProdukt produkt="@item" deleteProdukt="DeleteProdukt" OrdreAddBool="@AddingOrdreBool" OrdreId="@OrdreID" />
+				<RenderProdukt produkt="@item" Produkttilføjet="tilføjetProdukt" deleteProdukt="DeleteProdukt" OrdreAddBool="@AddingOrdreBool" OrdreId="@OrdreID" />
 			}
 
 		</thead>
@@ -53,10 +53,17 @@
 	[Parameter]
 	public int OrdreID { get; set; }
 
+	[Parameter]
+	public EventCallback Produkttilføjet { get; set; }
 
 	protected override void OnInitialized()
 	{
 		EditContext = new EditContext(newProdukt);
+	}
+
+	public async Task tilføjetProdukt()
+	{
+		await Produkttilføjet.InvokeAsync();
 	}
 
 	public async void DeleteProdukt(Produkt produkt)

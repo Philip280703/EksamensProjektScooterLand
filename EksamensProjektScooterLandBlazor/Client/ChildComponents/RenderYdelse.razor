@@ -53,10 +53,12 @@
     [Parameter]
     public bool OrdreAddBool { get; set; } = false;
 
+    [Parameter]
+    public EventCallback ydelseTilføjet { get; set; }
 
     private void DeleteYdelseHandler(int YdelseID)
     {
-        
+
     }
     private OrdreLinje ordreLinje = new OrdreLinje();
 
@@ -82,7 +84,8 @@
         ordreLinje.RabatProcent = 0;
         ordreLinje.OrdreID = Ordreid;
         Errorcode = await ordreLinjeService.AddOrdreLinje(ordreLinje);
-        StateHasChanged();
+
+        await ydelseTilføjet.InvokeAsync();
     }
 }
 

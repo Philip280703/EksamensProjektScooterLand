@@ -19,7 +19,7 @@
 	{
 		@foreach (var item in ordreLinjeListe)
 		{
-			<RenderOrdreLinje ordreLinje="@item" currentOrdre="@currentOrdre"  />
+			<RenderOrdreLinje slettetProduktEllerYdelse="SlettetProduktEllerYdelse" ordreLinje="@item" currentOrdre="@currentOrdre"  />
 		}
 	}
 	
@@ -47,12 +47,12 @@ else
 
 @if(ProduktKnap == true)
 {
-	<ProduktPage AddingOrdreBool="@ProduktKnap" OrdreID="@OrdreId"/>
+	<ProduktPage Produkttilføjet="Produkttilføjet" AddingOrdreBool="@ProduktKnap" OrdreID="@OrdreId" />
 }
 
 @if(YdelseKnap == true)
 {
-	<YdelsePage AddingOrdreBool="@YdelseKnap"Ordreid="@OrdreId" />
+	<YdelsePage ydelseTilføjet="Ydelsetilføjet" AddingOrdreBool="@YdelseKnap"Ordreid="@OrdreId" />
 }
 
 @if(ScooterLejeKnap == true)
@@ -91,6 +91,24 @@ else
 	{
 		ordreLinjeListe = (await OrdreLinjeService.GetAllOrdreLinjer()).Where(l => l.OrdreID == OrdreId).ToList();
 		currentOrdre = (await ordreService.GetOrdre(OrdreId));
+	}
+
+	public async void Produkttilføjet()
+	{
+		ordreLinjeListe = (await OrdreLinjeService.GetAllOrdreLinjer()).Where(l => l.OrdreID == OrdreId).ToList();
+		StateHasChanged();
+	}
+
+	public async void Ydelsetilføjet()
+	{
+		ordreLinjeListe = (await OrdreLinjeService.GetAllOrdreLinjer()).Where(l => l.OrdreID == OrdreId).ToList();
+		StateHasChanged();
+	}
+
+	public async void SlettetProduktEllerYdelse()
+	{
+		ordreLinjeListe = (await OrdreLinjeService.GetAllOrdreLinjer()).Where(l => l.OrdreID == OrdreId).ToList();
+		StateHasChanged();
 	}
 
 	public double BeregnSum()

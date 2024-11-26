@@ -23,6 +23,8 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         [Parameter]
         public int Ordreid {  get; set; }
 
+        [Parameter]
+        public EventCallback ydelseTilføjet { get; set; }
 
         private int ErrorCode { get; set; } = 0;
 
@@ -50,7 +52,10 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         }
 
         // Nyt ydelse oprettes
-       
+       private async Task ydelseTilføj()
+        {
+            await ydelseTilføjet.InvokeAsync();
+        }
 
         public async Task AddYdelseHandler()
         {
