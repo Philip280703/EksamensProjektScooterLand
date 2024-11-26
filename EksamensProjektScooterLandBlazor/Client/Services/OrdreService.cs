@@ -12,9 +12,9 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
             this.httpClient = httpClient;
         }
 
-        public Task<Ordre[]?> GetAllOrdrer()
+        public async Task<Ordre[]?> GetAllOrdrer()
         {
-            var Ordrer = httpClient.GetFromJsonAsync<Ordre[]>("api/Ordre");
+            var Ordrer = await httpClient.GetFromJsonAsync<Ordre[]>("api/Ordre");
             return Ordrer;
         }
 
@@ -33,14 +33,16 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 
         public async Task<int> UpdateOrdre(Ordre ordre)
         {
-            var svar = await httpClient.PutAsJsonAsync("api/Ordre/", ordre);
+            var svar = await httpClient.PutAsJsonAsync("api/Ordre", ordre);
             var svarStatusKode = svar.StatusCode;
             return (int)svarStatusKode;
         }
 
         public async Task<int> DeleteOrdre(int id)
         {
-            throw new NotImplementedException();
+            var svar = await httpClient.DeleteAsync("api/Ordre/" + id);
+            var svarStatusKode = svar.StatusCode;
+            return (int)svarStatusKode;
         }
 
 
