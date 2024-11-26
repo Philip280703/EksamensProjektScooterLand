@@ -1,49 +1,126 @@
-﻿br{
-    background-color: black;
+﻿/* Page Styling */
+.kunde-page {
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    color: #333;
 }
 
-th {
-    padding-top: 15px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-}
+    /* Page Header */
+    .kunde-page h3 {
+        font-size: 28px;
+        color: #0056b3;
+        margin-bottom: 12px;
+        font-weight: bold;
+    }
 
-td{
-    padding: 8px;
-    word-wrap: break-word;
-}
+    .kunde-page p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 30px;
+    }
 
-tr:nth-child(2n){
-    background-color: gray;
-}
-
-.Left-Side-Tabel{
+/* Table Styling */
+.table {
     width: 100%;
-    border: 1px solid gray;
-}
-
-.Kunde-Tabel{
     border-collapse: collapse;
-
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.Kunde-Tabel-Område{
-    max-height: 500px;
-    overflow-y: auto;
-    padding-left: 20px;
-    padding-right: 20px;
+    /* Table Header Styling */
+    .table th {
+        background-color: #0056b3;
+        color: white;
+        padding: 12px;
+        text-align: left;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    /* Table Body Styling */
+    .table td {
+        background-color: #fff;
+        color: #333;
+        padding: 12px;
+        text-align: left;
+        font-size: 14px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Hover effect for rows */
+    .table tr:hover {
+        background-color: #f1f1f1;
+        cursor: pointer;
+    }
+
+/* Responsive Table Styling */
+@media (max-width: 768px) {
+    .table th, .table td {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    .table {
+        overflow-x: auto;
+        display: block;
+    }
+
+        .table th, .table td {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+            .table td:before {
+                content: attr(data-label);
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #777;
+                display: block;
+            }
 }
 
-.Tabel-Header-Text {
-    color: black;
-    vertical-align: middle;
-    display: table-cell;
+/* Action Buttons */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
 }
 
-.Tabel-Header{
-    background-color: lightgray;
-    padding: 5px 15px 5px 15px;
-    border-bottom: 1px solid gray;
+    button:hover {
+        transform: scale(1.1);
+    }
+
+.Rediger-knap, .Slet-knap {
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
+    .Rediger-knap svg {
+        fill: #28a745;
+    }
 
+    .Slet-knap svg {
+        fill: #dc3545;
+    }
+
+    .Rediger-knap:hover svg {
+        fill: #218838;
+    }
+
+    .Slet-knap:hover svg {
+        fill: #c82333;
+    }

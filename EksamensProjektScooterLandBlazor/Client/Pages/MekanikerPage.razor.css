@@ -1,70 +1,112 @@
-﻿/* Globalt layout til siden */
+﻿/* Overall Page Styling */
 .mekaniker-page {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 20px auto;
     max-width: 800px;
+    color: #333;
 }
 
 .page-title {
-    text-align: center;
-    color: #333;
     font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    color: #0056b3;
     margin-bottom: 10px;
 }
 
 .page-description {
-    text-align: center;
-    color: #666;
     font-size: 16px;
+    color: #666;
+    text-align: center;
     margin-bottom: 20px;
 }
 
-/* Styled table */
+/* Table Styling */
 .styled-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 16px;
-    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 8px;
 }
 
-    .styled-table th,
-    .styled-table td {
-        padding: 12px 15px;
-        border: 1px solid #ddd;
-    }
-
-    .styled-table thead th {
-        background-color: #f4f4f4;
-        color: #333;
+    .styled-table thead {
+        background-color: #0056b3;
+        color: #ffffff;
         text-transform: uppercase;
-        font-weight: bold;
+        font-size: 14px;
+        letter-spacing: 1px;
     }
 
-    .styled-table tbody tr:nth-child(even) {
-        background-color: #f9f9f9;
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        text-align: left;
     }
 
-    .styled-table tbody tr:hover {
-        background-color: #f1f1f1;
-        cursor: pointer;
+    .styled-table tbody tr {
+        border-bottom: 1px solid #ddd;
     }
 
+        .styled-table tbody tr:last-of-type {
+            border-bottom: none;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #f1f1f1;
+            transition: background-color 0.3s;
+        }
+
+/* Empty message styling */
 .empty-message {
     text-align: center;
-    color: #888;
     font-style: italic;
+    color: #999;
+    padding: 20px 0;
 }
 
-/* Error container */
+/* Error container styling */
 .error-container {
     margin-top: 20px;
     text-align: center;
     font-size: 14px;
-    color: #888;
+    color: #555;
 }
 
     .error-container span {
-        color: red;
+        color: #ff0000;
         font-weight: bold;
     }
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .styled-table thead {
+        display: none;
+    }
+
+    .styled-table tbody tr {
+        display: block;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .styled-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        font-size: 14px;
+        border-bottom: 1px solid #ddd;
+    }
+
+        .styled-table td:last-of-type {
+            border-bottom: none;
+        }
+
+        .styled-table td:before {
+            content: attr(data-label);
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #666;
+        }
+}

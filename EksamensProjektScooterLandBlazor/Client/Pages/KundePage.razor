@@ -2,33 +2,27 @@
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents
 @page "/Kundepage"
 
-<div class="Left-Side-Tabel">
-	<div class="Tabel-Header">
-		<p class="Tabel-Header-Text">Kunde tabel</p>
-	</div>
-	<div class="Kunde-Tabel-Område">
-		<br class="Divider" />
-		<table class="table">
-			<tr class="Kunde-Tabel-Række">
-				<th>Id</th>
-				<th>Navn</th>
-				<th>Email</th>
-				<th>Tlf</th>
-				<th>Pref. M</th>
-				<th>Scooter</th>
-				<th>Action</th>
-			</tr>
-			@foreach(var kunde in kundeListe)
-			{
-				<RenderKunde kunde="kunde" deleteKunde="DeleteKunde" />	
-			}
-		</table>
-	</div>
+<div class="kunde-page">
+    <h3>Kunde Oversigt</h3>
+    <p>Her kan du se en oversigt over alle kunder som er registreret i systemet.</p>
+
+    <table class="table">
+        <thead>
+            <tr class="Kunde-Tabel-Række">
+                <th>Id</th>
+                <th>Navn</th>
+                <th>Email</th>
+                <th>Tlf</th>
+                <th>Pref. M</th>
+                <th>Scooter</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var kunde in kundeListe)
+            {
+                <RenderKunde kunde="kunde" deleteKunde="DeleteKunde" />
+            }
+        </tbody>
+    </table>
 </div>
-
-
-
-
-
-
-

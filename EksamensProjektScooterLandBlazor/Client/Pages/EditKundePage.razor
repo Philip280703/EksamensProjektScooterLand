@@ -2,92 +2,88 @@
 @using EksamensProjektScooterLandBlazor.Client.Services;
 @page "/Editkundepage/{kundeID:int}"
 
-@if(kunde == null)
+@if (kunde == null)
 {
-	<p>Indlæser Kunde....</p>
+        <p>Indlæser Kunde....</p>
 }
 else
 {
-    <div class="Enkelt-kunde">
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Navn</th>
-                    <th>Email</th>
-                    <th>Tlf</th>
-                    <th>Postnr</th>
-                    <th>By</th>
-                    <th>Adresse</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>@kunde.KundeID</td>
-                    <td>@kunde.Fornavn @kunde.Efternavn</td>
-                    <td>@kunde.Email</td>
-                    <td>+45 @kunde.TelefonNummer</td>
-                    <td>@kunde.PostNummer</td>
-                    <td>@kunde.PostNummerOgBy.ByNavn</td>
-                    <td>@kunde.VejNavn @kunde.HusNummer</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="Enkelt-kunde">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Navn</th>
+                        <th>Email</th>
+                        <th>Tlf</th>
+                        <th>Postnr</th>
+                        <th>By</th>
+                        <th>Adresse</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@kunde.KundeID</td>
+                        <td>@kunde.Fornavn @kunde.Efternavn</td>
+                        <td>@kunde.Email</td>
+                        <td>+45 @kunde.TelefonNummer</td>
+                        <td>@kunde.PostNummer</td>
+                        <td>@kunde.PostNummerOgBy.ByNavn</td>
+                        <td>@kunde.VejNavn @kunde.HusNummer</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-<EditForm EditContext="@editContext" class="row p-3"
-           OnValidSubmit="@HandleValidSubmit"
-           OnInvalidSubmit="@HandleInvalidSubmit">
-    <DataAnnotationsValidator />
-    <div class="Rediger-kunde">
-        <div class="form-row">
-            <div class="form-group">
-                <label for="Fornavn" class="form-label">Fornavn</label>
-                <InputText style="border-radius: 10px" id="Fornavn" @bind-Value="kunde.Fornavn" placeholder="@kunde.Fornavn" class="form-input" />
-                <ValidationMessage For ="@(() => kunde.Fornavn)" />
+    <EditForm EditContext="@editContext" class="row p-3"
+               OnValidSubmit="@HandleValidSubmit"
+               OnInvalidSubmit="@HandleInvalidSubmit">
+        <DataAnnotationsValidator />
+        <div class="Rediger-kunde">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Fornavn" class="form-label">Fornavn</label>
+                    <InputText id="Fornavn" @bind-Value="kunde.Fornavn" placeholder="@kunde.Fornavn" class="form-input" />
+                    <ValidationMessage For ="@(() => kunde.Fornavn)" />
+                </div>
+                <div class="form-group">
+                    <label for="Efternavn" class="form-label">Efternavn</label>
+                    <InputText id="Efternavn" @bind-Value="kunde.Efternavn" placeholder="@kunde.Efternavn" class="form-input" />
+                    <ValidationMessage For ="@(() => kunde.Efternavn)" />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="Efternavn" class="form-label">Efternavn</label>
-                <InputText style="border-radius: 10px" id="Efternavn" @bind-Value="kunde.Efternavn" placeholder="@kunde.Efternavn" class="form-input" />
-                <ValidationMessage For ="@(() => kunde.Efternavn)" />
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Email" class="form-label">Email</label>
+                    <InputText id="Email" @bind-Value="kunde.Email" placeholder="@kunde.Email" class="form-input" />
+                    <ValidationMessage For="@(() => kunde.Email)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Postnummer" class="form-label">Postnummer</label>
+                    <InputNumber id="Postnummer" @bind-Value="kunde.PostNummer" placeholder="@kunde.PostNummer" class="form-input" />
+                    <ValidationMessage For="@(() => kunde.PostNummer)" />
+                </div>
+                <div class="form-group">
+                    <label for="Vejnavn" class="form-label">Vejnavn</label>
+                    <InputText id="Vejnavn" @bind-Value="kunde.VejNavn" placeholder="@kunde.VejNavn" class="form-input" />
+                    <ValidationMessage For="@(() => kunde.VejNavn)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Husnummer" class="form-label">Husnummer</label>
+                    <InputText id="Husnummer" @bind-Value="kunde.HusNummer" placeholder="@kunde.HusNummer" class="form-input" />
+                    <ValidationMessage For="@(() => kunde.HusNummer)" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="button-save">Gem</button>
+                </div>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="Email" class="form-label">Email</label>
-                <InputText style="border-radius: 10px" id="Email" @bind-Value="kunde.Email" placeholder="@kunde.Email" class="form-input" />
-                <ValidationMessage For="@(() => kunde.Email)" />
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="Postnummer" class="form-label">Postnummer</label>
-                <InputNumber style="border-radius: 10px" id="Postnummer" @bind-Value="kunde.PostNummer" placeholder="@kunde.PostNummer" class="form-input" />
-                <ValidationMessage For="@(() => kunde.PostNummer)" />
-            </div>
-            <div class="form-group">
-                <label for="Vejnavn" class="form-label">Vejnavn</label>
-                <InputText style="border-radius: 10px" id="Vejnavn" @bind-Value="kunde.VejNavn" placeholder="@kunde.VejNavn" class="form-input" />
-                <ValidationMessage For="@(() => kunde.VejNavn)" />
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="Husnummer" class="form-label">Husnummer</label>
-                <InputText style="border-radius: 10px" id="Husnummer" @bind-Value="kunde.HusNummer" placeholder="@kunde.HusNummer" class="form-input" />
-                <ValidationMessage For="@(() => kunde.HusNummer)" />
-            </div>
-            <div class="form-group">
-                <button type="submit" class="button-save">Gem</button>
-            </div>
-        </div>
-    </div>
-</EditForm>
-
-
+    </EditForm>
 }
-
-
 
 @code {
     [Inject]
@@ -108,7 +104,6 @@ else
     protected override async Task OnInitializedAsync()
     {
         kunde = await KundeService.GetKunde(KundeId);
-
         editContext = new EditContext(kunde);
     }
 
@@ -131,5 +126,4 @@ else
     {
         Console.WriteLine("HandleInvalidSubmit called...");
     }
-
 }

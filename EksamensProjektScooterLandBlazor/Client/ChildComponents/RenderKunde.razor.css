@@ -1,33 +1,138 @@
-﻿.hoverable-row:hover {
-    background-color: #f0f0f0;
+﻿/* Page Styling */
+.kunde-page {
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+    /* Page Header */
+    .kunde-page h3 {
+        font-size: 28px;
+        color: #0056b3;
+        margin-bottom: 12px;
+        font-weight: bold;
+    }
+
+    .kunde-page p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+    /* Table Header Styling */
+    .table th {
+        background-color: #0056b3;
+        color: white;
+        padding: 12px;
+        text-align: left;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    /* Table Body Styling */
+    .table td {
+        background-color: #fff;
+        color: #333;
+        padding: 12px;
+        text-align: left;
+        font-size: 14px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Hover effect for rows */
+    .table tr:hover {
+        background-color: #f1f1f1;
+        cursor: pointer;
+    }
+
+/* Responsive Table Styling */
+@media (max-width: 768px) {
+    .table th, .table td {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    .table {
+        overflow-x: auto;
+        display: block;
+    }
+
+        .table th, .table td {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+            .table td:before {
+                content: attr(data-label);
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #777;
+                display: block;
+            }
+}
+
+/* Grundlæggende styling for knapperne */
+button {
+    background: none;
+    border: none;
     cursor: pointer;
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 4px;
+    transition: transform 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease;
 }
 
-tr{
-    height: 50px;
-}
-
-.table thead th {
-    position: sticky;
-    top: 0;
-    background-color: lightgray;
-    color: black;
-    z-index: 1;
-    padding 8px;
-    border-bottom: 1px solid #ddd;
-}
-
-button{
-    border-radius: 10px;
+/* Knapperne har samme farve som table row */
+.Rediger-knap, .Slet-knap {
     transition: background-color 0.5s ease;
 }
 
-/* Hover-effekt for knapper */
-.Rediger-knap:hover {
-    background-color: #8ab6ff; /* Lys blå nuance */
+    /* Hover-effekt: Baggrund ændres ved hover */
+    .Rediger-knap:hover {
+        background-color: #80d8ff; /* Lys blå */
+    }
+
+    .Slet-knap:hover {
+        background-color: #ff8a80; /* Lys rød */
+    }
+
+/* Ikon farver */
+button svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.5s ease, fill 0.5s ease;
 }
 
-.Slet-knap:hover {
-    background-color: #ffb3b3; /* Blid lys rød farve */
+/* Hover-effekt på ikoner: Gør dem større og ændrer farve */
+.Rediger-knap:hover svg {
+    fill: #0288d1; /* Mørk blå farve for rediger ikonet */
+    transform: scale(1.35); /* Gør ikonet større */
+}
+
+.Slet-knap:hover svg {
+    fill: #d32f2f; /* Mørk rød farve for slet ikonet */
+    transform: scale(1.35); /* Gør ikonet større */
+}
+
+/* Tilføj skyggeeffekt til knapperne ved hover */
+.Rediger-knap:hover, .Slet-knap:hover {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
