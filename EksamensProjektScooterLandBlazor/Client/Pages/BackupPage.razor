@@ -1,0 +1,10 @@
+﻿@page "/Backuppage"
+@inject HttpClient httpClient
+<button @onclick="ÅbnBackupPage">Tag Backup</button>
+
+@code {
+	private async Task ÅbnBackupPage()
+	{
+		var response = await httpClient.GetAsync("api/WinForms/åbnbackupform");
+	}
+}
