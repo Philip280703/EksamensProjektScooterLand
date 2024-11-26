@@ -42,6 +42,8 @@ else
 	<button class="btn btn-primary" @onclick="AddProduktKnap">Tilføj produkt</button>
 	<button class="btn btn-primary" @onclick="AddYdelseKnap">Tilføj ydelse</button>
 	<button class="btn btn-primary" @onclick="AddScooterLejeKnap">Tilføj scooterleje</button>
+	<div></div> <br />
+	<button class="btn btn-primary" @onclick="AfslutOrdreKnap">Afslut Ordre</button>
 }
 
 
@@ -60,6 +62,19 @@ else
 	<!-- Tilføj scooterlejepage her med samme parametre som de foregående metoder-->
 }
 
+@if (showModal)
+{
+	<div class="message-box">
+		<div class="message-content">
+			<h4>Betaling</h4>
+			<p>Er betaling modtaget på? <b>@BeregnSum().ToString("N2") kr.</b></p>
+			<div class="message-actions">
+				<button class="btn btn-success" @onclick="ConfirmAfslutOrdre">Ja</button>
+				<button class="btn btn-danger" @onclick="CancelAfslutOrdre">Nej</button>
+			</div>
+		</div>
+	</div>
+}
 
 
 
@@ -79,6 +94,8 @@ else
 
 	[Parameter]
 	public int OrdreId { get; set; }
+
+	private int ErrorCode { get; set; }
 
 
 	private bool ProduktKnap = false;
@@ -168,5 +185,46 @@ else
 		}
 		StateHasChanged();
 	}
+
+
+	// pop op box kode til afslut ordre med betaling
+	private bool showModal = false;
+
+	private async void AfslutOrdreKnap()
+	{
+		// Show the modal to confirm the action
+		showModal = true;
+		StateHasChanged();
+	}
+
+	private async void ConfirmAfslutOrdre()
+	{
+		// Proceed with the action after confirmation
+		showModal = false;
+		currentOrdre.Afsluttet = true;
+		currentOrdre.BetalingsSum = BeregnSum();
+
+		ErrorCode = await ordreService.UpdateOrdre(currentOrdre);
+
+		if (ErrorCode == 0)
+		{
+			Console.WriteLine("Order afsluttet successfult.");
+		}
+		else
+		{
+			Console.WriteLine("Error afslutting order: " + ErrorCode);
+		}
+
+		StateHasChanged();
+	}
+
+	private void CancelAfslutOrdre()
+	{
+		// luk pop up uden at afslut ordre
+		showModal = false;
+		Console.WriteLine("Afslutning cancelled.");
+	}
+
+
 
 }
