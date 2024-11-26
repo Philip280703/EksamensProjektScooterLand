@@ -1,36 +1,59 @@
-﻿tr.hoverable-row {
-    font-size: 14px;
-    height: 50px;
-    border-top: 3px solid #ccc;
+﻿/* Styling for tabelrækker */
+.hoverable-row {
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-    tr.hoverable-row td:first-child {
-        vertical-align: middle; /* Vertically centers the content */
-        padding-left: 5px; /* Adds padding to the left */
-        padding-right: 5px; /* Adds padding to the right */
+    .hoverable-row:hover {
+        background-color: #f5f5f5;
     }
 
-tr.hoverable-row:hover {
-    background-color: #f0f0f0; 
-    cursor: pointer; 
+.ydelse-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
 }
 
-
-/* Default button styling */
-button {
-    background-color: transparent;
+/* Knapper - Rediger og Slet */
+.Rediger-knap, .Slet-knap {
+    background: transparent;
     border: none;
-    border-radius: 10px;
-    transition: background-color 0.5s ease;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-.Rediger-knap:hover {
-    background-color: #8ab6ff; /* blå farve når du hover */
+    .Rediger-knap:hover, .Slet-knap:hover {
+        background-color: #ddd;
+        transform: scale(1.1);
+    }
+
+/* Knapper - Tilføj til ordrelinje */
+.btn-primary {
+    background-color: #0288d1;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
 }
 
+    .btn-primary:hover {
+        background-color: #0277bd;
+    }
 
-.Slet-knap:hover {
-    background-color: #ffb3b3; /* rød farve når du hover */
+/* Ikonfarver for rediger og slet */
+.feather.feather-edit {
+    stroke: #0288d1;
 }
 
+.feather.feather-trash {
+    stroke: #f44336;
+}
 
+.feather.feather-edit:hover {
+    stroke: #0277bd;
+}
+
+.feather.feather-trash:hover {
+    stroke: #d32f2f;
+}

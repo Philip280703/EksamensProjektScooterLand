@@ -101,17 +101,21 @@ button {
 
 /* Knapperne har samme farve som table row */
 .Rediger-knap, .Slet-knap {
-    transition: background-color 0.5s ease;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.5s ease, transform 0.3s ease ;
 }
 
     /* Hover-effekt: Baggrund ændres ved hover */
-    .Rediger-knap:hover {
-        background-color: #80d8ff; /* Lys blå */
+    .Rediger-knap:hover, .Slet-knap:hover {
+        background-color: #ddd;
+        transform: scale(1.1);
     }
 
-    .Slet-knap:hover {
-        background-color: #ff8a80; /* Lys rød */
-    }
+
 
 /* Ikon farver */
 button svg {
@@ -122,17 +126,32 @@ button svg {
 
 /* Hover-effekt på ikoner: Gør dem større og ændrer farve */
 .Rediger-knap:hover svg {
-    fill: #0288d1; /* Mørk blå farve for rediger ikonet */
-    transform: scale(1.35); /* Gør ikonet større */
+    transform: scale(1.2); /* Gør ikonet større */
 }
 
 .Slet-knap:hover svg {
-    fill: #d32f2f; /* Mørk rød farve for slet ikonet */
-    transform: scale(1.35); /* Gør ikonet større */
+    transform: scale(1.2); /* Gør ikonet større */
 }
 
 /* Tilføj skyggeeffekt til knapperne ved hover */
 .Rediger-knap:hover, .Slet-knap:hover {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Ikonfarver for rediger og slet */
+.feather.feather-edit {
+    stroke: #0288d1;
+}
+
+.feather.feather-trash {
+    stroke: #f44336;
+}
+
+.feather.feather-edit:hover {
+    stroke: #0277bd;
+}
+
+.feather.feather-trash:hover {
+    stroke: #d32f2f;
 }
 
