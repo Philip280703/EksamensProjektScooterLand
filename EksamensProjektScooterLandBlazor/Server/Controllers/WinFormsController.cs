@@ -4,10 +4,10 @@ using System.Diagnostics;
 namespace EksamensProjektScooterLandBlazor.Server.Controllers
 {
 	[ApiController]
-	[Route("api/[controller]")] // Denne rute siger, at alt som starter med "api/WinForms", går til den her controller
+	[Route("api/winform")] // Denne rute siger, at alt som starter med "api/WinForms", går til den her controller
 	public class WinFormsController : ControllerBase
 	{
-		[HttpGet("åbnbackupform")] //skal være en GET-anmodning med ruten "api/WinForms/åbnbackupform"
+		[HttpGet] //skal være en GET-anmodning med ruten "api/WinForms/åbnbackupform"
 		// IActionResult er et Interface som angiver, at metoden kan returnere et hvilket som helst HTTP-svar. 
 		public IActionResult ÅbnBackupForm()
 		{

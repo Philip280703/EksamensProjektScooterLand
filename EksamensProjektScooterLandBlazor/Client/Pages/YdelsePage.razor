@@ -22,11 +22,19 @@
         <tbody>
             @foreach (var ydelse in YdelsesList)
             {
-                <RenderYdelse ydelser="ydelse" OrdreAddBool="AddingOrdreBool" Ordreid="@Ordreid"/>
+                <RenderYdelse ydelseTilføjet="ydelseTilføj" ydelser="ydelse" OrdreAddBool="AddingOrdreBool" Ordreid="@Ordreid"/>
             }
         </tbody>
     </table>
 </div>
 
-
+<br />
+@if (Ordreid == 0)
+{
+    <button class=" btn btn-primary" @onclick="OpenAddYdelse"> Tilføj Ydelse</button>
+    @if (AddingOrdreBool == true)
+    {
+        <AddYdelsePage AddYdelsebtn = "AddingOrdreBool == true"/>
+    }
+}
 

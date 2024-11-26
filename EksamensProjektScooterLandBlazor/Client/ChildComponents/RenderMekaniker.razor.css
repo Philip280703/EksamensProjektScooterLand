@@ -1,0 +1,16 @@
+﻿/* Mekaniker table row styling */
+.mekaniker-row {
+    transition: background-color 0.3s ease-in-out;
+}
+
+    .mekaniker-row:hover {
+        background-color: #f1f1f1;
+        cursor: pointer;
+    }
+
+    .mekaniker-row td {
+        padding: 12px 15px;
+        text-align: left;
+        font-size: 14px;
+        color: #333;
+    }

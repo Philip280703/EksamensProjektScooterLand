@@ -1,34 +1,15 @@
-﻿
-@using EksamensProjektScooterLandBlazor.Shared.Models;
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
 @using EksamensProjektScooterLandBlazor.Client;
 
-<!-- Render mekaniker, tr = table row, td = table divider-->
-<tr>
-	<td>
-		@(mekaniker.CprNummer?.Substring(0,6) + "-****")
-	</td>
-	<td>
-		@mekaniker.Fornavn
-	</td>
-	<td>
-		@mekaniker.Efternavn
-	</td>
-	<td>
-		@mekaniker.Rolle
-	</td>
-	<td>
-		@mekaniker.scooterBrand.ScooterBrandNavn	
-	</td>
+<tr class="mekaniker-row">
+    <td>@(mekaniker.CprNummer?.Substring(0, 6) + "-****")</td>
+    <td>@mekaniker.Fornavn</td>
+    <td>@mekaniker.Efternavn</td>
+    <td>@mekaniker.Rolle</td>
+    <td>@mekaniker.scooterBrand?.ScooterBrandNavn</td>
 </tr>
 
-
-
-@code 
-{
-	[Parameter]
-	public Mekaniker mekaniker { get; set; }
-
-
-	
-
+@code {
+    [Parameter]
+    public Mekaniker mekaniker { get; set; }
 }
