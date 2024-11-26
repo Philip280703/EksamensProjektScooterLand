@@ -3,49 +3,52 @@
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents;
 @using EksamensProjektScooterLandBlazor.Client.Services;
 
-<h3>Mekaniker</h3>
-<br />
+<div class="mekaniker-page">
+    <h3 class="page-title">Mekaniker Oversigt</h3>
+    <p class="page-description">Her kan du se en liste over mekanikere og deres ekspertiser.</p>
 
-<table class="table">
-    <tr>
-        <th>CPR-nummer</th>
-        <th>Fornavn</th>
-        <th>Efternavn</th>
-        <th>Rolle</th>
-        <th>Scooter brand ekspertise</th>
-    </tr>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>CPR-nummer</th>
+                <th>Fornavn</th>
+                <th>Efternavn</th>
+                <th>Rolle</th>
+                <th>Scooter brand ekspertise</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (MekanikerList.Any())
+            {
+                @foreach (var item in MekanikerList)
+                {
+                    <RenderMekaniker mekaniker="@item" />
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="empty-message">Ingen mekanikere fundet.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-    @foreach (var item in MekanikerList)
-    {
-        <RenderMekaniker mekaniker="@item"/>
-    }
-
-</table>
-
-<div></div>
-<br />
-
-
-<!-- display errorcode-->
-<label>return code: @ErrorCode</label>
+    <div class="error-container">
+        <label>Return Code: <span>@ErrorCode</span></label>
+    </div>
+</div>
 
 @code {
+    private List<Mekaniker> MekanikerList = new List<Mekaniker>();
 
-    private List<Mekaniker> MekanikerList = new List<Mekaniker> ();
-
-   
     [Inject]
     public IMekanikerService service { get; set; }
-
 
     private int ErrorCode { get; set; } = 0;
 
     protected override async Task OnInitializedAsync()
     {
         MekanikerList = (await service.GetAllMekaniker()).ToList();
-        
-    
     }
-
-
 }

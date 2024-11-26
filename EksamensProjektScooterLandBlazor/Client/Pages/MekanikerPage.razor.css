@@ -1,0 +1,70 @@
+﻿/* Globalt layout til siden */
+.mekaniker-page {
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.page-title {
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.page-description {
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Styled table */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+    }
+
+    .styled-table thead th {
+        background-color: #f4f4f4;
+        color: #333;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .styled-table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .styled-table tbody tr:hover {
+        background-color: #f1f1f1;
+        cursor: pointer;
+    }
+
+.empty-message {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+}
+
+/* Error container */
+.error-container {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+}
+
+    .error-container span {
+        color: red;
+        font-weight: bold;
+    }
