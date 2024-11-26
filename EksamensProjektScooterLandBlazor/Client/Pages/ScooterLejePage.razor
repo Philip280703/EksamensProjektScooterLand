@@ -1,6 +1,45 @@
-﻿<h3>Component</h3>
+﻿@using EksamensProjektScooterLandBlazor.Client.ChildComponents
+@using EksamensProjektScooterLandBlazor.Shared.Models
+@using EksamensProjektScooterLandBlazor.Client.Services
 
+@page "/ScooterLejePage"
+
+<div class="Tabel-Header h4">
+    <p class="Tabel-Header-Text">Scooter Leje</p>
+</div>
+
+<div class="table-container">
+    <table class="ScooterLeje-table">
+        <thead>
+            <tr>
+                <th>ScooterID</th>
+                <th>SelvRisiko</th>
+                <th>ForsikringPrKm</th>
+                <th>DagsLejePris</th>
+            </tr>
+        </thead>
+        <tbody>
+                @foreach (var Leje in ScooterLejeList)
+                {
+                    <tr>
+                        <td>@Leje.ScooterID</td>
+                        <td>@Leje.SelvRisiko</td>
+                        <td>@Leje.ForsikringPrKm</td>
+                        <td>@Leje.DagsLejePris</td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+</div>
 
 @code {
+    private List<ScooterLeje> ScooterLejeList = new List<ScooterLeje>();
 
+    [Inject]
+    public IScooterLejeService Service { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ScooterLejeList = (await Service.GetAll()).ToList();
+    }
 }

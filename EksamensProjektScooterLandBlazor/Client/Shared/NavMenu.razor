@@ -1,4 +1,6 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@inject HttpClient httpClient
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href=""></a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -126,7 +128,7 @@
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Backuppage">
+            <NavLink class="nav-link" @onclick="ÅbnBackupPage">
                 <span class="bi bi-list-nested-nav-menu"></span> Backup
             </NavLink>
         </div>
@@ -151,4 +153,10 @@
             showSubMenu[i] = i == index ? !showSubMenu[i] : false;
         }
     }
+
+    private async Task ÅbnBackupPage()
+    {
+        var response = await httpClient.GetAsync("api/WinForms/åbnbackupform");
+    }
+
 }
