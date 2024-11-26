@@ -14,9 +14,16 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
             Console.WriteLine("Åbnbackupform kaldet");
 			try
 			{
-				string path = "EksamensProjektScooterLand\\ScooterLandWinForms\\bin\\Debug\\net8.0-windows\\ScooterLandWinForms.exe";
-				//Forsøg på at åbne WinForms-applikation, hvis filen findes.
-				Process.Start("C:\\Users\\markr\\source\\repos\\"+path);
+				// henter directory
+				string currentDirec = Directory.GetCurrentDirectory();
+				// splitter ved projekt ref
+				string localDirec = currentDirec.Split("EksamensProjektScooterLand\\")[0];
+				// path til WinForms exe filen
+                string path = "EksamensProjektScooterLand\\ScooterLandWinForms\\bin\\Debug\\net8.0-windows\\ScooterLandWinForms.exe";
+				// kombinerer de to path
+                string fullPath = localDirec + path;
+				// start Winforms
+				Process.Start(fullPath);
 				return Ok("Backup Projekt startet");
 			}
 			catch (Exception ex)
