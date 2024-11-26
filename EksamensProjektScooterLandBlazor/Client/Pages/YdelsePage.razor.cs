@@ -14,6 +14,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
         private EditContext EditContext;
 
+        private bool btnVisibility = true;
       
         private Ydelse YdelseModel = new Ydelse();
 
@@ -72,6 +73,11 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
             Console.WriteLine("Ydelse opdateret: return code: " + ErrorCode);
             YdelseModel = new Ydelse();
             StateHasChanged();
+        }
+
+        private void OpenAddYdelse()
+        {
+            AddingOrdreBool = !AddingOrdreBool;
         }
     }
 }

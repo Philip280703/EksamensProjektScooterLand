@@ -28,5 +28,17 @@
     </table>
 </div>
 
+<br />
+@if (Ordreid != null)
+{
+    <button class=" btn btn-primary" @onclick="OpenAddYdelse"> Tilføj Ydelse</button>
 
+}
+
+
+
+@if (AddingOrdreBool == true)
+{
+    <AddYdelsePage AddYdelsebtn = "AddingOrdreBool == true"/>
+}
 
