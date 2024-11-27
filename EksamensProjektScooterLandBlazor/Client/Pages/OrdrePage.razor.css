@@ -1,0 +1,68 @@
+﻿/* Table Styling */
+.table-container {
+    margin-top: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table th, .table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table th {
+        background-color: #0288d1;
+        color: white;
+    }
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.table-striped tbody tr:nth-child(even) {
+    background-color: #fff;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+    .table {
+        font-size: 14px;
+    }
+
+        .table th, .table td {
+            padding: 8px;
+        }
+}
+
+/* Button styling for order line button */
+.btn-info {
+    background-color: #0288d1;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+    .btn-info:hover {
+        background-color: #0277bd;
+    }
+
+/* Styling for the checkbox column (Afsluttet) */
+input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+/* Error message */
+.alert-danger {
+    background-color: #f44336;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}

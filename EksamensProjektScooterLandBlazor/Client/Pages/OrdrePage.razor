@@ -3,48 +3,62 @@
 @using EksamensProjektScooterLandBlazor.Client.Services;
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents;
 
-<h3>Ordre</h3>
+<h3>Ordre Oversigt</h3>
+<p>Her kan du finde en liste over alle ordrer og deres detaljer.</p>
 
+<!-- Ordre Table Section -->
+<div class="table-container">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Ordre ID</th>
+                <th>Salgsdato</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Kunde</th>
+                <th>Medarbejder</th>
+                <th>Handling</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ordreListe)
+            {
+                <RenderOrdre ordre="@item" />
+            }
+        </tbody>
+    </table>
+</div>
 
+<!-- Error Notification (for failed orders loading) -->
+@if (ErrorCode != 0)
+{
+    <div class="alert alert-danger" role="alert">
+        Der opstod en fejl under indlæsning af ordrer. Fejlkode: @ErrorCode
+    </div>
+}
 
-<table class="table">
-    <tr>
-        <th>Ordre ID</th>
-        <th>Salgsdato</th>
-        <th>Status</th>
-        <th>Total</th>
-        <th>Kunde ID</th>
-        <th>Medarbejder</th>
-        <th>Ordre info</th>
-    </tr>
-
-    @foreach (var item in ordreListe)
-    {
-        <RenderOrdre ordre="@item"/>
-    }
-
-</table>
-
-<div></div>
 <br />
 
-
-
 @code {
+    private List<Ordre> ordreListe = new List<Ordre>();
 
-	private List<Ordre> ordreListe = new List<Ordre>();
+    [Inject]
+    public IOrdreService ordreService { get; set; }
 
-	[Inject]
-	public IOrdreService ordreService { get; set; }
+    private int ErrorCode { get; set; } = 0;
 
-	private int ErrorCode { get; set; } = 0;
-
-	protected override async Task OnInitializedAsync()
-	{
-		ordreListe = (await ordreService.GetAllOrdrer()).ToList();
-
-	}
-
-
-
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Hent ordrer
+            ordreListe = (await ordreService.GetAllOrdrer()).ToList();
+        }
+        catch (Exception ex)
+        {
+            // Fejlhåndtering, hvis tjenesten ikke kan tilgås
+            ErrorCode = 500;
+            Console.WriteLine($"Fejl ved indlæsning af ordrer: {ex.Message}");
+        }
+    }
 }
