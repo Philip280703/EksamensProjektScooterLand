@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-                @foreach (var Leje in ScooterLejeList)
+                @foreach (var Leje in scooterLejeList)
                 {
                     <tr>
                         <td>@Leje.ScooterID</td>
@@ -38,7 +38,6 @@
                         {
                             <button class="btn btn-primary" @onclick="() => AddScooterLejeToOrdre()">Tilføj til ordrelinje</button>
                         }
-
                         </td>
                     </tr>
                 }
@@ -48,8 +47,10 @@
 
 @code {
 
-    private List<ScooterLeje> ScooterLejeList = new List<ScooterLeje>();
-    private OrdreLinje ordreLinje = new OrdreLinje();
+    private List<ScooterLeje> scooterLejeList = new List<ScooterLeje>();
+    private ScooterLeje scooterLejeModel = new ScooterLeje();
+    private OrdreLinje ordreLinjeDagsPris = new OrdreLinje();
+    private OrdreLinje ordreLinjeKmPris = new OrdreLinje(); 
 
     [Parameter]
     public bool OrdreAddBool { get; set; } = false;
@@ -75,10 +76,9 @@
 
 
 
-
     protected override async Task OnInitializedAsync()
     {
-        ScooterLejeList = (await Service.GetAll()).ToList();
+        scooterLejeList = (await Service.GetAll()).ToList();
     }
 
     private async Task DeleteScooterLeje()
@@ -96,11 +96,6 @@
 
     private async void AddScooterLejeToOrdre()
     {
-        ordreLinje.ScooterLejeID = scooterLeje.ScooterID;
-        ordreLinje.Antal = 1;
-        ordreLinje.OrdreLinjeDato = DateTime.Now;
-        ordreLinje.RabatProcent = 0;
-        ordreLinje.OrdreID = Ordreid;
-        await scootertilføjet.InvokeAsync();
+       
     }
 }
