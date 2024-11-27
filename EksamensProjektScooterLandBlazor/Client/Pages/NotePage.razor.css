@@ -1,0 +1,20 @@
+﻿textarea {
+    width: 100%; /* Full width of its container */
+    max-width: 800px; /* Limit the maximum width */
+    height: 200px; /* Set a default height */
+    padding: 10px; /* Inner padding for text spacing */
+    font-size: 16px; /* Larger text size for readability */
+    font-family: Arial, sans-serif; /* Clean font */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    resize: vertical; /* Allow vertical resizing only */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow inside the textarea */
+    background-color: #f9f9f9; /* Light background color */
+}
+
+    textarea:focus {
+        outline: none; /* Remove default focus outline */
+        border-color: #007bff; /* Blue border on focus */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect on focus */
+        background-color: #fff; /* Change to white on focus */
+    }

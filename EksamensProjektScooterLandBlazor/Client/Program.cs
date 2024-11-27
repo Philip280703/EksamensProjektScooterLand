@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using EksamensProjektScooterLandBlazor.Client;
 using EksamensProjektScooterLandBlazor.Client.Services;
 using EksamensProjektScooterLandBlazor.Shared.Models;
@@ -58,6 +59,8 @@ builder.Services.AddHttpClient<IPostnummerOgByService, PostnummerOgByService>(cl
 {
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
+
+builder.Services.AddBlazoredLocalStorage();
 
 
 
