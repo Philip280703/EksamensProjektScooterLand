@@ -1,0 +1,176 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+@using EksamensProjektScooterLandBlazor.Client.Pages;
+
+<tr>
+	<td>
+        @ordreLinje.OrdreLinjeID
+	</td>
+    <td>
+        <h7>Scooter leje</h7>
+    </td>
+
+    <td>
+        @ordreLinje.scooterLeje?.DagsLejePris
+    </td>
+    <td>
+        @if (currentOrdre.Afsluttet == false)
+        {
+            <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit" class="d-inline-block">
+                <div class="input-group input-group-sm">
+                    <InputNumber @bind-Value="ordreLinje.AntalEkstra" Min="1" Max="1000" class="form-control form-control-sm" />
+                    <span class="input-group-text">dage</span>
+                </div>
+                <ValidationMessage For="@(() => ordreLinje.AntalEkstra)" class="text-danger small" />
+            </EditForm>
+
+        }
+        else
+        {
+            @($"{ordreLinje.AntalEkstra} dage.")
+        }
+    </td>
+    
+    <td>
+        @ordreLinje.scooterLeje?.ForsikringPrKm
+    </td>
+    <td>
+        @if (currentOrdre.Afsluttet == false)
+        {
+            <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit" class="d-inline-block">
+                <div class="input-group input-group-sm">
+                    <InputNumber @bind-Value="ordreLinje.Antal" Min="1" Max="1000" class="form-control form-control-sm" />
+                    <span class="input-group-text">Km.</span>
+                </div>
+                <ValidationMessage For="@(() => ordreLinje.Antal)" class="text-danger small" />
+            </EditForm>
+
+        }
+        else
+        {
+            @($"{ordreLinje.Antal} Km.")
+        }
+    </td>
+    
+    <td>
+        <InputCheckbox @bind-Value="SelvrisikoBool" @onclick="AddedSelvRisiko" />
+
+    </td>
+    <td>
+        @if (currentOrdre.Afsluttet == false)
+        {
+            <EditForm Model="@ordreLinje" OnValidSubmit="@HandleInValidSubmit" class="d-inline-block">
+                <div class="input-group input-group-sm">
+                    <InputNumber @bind-Value="ordreLinje.RabatProcent" Min="0" Max="99" class="form-control form-control-sm" />
+                    <span class="input-group-text">%</span>
+                </div>
+                <ValidationMessage For="@(() => ordreLinje.RabatProcent)" class="text-danger small" />
+            </EditForm>
+        }
+        else
+        {
+            @($"{ordreLinje.RabatProcent} %")
+        }
+    </td>
+    
+    <td>
+        <b>@BeregnOrdreLinjeSum() kr.</b>
+    </td>
+    
+    <td>
+        @if (currentOrdre.Afsluttet == false)
+        {
+            <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit">
+                <button type="submit" class="btn btn-primary">Opdater</button>
+            </EditForm>
+
+            <button class="btn btn-primary" @onclick="@FjernOrdrelinje">Fjern</button>
+        }
+
+    </td>  
+
+
+</tr>
+
+
+
+
+
+
+@code {
+    [Parameter]
+    public OrdreLinje ordreLinje { get; set; }
+
+    [Parameter]
+    public Ordre currentOrdre { get; set; }
+
+    private ScooterLeje scooterLejeModel = new ScooterLeje();
+
+    [Parameter]
+    public EventCallback slettetProduktEllerYdelse { get; set; }
+
+    [Inject]
+    public IOrdreLinjeService ordreLinjeService { get; set; }
+
+    [Inject]
+    public IOrdreService ordreService { get; set; }
+
+    [Inject]
+    public IScooterLejeService scooterLejeService { get; set; }
+
+    private bool SelvrisikoBool { get; set; } = false;
+
+    private int ErrorCode { get; set; } = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ordreLinje.ScooterLejeID != null)
+        {
+            scooterLejeModel = await scooterLejeService.GetSingle((int)ordreLinje.ScooterLejeID);
+            ordreLinje.scooterLeje = scooterLejeModel; // Initialize scooterLeje in ordreLinje
+        }
+    }
+
+    private double BeregnOrdreLinjeSum()
+    {
+        if (ordreLinje == null) return 0; // Return 0 if ordreLinje is null
+
+        double pris = 0;
+        int antalDage = ordreLinje.AntalEkstra ?? 0;
+        int antalKm = ordreLinje.Antal;
+        int rabat = ordreLinje.RabatProcent ?? 0;
+
+        pris = (scooterLejeModel.DagsLejePris * antalDage) + scooterLejeModel.ForsikringPrKm * antalKm;
+
+        double total = pris * (1 - (rabat / 100.0));
+        return total;
+    }
+
+    private async void HandleValidSubmit()
+    {
+        Console.WriteLine("HandeValidSubmit Called ...");
+        ErrorCode = (await ordreLinjeService.UpdateOrdreLinje(ordreLinje));
+        StateHasChanged();
+
+    }
+
+    private void HandleInValidSubmit()
+    {
+        Console.WriteLine("HandeInValidSubmit Called ...");
+    }
+
+    private async void FjernOrdrelinje()
+    {
+        int ordreLinjeid = ordreLinje.OrdreLinjeID;
+        ErrorCode = (await ordreLinjeService.DeleteOrdreLinje(ordreLinjeid));
+        await slettetProduktEllerYdelse.InvokeAsync();
+    }
+
+    private void AddedSelvRisiko()
+    {
+        SelvrisikoBool = !SelvrisikoBool;
+        StateHasChanged();
+    }
+
+}

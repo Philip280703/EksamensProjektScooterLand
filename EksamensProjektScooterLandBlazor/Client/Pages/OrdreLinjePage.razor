@@ -19,11 +19,44 @@
 	{
 		@foreach (var item in ordreLinjeListe)
 		{
-			<RenderOrdreLinje slettetProduktEllerYdelse="SlettetProduktEllerYdelse" ordreLinje="@item" currentOrdre="@currentOrdre"  />
+			@if(item.ScooterLejeID == null)
+			{
+				<RenderOrdreLinje slettetProduktEllerYdelse="SlettetProduktEllerYdelse" ordreLinje="@item" currentOrdre="@currentOrdre" />
+			}
+			
 		}
 	}
 	
 </table>
+
+<!-- Table til scooterleje -->
+@if(ordreLinjeListe.Count > 0)
+{
+		if(Succes = ordreLinjeListe.Any(s => s.ScooterLejeID != null))
+		{
+			<table class="table">
+					<th>OrdreLinje ID</th>
+					<th>Type</th>
+					<th>dagspris</th>
+					<th>Antal dage</th>
+					<th>km pris</th>
+					<th>km kørt</th>
+					<th>selvrisiko</th>
+					<th>rabat procent</th>
+					<th>sum</th>
+					<th>action</th>
+					@foreach (var item in ordreLinjeListe)
+					{
+						@if(item.ScooterLejeID != null)
+						{
+							<RenderScooterLejeOrdreLinje ordreLinje="@item" currentOrdre="@currentOrdre" />
+						}
+						
+					}	
+			</table>
+		}
+}
+
 
 @if(ordreLinjeListe.Count == 0){
 <h5><b>Ingen ordrelinjer i ordren</b></h5>
@@ -80,12 +113,14 @@ else
 
 
 @code {
+	private bool Succes;
+	private OrdreLinje Item;
 
 	private List<OrdreLinje> ordreLinjeListe = new List<OrdreLinje>();
 
 	private Ordre currentOrdre = new Ordre();
 
-
+	private OrdreLinje ScooterOrdreLinje = new OrdreLinje();
 
 	[Inject]
 	public IOrdreLinjeService OrdreLinjeService { get; set;}

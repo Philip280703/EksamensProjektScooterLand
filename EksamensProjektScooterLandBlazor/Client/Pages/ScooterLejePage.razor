@@ -36,7 +36,7 @@
                         }
                         else if (OrdreAddBool == true)
                         {
-                            <button class="btn btn-primary" @onclick="() => AddScooterLejeToOrdre()">Tilføj til ordrelinje</button>
+                            <button class="btn btn-primary" @onclick="() => AddScooterLejeToOrdre(Leje.ScooterID)">Tilføj til ordrelinje</button>
                         }
                         </td>
                     </tr>
@@ -49,8 +49,7 @@
 
     private List<ScooterLeje> scooterLejeList = new List<ScooterLeje>();
     private ScooterLeje scooterLejeModel = new ScooterLeje();
-    private OrdreLinje ordreLinjeDagsPris = new OrdreLinje();
-    private OrdreLinje ordreLinjeKmPris = new OrdreLinje(); 
+    private OrdreLinje ordreLinje = new OrdreLinje();
 
     [Parameter]
     public bool OrdreAddBool { get; set; } = false;
@@ -74,6 +73,8 @@
     [Inject]
     public IOrdreLinjeService OrdreLinjeService { get; set; }
 
+    private int ErrorCode { get; set; } = 0;
+
 
 
     protected override async Task OnInitializedAsync()
@@ -81,21 +82,16 @@
         scooterLejeList = (await Service.GetAll()).ToList();
     }
 
-    private async Task DeleteScooterLeje()
-    {
-        // await deleteProdukt.InvokeAsync(produkt);
-        var placeholder = "intet at se her...";
-        Console.WriteLine(placeholder);
 
-    }
-
-    private async Task scooterTilføjet()
+    private async Task AddScooterLejeToOrdre(int scooterId)
     {
-        await scootertilføjet.InvokeAsync();
-    }
+        ordreLinje.ScooterLejeID = scooterId;
+        ordreLinje.Antal = 1;
+        ordreLinje.AntalEkstra = 1;
+        ordreLinje.OrdreLinjeDato = DateTime.Now;
+        ordreLinje.RabatProcent = 0;
+        ordreLinje.OrdreID = Ordreid;
 
-    private async void AddScooterLejeToOrdre()
-    {
-       
+        ErrorCode = await OrdreLinjeService.AddOrdreLinje(ordreLinje);
     }
 }
