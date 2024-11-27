@@ -101,13 +101,36 @@
 </EditForm>
 
 
+@if (ShowError)
+{
+    <div class="message-box">
+        <div class="message-content">
+            <h4>Fejl</h4>
+            <p>Ugylidgt indtastet postnummer</p>
+            <div class="message-actions">
+                <button class="btn btn-danger" @onclick="OkayToError">OK</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+@if (showModal)
+{
+    <div class="message-box">
+        <div class="message-content">
+            <h4>Succes!</h4>
+            <p>Kunden er nu oprettet i systemet</p>
+            <div class="message-actions">
+                <button class="btn btn-success" @onclick="OkayToComplete">OK</button>
+            </div>
+        </div>
+    </div>
+}
+
 <br />
 <div></div>
 
-@if (ErrorCode == 200)
-{
-    <label>Kunden er nu tilføjet til databasen! :)</label>
-}
 
 
 
@@ -135,6 +158,8 @@
 
     public int ErrorCode { get; set; }
 
+    private bool ValidPostnrBool = false;
+
     protected override async Task OnInitializedAsync()
     {
         editContext = new EditContext(KundeModel);
@@ -148,7 +173,33 @@
     private async void HandleValidSubmit()
     {
         Console.WriteLine("HandleValidSubmit called..");
-        ErrorCode = await kundeService.AddKunde(KundeModel);
+        if(ValidPostnrBool == true)
+        {
+            if (KundeModel.PreferetMekanikerCprNummer != null)
+            {
+                try
+                {
+                    ErrorCode = await kundeService.AddKunde(KundeModel);
+                    ShowMessageBoxAfslut();
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception thrown " + ex);
+                }
+            }
+            else
+            {
+                HandleInvalidSubmit();
+            }
+
+
+
+        }
+        else
+        {
+            ShowMessageBoxErrorPostnr();
+        }
     }
 
     private void HandleInvalidSubmit()
@@ -165,7 +216,16 @@
             KundeModel.PostNummer = postNummer;
 
             var match = postNummerOgByListe.FirstOrDefault(x => x.Postnummer == postNummer);
-            Bynavn = match?.ByNavn ?? "Ikke gyldigt postnummer"; 
+            if(match != null)
+            {
+                Bynavn = match?.ByNavn;
+                ValidPostnrBool = true;
+            }
+            else
+            {
+                Bynavn = "Ikke gyldigt postnummer";
+                ValidPostnrBool = false;
+            }
             Console.WriteLine($"PostNummer: {postNummer}, ByNavn: {Bynavn}");
         }
         else
@@ -197,5 +257,41 @@
 
         StateHasChanged();
     }
+
+
+    // pop op box kode til afslut ordre med betaling
+    private bool ShowError = false;
+
+    private async void ShowMessageBoxErrorPostnr()
+    {
+        ShowError = true;
+        StateHasChanged();
+    }
+
+    private async void OkayToError()
+    {
+        ShowError = false;
+        Console.WriteLine("Error afslutting order: " + ErrorCode);
+        StateHasChanged();
+    }
+
+
+    // Messagebox
+    private bool showModal = false;
+
+    private async void ShowMessageBoxAfslut()
+    {
+        showModal = true;
+        StateHasChanged();
+    }
+
+    private async void OkayToComplete()
+    {
+        showModal = false;
+        StateHasChanged();
+    }
+
+   
+  
 }
 

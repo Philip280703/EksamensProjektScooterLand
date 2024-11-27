@@ -1,0 +1,33 @@
+﻿@inject HttpClient httpClient
+@using Blazored.LocalStorage;
+@inject Blazored.LocalStorage.ILocalStorageService localStorage;
+
+<h3>Noter</h3>
+
+<textarea @bind="noteIndhold" />
+<br />
+
+<button class="btn btn-primary" @onclick="ClearLocalStorage"> Slet note </button>
+<button class="btn btn-primary" @onclick="UpdateLocalStorage"> Gem note </button>
+
+@code {
+	const string NoteKey = "note";
+	private string noteIndhold;
+
+	private async void UpdateLocalStorage()
+	{
+		await localStorage.SetItemAsync(NoteKey, noteIndhold);
+	}
+
+	private async void ClearLocalStorage()
+	{
+		noteIndhold = "";
+		await localStorage.ClearAsync();
+	}
+
+	protected override async Task OnInitializedAsync()
+	{
+		noteIndhold = await localStorage.GetItemAsync<string>(NoteKey);
+	}
+
+}

@@ -9,6 +9,7 @@
 
 <table class="table">
 	<tr>
+		<th>Ordre ID</th>
 		<th>Ydelse navn</th>
 		<th>Estimeret tid</th>
 		<th>OrdreLinje dato</th>
@@ -17,14 +18,17 @@
 		@foreach(var item in filteretListe)
 		{
 		<tr>
+			<td>@item.OrdreID</td>
 			<td>@item.ydelse.YdelseNavn</td>
 			<td>@item.ydelse.EstimeretTid timer.</td>
 			<td>@item.OrdreLinjeDato.ToShortDateString()</td>
 		</tr>
 		}
 	
-
 </table>
+
+<br />
+<NotePage/>
 
 
 
