@@ -12,28 +12,7 @@
     </td>
 
     <td>
-        @ordreLinje.scooterLeje?.DagsLejePris
-    </td>
-    <td>
-        @if (currentOrdre.Afsluttet == false)
-        {
-            <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit" class="d-inline-block">
-                <div class="input-group input-group-sm">
-                    <InputNumber @bind-Value="ordreLinje.AntalEkstra" Min="1" Max="1000" class="form-control form-control-sm" />
-                    <span class="input-group-text">dage</span>
-                </div>
-                <ValidationMessage For="@(() => ordreLinje.AntalEkstra)" class="text-danger small" />
-            </EditForm>
-
-        }
-        else
-        {
-            @($"{ordreLinje.AntalEkstra} dage.")
-        }
-    </td>
-    
-    <td>
-        @ordreLinje.scooterLeje?.ForsikringPrKm
+        @ordreLinje.scooterLeje?.DagsLejePris kr.
     </td>
     <td>
         @if (currentOrdre.Afsluttet == false)
@@ -41,7 +20,7 @@
             <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit" class="d-inline-block">
                 <div class="input-group input-group-sm">
                     <InputNumber @bind-Value="ordreLinje.Antal" Min="1" Max="1000" class="form-control form-control-sm" />
-                    <span class="input-group-text">Km.</span>
+                    <span class="input-group-text">dage</span>
                 </div>
                 <ValidationMessage For="@(() => ordreLinje.Antal)" class="text-danger small" />
             </EditForm>
@@ -49,7 +28,28 @@
         }
         else
         {
-            @($"{ordreLinje.Antal} Km.")
+            @($"{ordreLinje.Antal} dage.")
+        }
+    </td>
+    
+    <td>
+        @($"{ordreLinje.scooterLeje?.ForsikringPrKm} km.")
+    </td>
+    <td>
+        @if (currentOrdre.Afsluttet == false)
+        {
+            <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit" class="d-inline-block">
+                <div class="input-group input-group-sm">
+                    <InputNumber @bind-Value="ordreLinje.AntalEkstra" Min="1" Max="1000" class="form-control form-control-sm" />
+                    <span class="input-group-text">Km.</span>
+                </div>
+                <ValidationMessage For="@(() => ordreLinje.AntalEkstra)" class="text-danger small" />
+            </EditForm>
+
+        }
+        else
+        {
+            @($"{ordreLinje.AntalEkstra} Km.")
         }
     </td>
     
@@ -75,7 +75,7 @@
     </td>
     
     <td>
-        <b>@BeregnOrdreLinjeSum() kr.</b>
+        <b>@BeregnOrdreLinjeSum().ToString("N0") kr.</b>
     </td>
     
     <td>
@@ -137,11 +137,20 @@
         if (ordreLinje == null) return 0; // Return 0 if ordreLinje is null
 
         double pris = 0;
-        int antalDage = ordreLinje.AntalEkstra ?? 0;
-        int antalKm = ordreLinje.Antal;
+        int antalKm = ordreLinje.AntalEkstra ?? 0;
+        int antalDage = ordreLinje.Antal;
         int rabat = ordreLinje.RabatProcent ?? 0;
+        double selvrisiko;
+        if (SelvrisikoBool == true)
+        {
+            selvrisiko = scooterLejeModel.SelvRisiko;
+        }
+        else
+        {
+            selvrisiko = 0;
+        }
 
-        pris = (scooterLejeModel.DagsLejePris * antalDage) + scooterLejeModel.ForsikringPrKm * antalKm;
+        pris = (scooterLejeModel.DagsLejePris * antalDage) + (scooterLejeModel.ForsikringPrKm * antalKm) + selvrisiko;
 
         double total = pris * (1 - (rabat / 100.0));
         return total;

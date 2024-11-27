@@ -50,6 +50,7 @@
 						@if(item.ScooterLejeID != null)
 						{
 							<RenderScooterLejeOrdreLinje ordreLinje="@item" currentOrdre="@currentOrdre" />
+							ListContainsScooterLejeBool = true;
 						}
 						
 					}	
@@ -74,7 +75,10 @@ else
 {
 	<button class="btn btn-primary" @onclick="AddProduktKnap">Tilføj produkt</button>
 	<button class="btn btn-primary" @onclick="AddYdelseKnap">Tilføj ydelse</button>
-	<button class="btn btn-primary" @onclick="AddScooterLejeKnap">Tilføj scooterleje</button>
+	@if (ListContainsScooterLejeBool == false)
+	{
+		<button class="btn btn-primary" @onclick="AddScooterLejeKnap">Tilføj scooterleje</button>
+	}
 	<div></div> <br />
 	<button class="btn btn-primary" @onclick="AfslutOrdreKnap">Afslut Ordre</button>
 }
@@ -90,11 +94,13 @@ else
 	<YdelsePage ydelseTilføjet="Ydelsetilføjet" AddingOrdreBool="@YdelseKnap"Ordreid="@OrdreId" />
 }
 
-@if(ScooterLejeKnap == true)
+@if (ScooterLejeKnap == true)
 {
 	<ScooterLejePage scootertilføjet="Scootertilføjet" OrdreAddBool="@ScooterLejeKnap" Ordreid="@OrdreId" />
 
 }
+
+
 
 @if (showModal)
 {
@@ -114,13 +120,17 @@ else
 
 @code {
 	private bool Succes;
-	private OrdreLinje Item;
+	private OrdreLinje ordreLinjeModel = new OrdreLinje();
 
 	private List<OrdreLinje> ordreLinjeListe = new List<OrdreLinje>();
 
 	private Ordre currentOrdre = new Ordre();
 
 	private OrdreLinje ScooterOrdreLinje = new OrdreLinje();
+
+	private ScooterLeje scooterLeje = new ScooterLeje();
+	[Inject]
+	public IScooterLejeService scooterLejeService { get; set; }
 
 	[Inject]
 	public IOrdreLinjeService OrdreLinjeService { get; set;}
@@ -133,18 +143,24 @@ else
 
 	private int ErrorCode { get; set; }
 
-
 	private bool ProduktKnap = false;
 
 	private bool YdelseKnap = false;
 
 	private bool ScooterLejeKnap = false;
 
+	private bool ListContainsScooterLejeBool = false;
+
+	private bool selvrisikoBool { get; set; }
+
 
 	protected override async Task OnInitializedAsync()
 	{
 		ordreLinjeListe = (await OrdreLinjeService.GetAllOrdreLinjer()).Where(l => l.OrdreID == OrdreId).ToList();
 		currentOrdre = (await ordreService.GetOrdre(OrdreId));
+		scooterLeje = await scooterLejeService.GetSingle(4);
+		// ordreLinjeModel.scooterLeje = scooterLeje; // Initialize scooterLeje in ordreLinje
+
 	}
 
 	public async void Produkttilføjet()
@@ -179,6 +195,17 @@ else
 		{
 			double pris = 0;
 
+			if (linje.ScooterLejeID != null)
+			{
+				double dagsPrisXDage = scooterLeje.DagsLejePris * linje.Antal;
+				double KmPrisXAntal = scooterLeje.ForsikringPrKm  * linje.AntalEkstra ?? 0;
+				double selvrisiko = 0;
+				if(selvrisikoBool == true)
+				{
+					selvrisiko = scooterLeje.SelvRisiko;
+				}
+				pris = dagsPrisXDage + KmPrisXAntal + selvrisiko;
+			}
 
 			if (linje.ProduktID != null)
 				pris = linje.produkt.ProduktPris;
@@ -186,10 +213,21 @@ else
 				pris = linje.ydelse.Pris;
 
 
-			int antal = linje.Antal;
+
+			int antal = 0;
+			if (linje.ScooterLejeID != null)
+			{
+				antal = 1;
+			}
+			else
+			{
+				antal = linje.Antal;
+			}
 			int rabat = linje.RabatProcent ?? 0; ;
 
 			sum += pris * antal * (1 - (rabat / 100.0));
+
+			
 		}
 
 		return sum;
