@@ -4,107 +4,32 @@
 
 @page "/Produkt"
 
-<br />
-<h4>Produkter</h4>
+@if (AddingOrdreBool == false)
+{
+	<h3 class="header">Produkt Oversigt</h3>
+	<p class="description">Her kan du se en oversigt over alle produkter som er i systemet.</p>
+}
 
-<div class="table-container">
+<div class="produkt-page">
+	
+
 	<table class="table">
 		<thead>
-			<tr>
-				<th> Id</th>
-				<th> Produktnavn</th>
-				<th>Produktpris</th>
+			<tr class="Produkt-tabel-række">
+				<th @onclick="() => SortByColumn(nameof(Produkt.ProduktID))">Id</th>
+				<th @onclick="() => SortByColumn(nameof(Produkt.ProduktNavn))">Produkt</th>
+				<th @onclick="() => SortByColumn(nameof(Produkt.ProduktPris))">Pris</th>
 				<th>Action</th>
 			</tr>
 		</thead>
-
-		<thead>
-
-			@foreach (var item in produktListe)
+		<tbody>
+			@foreach(var produkt in produktListe)
 			{
-				<RenderProdukt produkt="@item" deleteProdukt="DeleteProdukt" OrdreAddBool="@AddingOrdreBool" OrdreId="@OrdreID" />
+				<RenderProdukt produkt="produkt" Produkttilføjet="Produkttilføjet" deleteProdukt="DeleteProdukt"/>
 			}
-
-		</thead>
+		</tbody>
 	</table>
-
 </div>
 
 
 
-
-@code
-{
-	private List<Produkt> produktListe = new List<Produkt>();
-
-	// Nyt item som oprettes gennem formen
-	private Produkt newProdukt = new Produkt();
-
-	private int ErrorCode { get; set; } = 0;
-
-	private EditContext EditContext;
-
-	[Inject]
-	public IProduktService Service {get; set;}
-
-	[Parameter]
-	public bool AddingOrdreBool { get; set; }
-
-	[Parameter]
-	public int OrdreID { get; set; }
-
-
-	protected override void OnInitialized()
-	{
-		EditContext = new EditContext(newProdukt);
-	}
-
-	public async void DeleteProdukt(Produkt produkt)
-	{
-		// produktListe.Remove(produkt);
-		// ErrorCode = await Service.DeleteProdukt(produkt.ProduktID);
-	}
-
-
-
-	protected override async Task OnInitializedAsync()
-	{
-		produktListe = (await Service.GetAllProdukt()).ToList();
-
-	}
-
-	private void EnsureNonNegative(ChangeEventArgs e)
-	{
-		if (double.TryParse(e.Value?.ToString(), out var value))
-		{
-			if (value < 0)
-			{
-				newProdukt.ProduktPris = 0;
-			}
-			else 
-			{
-				newProdukt.ProduktPris = value;
-			}
-		}
-	}
-
-	public async Task HandleValidSubmit()
-	{
-
-		ErrorCode = await Service.AddProdukt(newProdukt);
-		Console.WriteLine("Shopping item added: return code: " + ErrorCode);
-
-		// Ryd formen efter tilføjelse
-		newProdukt = new Produkt();
-		EditContext = new EditContext(newProdukt);
-		StateHasChanged();
-	}
-
-
-	public async Task HandleInvalidSubmit()
-	{
-		Console.WriteLine("HandleInvalidSubmit Called...");
-	}
-
-	
-}

@@ -3,48 +3,94 @@
 @using EksamensProjektScooterLandBlazor.Client.Services;
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents;
 
-<h3>Ordre</h3>
+<h3>Ordre oversigt</h3>
+<p>Her kan du finde en liste over alle ordrer og deres detaljer.</p>
 
+<!-- Ordre Table Section -->
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th @onclick="() => SortByColumn(nameof(Ordre.OrdreID))">Ordre ID @GetSortIndicator(nameof(Ordre.OrdreID))</th>
+                <th @onclick="() => SortByColumn(nameof(Ordre.SalgsDato))">Salgsdato @GetSortIndicator(nameof(Ordre.SalgsDato))</th>
+                <th @onclick="() => SortByColumn(nameof(Ordre.Afsluttet))">Status @GetSortIndicator(nameof(Ordre.Afsluttet))</th>
+                <th @onclick="() => SortByColumn(nameof(Ordre.BetalingsSum))">Total @GetSortIndicator(nameof(Ordre.BetalingsSum))</th>
+                <th @onclick="() => SortByColumn(nameof(Ordre.KundeiD))">Kunde @GetSortIndicator(nameof(Ordre.KundeiD))</th>
+                <th @onclick="() => SortByColumn(nameof(Ordre.MedarbejderCpr))">Medarbejder @GetSortIndicator(nameof(Ordre.MedarbejderCpr))</th>
+                <th>Handling</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ordreListe)
+            {
+                <RenderOrdre ordre="@item" />
+            }
+        </tbody>
+    </table>
+</div>
 
+<!-- Error Notification (for failed orders loading) -->
+@if (ErrorCode != 0)
+{
+    <div class="alert alert-danger" role="alert">
+        Der opstod en fejl under indlæsning af ordrer. Fejlkode: @ErrorCode
+    </div>
+}
 
-<table class="table">
-    <tr>
-        <th>Ordre ID</th>
-        <th>Salgsdato</th>
-        <th>Status</th>
-        <th>Total</th>
-        <th>Kunde ID</th>
-        <th>Medarbejder</th>
-        <th>Ordre info</th>
-    </tr>
-
-    @foreach (var item in ordreListe)
-    {
-        <RenderOrdre ordre="@item"/>
-    }
-
-</table>
-
-<div></div>
 <br />
 
-
-
 @code {
+    private List<Ordre> ordreListe = new List<Ordre>();
 
-	private List<Ordre> ordreListe = new List<Ordre>();
+    [Inject]
+    public IOrdreService ordreService { get; set; }
 
-	[Inject]
-	public IOrdreService ordreService { get; set; }
+    private int ErrorCode { get; set; } = 0;
 
-	private int ErrorCode { get; set; } = 0;
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Hent ordrer
+            ordreListe = (await ordreService.GetAllOrdrer()).ToList();
+        }
+        catch (Exception ex)
+        {
+            // Fejlhåndtering, hvis tjenesten ikke kan tilgås
+            ErrorCode = 500;
+            Console.WriteLine($"Fejl ved indlæsning af ordrer: {ex.Message}");
+        }
+    }
 
-	protected override async Task OnInitializedAsync()
-	{
-		ordreListe = (await ordreService.GetAllOrdrer()).ToList();
+    // Sorterings parametre
+    private string currentSortColumn;
+    private bool isAscending = true;
 
-	}
+    private void SortByColumn(string column)
+    {
+        if (currentSortColumn == column)
+        {
+            isAscending = !isAscending; // Toggle sorting direction
+        }
+        else
+        {
+            currentSortColumn = column;
+            isAscending = true; // Default to ascending for new column
+        }
 
+        // Sort the list dynamically based on the column name
+        ordreListe = isAscending
+            ? ordreListe.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
+            : ordreListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
+    }
 
-
+    // Der bruges MarkupString til at rendre HTML i Blazor kode
+    private MarkupString GetSortIndicator(string columnName)
+    {
+        if (currentSortColumn == columnName)
+        {
+            return new MarkupString(isAscending ? "<i class='bi bi-chevron-up'></i>" : "<i class='bi bi-chevron-down'></i>");
+        }
+        return new MarkupString(string.Empty);
+    }
 }

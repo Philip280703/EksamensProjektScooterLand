@@ -3,30 +3,41 @@
 @using EksamensProjektScooterLandBlazor.Client.Services;
 
 @page "/YdelsePage"
-<br />
-<div class="Tabel-Header">
-    <p class="Tabel-Header-Text">Ydelser</p>
-</div>
+@if (AddingOrdreBool == false)
+{
+    <h3>Ydelse oversigt</h3>
+    <p>Her kan du se en liste over alle ydelser vi tilbyder</p>
+}
 
 <div class="table-container">
     <table class="ydelse-table">
         <thead>
             <tr>
-                <th>Ydelse ID</th>
-                <th>Ydelsesnavn</th>
-                <th>Estimeret Tid</th>
-                <th>Pris</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseID))">ID</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseNavn))">Ydelsesnavn</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.EstimeretTid))">Estimeret Tid</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.Pris))">Pris</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var ydelse in YdelsesList)
             {
-                <RenderYdelse ydelser="ydelse" OrdreAddBool="AddingOrdreBool" Ordreid="@Ordreid"/>
+                <RenderYdelse ydelseTilføjet="ydelseTilføj" ydelser="ydelse" OrdreAddBool="AddingOrdreBool" Ordreid="@Ordreid"/>
             }
         </tbody>
     </table>
 </div>
 
-
+<br />
+@if (Ordreid == 0)
+{
+    <div class="button-container">
+        <button class="btn btn-primary" @onclick="OpenAddYdelse"> Tilføj Ydelse</button>
+        @if (AddingOrdreBool == true)
+        {
+            <AddYdelsePage AddYdelsebtn="AddingOrdreBool == true" />
+        }
+    </div>
+}
 

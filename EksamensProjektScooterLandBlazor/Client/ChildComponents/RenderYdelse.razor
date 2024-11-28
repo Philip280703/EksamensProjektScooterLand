@@ -3,8 +3,6 @@
 @inject NavigationManager NavigationManager
 @using EksamensProjektScooterLandBlazor.Client.Services;
 
-
-
 <tr class="hoverable-row">
     <td>@ydelser.YdelseID</td>
     <td>@ydelser.YdelseNavn</td>
@@ -53,10 +51,12 @@
     [Parameter]
     public bool OrdreAddBool { get; set; } = false;
 
+    [Parameter]
+    public EventCallback ydelseTilføjet { get; set; }
 
     private void DeleteYdelseHandler(int YdelseID)
     {
-        
+
     }
     private OrdreLinje ordreLinje = new OrdreLinje();
 
@@ -66,7 +66,7 @@
     private void UpdateYdelseHandler(Ydelse ydelse)
     {
         // Logic to delete the ydelse with ydelseId
-        Console.WriteLine($"Deleting YdelseID: {ydelse.YdelseID}");
+        /* onsole.WriteLine($"Deleting YdelseID: {YdelseID}"); */
     }
 
     private void NavigateToEditYdelseComponent(int YdelseID)
@@ -82,7 +82,8 @@
         ordreLinje.RabatProcent = 0;
         ordreLinje.OrdreID = Ordreid;
         Errorcode = await ordreLinjeService.AddOrdreLinje(ordreLinje);
-        StateHasChanged();
+
+        await ydelseTilføjet.InvokeAsync();
     }
 }
 

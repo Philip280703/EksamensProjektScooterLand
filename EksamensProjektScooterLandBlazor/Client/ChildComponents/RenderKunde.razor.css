@@ -1,33 +1,80 @@
-﻿.hoverable-row:hover {
-    background-color: #f0f0f0;
+﻿/* Grundlæggende styling for tr */
+tr {
+    background-color: white;
+}
+
+    /* Hover-effekt for tr */
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+/* Justering af celler - gør cellerne fleksible med vertikal centreringsregel */
+td {
+    padding: 12px; /* Juster padding for at give cellerne lidt luft */
+    vertical-align: middle; /* Centrerer indholdet vertikalt i cellerne */
+}
+
+/* Grundlæggende styling for knapperne */
+button {
+    background: none;
+    border: none;
     cursor: pointer;
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 4px;
+    transition: transform 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease;
 }
 
-tr{
-    height: 50px;
+/* Knapperne har samme farve som table row */
+.Rediger-knap, .Slet-knap {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.5s ease, transform 0.3s ease;
 }
 
-.table thead th {
-    position: sticky;
-    top: 0;
-    background-color: lightgray;
-    color: black;
-    z-index: 1;
-    padding 8px;
-    border-bottom: 1px solid #ddd;
+    /* Hover-effekt: Baggrund ændres ved hover */
+    .Rediger-knap:hover, .Slet-knap:hover {
+        background-color: #ddd;
+        transform: scale(1.1);
+    }
+
+/* Ikon farver */
+button svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.5s ease, fill 0.5s ease;
 }
 
-button{
-    border-radius: 10px;
-    transition: background-color 0.5s ease;
+/* Hover-effekt på ikoner: Gør dem større og ændrer farve */
+.Rediger-knap:hover svg {
+    transform: scale(1.1); /* Gør ikonet større */
 }
 
-/* Hover-effekt for knapper */
-.Rediger-knap:hover {
-    background-color: #8ab6ff; /* Lys blå nuance */
+.Slet-knap:hover svg {
+    transform: scale(1.1); /* Gør ikonet større */
 }
 
-.Slet-knap:hover {
-    background-color: #ffb3b3; /* Blid lys rød farve */
+/* Tilføj skyggeeffekt til knapperne ved hover */
+.Rediger-knap:hover, .Slet-knap:hover {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* Ikonfarver for rediger og slet */
+.feather.feather-edit {
+    stroke: #0288d1;
+}
+
+.feather.feather-trash {
+    stroke: #f44336;
+}
+
+.feather.feather-edit:hover {
+    stroke: #0277bd;
+}
+
+.feather.feather-trash:hover {
+    stroke: #d32f2f;
+}

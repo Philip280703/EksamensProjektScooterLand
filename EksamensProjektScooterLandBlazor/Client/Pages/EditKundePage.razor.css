@@ -1,183 +1,165 @@
-﻿/* Wrapper styling */
-.Enkelt-kunde {
-    margin: 20px auto;
-    padding: 10px;
-    max-width: 80%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    border-radius: 8px;
+﻿/* Message Box Styles */
+.message-box {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
 }
 
-/* Table styling */
-.styled-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    color: #333;
-    text-align: left;
-}
-
-    .styled-table thead tr {
-        background-color: #4CAF50;
-        color: #ffffff;
-        text-align: left;
-    }
-
-    .styled-table th,
-    .styled-table td {
-        padding: 12px 15px;
-        border: 1px solid #ddd;
-    }
-
-    .styled-table tbody tr {
-        border-bottom: 1px solid #ddd;
-    }
-
-        /* Row hover effect */
-        .styled-table tbody tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        /* Alternate row colors */
-        .styled-table tbody tr:nth-of-type(even) {
-            background-color: #f3f3f3;
-        }
-
-    /* Action button styling */
-    .styled-table td:last-child {
-        text-align: center;
-    }
-
-    .styled-table button {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        padding: 6px 12px;
-        cursor: pointer;
-    }
-
-        .styled-table button:hover {
-            background-color: #45a049;
-        }
-
-/* Responsive table */
-@media (max-width: 768px) {
-    .styled-table {
-        font-size: 14px;
-    }
-
-        .styled-table th,
-        .styled-table td {
-            padding: 8px 10px;
-        }
-}
-
-/* Container styling */
-.Rediger-kunde {
-    max-width: 80%; /* Matches table width */
-    margin: 20px auto;
+.message-content {
     padding: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
 }
 
-/* Row styling */
+    .message-content h4 {
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        color: #343a40;
+    }
+
+    .message-content p {
+        margin-bottom: 20px;
+        color: #495057;
+    }
+
+.message-actions button {
+    margin: 5px;
+}
+
+
+
+
+
+
+
+
+
+/* Generelt layout for siden */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for hele indholdet */
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Header sektion */
+.header {
+    background-color: #0288d1;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+/* Rediger-kunde boks */
+.Rediger-kunde {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Gør boksen så bred som containeren */
+    margin: 0 auto;
+}
+
+/* Forbedret form-row for pæn opstilling */
 .form-row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     gap: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
-/* Group styling */
+/* Styling for form-group */
 .form-group {
-    flex: 1; /* Allow fields to scale evenly */
-    min-width: 200px; /* Prevent fields from shrinking too small */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    margin-top: auto;
+    flex: 1 1 48%; /* Inputfelter ved siden af hinanden */
+    min-width: 250px;
 }
 
-/* Label styling */
+/* Styling for labels */
 .form-label {
-    font-size: 16px;
-    font-weight: 600;
+    display: block;
+    font-weight: bold;
     color: #333;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
 }
 
-/* Input styling */
+/* Styling for inputfelter */
 .form-input {
-    border-radius: 10px;
-    padding: 10px 12px;
-    font-size: 16px;
+    width: 100%;
+    padding: 15px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 10px; /* Rundere kanter */
+    font-size: 1rem;
+    background-color: #fafafa;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+    /* Fokus-effekt på inputfelterne */
     .form-input:focus {
-        border-color: #4CAF50;
-        box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+        border-color: #0288d1;
+        box-shadow: 0 0 8px rgba(2, 136, 209, 0.5);
     }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .form-row {
-        flex-direction: column; /* Stack inputs vertically on smaller screens */
-    }
-
-    .form-group {
-        min-width: 100%;
-    }
-
-    .form-label {
-        font-size: 14px;
-    }
-
-    .form-input {
-        font-size: 14px;
-        padding: 8px 10px;
-    }
-}
-
-/* Button styling */
+/* Styling for knappen */
 .button-save {
-    padding: 12px 20px; /* Polstring for knappen */
-    font-size: 16px; /* Størrelse af teksten */
-    background-color: #4CAF50; /* Grøn baggrund */
-    color: white; /* Hvid tekst */
-    border: none; /* Fjern kantlinje */
-    border-radius: 4px; /* Rundede hjørner */
-    cursor: pointer; /* Skift musemarkør */
-    transition: background-color 0.3s ease; /* Smidig overgang ved hover */
-    width: 100%; /* Sørg for at knappen fylder hele bredden af form-group */
-    margin-top: auto;
+    background-color: #0288d1;
+    color: white;
+    padding: 18px 28px;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
 }
 
-    /* Hover effekt på knappen */
+    /* Hover-effekt for knappen */
     .button-save:hover {
-        background-color: #45a049; /* Mørkere grøn ved hover */
+        background-color: #0277bd;
+        transform: scale(1.05);
     }
 
-    /* Fokus effekt på knappen */
-    .button-save:focus {
-        outline: none; /* Fjern standard kant ved fokus */
-        box-shadow: 0 0 5px rgba(76, 175, 80, 0.6); /* Grøn skygge ved fokus */
+/* Styling for bordene med kundedetaljer */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+    .styled-table th, .styled-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
     }
 
-    .button-save:hover {
-        background-color: #0056b3; /* Ændrer baggrundsfarven når man hover */
+    .styled-table th {
+        background-color: #0288d1;
+        color: white;
     }
 
-
-
-
-
+    .styled-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }

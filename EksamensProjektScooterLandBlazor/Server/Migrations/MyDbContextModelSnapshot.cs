@@ -164,6 +164,9 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                     b.Property<int>("Antal")
                         .HasColumnType("int");
 
+                    b.Property<int?>("AntalEkstra")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrdreID")
                         .HasColumnType("int");
 
@@ -178,6 +181,9 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.Property<int?>("ScooterLejeID")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("SelvrisikoBool")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("YdelseID")
                         .HasColumnType("int");

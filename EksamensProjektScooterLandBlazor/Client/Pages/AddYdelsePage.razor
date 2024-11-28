@@ -4,7 +4,6 @@
 
 @page "/AddYdelsePage"
 
-<h2>Tilføj Ydelse</h2>
 
 <br />
 
@@ -52,6 +51,9 @@
 }
 
 @code{
+    [Parameter]
+    public bool AddYdelsebtn { get; set; }
+
 
         [Inject]
         public IYdelseService Service { get; set; }

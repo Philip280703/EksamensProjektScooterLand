@@ -3,9 +3,71 @@
 @inject NavigationManager NavigationManager
 @page "/EditYdelsePage/{ydelseID:int}"
 
+@if(ydelse == null)
+{
+    <p>Indlæser ydelse</p>
+}
+else
+{
+    <div class="Enkelt-Ydelse">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ydelse</th>
+                    <th>Estimeret tid</th>
+                    <th>Pris</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@ydelse.YdelseID</td>
+                    <td>@ydelse.YdelseNavn</td>
+                    <td>@ydelse.EstimeretTid</td>
+                    <td>@ydelse.Pris</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-<h4>Opdater ydelse: <u>@ydelse?.YdelseNavn</u></h4>
+    <EditForm EditContext="editContext" class="row p-3"
+    OnValidSubmit="@HandleValidSubmit"
+    OnInvalidSubmit="@HandleInvalidSubmit">
+        <DataAnnotationsValidator/>
 
+        <div class="Rediger-ydelse">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="ydelsenavn" class="form-label">ydelse</label>
+                    <InputText  id="ydelsenavn" @bind-Value="ydelse.YdelseNavn" placeholder="@ydelse.YdelseNavn" class="form-control" readonly />
+                    <ValidationMessage For="@(() => ydelse.YdelseNavn)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Tid" class="form-label">Estimeret Tid</label>
+                    <InputNumber  id="Tid" @bind-Value="ydelse.EstimeretTid" placeholder="@ydelse.EstimeretTid" class="form-input" />
+                    <ValidationMessage For="@(() => ydelse.EstimeretTid)" />
+                </div>
+            </div>
+            <div class="pris-column">
+                <label for="pris" class="form-label">Pris</label>
+                <InputNumber  id="pris" @bind-Value="ydelse.Pris" placeholder="@ydelse.Pris" class="form-input"/>
+                <ValidationMessage For="@(() => ydelse.Pris)" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="button-save">Gem</button>
+            </div>
+        </div>
+    </EditForm>
+}
+
+<h3>EditYdelsePage</h3>
+
+
+
+
+@* <h3>EditYdelsePage</h3>
 
 @if (ydelse == null)
 {
@@ -58,49 +120,6 @@ else
         </div>
     </EditForm>
     
-}
+} *@
 
-@code {
 
-    [Inject]
-    public IYdelseService YdelseService { get; set; }
-
-    [Parameter]
-    public int YdelseID { get; set; }
-
-    private Ydelse? ydelse;
-
-    private EditContext EditContext;
-    public int ErrorCode { get; set; }
-    private string ErrorMessage;
-
-    protected override async Task OnInitializedAsync()
-    {
-        ydelse = await YdelseService.GetYdelse(YdelseID);
-        if (ydelse != null)
-        {
-            EditContext = new EditContext(ydelse);
-        }
-    }
-
-    private async Task HandleValidSubmit()
-    {
-        Console.WriteLine("HandleValidSubmit called...");
-        ErrorCode = await YdelseService.UpdateYdelse(ydelse);
-
-        if (ErrorCode == 200)
-        {
-            NavigationManager.NavigateTo("/YdelsePage");
-        }
-        else
-        {
-            ErrorMessage = "Der opstod en fejl under opdatering af ydelse. Prøv igen.";
-        }
-    }
-
-    private void HandleInvalidSubmit()
-    {
-        Console.WriteLine("HandleInvalidSubmit called...");
-        ErrorMessage = "Formularen indeholder ugyldige data. Ret fejlene og prøv igen.";
-    }
-}

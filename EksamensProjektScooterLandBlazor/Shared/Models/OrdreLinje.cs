@@ -19,8 +19,15 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
 
         [Required(ErrorMessage ="Antal er påkrævet.")]
-        [Range(1,1000, ErrorMessage = "Antal skal være mellem 1 og 1000")]
+        [Range(1,100, ErrorMessage = "Antal skal være mellem 1 og 100")]
         public int Antal {  get; set; }
+
+        // bruges til dagsleje på scooterleje ordrelinje.
+        [Range(1, 5000, ErrorMessage = "Antal skal være mellem 1 og 5000")]
+        public int ?AntalEkstra { get; set; }
+
+        // bruges til scooterleje selvrisiko
+        public bool ?SelvrisikoBool { get; set; }
 
 
         [Range(0, 99, ErrorMessage ="Rabat skal være mellem 0 og 99 procent, skrives i hele tal")]

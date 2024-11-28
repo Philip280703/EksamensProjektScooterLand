@@ -48,9 +48,10 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
 			{
 				return false;
 			}
-
+			currentOrdreLinje.AntalEkstra = ordreLinje.AntalEkstra;
 			currentOrdreLinje.Antal = ordreLinje.Antal;
 			currentOrdreLinje.RabatProcent = ordreLinje.RabatProcent;
+			currentOrdreLinje.SelvrisikoBool = ordreLinje.SelvrisikoBool;
 			db.SaveChanges();
 			return true;
 		}

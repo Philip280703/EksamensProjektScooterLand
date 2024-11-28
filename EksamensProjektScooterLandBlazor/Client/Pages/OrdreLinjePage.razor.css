@@ -1,0 +1,33 @@
+﻿/* Message Box Styles */
+.message-box {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+}
+
+.message-content {
+    padding: 20px;
+}
+
+    .message-content h4 {
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        color: #343a40;
+    }
+
+    .message-content p {
+        margin-bottom: 20px;
+        color: #495057;
+    }
+
+.message-actions button {
+    margin: 5px;
+}

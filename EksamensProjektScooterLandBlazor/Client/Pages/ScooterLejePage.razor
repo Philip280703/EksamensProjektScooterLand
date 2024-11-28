@@ -1,0 +1,98 @@
+﻿@using EksamensProjektScooterLandBlazor.Client.Services;
+@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using Microsoft.AspNetCore.Components;
+@inject NavigationManager NavigationsManager;
+
+
+@page "/ScooterLejePage"
+
+<div class="Tabel-Header h4">
+    <p class="Tabel-Header-Text">Scooter Leje</p>
+</div>
+
+<div class="table-container">
+    <table class="ScooterLeje-table">
+        <thead>
+            <tr>
+                <th>ScooterID</th>
+                <th>SelvRisiko</th>
+                <th>ForsikringPrKm</th>
+                <th>DagsLejePris</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+                @foreach (var Leje in scooterLejeList)
+                {
+                    <tr>
+                        <td>@Leje.ScooterID</td>
+                        <td>@Leje.SelvRisiko kr.</td>
+                        <td>@Leje.ForsikringPrKm kr/km.</td>
+                        <td>@Leje.DagsLejePris kr.</td>
+                        <td>
+                        @if (OrdreAddBool == false)
+                        {
+
+                        }
+                        else if (OrdreAddBool == true)
+                        {
+                            <button class="btn btn-primary" @onclick="() => AddScooterLejeToOrdre(Leje.ScooterID)">Tilføj til ordrelinje</button>
+                        }
+                        </td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+</div>
+
+@code {
+
+    private List<ScooterLeje> scooterLejeList = new List<ScooterLeje>();
+    private ScooterLeje scooterLejeModel = new ScooterLeje();
+    private OrdreLinje ordreLinje = new OrdreLinje();
+
+    [Parameter]
+    public bool OrdreAddBool { get; set; } = false;
+
+    [Parameter]
+    public int ScooterID { get; set; }
+
+    [Parameter]
+    public int Ordreid { get; set; }
+
+    [Parameter]
+    public ScooterLeje scooterLeje { get; set; }
+
+    [Parameter]
+    public EventCallback scootertilføjet { get; set; }
+
+
+    [Inject]
+    public IScooterLejeService Service { get; set; }
+
+    [Inject]
+    public IOrdreLinjeService OrdreLinjeService { get; set; }
+
+    private int ErrorCode { get; set; } = 0;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        scooterLejeList = (await Service.GetAll()).ToList();
+    }
+
+
+    private async Task AddScooterLejeToOrdre(int scooterId)
+    {
+        ordreLinje.ScooterLejeID = scooterId;
+        ordreLinje.Antal = 1;
+        ordreLinje.AntalEkstra = 1;
+        ordreLinje.OrdreLinjeDato = DateTime.Now;
+        ordreLinje.RabatProcent = 0;
+        ordreLinje.OrdreID = Ordreid;
+        ErrorCode = await OrdreLinjeService.AddOrdreLinje(ordreLinje);
+
+        await scootertilføjet.InvokeAsync();
+    }
+}

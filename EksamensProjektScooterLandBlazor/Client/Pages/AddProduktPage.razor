@@ -38,39 +38,3 @@ OnInvalidSubmit="@HandleInvalidSubmit">
 }
 
 
-
-
-@code {
-
-	private Produkt ProduktModel = new Produkt();
-	private EditContext editContext;
-
-	[Inject]
-	public IProduktService produktService { get; set; }
-
-	public int ErrorCode { get; set; }
-
-	protected override async Task OnInitializedAsync(){
-		editContext = new EditContext(ProduktModel);
-
-	}
-
-	private async void HandleValidSubmit()
-	{
-		Console.WriteLine("HandleValidSubmit called...");
-		ErrorCode = await produktService.AddProdukt(ProduktModel);
-
-		if (ErrorCode == 200)
-		{
-			ProduktModel = new Produkt();
-			editContext = new EditContext(ProduktModel);
-		}
-		
-	}
-
-	private void HandleInvalidSubmit()
-	{
-		Console.WriteLine("HandleInvalidSubmit called..");
-	}
-
-}

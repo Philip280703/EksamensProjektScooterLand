@@ -19,7 +19,7 @@
 }
 
     .styled-table thead tr {
-        background-color: #4CAF50;
+        background-color: #0056b3;
         color: #ffffff;
         text-align: left;
     }
@@ -50,8 +50,8 @@
     }
 
     .styled-table button {
-        background-color: #4CAF50;
-        color: white;
+        background-color: #0056b3;
+        color: #0056b3;
         border: none;
         border-radius: 4px;
         padding: 6px 12px;
@@ -152,7 +152,7 @@
 .button-save {
     padding: 12px 20px; /* Polstring for knappen */
     font-size: 16px; /* Størrelse af teksten */
-    background-color: #4CAF50; /* Grøn baggrund */
+    background-color: #0056b3; /* blå baggrund */
     color: white; /* Hvid tekst */
     border: none; /* Fjern kantlinje */
     border-radius: 4px; /* Rundede hjørner */
@@ -164,7 +164,7 @@
 
     /* Hover effekt på knappen */
     .button-save:hover {
-        background-color: #45a049; /* Mørkere grøn ved hover */
+        background-color: #0056b3; /* Mørkere blå ved hover */
     }
 
     /* Fokus effekt på knappen */
