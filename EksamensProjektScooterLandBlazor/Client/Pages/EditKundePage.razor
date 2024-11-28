@@ -93,6 +93,7 @@ else
     </EditForm>
 
 
+}
 @if (ShowError)
 {
     <div class="message-box">
@@ -144,7 +145,6 @@ else
 
     private List<Ordre> ordreListe = new List<Ordre>();
 
-    private List<Kunde> kundeliste = new List<Kunde>();
 
  
     private EditContext editContext;
@@ -156,7 +156,6 @@ else
     {
         kunde = await KundeService.GetKunde(KundeId);
         postNummerOgByListe = (await postnummerOgByService.GetAllPostnummerOgByer()).ToList();
-
         editContext = new EditContext(kunde);
         if (kunde?.PostNummer != null)
         {

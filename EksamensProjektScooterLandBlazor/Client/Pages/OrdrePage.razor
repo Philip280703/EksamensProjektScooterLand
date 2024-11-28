@@ -40,6 +40,7 @@
 <br />
 
 @code {
+
     private List<Ordre> ordreListe = new List<Ordre>();
 
     [Inject]
@@ -47,12 +48,22 @@
 
     private int ErrorCode { get; set; } = 0;
 
+    [Parameter]
+    public int kundeId { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         try
         {
             // Hent ordrer
-            ordreListe = (await ordreService.GetAllOrdrer()).ToList();
+            if (kundeId == 0)
+            { ordreListe = (await ordreService.GetAllOrdrer()).ToList(); }
+
+            else if (kundeId > 0)
+            {
+                ordreListe = (await ordreService.GetAllOrdrer()).Where (kID => kID.KundeiD == kundeId).ToList();
+       
+            }
         }
         catch (Exception ex)
         {

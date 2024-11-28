@@ -4,37 +4,14 @@
 
 <h3>KundeOrdreOversigtPage</h3>
 
-@page "/KundeOrdreOversigtPage"
+@page "/KundeOrdreOversigtPage/{kundeID:int}"
 
 
-<div class="table-container">
-        @if (ordreList == null || !ordreList.Any())
-        {
-            <p>No orders found.</p>
-        }
-        else
-        {
-            <div class="table-container">
-                <table class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Ordre ID</th>
-                            <th>Salgsdato</th>
-                            <th>Status</th>
-                            <th>Total</th>
-                            <th>Kunde</th>
-                            <th>Medarbejder</th>
-                            <th>Handling</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in ordreList)
-                        {
-                            <RenderOrdre ordre="@item" />
-                        }
-                    </tbody>
-                </table>
-            </div>
-        }
-    </div>
+<OrdrePage kundeId = "@KundeId" />
+
+@code {
+
+	[Parameter]
+	public int KundeId { get; set; }
+
 }
