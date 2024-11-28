@@ -9,7 +9,8 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		[Inject]
 		public IKundeService KundeService { get; set; }
 
-		private List<Kunde> kundeListe = new List<Kunde>();
+        
+        private List<Kunde> kundeListe = new List<Kunde>();
 		public int ErrorCode { get; set; }
 
 		protected override async Task OnInitializedAsync()
@@ -28,5 +29,27 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
 		}
 
-	}
+        // sortings parametre
+        private string currentSortColumn;
+        private bool isAscending = true;
+
+        private void SortByColumn(string column)
+        {
+            if (currentSortColumn == column)
+            {
+                isAscending = !isAscending; // Toggle sorting direction
+            }
+            else
+            {
+                currentSortColumn = column;
+                isAscending = true; // Default to ascending for new column
+            }
+
+            // Sort the list dynamically based on the column name
+            kundeListe = isAscending
+                ? kundeListe.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
+                : kundeListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
+        }
+
+    }
 }
