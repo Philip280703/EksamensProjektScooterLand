@@ -14,17 +14,23 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrdreLinjeID { get; set; }
 
+        [Required]
+        public DateTime OrdreLinjeDato { get; set; }
+
 
         [Required(ErrorMessage ="Antal er påkrævet.")]
-        [Range(1,1000, ErrorMessage = "Antal skal være mellem 1 og 1000")]
+        [Range(1,100, ErrorMessage = "Antal skal være mellem 1 og 100")]
         public int Antal {  get; set; }
 
+        // bruges til dagsleje på scooterleje ordrelinje.
+        [Range(1, 5000, ErrorMessage = "Antal skal være mellem 1 og 5000")]
+        public int ?AntalEkstra { get; set; }
 
-        [Range(1, int.MaxValue, ErrorMessage ="Total skal være postivt.")]
-        public double Total { get; set; }
+        // bruges til scooterleje selvrisiko
+        public bool ?SelvrisikoBool { get; set; }
 
 
-        [Range(1, 99, ErrorMessage ="Rabat skal være mellem 1 og 99 procent, skrives i hele tal")]
+        [Range(0, 99, ErrorMessage ="Rabat skal være mellem 0 og 99 procent, skrives i hele tal")]
         public int ?RabatProcent { get; set; }
 
 
@@ -50,7 +56,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public int OrdreID { get; set; }
 
         // objekt relation til EF
-        public Ordre ordre { get; set; }
+        public Ordre ?ordre { get; set; }
 
 
     }

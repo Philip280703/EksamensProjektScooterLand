@@ -1,0 +1,63 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+@page "/Editproduktpage/{produktId:int}"
+
+
+@if(produkt == null)
+{
+    <p>Indlæser Produkt...</p>
+}
+else 
+{
+    <div class="Enkelt-Produkt">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Produkt</th>
+                    <th>pris</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@produkt.ProduktID</td>
+                    <td>@produkt.ProduktNavn</td>
+                    <td>@produkt.ProduktPris</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <EditForm EditContext="editContext" class="row p-3"
+    OnValidSubmit="@HandleValidSubmit"
+    OnInvalidSubmit="@HandleInvalidSubmit">
+        <DataAnnotationsValidator />
+        <div class="Rediger-kunde">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="produktnavn" class="form-label">Produkt</label>
+                    <InputText style="border-radius: 10px" id="produktnavn" @bind-Value="produkt.ProduktNavn" placeholder="@produkt.ProduktNavn" class="form-input" />
+                    <ValidationMessage For="@(() => produkt.ProduktNavn)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Pris" class="form-label">Pris</label>
+                    <InputNumber style="border-radius: 10px" id="Pris" @bind-Value="produkt.ProduktPris" placeholder="@produkt.ProduktPris" class="form-input"/>
+                    <ValidationMessage For="@(() => produkt.ProduktPris)" />
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="button-save">Gem</button>
+            </div>
+        </div>
+    </EditForm>
+}
+
+
+
+
+
+
+
+

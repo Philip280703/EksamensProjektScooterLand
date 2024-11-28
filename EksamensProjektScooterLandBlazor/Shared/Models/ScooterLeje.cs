@@ -12,16 +12,6 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Key]
         public int ScooterID { get; set; }
 
-
-        [Required(ErrorMessage = "Scooterens kilometertal er påkrævet.")]
-        [Range(1, int.MaxValue, ErrorMessage = "Kilometer tal skal være postivt.")]
-        public int KmTalDifference {  get; set; }
-
-
-        [Range(0, 1, ErrorMessage ="Ledigheden skal enten være 0 for optaget eller 1 for ledig")]
-        public bool Ledig {  get; set; }
-
-
         [Range(0, 20000, ErrorMessage ="Selvrisiko skal være mellem 0 og 20.000")]
         public double SelvRisiko { get; set; }
 
@@ -30,17 +20,8 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public double ForsikringPrKm { get; set; }
 
 
-        [Range(1, 100, ErrorMessage ="Antal dage scooteren er lejet skal være mellem 1 og 100")]
-        public int ?AntalDage { get; set; }
-
-
         [Range(0.1, 1000, ErrorMessage ="DagsLejePrisen skal være mellem 0.1 og 1000 kr. pr. dag.")]
         public double DagsLejePris { get; set; }
-
-
-        [Range(1, 10000, ErrorMessage ="Prisen for scooterLeje skal være mellem 1 og 10000 kr.")]
-        public double ?Pris { get; set; }
-
 
     }
 }

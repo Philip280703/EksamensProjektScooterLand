@@ -3,90 +3,52 @@
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents;
 @using EksamensProjektScooterLandBlazor.Client.Services;
 
-<h3>Mekaniker</h3>
-<br />
+<div class="mekaniker-page">
+    <h3 class="page-title">Mekaniker oversigt</h3>
+    <p class="page-description">Her kan du se en liste over mekanikere og deres ekspertiser.</p>
 
-<table class="table">
-    <tr>
-        <th>CPR-nummer</th>
-        <th>Fornavn</th>
-        <th>Efternavn</th>
-        <th>Rolle</th>
-        <th>Scooter brand ekspertise</th>
-    </tr>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>CPR-nummer</th>
+                <th>Fornavn</th>
+                <th>Efternavn</th>
+                <th>Rolle</th>
+                <th>Scooter brand ekspertise</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (MekanikerList.Any())
+            {
+                @foreach (var item in MekanikerList)
+                {
+                    <RenderMekaniker mekaniker="@item" />
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="empty-message">Ingen mekanikere fundet.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-    @foreach (var item in MekanikerList)
-    {
-        <RenderMekaniker mekaniker="@item"/>
-    }
-
-    @* @foreach(var item in mekanikerWithBrands)
-    {
-        <RenderMekaniker mekaniker ="@item.mekaniker" scooterBrandNavn="@item.scooterBrandNavnet"/>
-        
-    } *@
-
-</table>
-
-<div></div>
-<br />
-
-<!-- scooterbrandPage renderes i dette blazor component -->
-<ScooterBrandPagecomponent/>
-
-
-
-@* <table class="table">
-    <tr>
-        <th>Scooter brand ID</th>
-        <th>Scooter mærke</th>
-    </tr>
-
-    @foreach(var item in ScooterBrandList)
-    {
-        <RenderScooterbrand scooterBrand ="@item"/>
-    }
-</table>
- *@
-<!-- display errorcode-->
-<label>return code: @ErrorCode</label>
+    <div class="error-container">
+        <label>Return Code: <span>@ErrorCode</span></label>
+    </div>
+</div>
 
 @code {
-
-    private List<Mekaniker> MekanikerList = new List<Mekaniker> ();
-
-    private List<ScooterBrand> ScooterBrandList = new List<ScooterBrand>();
-
-    // private List<MekanikerWithBrand> mekanikerWithBrands = new List<MekanikerWithBrand>();
+    private List<Mekaniker> MekanikerList = new List<Mekaniker>();
 
     [Inject]
     public IMekanikerService service { get; set; }
-
-    [Inject]
-    public IScooterBrandService brandService { get; set; }
 
     private int ErrorCode { get; set; } = 0;
 
     protected override async Task OnInitializedAsync()
     {
         MekanikerList = (await service.GetAllMekaniker()).ToList();
-        // ScooterBrandList = (await brandService.GetAll()).ToList();
-
-    //     mekanikerWithBrands =
-    //     (from Mekaniker in MekanikerList
-    //      join ScooterBrand in ScooterBrandList
-    //  on Mekaniker.ScooterBrandId equals ScooterBrand.ScooterBrandID
-    //      select new MekanikerWithBrand { mekaniker = Mekaniker, scooterBrandNavnet = ScooterBrand.ScooterBrandNavn }
-    // ).ToList();
     }
-
-
-
-
-    // public class MekanikerWithBrand
-    // {
-    //     public Mekaniker mekaniker { get; set; }
-    //     public string scooterBrandNavnet { get; set; }
-    // }
-
 }

@@ -16,6 +16,12 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public string ByNavn { get; set; }
 
 
+        public PostNummerOgBy()
+        {
+
+        }
+
+
         public override string ToString()
         {
             return $"postnummer = {Postnummer}, by = {ByNavn}";

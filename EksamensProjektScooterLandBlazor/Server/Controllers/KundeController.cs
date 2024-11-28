@@ -23,6 +23,8 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
 		[HttpGet]
 		public IEnumerable<Kunde> GetAllKunder()
 		{
+			Console.WriteLine("Get all kunder kaldet");
+			
 			return Repository.GetAllKunder();
 		}
 
@@ -56,6 +58,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
 		[HttpGet("{id:int}")]
 		public Kunde FindKunde(int id)
 		{
+            Console.WriteLine("Find kunde kaldet");
 			var kunde = Repository.FindKunde(id);
 			return kunde;
 		}
@@ -63,6 +66,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
 		[HttpPut]
 		public void UpdateKunde(Kunde kunde)
 		{
+            Console.WriteLine("Update kunde kaldet");
 			Repository.UpdateKunde(kunde);
 		}
 	}

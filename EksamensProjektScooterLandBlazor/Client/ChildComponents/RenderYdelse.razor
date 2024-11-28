@@ -1,0 +1,90 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client;
+@inject NavigationManager NavigationManager
+@using EksamensProjektScooterLandBlazor.Client.Services;
+
+<tr class="hoverable-row">
+    <td>@ydelser.YdelseID</td>
+    <td>@ydelser.YdelseNavn</td>
+    <td>@ydelser.EstimeretTid</td>
+    <td>@ydelser.Pris kr.</td>
+    <td>
+        @if(OrdreAddBool == false)
+        {
+            <!-- Edit knap -->
+            <button class="Rediger-knap" style="border: none;" @onclick="() => NavigateToEditYdelseComponent(ydelser.YdelseID)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+            </button>
+
+            <!-- Delete knap -->
+            <button class="Slet-knap" @onclick="() => DeleteYdelseHandler(ydelser.YdelseID)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6L19 19a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L5 6"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                </svg>
+            </button>
+        }
+        else if(OrdreAddBool == true)
+        {
+            <button class="btn btn-primary" @onclick="AddYdelseToOrdrelinje">Tilføj til ordrelinje</button>
+        }
+
+    </td>
+</tr>
+
+
+@code {
+
+    [Parameter]
+    public Ydelse ydelser { get; set; }
+
+    [Parameter]
+    public int Ordreid { get; set; }
+
+    private int Errorcode { get; set; }
+
+    [Parameter]
+    public bool OrdreAddBool { get; set; } = false;
+
+    [Parameter]
+    public EventCallback ydelseTilføjet { get; set; }
+
+    private void DeleteYdelseHandler(int YdelseID)
+    {
+
+    }
+    private OrdreLinje ordreLinje = new OrdreLinje();
+
+    [Inject]
+    public IOrdreLinjeService ordreLinjeService { get; set; }
+
+    private void UpdateYdelseHandler(Ydelse ydelse)
+    {
+        // Logic to delete the ydelse with ydelseId
+        /* onsole.WriteLine($"Deleting YdelseID: {YdelseID}"); */
+    }
+
+    private void NavigateToEditYdelseComponent(int YdelseID)
+    {
+        NavigationManager.NavigateTo($"/EditYdelsePage/{YdelseID}");
+    }
+
+    private async void AddYdelseToOrdrelinje()
+    {
+        ordreLinje.YdelseID = ydelser.YdelseID;
+        ordreLinje.Antal = 1;
+        ordreLinje.OrdreLinjeDato = DateTime.Now;
+        ordreLinje.RabatProcent = 0;
+        ordreLinje.OrdreID = Ordreid;
+        Errorcode = await ordreLinjeService.AddOrdreLinje(ordreLinje);
+
+        await ydelseTilføjet.InvokeAsync();
+    }
+}
+
+

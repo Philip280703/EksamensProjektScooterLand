@@ -44,7 +44,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
 
 
 		[HttpDelete("{id:int}")]
-		public StatusCodeResult DeleteProdukt(int id)
+		public StatusCodeResult Deleteprodukt(int id)
 		{
 			Console.WriteLine("Server: Slet produkt kaldet: id = " + id);
 

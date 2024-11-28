@@ -28,6 +28,5 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Range(1, int.MaxValue, ErrorMessage ="Prisen skal være positiv")]
         public double Pris {  get; set; }
 
-        
     }
 }

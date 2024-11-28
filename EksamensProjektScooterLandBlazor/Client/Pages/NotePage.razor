@@ -1,0 +1,50 @@
+﻿@inject HttpClient httpClient
+@using Blazored.LocalStorage;
+@inject Blazored.LocalStorage.ILocalStorageService localStorage;
+
+<h3>Noter</h3>
+<p class="description">Her kan du skrive dine personlige noter, til erstatning af post-it notes</p>
+
+<textarea class="note-textarea" @bind="noteIndhold"></textarea>
+<br />
+
+<div class="button-group">
+	<!-- Slet-knap med SVG -->
+	<button class="btn-icon btn-delete" style="border: none;" @onclick="ClearLocalStorage" title="Slet note">
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<path d="M3 6h18M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6m7 4v6m-4-6v6m8-6v6" />
+		</svg>
+	</button>
+
+	<!-- Gem-knap med SVG -->
+	<button class="btn-icon btn-save" style="border: none;" @onclick="UpdateLocalStorage" title="Gem note">
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+			<polyline points="17 21 17 13 7 13 7 21" />
+			<polyline points="7 3 7 8 15 8" />
+		</svg>
+	</button>
+</div>
+
+
+@code {
+	const string NoteKey = "note";
+	private string noteIndhold;
+
+	private async void UpdateLocalStorage()
+	{
+		await localStorage.SetItemAsync(NoteKey, noteIndhold);
+	}
+
+	private async void ClearLocalStorage()
+	{
+		noteIndhold = "";
+		await localStorage.ClearAsync();
+	}
+
+	protected override async Task OnInitializedAsync()
+	{
+		noteIndhold = await localStorage.GetItemAsync<string>(NoteKey);
+	}
+
+}

@@ -1,0 +1,164 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+@using EksamensProjektScooterLandBlazor.Client.Pages;
+
+<tr>
+    <td>
+        @ordreLinje?.OrdreLinjeID
+    </td>
+    <td>
+        @if (ordreLinje?.YdelseID != null)
+        {
+            <h7>Ydelse</h7>
+        }
+        else if (ordreLinje?.ProduktID != null)
+        {
+            <h7>Produkt</h7>
+        }
+    </td>
+    <td>
+        @if (ordreLinje?.YdelseID != null)
+        {
+            @ordreLinje?.ydelse?.YdelseNavn
+        }
+        else if (ordreLinje?.ProduktID != null)
+        {
+            @ordreLinje?.produkt?.ProduktNavn
+        }
+    </td>
+    <td>
+        @ordreLinje.OrdreLinjeDato.ToShortDateString()
+    </td>
+    <td>
+        @if (ordreLinje?.YdelseID != null)
+        {
+            @($"{ordreLinje.ydelse?.Pris} kr.")
+        }
+        @if (ordreLinje?.ProduktID != null)
+        {
+            @($"{ordreLinje.produkt?.ProduktPris} kr.")
+        }
+    </td>
+    <td>
+        @if(currentOrdre.Afsluttet == false)
+        {
+            <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit" class="d-inline-block">
+                <div class="input-group input-group-sm">
+                    <InputNumber @bind-Value="ordreLinje.Antal" Min="1" Max="1000" class="form-control form-control-sm" />
+                    <span class="input-group-text">Antal</span>
+                </div>
+                <ValidationMessage For="@(() => ordreLinje.Antal)" class="text-danger small" />
+            </EditForm>
+
+        }
+        else
+        {
+            @($"{ordreLinje.Antal} stk.")
+        }
+
+    </td>
+    <td>
+        @if (currentOrdre.Afsluttet == false)
+        {
+            <EditForm Model="@ordreLinje" OnValidSubmit="@HandleInValidSubmit" class="d-inline-block">
+                <div class="input-group input-group-sm">
+                    <InputNumber @bind-Value="ordreLinje.RabatProcent" Min="0" Max="99" class="form-control form-control-sm" />
+                    <span class="input-group-text">%</span>
+                </div>
+                <ValidationMessage For="@(() => ordreLinje.RabatProcent)" class="text-danger small" />
+            </EditForm>
+        }
+        else
+        {
+            @($"{ordreLinje.RabatProcent} %")
+        }
+
+    </td>
+    <td>
+        <b>@BeregnOrdreLinjeSum().ToString("N0") kr.</b>
+    </td>
+    <td>
+        @if(currentOrdre.Afsluttet == false)
+        {
+            <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit">
+                <button type="submit" class="btn btn-primary">Opdater</button>
+            </EditForm>
+
+            <button class="btn btn-primary" @onclick="@FjernOrdrelinje">Fjern</button>
+        }
+        
+    </td>
+    
+</tr>
+
+@if (ErrorCode == 200)
+{
+    <div class="alert alert-success mt-3">
+        <strong>Ordrelinje opdateret!</strong> Ændringerne er blevet gemt succesfuldt.
+    </div>
+}
+
+
+
+@code {
+    [Parameter]
+    public OrdreLinje ordreLinje { get; set; }
+
+    [Parameter]
+    public Ordre currentOrdre { get; set; }
+
+    [Parameter]
+    public EventCallback slettetProduktEllerYdelse { get; set; }
+
+    [Inject]
+    public IOrdreLinjeService ordreLinjeService { get; set; }
+
+    [Inject]
+    public IOrdreService ordreService { get; set; }
+
+
+    private int ErrorCode { get; set; } = 0;
+
+    private double BeregnOrdreLinjeSum()
+    {
+        if (ordreLinje == null) return 0; // Return 0 if ordreLinje is null
+
+        double pris = 0;
+        int antal = ordreLinje.Antal; 
+        int rabat = ordreLinje.RabatProcent ?? 0;
+
+        if (ordreLinje.ProduktID != null && ordreLinje.produkt != null)
+        {
+            pris = ordreLinje.produkt.ProduktPris;
+        }
+        else if (ordreLinje.YdelseID != null && ordreLinje.ydelse != null)
+        {
+            pris = ordreLinje.ydelse.Pris;
+        }
+
+        double total = pris * antal * (1 - (rabat / 100.0));
+        return total;
+    }
+
+    private async void HandleValidSubmit()
+    {
+        Console.WriteLine("HandeValidSubmit Called ...");
+        ErrorCode = (await ordreLinjeService.UpdateOrdreLinje(ordreLinje));
+        StateHasChanged();
+
+    }
+
+    private void HandleInValidSubmit()
+    {
+        Console.WriteLine("HandeInValidSubmit Called ...");
+    }
+
+    private async void FjernOrdrelinje()
+    {
+        int ordreLinjeid = ordreLinje.OrdreLinjeID;
+        ErrorCode = (await ordreLinjeService.DeleteOrdreLinje(ordreLinjeid));
+        await slettetProduktEllerYdelse.InvokeAsync();
+    }
+
+}

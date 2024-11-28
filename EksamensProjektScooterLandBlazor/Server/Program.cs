@@ -17,8 +17,17 @@ builder.Services.AddScoped<IMekanikerRepository, MekanikerRepositorySql>();
 
 builder.Services.AddScoped<IScooterBrandRepository, ScooterBrandRepositorySql>();
 
+builder.Services.AddScoped<IYdelseRepository, YdelseRepositorySql>();
 
+builder.Services.AddScoped<IScooterLejeRepository, ScooterLejeRepositorySql>();
 
+builder.Services.AddScoped<IProduktRepository, ProduktRepositorySql>();
+
+builder.Services.AddScoped<IOrdreRepository, OrdreRepositorySql>();
+
+builder.Services.AddScoped<IOrdreLinjeRepository, OrdreLinjeRepositorySql>();
+
+builder.Services.AddScoped<IPostnummerOgByRepostitory, PostnummerOgByRepositorySql>();
 
 var app = builder.Build();
 

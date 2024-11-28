@@ -1,0 +1,35 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+@using EksamensProjektScooterLandBlazor.Client.ChildComponents;
+
+@page "/Produkt"
+
+@if (AddingOrdreBool == false)
+{
+	<h3 class="header">Produkt Oversigt</h3>
+	<p class="description">Her kan du se en oversigt over alle produkter som er i systemet.</p>
+}
+
+<div class="produkt-page">
+	
+
+	<table class="table">
+		<thead>
+			<tr class="Produkt-tabel-række">
+				<th @onclick="() => SortByColumn(nameof(Produkt.ProduktID))">Id</th>
+				<th @onclick="() => SortByColumn(nameof(Produkt.ProduktNavn))">Produkt</th>
+				<th @onclick="() => SortByColumn(nameof(Produkt.ProduktPris))">Pris</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var produkt in produktListe)
+			{
+				<RenderProdukt produkt="produkt" Produkttilføjet="Produkttilføjet" deleteProdukt="DeleteProdukt"/>
+			}
+		</tbody>
+	</table>
+</div>
+
+
+

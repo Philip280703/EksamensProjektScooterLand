@@ -1,0 +1,322 @@
+﻿@using EksamensProjektScooterLandBlazor.Client.Services;
+@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.ChildComponents;
+@page "/OrdreLinjePage/{OrdreID:int}"
+
+<h3>OrdreLinjePage</h3>
+
+<table class="table">
+	<th>Ordrelinje ID</th>
+	<th>Type</th>
+	<th>Navn</th>
+	<th>Dato</th>
+	<th>Pris</th>
+	<th>Antal</th>
+	<th>Rabat</th>
+	<th>Total</th>
+	<th>Action</th>
+	@if(ordreLinjeListe.Count > 0)
+	{
+		@foreach (var item in ordreLinjeListe)
+		{
+			@if(item.ScooterLejeID == null)
+			{
+				<RenderOrdreLinje slettetProduktEllerYdelse="SlettetProduktEllerYdelse" ordreLinje="@item" currentOrdre="@currentOrdre" />
+			}
+
+		}
+	}
+	
+</table>
+
+<!-- Table til scooterleje -->
+@if(ordreLinjeListe.Count > 0)
+{
+		if(Succes = ordreLinjeListe.Any(s => s.ScooterLejeID != null))
+		{
+			<table class="table">
+					<th>OrdreLinje ID</th>
+					<th>Type</th>
+					<th>dagspris</th>
+					<th>Antal dage</th>
+					<th>km pris</th>
+					<th>km kørt</th>
+					<th>selvrisiko</th>
+					<th>rabat procent</th>
+					<th>sum</th>
+					<th>action</th>
+					@foreach (var item in ordreLinjeListe)
+					{
+						@if(item.ScooterLejeID != null)
+						{
+							<RenderScooterLejeOrdreLinje slettetScooterleje="SlettetScooterLeje" ordreLinje="@item" currentOrdre="@currentOrdre" />
+							ListContainsScooterLejeBool = true;
+						}
+						
+					}	
+			</table>
+		}
+}
+
+
+@if(ordreLinjeListe.Count == 0){
+<h5><b>Ingen ordrelinjer i ordren</b></h5>
+}
+
+<h4><b>sum: @BeregnSum().ToString("N2") kr.</b></h4>
+<br />
+
+
+@if(currentOrdre.Afsluttet == true)
+{
+	<button class="btn btn-primary">Faktura</button>
+}
+else
+{
+	<button class="btn btn-primary" @onclick="AddProduktKnap">Tilføj produkt</button>
+	<button class="btn btn-primary" @onclick="AddYdelseKnap">Tilføj ydelse</button>
+	@if (ListContainsScooterLejeBool == false)
+	{
+		<button class="btn btn-primary" @onclick="AddScooterLejeKnap">Tilføj scooterleje</button>
+	}
+	<div></div> <br />
+	<button class="btn btn-primary" @onclick="AfslutOrdreKnap">Afslut Ordre</button>
+}
+
+
+@if(ProduktKnap == true)
+{
+	<ProduktPage Produkttilføjet="Produkttilføjet" AddingOrdreBool="@ProduktKnap" OrdreID="@OrdreId" />
+}
+
+@if(YdelseKnap == true)
+{
+	<YdelsePage ydelseTilføjet="Ydelsetilføjet" AddingOrdreBool="@YdelseKnap" Ordreid="@OrdreId"/>
+}
+
+@if (ScooterLejeKnap == true)
+{
+	<ScooterLejePage scootertilføjet="Scootertilføjet" OrdreAddBool="@ScooterLejeKnap" Ordreid="@OrdreId" />
+
+}
+
+
+
+@if (showModal)
+{
+	<div class="message-box">
+		<div class="message-content">
+			<h4>Betaling</h4>
+			<p>Er betaling modtaget på? <b>@BeregnSum().ToString("N2") kr.</b></p>
+			<div class="message-actions">
+				<button class="btn btn-success" @onclick="ConfirmAfslutOrdre">Ja</button>
+				<button class="btn btn-danger" @onclick="CancelAfslutOrdre">Nej</button>
+			</div>
+		</div>
+	</div>
+}
+
+
+
+@code {
+	private bool Succes;
+	private OrdreLinje ordreLinjeModel = new OrdreLinje();
+
+	private List<OrdreLinje> ordreLinjeListe = new List<OrdreLinje>();
+
+	private Ordre currentOrdre = new Ordre();
+
+	private OrdreLinje ScooterOrdreLinje = new OrdreLinje();
+
+	private ScooterLeje scooterLeje = new ScooterLeje();
+	[Inject]
+	public IScooterLejeService scooterLejeService { get; set; }
+
+	[Inject]
+	public IOrdreLinjeService OrdreLinjeService { get; set;}
+
+	[Inject]
+	public IOrdreService ordreService { get; set; }
+
+	[Parameter]
+	public int OrdreId { get; set; }
+
+	private int ErrorCode { get; set; }
+
+	private bool ProduktKnap = false;
+
+	private bool YdelseKnap = false;
+
+	private bool ScooterLejeKnap = false;
+
+	private bool ListContainsScooterLejeBool = false;
+
+	private bool selvrisikoBool { get; set; }
+
+
+	protected override async Task OnInitializedAsync()
+	{
+		await GetOrdreLinjeList();
+		currentOrdre = (await ordreService.GetOrdre(OrdreId));
+		scooterLeje = await scooterLejeService.GetSingle(4);
+		// ordreLinjeModel.scooterLeje = scooterLeje; // Initialize scooterLeje in ordreLinje
+
+	}
+
+	public async void Produkttilføjet()
+	{
+		await GetOrdreLinjeList();
+		StateHasChanged();
+	}
+
+	public async void Ydelsetilføjet()
+	{
+		await GetOrdreLinjeList();
+		StateHasChanged();
+	}
+
+	public async void Scootertilføjet()
+	{
+		await GetOrdreLinjeList();
+		StateHasChanged();
+	}
+
+	public async void SlettetProduktEllerYdelse()
+	{
+		await GetOrdreLinjeList();
+		StateHasChanged();
+	}
+
+	public async void SlettetScooterLeje()
+	{
+		await GetOrdreLinjeList();
+		StateHasChanged();
+	}
+
+	public async Task GetOrdreLinjeList()
+	{
+		ordreLinjeListe = (await OrdreLinjeService.GetAllOrdreLinjer()).Where(l => l.OrdreID == OrdreId).ToList();
+	}
+
+	public double BeregnSum()
+	{
+		double sum = 0;
+
+		foreach (var linje in ordreLinjeListe)
+		{
+			double pris = 0;
+
+			if (linje.ScooterLejeID != null)
+			{
+				double dagsPrisXDage = scooterLeje.DagsLejePris * linje.Antal;
+				double KmPrisXAntal = scooterLeje.ForsikringPrKm  * linje.AntalEkstra ?? 0;
+				double selvrisiko = 0;
+				if(selvrisikoBool == true)
+				{
+					selvrisiko = scooterLeje.SelvRisiko;
+				}
+				pris = dagsPrisXDage + KmPrisXAntal + selvrisiko;
+			}
+
+			if (linje.ProduktID != null)
+				pris = linje.produkt.ProduktPris;
+			else if (linje.YdelseID != null)
+				pris = linje.ydelse.Pris;
+
+
+
+			int antal = 0;
+			if (linje.ScooterLejeID != null)
+			{
+				antal = 1;
+			}
+			else
+			{
+				antal = linje.Antal;
+			}
+			int rabat = linje.RabatProcent ?? 0; ;
+
+			sum += pris * antal * (1 - (rabat / 100.0));
+
+			
+		}
+
+		return sum;
+	}
+
+	private async void AddProduktKnap()
+	{
+		ProduktKnap = !ProduktKnap;
+		if(YdelseKnap == true)
+		{
+			YdelseKnap = false;
+			ScooterLejeKnap = false;
+		}
+
+		StateHasChanged();
+	}
+
+	private async void AddYdelseKnap()
+	{
+		YdelseKnap = !YdelseKnap;
+		if(ProduktKnap == true)
+		{
+			ProduktKnap = false;
+			ScooterLejeKnap = false;
+		}
+		StateHasChanged();
+	}
+
+	private async void AddScooterLejeKnap()
+	{
+		ScooterLejeKnap = !ScooterLejeKnap;
+		if(ScooterLejeKnap == true)
+		{
+			YdelseKnap = false;
+			ProduktKnap = false;
+		}
+		StateHasChanged();
+	}
+
+
+	// pop op box kode til afslut ordre med betaling
+	private bool showModal = false;
+
+	private async void AfslutOrdreKnap()
+	{
+		// Show the modal to confirm the action
+		showModal = true;
+		StateHasChanged();
+	}
+
+	private async void ConfirmAfslutOrdre()
+	{
+		// Proceed with the action after confirmation
+		showModal = false;
+		currentOrdre.Afsluttet = true;
+		currentOrdre.BetalingsSum = BeregnSum();
+
+		ErrorCode = await ordreService.UpdateOrdre(currentOrdre);
+
+		if (ErrorCode == 0)
+		{
+			Console.WriteLine("Order afsluttet successfult.");
+		}
+		else
+		{
+			Console.WriteLine("Error afslutting order: " + ErrorCode);
+		}
+
+		StateHasChanged();
+	}
+
+	private void CancelAfslutOrdre()
+	{
+		// luk pop up uden at afslut ordre
+		showModal = false;
+		Console.WriteLine("Afslutning cancelled.");
+	}
+
+
+
+}

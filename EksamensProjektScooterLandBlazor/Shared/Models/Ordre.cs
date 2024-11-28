@@ -18,9 +18,9 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Required]
         public DateTime SalgsDato { get; set; }
 
+        [Required]
+        public bool Afsluttet { get; set; }
 
-        [Range(0, int.MaxValue, ErrorMessage ="Samelt pris skal være et positivt tal")]
-        public double ?SamletPris {  get; set; }
 
 
         [Range(0, int.MaxValue, ErrorMessage ="Betalings sum skal være et positivt tal")]
@@ -29,13 +29,15 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
 
         // fremmednøgle
         public int ?KundeiD { get; set; }
-        // objekt relation til EF
+
+        [ForeignKey("KundeiD")]
         public Kunde ?kunde { get; set; }
 
 
         // fremmednøgle
-        public int ?MedarbejderCpr { get; set; }
-        // objekt relation til EF
+        public string ?MedarbejderCpr { get; set; }
+
+        [ForeignKey("MedarbejderCpr")]
         public Medarbejder ?medarbejder { get; set; }
 
 

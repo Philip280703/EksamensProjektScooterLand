@@ -40,7 +40,8 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Etage")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
 
                     b.Property<string>("Fornavn")
                         .IsRequired()
@@ -49,16 +50,19 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.Property<string>("HusNummer")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("Placering")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
 
                     b.Property<int>("PostNummer")
                         .HasColumnType("int");
 
-                    b.Property<int>("PreferetMekanikerCprNummer")
-                        .HasColumnType("int");
+                    b.Property<string>("PreferetMekanikerCprNummer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ScooterBrandID")
                         .HasColumnType("int");
@@ -71,12 +75,11 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("postNummerOgByPostnummer")
-                        .HasColumnType("int");
-
                     b.HasKey("KundeID");
 
-                    b.HasIndex("postNummerOgByPostnummer");
+                    b.HasIndex("PostNummer");
+
+                    b.HasIndex("PreferetMekanikerCprNummer");
 
                     b.ToTable("Kunder");
                 });
@@ -126,29 +129,26 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrdreID"));
 
+                    b.Property<bool>("Afsluttet")
+                        .HasColumnType("bit");
+
                     b.Property<double?>("BetalingsSum")
                         .HasColumnType("float");
 
                     b.Property<int?>("KundeiD")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MedarbejderCpr")
-                        .HasColumnType("int");
+                    b.Property<string>("MedarbejderCpr")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("SalgsDato")
                         .HasColumnType("datetime2");
-
-                    b.Property<double?>("SamletPris")
-                        .HasColumnType("float");
-
-                    b.Property<string>("medarbejderCprNummer")
-                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("OrdreID");
 
                     b.HasIndex("KundeiD");
 
-                    b.HasIndex("medarbejderCprNummer");
+                    b.HasIndex("MedarbejderCpr");
 
                     b.ToTable("Ordrer");
                 });
@@ -164,8 +164,14 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                     b.Property<int>("Antal")
                         .HasColumnType("int");
 
+                    b.Property<int?>("AntalEkstra")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrdreID")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("OrdreLinjeDato")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("ProduktID")
                         .HasColumnType("int");
@@ -176,8 +182,8 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
                     b.Property<int?>("ScooterLejeID")
                         .HasColumnType("int");
 
-                    b.Property<double>("Total")
-                        .HasColumnType("float");
+                    b.Property<bool?>("SelvrisikoBool")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("YdelseID")
                         .HasColumnType("int");
@@ -258,22 +264,10 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScooterID"));
 
-                    b.Property<int?>("AntalDage")
-                        .HasColumnType("int");
-
                     b.Property<double>("DagsLejePris")
                         .HasColumnType("float");
 
                     b.Property<double>("ForsikringPrKm")
-                        .HasColumnType("float");
-
-                    b.Property<int>("KmTalDifference")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Ledig")
-                        .HasColumnType("bit");
-
-                    b.Property<double?>("Pris")
                         .HasColumnType("float");
 
                     b.Property<double>("SelvRisiko")
@@ -322,13 +316,21 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Kunde", b =>
                 {
-                    b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.PostNummerOgBy", "postNummerOgBy")
+                    b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.PostNummerOgBy", "PostNummerOgBy")
                         .WithMany()
-                        .HasForeignKey("postNummerOgByPostnummer")
+                        .HasForeignKey("PostNummer")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("postNummerOgBy");
+                    b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.Mekaniker", "Mekaniker")
+                        .WithMany()
+                        .HasForeignKey("PreferetMekanikerCprNummer")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Mekaniker");
+
+                    b.Navigation("PostNummerOgBy");
                 });
 
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Ordre", b =>
@@ -339,7 +341,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
 
                     b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.Medarbejder", "medarbejder")
                         .WithMany()
-                        .HasForeignKey("medarbejderCprNummer");
+                        .HasForeignKey("MedarbejderCpr");
 
                     b.Navigation("kunde");
 
@@ -378,7 +380,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Mekaniker", b =>
                 {
                     b.HasOne("EksamensProjektScooterLandBlazor.Shared.Models.ScooterBrand", "scooterBrand")
-                        .WithMany("mekanikers")
+                        .WithMany()
                         .HasForeignKey("ScooterBrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -389,11 +391,6 @@ namespace EksamensProjektScooterLandBlazor.Server.Migrations
             modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.Ordre", b =>
                 {
                     b.Navigation("ordreLinjer");
-                });
-
-            modelBuilder.Entity("EksamensProjektScooterLandBlazor.Shared.Models.ScooterBrand", b =>
-                {
-                    b.Navigation("mekanikers");
                 });
 #pragma warning restore 612, 618
         }

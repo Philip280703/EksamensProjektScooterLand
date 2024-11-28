@@ -34,6 +34,5 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
 			var result = repository.GetMekaniker(id);
 			return result;
 		}
-
 	}
 }

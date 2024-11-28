@@ -1,0 +1,297 @@
+﻿@page "/AddKundePage"
+@inject HttpClient httpClient;
+@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+
+<h2>Tilføj kunde</h2>
+
+<EditForm EditContext="@editContext" class="row p-3"
+          OnValidSubmit="@HandleValidSubmit"
+          OnInvalidSubmit="@HandleInvalidSubmit">
+    <DataAnnotationsValidator />
+    <div class="col-6 mb-3">
+        <label for="fornavn">Fornavn</label>
+        <InputText id="fornavn" @bind-Value="KundeModel.Fornavn" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.Fornavn)" />
+    </div>
+    <div class="col-6 mb-3">
+        <label for="efternavn">Efternavn</label>
+        <InputText id="efternavn" @bind-Value="KundeModel.Efternavn" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.Efternavn)" />
+    </div>
+    <div class="col-6 mb-3">
+        <label for="TelefonNummer">TelefonNummer</label>
+        <InputText id="TelefonNummer" @bind-Value="KundeModel.TelefonNummer" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.TelefonNummer)" />
+    </div>
+    <div class="col-6 mb-3">
+        <label for="Email">Email</label>
+        <InputText id="Email" @bind-Value="KundeModel.Email" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.Email)" />
+    </div>
+    <div class="col-6 mb-3">
+        <label for="VejNavn">Vejnavn</label>
+        <InputText id="VejNavn" @bind-Value="KundeModel.VejNavn" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.VejNavn)" />
+    </div>
+    <div class="col-2 mb-3">
+        <label for="HusNummer">Husnummer</label>
+        <InputText id="HusNummer" @bind-Value="KundeModel.HusNummer" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.HusNummer)" />
+    </div>
+    <div class="col-2 mb-3">
+        <label for="Etage">Etage</label>
+        <InputText id="Etage" @bind-Value="KundeModel.Etage" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.Etage)" />
+    </div>
+    <div class="col-2 mb-3">
+        <label for="Placering">Placering</label>
+        <InputText id="Placering" @bind-Value="KundeModel.Placering" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.Placering)" />
+    </div>
+       <div class="col-2 mb-3">
+        <label for="Postnummer">Postnummer</label>
+        <InputNumber id="PostNummer" @bind-Value="KundeModel.PostNummer" @oninput="UpdateBynavn" class="form-control" />
+    </div>
+
+    <div class="col-3 mb-3">
+        <label for="Bynavn">By</label>
+        <input id="Bynavn" type="text" value="@Bynavn" class="form-control" readonly />
+    </div>
+
+    <div class="d-block">
+        <label for="Scooter" class="col-sm-2 col-form-label">Scooter</label>
+        <div class="col-sm-5"> 
+            <InputSelect id="Scooter" @bind-Value="KundeModel.ScooterBrandID" class="form-control">
+                <option value="">-- Vælg en scooter --</option>
+                @foreach (var item in scooterBrandListe)
+                {
+                    <option value="@item.ScooterBrandID">@item.ScooterBrandNavn</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+    <div>
+        <button class="btn btn-primary" @onclick="FilterMekaniker">load</button>
+    </div>
+
+
+    <div class="d-block">
+        <label for="PreferetMekanikerCprNummer" class="col-sm-2 col-form-label">Ønsket mekaniker</label>
+        <div class="col-sm-10">
+            <InputSelect id="PreferetMekanikerCprNummer" @bind-Value="KundeModel.PreferetMekanikerCprNummer" class="form-control">
+                <option value="">-- Vælg en mekaniker --</option>
+                @foreach (var item in filteredMekanikerListe)
+                {
+                    <option value="@item.CprNummer">@item.Fornavn @item.Efternavn</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+    <br />
+    <div>
+
+    </div>
+    <div class="col-6 mb-3">
+        <button type="submit" class="btn btn-primary">Tilføj kunde</button>
+    </div>
+
+</EditForm>
+
+
+@if (ShowError)
+{
+    <div class="message-box">
+        <div class="message-content">
+            <h4>Fejl</h4>
+            <p>Ugylidgt indtastet postnummer</p>
+            <div class="message-actions">
+                <button class="btn btn-danger" @onclick="OkayToError">OK</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+@if (showModal)
+{
+    <div class="message-box">
+        <div class="message-content">
+            <h4>Succes!</h4>
+            <p>Kunden er nu oprettet i systemet</p>
+            <div class="message-actions">
+                <button class="btn btn-success" @onclick="OkayToComplete">OK</button>
+            </div>
+        </div>
+    </div>
+}
+
+<br />
+<div></div>
+
+
+
+
+@code {
+    private Kunde KundeModel = new Kunde();
+    private EditContext editContext;
+
+    private List<ScooterBrand> scooterBrandListe = new List<ScooterBrand>();
+    private List<PostNummerOgBy> postNummerOgByListe = new List<PostNummerOgBy>();
+    private List<Mekaniker> mekanikerListe = new List<Mekaniker>();
+
+    private List<Mekaniker> filteredMekanikerListe = new List<Mekaniker>();
+
+    [Inject]
+    public IScooterBrandService ScooterService { get; set; }
+
+    [Inject]
+    public IPostnummerOgByService postnummerOgByService { get; set; }
+
+    [Inject]
+    public IKundeService kundeService { get; set; }
+
+    [Inject]
+    public IMekanikerService mekanikerService { get; set; }
+
+    public int ErrorCode { get; set; }
+
+    private bool ValidPostnrBool = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        editContext = new EditContext(KundeModel);
+
+        scooterBrandListe = (await ScooterService.GetAll()).ToList();
+        postNummerOgByListe = (await postnummerOgByService.GetAllPostnummerOgByer()).ToList();
+        mekanikerListe = (await mekanikerService.GetAllMekaniker()).ToList();
+
+    }
+
+    private async void HandleValidSubmit()
+    {
+        Console.WriteLine("HandleValidSubmit called..");
+        if(ValidPostnrBool == true)
+        {
+            if (KundeModel.PreferetMekanikerCprNummer != null)
+            {
+                try
+                {
+                    ErrorCode = await kundeService.AddKunde(KundeModel);
+                    ShowMessageBoxAfslut();
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception thrown " + ex);
+                }
+            }
+            else
+            {
+                HandleInvalidSubmit();
+            }
+
+
+
+        }
+        else
+        {
+            ShowMessageBoxErrorPostnr();
+        }
+    }
+
+    private void HandleInvalidSubmit()
+    {
+        Console.WriteLine("HandleInvalidSubmit called..."); 
+    }
+
+    private string Bynavn { get; set; } = string.Empty;
+
+    private void UpdateBynavn(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int postNummer))
+        {
+            KundeModel.PostNummer = postNummer;
+
+            var match = postNummerOgByListe.FirstOrDefault(x => x.Postnummer == postNummer);
+            if(match != null)
+            {
+                Bynavn = match?.ByNavn;
+                ValidPostnrBool = true;
+            }
+            else
+            {
+                Bynavn = "Ikke gyldigt postnummer";
+                ValidPostnrBool = false;
+            }
+            Console.WriteLine($"PostNummer: {postNummer}, ByNavn: {Bynavn}");
+        }
+        else
+        {
+            Bynavn = string.Empty;
+            Console.WriteLine("Indtastet postnummer kan ikke parses til int.");
+        }
+    }
+
+    private async Task FilterMekaniker()
+    {
+        var selectedScooterBrandID = KundeModel.ScooterBrandID;
+
+        if (selectedScooterBrandID != null)
+        {
+            filteredMekanikerListe = mekanikerListe
+                .Where(m => m.ScooterBrandId == selectedScooterBrandID)
+                .ToList(); // sotere listen til kun de mekaniker som har det scooter mærke som ekspertise
+        }
+        else
+        {
+            filteredMekanikerListe = new List<Mekaniker>();
+        }
+
+        filteredMekanikerListe = filteredMekanikerListe
+            .OrderBy(m => m.Fornavn)
+            .ThenBy(m => m.Efternavn)
+            .ToList(); // udskriver listen af objektet mekaniker kun med for- og efternavn til combobox.
+
+        StateHasChanged();
+    }
+
+
+    // pop op box kode til afslut ordre med betaling
+    private bool ShowError = false;
+
+    private async void ShowMessageBoxErrorPostnr()
+    {
+        ShowError = true;
+        StateHasChanged();
+    }
+
+    private async void OkayToError()
+    {
+        ShowError = false;
+        Console.WriteLine("Error afslutting order: " + ErrorCode);
+        StateHasChanged();
+    }
+
+
+    // Messagebox
+    private bool showModal = false;
+
+    private async void ShowMessageBoxAfslut()
+    {
+        showModal = true;
+        StateHasChanged();
+    }
+
+    private async void OkayToComplete()
+    {
+        showModal = false;
+        StateHasChanged();
+    }
+
+   
+  
+}
+

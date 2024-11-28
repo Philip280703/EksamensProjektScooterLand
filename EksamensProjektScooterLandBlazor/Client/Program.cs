@@ -1,8 +1,10 @@
+using Blazored.LocalStorage;
 using EksamensProjektScooterLandBlazor.Client;
 using EksamensProjektScooterLandBlazor.Client.Services;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 
@@ -24,8 +26,42 @@ builder.Services.AddHttpClient<IMekanikerService, MekanikerService>(client =>
 
 builder.Services.AddHttpClient<IScooterBrandService, ScooterBrandService>(client =>
 {
+	client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
+builder.Services.AddHttpClient<IYdelseService, YdelseService>(client =>
+{
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
+
+builder.Services.AddHttpClient<IScooterLejeService, ScooterLejeService>(client =>
+{
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
+builder.Services.AddHttpClient<IProduktService, ProduktService>(client =>
+{
+	client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
+builder.Services.AddHttpClient<IOrdreService, OrdreService>(client =>
+{
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
+builder.Services.AddHttpClient<IOrdreLinjeService, OrdreLinjeService>(client =>
+{
+	client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
+
+builder.Services.AddHttpClient<IPostnummerOgByService, PostnummerOgByService>(client =>
+{
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
+builder.Services.AddBlazoredLocalStorage();
+
 
 
 await builder.Build().RunAsync();

@@ -1,0 +1,102 @@
+﻿/* Generelle stilindstillinger */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hovedindhold container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header med Ydelse oversigt */
+h3 {
+    font-size: 2rem;
+    color: #0056b3;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1.1rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Styling for tabelen */
+.table-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Ydelsestabelen */
+.ydelse-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 1.1rem;
+}
+
+    .ydelse-table th,
+    .ydelse-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .ydelse-table th {
+        background-color: #0056b3;
+        color: white;
+        font-weight: bold;
+    }
+
+    .ydelse-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .ydelse-table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+/* Knappen til at tilføje ydelse */
+.btn {
+    padding: 12px 24px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+    /* Hover effekt på knappen */
+    .btn:hover {
+        background-color: #0277bd;
+    }
+
+/* Sektion for tilføjelse af ydelse */
+.AddYdelsePage {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.button-container {
+    margin-bottom: 30px;
+}
