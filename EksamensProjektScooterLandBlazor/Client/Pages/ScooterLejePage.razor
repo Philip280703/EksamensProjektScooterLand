@@ -91,7 +91,8 @@
         ordreLinje.OrdreLinjeDato = DateTime.Now;
         ordreLinje.RabatProcent = 0;
         ordreLinje.OrdreID = Ordreid;
-
         ErrorCode = await OrdreLinjeService.AddOrdreLinje(ordreLinje);
+
+        await scootertilføjet.InvokeAsync();
     }
 }

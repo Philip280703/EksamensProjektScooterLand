@@ -126,11 +126,11 @@ button svg {
 
 /* Hover-effekt på ikoner: Gør dem større og ændrer farve */
 .Rediger-knap:hover svg {
-    transform: scale(1.2); /* Gør ikonet større */
+    transform: scale(1.1); /* Gør ikonet større */
 }
 
 .Slet-knap:hover svg {
-    transform: scale(1.2); /* Gør ikonet større */
+    transform: scale(1.1); /* Gør ikonet større */
 }
 
 /* Tilføj skyggeeffekt til knapperne ved hover */

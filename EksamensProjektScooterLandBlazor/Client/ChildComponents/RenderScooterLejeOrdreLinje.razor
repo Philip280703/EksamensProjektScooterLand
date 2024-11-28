@@ -108,7 +108,7 @@
     private ScooterLeje scooterLejeModel = new ScooterLeje();
 
     [Parameter]
-    public EventCallback slettetProduktEllerYdelse { get; set; }
+    public EventCallback slettetScooterleje { get; set; }
 
     [Inject]
     public IOrdreLinjeService ordreLinjeService { get; set; }
@@ -173,7 +173,7 @@
     {
         int ordreLinjeid = ordreLinje.OrdreLinjeID;
         ErrorCode = (await ordreLinjeService.DeleteOrdreLinje(ordreLinjeid));
-        await slettetProduktEllerYdelse.InvokeAsync();
+        await slettetScooterleje.InvokeAsync();
     }
 
     private void AddedSelvRisiko()
