@@ -9,7 +9,7 @@
     <table class="table">
         <thead>
             <tr class="Kunde-Tabel-Række">
-                <th @onclick="() => SortByColumn(nameof(Kunde.KundeID))"> ID </th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.KundeID))"> ID @UiValue </th> @if (currentSortColumn == nameof(Kunde.KundeID)) { if (isAscending == true) { UiValue = "ASC"; } else { UiValue = "DESC"; } }
                 <th @onclick="() => SortByColumn(nameof(Kunde.Fornavn))"> Navn </th>
                 <th @onclick="() => SortByColumn(nameof(Kunde.Email))"> Email </th>
                 <th @onclick="() => SortByColumn(nameof(Kunde.TelefonNummer))"> Tlf </th>

@@ -32,6 +32,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         // sortings parametre
         private string currentSortColumn;
         private bool isAscending = true;
+        private string UiValue { get; set; } = "";
 
         private void SortByColumn(string column)
         {
