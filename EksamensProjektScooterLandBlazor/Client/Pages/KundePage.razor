@@ -2,7 +2,7 @@
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents
 @page "/Kundepage"
 
-<h3>Kunde Oversigt</h3>
+<h3>Kunde oversigt</h3>
 <p>Her kan du se en oversigt over alle kunder som er registreret i systemet.</p>
 
 <div class="table-wrapper">
@@ -15,6 +15,7 @@
                 <th @onclick="() => SortByColumn(nameof(Kunde.TelefonNummer))">Tlf @GetSortIndicator("TelefonNummer")</th>
                 <th @onclick="() => SortByColumn(nameof(Kunde.PreferetMekanikerCprNummer))">Pref. M @GetSortIndicator("PreferetMekanikerCprNummer")</th>
                 <th @onclick="() => SortByColumn(nameof(Kunde.ScooterBrandID))">Scooter @GetSortIndicator("ScooterBrandID")</th>
+
                 <th>Action</th>
             </tr>
         </thead>

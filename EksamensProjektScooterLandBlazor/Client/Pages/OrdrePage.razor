@@ -3,20 +3,20 @@
 @using EksamensProjektScooterLandBlazor.Client.Services;
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents;
 
-<h3>Ordre Oversigt</h3>
+<h3>Ordre oversigt</h3>
 <p>Her kan du finde en liste over alle ordrer og deres detaljer.</p>
 
 <!-- Ordre Table Section -->
 <div class="table-container">
-    <table class="table table-striped table-bordered">
+    <table class="table">
         <thead>
             <tr>
-                <th @onclick="() => SortByColumn(nameof(Ordre.OrdreID))">Ordre ID</th>
-                <th @onclick="() => SortByColumn(nameof(Ordre.SalgsDato))">Salgsdato</th>
-                <th @onclick="() => SortByColumn(nameof(Ordre.Afsluttet))">Status</th>
-                <th @onclick="() => SortByColumn(nameof(Ordre.BetalingsSum))">Total</th>
-                <th @onclick="() => SortByColumn(nameof(Ordre.KundeiD))">Kunde</th>
-                <th @onclick="() => SortByColumn(nameof(Ordre.MedarbejderCpr))">Medarbejder</th>
+                <th @onclick="() => SortByColumn(nameof(Ordre.OrdreID))">Ordre ID @GetSortIndicator(nameof(Ordre.OrdreID))</th>
+                <th @onclick="() => SortByColumn(nameof(Ordre.SalgsDato))">Salgsdato @GetSortIndicator(nameof(Ordre.SalgsDato))</th>
+                <th @onclick="() => SortByColumn(nameof(Ordre.Afsluttet))">Status @GetSortIndicator(nameof(Ordre.Afsluttet))</th>
+                <th @onclick="() => SortByColumn(nameof(Ordre.BetalingsSum))">Total @GetSortIndicator(nameof(Ordre.BetalingsSum))</th>
+                <th @onclick="() => SortByColumn(nameof(Ordre.KundeiD))">Kunde @GetSortIndicator(nameof(Ordre.KundeiD))</th>
+                <th @onclick="() => SortByColumn(nameof(Ordre.MedarbejderCpr))">Medarbejder @GetSortIndicator(nameof(Ordre.MedarbejderCpr))</th>
                 <th>Handling</th>
             </tr>
         </thead>
@@ -62,7 +62,7 @@
         }
     }
 
-    // sortings parametre
+    // Sorterings parametre
     private string currentSortColumn;
     private bool isAscending = true;
 
@@ -82,5 +82,15 @@
         ordreListe = isAscending
             ? ordreListe.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
             : ordreListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
+    }
+
+    // Der bruges MarkupString til at rendre HTML i Blazor kode
+    private MarkupString GetSortIndicator(string columnName)
+    {
+        if (currentSortColumn == columnName)
+        {
+            return new MarkupString(isAscending ? "<i class='bi bi-chevron-up'></i>" : "<i class='bi bi-chevron-down'></i>");
+        }
+        return new MarkupString(string.Empty);
     }
 }
