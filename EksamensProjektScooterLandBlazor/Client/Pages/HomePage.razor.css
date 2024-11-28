@@ -1,0 +1,105 @@
+﻿/* Generelle indstillinger */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.description {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Header-styling */
+.header {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2rem;
+    color: #0056b3;
+}
+
+/* Tabel styling */
+.table-modern {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    .table-modern th,
+    .table-modern td {
+        text-align: left;
+        padding: 12px 15px;
+    }
+
+    .table-modern th {
+        background-color: #0056b3;
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    .table-modern td {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .table-modern tr:hover td {
+        background-color: #e9f1ff;
+    }
+
+/* Mobilvenlig styling */
+@media (max-width: 768px) {
+    .table-modern {
+        font-size: 0.9rem;
+    }
+
+    .header {
+        font-size: 1.5rem;
+    }
+}
+
+h3{
+    font-weight: bold;
+}
+
+/* NotePage og knapper */
+.note-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+    .note-container .btn-primary,
+    .note-container .btn-secondary {
+        background-color: #0056b3;
+        color: white;
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .note-container .btn-primary:hover {
+            background-color: #004494;
+        }
+
+    .note-container .btn-secondary {
+        background-color: gray;
+    }
+
+        .note-container .btn-secondary:hover {
+            background-color: #666;
+        }
+
