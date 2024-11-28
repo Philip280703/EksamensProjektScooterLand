@@ -28,9 +28,5 @@ namespace EksamensProjektScooterLandBlazor.Server.DataAccess
         public DbSet<ScooterBrand> ScooterBrands { get; set; }
         public DbSet<ScooterLeje> ScooterLejer { get; set; }
         public DbSet<Ydelse> Ydelser { get; set; }
-
-        
-
-
     }
 }
