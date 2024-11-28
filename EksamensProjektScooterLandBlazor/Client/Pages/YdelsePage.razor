@@ -3,7 +3,7 @@
 @using EksamensProjektScooterLandBlazor.Client.Services;
 
 @page "/YdelsePage"
-@if (IsStandalone)
+@if (AddingOrdreBool == false)
 {
     <h3>Ydelse oversigt</h3>
     <p>Her kan du se en liste over alle ydelser vi tilbyder</p>
