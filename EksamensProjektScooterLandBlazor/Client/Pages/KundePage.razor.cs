@@ -52,5 +52,14 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
                 : kundeListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
         }
 
+        private string GetSortIndicator(string columnName)
+        {
+            if (currentSortColumn == columnName)
+            {
+                return isAscending ? "↑" : "↓"; // Arrows to indicate sort direction
+            }
+            return string.Empty;
+        }
+
     }
 }
