@@ -16,9 +16,9 @@
 	<table class="table">
 		<thead>
 			<tr class="Produkt-tabel-række">
-				<th>Id</th>
-				<th>Produkt</th>
-				<th>Pris</th>
+				<th @onclick="() => SortByColumn(nameof(Produkt.ProduktID))">Id</th>
+				<th @onclick="() => SortByColumn(nameof(Produkt.ProduktNavn))">Produkt</th>
+				<th @onclick="() => SortByColumn(nameof(Produkt.ProduktPris))">Pris</th>
 				<th>Action</th>
 			</tr>
 		</thead>

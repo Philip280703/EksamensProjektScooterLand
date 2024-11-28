@@ -87,5 +87,28 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
             AddingOrdreBool = !AddingOrdreBool;
         }
 
-    }
+
+		// sortings parametre
+		private string currentSortColumn;
+		private bool isAscending = true;
+
+		private void SortByColumn(string column)
+		{
+			if (currentSortColumn == column)
+			{
+				isAscending = !isAscending; // Toggle sorting direction
+			}
+			else
+			{
+				currentSortColumn = column;
+				isAscending = true; // Default to ascending for new column
+			}
+
+			// Sort the list dynamically based on the column name
+			YdelsesList = isAscending
+				? YdelsesList.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
+				: YdelsesList.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
+		}
+
+	}
 }
