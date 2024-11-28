@@ -29,6 +29,8 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
         private int ErrorCode { get; set; } = 0;
 
+        private bool RenderYdelse = false;
+
         protected override async Task OnInitializedAsync()
         {
             EditContext = new EditContext(YdelseModel);
@@ -84,5 +86,6 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         {
             AddingOrdreBool = !AddingOrdreBool;
         }
+
     }
 }
