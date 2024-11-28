@@ -1,27 +1,21 @@
 ﻿/* Page Styling */
-.kunde-page {
-    margin: 40px auto;
-    padding: 20px;
-    max-width: 1200px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
-    color: #333;
-}
+
 
     /* Page Header */
-    .kunde-page h3 {
+    h3{
         font-size: 28px;
         color: #0056b3;
         margin-bottom: 12px;
         font-weight: bold;
+        text-align: center;
+        margin: 20px 0;
     }
 
-    .kunde-page p {
+ p{
         font-size: 16px;
         color: #555;
         margin-bottom: 30px;
+        text-align: center;
     }
 
 /* Table Styling */
@@ -32,6 +26,11 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+tr:hover{
+    background-color: #f1f1f1;
 }
 
     /* Table Header Styling */
@@ -46,20 +45,14 @@
     }
 
     /* Table Body Styling */
-    .table td {
-        background-color: #fff;
-        color: #333;
-        padding: 12px;
-        text-align: left;
-        font-size: 14px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    /* Hover effect for rows */
-    .table tr:hover {
-        background-color: #f1f1f1;
-        cursor: pointer;
-    }
+.table td {
+    background-color: #fff;
+    color: #333;
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+}
 
 /* Responsive Table Styling */
 @media (max-width: 768px) {

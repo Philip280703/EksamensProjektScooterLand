@@ -16,9 +16,9 @@ body {
 
 /* Header-styling */
 .header {
+    font-size: 28px;
     text-align: center;
     margin: 20px 0;
-    font-size: 2rem;
     color: #0056b3;
 }
 
@@ -51,7 +51,8 @@ body {
     }
 
     .table-modern tr:hover td {
-        background-color: #e9f1ff;
+        background-color: #f1f1f1;
+        transition: 0.3s ease;
     }
 
 /* Mobilvenlig styling */
