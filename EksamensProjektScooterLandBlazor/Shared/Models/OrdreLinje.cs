@@ -26,6 +26,9 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         [Range(1, 5000, ErrorMessage = "Antal skal være mellem 1 og 5000")]
         public int ?AntalEkstra { get; set; }
 
+        // bruges til scooterleje selvrisiko
+        public bool ?SelvrisikoBool { get; set; }
+
 
         [Range(0, 99, ErrorMessage ="Rabat skal være mellem 0 og 99 procent, skrives i hele tal")]
         public int ?RabatProcent { get; set; }
