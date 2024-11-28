@@ -59,12 +59,17 @@ else
                     <ValidationMessage For="@(() => kunde.Email)" />
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="Postnummer" class="form-label">Postnummer</label>
-                    <InputNumber id="Postnummer" @bind-Value="kunde.PostNummer" placeholder="@kunde.PostNummer" class="form-input" />
-                    <ValidationMessage For="@(() => kunde.PostNummer)" />
-                </div>
+
+            <div class="col-2 mb-3">
+                <label for="Postnummer">Postnummer</label>
+                <InputNumber id="PostNummer" @bind-Value="kunde.PostNummer" @oninput="UpdateBynavn" class="form-control" />
+            </div>
+
+            <div class="col-3 mb-3">
+                <label for="Bynavn">By</label>
+                <input id="Bynavn" type="text" value="@Bynavn" class="form-control" readonly />
+            </div>
+
                 <div class="form-group">
                     <label for="Vejnavn" class="form-label">Vejnavn</label>
                     <InputText id="Vejnavn" @bind-Value="kunde.VejNavn" placeholder="@kunde.VejNavn" class="form-input" />
@@ -81,9 +86,43 @@ else
                     <button type="submit" class="button-save">Gem</button>
                 </div>
             </div>
-        </div>
+       
     </EditForm>
 }
+
+
+
+@if (ShowError)
+{
+    <div class="message-box">
+        <div class="message-content">
+            <h4>Fejl</h4>
+            <p>Ugylidgt indtastet postnummer</p>
+            <div class="message-actions">
+                <button class="btn btn-danger" @onclick="OkayToError">OK</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@if (showModal)
+{
+    <div class="message-box">
+        <div class="message-content">
+            <h4>Succes!</h4>
+            <p>Kunden er nu rettet i systemet</p>
+            <div class="message-actions">
+                <button class="btn btn-success" @onclick="OkayToComplete">OK</button>
+            </div>
+        </div>
+    </div>
+}
+
+<br />
+<div></div>
+
 
 @code {
     [Inject]
@@ -91,39 +130,128 @@ else
 
     [Inject]
     public NavigationManager navigationManager { get; set; }
+    [Inject]
+    public IPostnummerOgByService postnummerOgByService { get; set; }
 
     [Parameter]
     public int KundeId { get; set; }
 
     private Kunde? kunde;
 
+    private List<PostNummerOgBy> postNummerOgByListe = new List<PostNummerOgBy>();
+
     private EditContext editContext;
     public int ErrorCode { get; set; }
     private string ErrorMessage;
+    private bool ValidPostnrBool = false;
 
     protected override async Task OnInitializedAsync()
     {
         kunde = await KundeService.GetKunde(KundeId);
+        postNummerOgByListe = (await postnummerOgByService.GetAllPostnummerOgByer()).ToList();
         editContext = new EditContext(kunde);
+        if (kunde?.PostNummer != null)
+        {
+            var args = new ChangeEventArgs { Value = kunde.PostNummer.ToString() };
+            UpdateBynavn(args);
+        }
+
+    }
+
+    private string Bynavn { get; set; } = string.Empty;
+
+    private void UpdateBynavn(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int postNummer))
+        {
+            kunde.PostNummer = postNummer;
+
+            var match = postNummerOgByListe.FirstOrDefault(x => x.Postnummer == postNummer);
+            if (match != null)
+            {
+                Bynavn = match?.ByNavn;
+                ValidPostnrBool = true;
+            }
+            else
+            {
+                Bynavn = "Ikke gyldigt postnummer";
+                ValidPostnrBool = false;
+            }
+            Console.WriteLine($"PostNummer: {postNummer}, ByNavn: {Bynavn}");
+        }
+        else
+        {
+            Bynavn = string.Empty;
+            Console.WriteLine("Indtastet postnummer kan ikke parses til int.");
+        }
     }
 
     private async void HandleValidSubmit()
     {
         Console.WriteLine("HandlevalidSubmit called...");
-        ErrorCode = await KundeService.UpdateKunde(kunde);
+        if(ValidPostnrBool == true)
+        {
+            ErrorCode = await KundeService.UpdateKunde(kunde);
+            ShowMessageBoxAfslut();
 
-        if (ErrorCode == 200)
-        {
-            navigationManager.NavigateTo("/Kundepage");
+
+            if (ErrorCode == 200)
+            {
+                if (showModal == false)
+                {
+                    navigationManager.NavigateTo("/Kundepage");
+                }
+                
+            }
+                
+            
+            if(ErrorCode != 200)
+            {
+                ErrorMessage = "Der opstod en fejl under opdatering af kunde. Prøv igen";
+            }
+
+           
         }
-        else
-        {
-            ErrorMessage = "Der opstod en fejl under opdatering af kunde. Prøv igen";
-        }
+
+        ShowMessageBoxErrorPostnr();
+
     }
 
     private void HandleInvalidSubmit()
     {
         Console.WriteLine("HandleInvalidSubmit called...");
     }
+
+    // pop op box kode til afslut ordre med betaling
+    private bool ShowError = false;
+
+    private async void ShowMessageBoxErrorPostnr()
+    {
+        ShowError = true;
+        StateHasChanged();
+    }
+
+    private async void OkayToError()
+    {
+        ShowError = false;
+        Console.WriteLine("Error afslutting order: " + ErrorCode);
+        StateHasChanged();
+    }
+
+
+    // Messagebox
+    private bool showModal = false;
+
+    private async void ShowMessageBoxAfslut()
+    {
+        showModal = true;
+        StateHasChanged();
+    }
+
+    private async void OkayToComplete()
+    {
+        showModal = false;
+        StateHasChanged();
+    }
+
 }
