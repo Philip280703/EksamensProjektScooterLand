@@ -3,8 +3,12 @@
 @using EksamensProjektScooterLandBlazor.Client.Services;
 
 @page "/YdelsePage"
-<h3>Ydelse oversigt</h3>
-<p>Her kan du se en liste over alle ydelser vi tilbyder</p>
+@if (IsStandalone)
+{
+    <h3>Ydelse oversigt</h3>
+    <p>Her kan du se en liste over alle ydelser vi tilbyder</p>
+}
+
 <div class="table-container">
     <table class="ydelse-table">
         <thead>

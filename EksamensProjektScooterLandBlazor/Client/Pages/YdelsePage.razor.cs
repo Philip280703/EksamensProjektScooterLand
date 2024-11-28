@@ -27,7 +27,12 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         [Parameter]
         public EventCallback ydelseTilføjet { get; set; }
 
+        [Parameter]
+        public bool IsStandalone { get; set; } = true;
+
         private int ErrorCode { get; set; } = 0;
+
+        private bool RenderYdelse = false;
 
         protected override async Task OnInitializedAsync()
         {
@@ -84,5 +89,6 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         {
             AddingOrdreBool = !AddingOrdreBool;
         }
+
     }
 }
