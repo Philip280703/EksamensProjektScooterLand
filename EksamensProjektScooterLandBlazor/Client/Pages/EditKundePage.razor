@@ -201,19 +201,23 @@ else
                 {
                     navigationManager.NavigateTo("/Kundepage");
                 }
-                
+
             }
-                
-            
+
+
             if(ErrorCode != 200)
             {
                 ErrorMessage = "Der opstod en fejl under opdatering af kunde. Prøv igen";
             }
 
-           
+
+        }
+        else
+        {
+            ShowMessageBoxErrorPostnr();
         }
 
-        ShowMessageBoxErrorPostnr();
+        
 
     }
 
