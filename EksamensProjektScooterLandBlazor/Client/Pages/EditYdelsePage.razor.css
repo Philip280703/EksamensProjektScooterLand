@@ -1,5 +1,5 @@
 ﻿/* Wrapper styling */
-.Enkelt-kunde {
+.Enkelt-ydelse {
     margin: 20px auto;
     padding: 10px;
     max-width: 80%;
@@ -16,6 +16,8 @@
     font-size: 16px;
     color: #333;
     text-align: left;
+    overflow: hidden;
+    border-radius: 12px;
 }
 
     .styled-table thead tr {
@@ -26,12 +28,13 @@
 
     .styled-table th,
     .styled-table td {
-        padding: 12px 15px;
+        padding: 16px 20px;
         border: 1px solid #ddd;
     }
 
     .styled-table tbody tr {
         border-bottom: 1px solid #ddd;
+        transition: background-color 0.3s ease;
     }
 
         /* Row hover effect */
@@ -75,7 +78,7 @@
 }
 
 /* Container styling */
-.Rediger-kunde {
+.Rediger-ydelse {
     max-width: 80%; /* Matches table width */
     margin: 20px auto;
     padding: 20px;
@@ -176,3 +179,9 @@
     .button-save:hover {
         background-color: #0056b3; /* Ændrer baggrundsfarven når man hover */
     }
+
+    .pris column {
+        text-align: right;
+    }
+
+

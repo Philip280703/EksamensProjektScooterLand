@@ -13,10 +13,10 @@
     <table class="ydelse-table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Ydelsesnavn</th>
-                <th>Estimeret Tid</th>
-                <th>Pris</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseID))">ID</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseNavn))">Ydelsesnavn</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.EstimeretTid))">Estimeret Tid</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.Pris))">Pris</th>
                 <th>Action</th>
             </tr>
         </thead>

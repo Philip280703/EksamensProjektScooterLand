@@ -2,19 +2,19 @@
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents
 @page "/Kundepage"
 
-<div class="kunde-page">
-    <h3>Kunde Oversigt</h3>
-    <p>Her kan du se en oversigt over alle kunder som er registreret i systemet.</p>
+<h3>Kunde Oversigt</h3>
+<p>Her kan du se en oversigt over alle kunder som er registreret i systemet.</p>
 
+<div class="table-wrapper">
     <table class="table">
         <thead>
             <tr class="Kunde-Tabel-Række">
-                <th>Id</th>
-                <th>Navn</th>
-                <th>Email</th>
-                <th>Tlf</th>
-                <th>Pref. M</th>
-                <th>Scooter</th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.KundeID))"> ID </th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.Fornavn))"> Navn </th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.Email))"> Email </th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.TelefonNummer))"> Tlf </th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.PreferetMekanikerCprNummer))"> Pref. M </th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.ScooterBrandID))"> Scooter </th>
                 <th>Action</th>
             </tr>
         </thead>
