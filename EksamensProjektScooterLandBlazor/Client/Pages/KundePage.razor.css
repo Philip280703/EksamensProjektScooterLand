@@ -1,22 +1,26 @@
 ﻿/* Page Styling */
 
+/* Page Header */
+h3 {
+    font-size: 28px;
+    color: #0056b3;
+    margin-bottom: 12px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+}
 
-    /* Page Header */
-    h3{
-        font-size: 28px;
-        color: #0056b3;
-        margin-bottom: 12px;
-        font-weight: bold;
-        text-align: center;
-        margin: 20px 0;
-    }
+p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+    text-align: center;
+}
 
- p{
-        font-size: 16px;
-        color: #555;
-        margin-bottom: 30px;
-        text-align: center;
-    }
+.table th:hover {
+    cursor: pointer;
+    background-color: #4d82c4;
+}
 
 /* Table Styling */
 .table {
@@ -26,11 +30,6 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-
-tr:hover{
-    background-color: #f1f1f1;
 }
 
     /* Table Header Styling */
@@ -45,14 +44,14 @@ tr:hover{
     }
 
     /* Table Body Styling */
-.table td {
-    background-color: #fff;
-    color: #333;
-    padding: 12px;
-    text-align: left;
-    font-size: 14px;
-    border-bottom: 1px solid #ddd;
-}
+    .table td {
+        background-color: #fff;
+        color: #333;
+        padding: 12px;
+        text-align: left;
+        font-size: 14px;
+        border-bottom: 1px solid #ddd;
+    }
 
 /* Responsive Table Styling */
 @media (max-width: 768px) {
@@ -81,6 +80,23 @@ tr:hover{
             }
 }
 
+/* Scrollable Table */
+.table-wrapper {
+    max-height: 500px; /* Juster max-height til den ønskede højde */
+    overflow-y: auto; /* Tilføjer scrollbar når indholdet er for stort */
+    margin-top: 20px;
+}
+
+/* Table Row Hover Effect */
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Vertikal og horisontal centrering af indhold i celler */
+td {
+    vertical-align: middle; /* Centrerer indholdet vertikalt */
+}
+
 /* Action Buttons */
 button {
     background: none;
@@ -95,6 +111,7 @@ button {
         transform: scale(1.1);
     }
 
+/* Rediger og Slet knap styling */
 .Rediger-knap, .Slet-knap {
     padding: 10px;
     background-color: transparent;
