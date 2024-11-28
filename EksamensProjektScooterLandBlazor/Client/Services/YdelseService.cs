@@ -46,7 +46,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 
         public async Task<int> UpdateYdelse(Ydelse ydelse)
         {
-            var response = await httpClient.PutAsJsonAsync($"api/ydelseapi/{ydelse.YdelseID}", ydelse);
+            var response = await httpClient.PutAsJsonAsync($"api/ydelseapi/",ydelse);
             var responseStatusCode = response.StatusCode;
             return (int)responseStatusCode;
         }
