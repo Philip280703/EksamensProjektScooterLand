@@ -24,6 +24,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
                 string fullPath = localDirec + path;
 				// start Winforms
 				Process.Start(fullPath);
+                Console.WriteLine(fullPath);
 				return Ok("Backup Projekt startet");
 			}
 			catch (Exception ex)

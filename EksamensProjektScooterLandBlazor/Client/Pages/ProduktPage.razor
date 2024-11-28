@@ -4,9 +4,14 @@
 
 @page "/Produkt"
 
-<div class="produkt-page">
+@if (AddingOrdreBool == false)
+{
 	<h3>Produkt Oversigt</h3>
 	<p>Her kan du se en oversigt over alle produkter som er i systemet.</p>
+}
+
+<div class="produkt-page">
+	
 
 	<table class="table">
 		<thead>
@@ -25,29 +30,6 @@
 		</tbody>
 	</table>
 </div>
-@* <h4>Produkter</h4>
 
-<div class="table-container">
-	<table class="table">
-		<thead>
-			<tr>
-				<th> Id</th>
-				<th> Produktnavn</th>
-				<th>Produktpris</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-
-		<thead>
-
-			@foreach (var item in produktListe)
-			{
-				<RenderProdukt produkt="@item" Produkttilføjet="tilføjetProdukt" deleteProdukt="DeleteProdukt" OrdreAddBool="@AddingOrdreBool" OrdreId="@OrdreID" />
-			}
-
-		</thead>
-	</table>
-
-</div> *@
 
 
