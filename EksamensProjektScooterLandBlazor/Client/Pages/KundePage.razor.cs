@@ -52,14 +52,16 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
                 : kundeListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
         }
 
-        private string GetSortIndicator(string columnName)
+        // der bruges MarkupString til at rendere HTML i blazor kode. Det bliver brugt i ønsket om at bruge blazor bootsratp ikonerne 
+        private MarkupString GetSortIndicator(string columnName)
         {
             if (currentSortColumn == columnName)
             {
-                return isAscending ? "↑" : "↓"; // Arrows to indicate sort direction
+                // Returnere MarkupString som enten er bi bi-chevron-up eller bi bi-chevron-down, som er pilene. Bootstrap ikonerne
+                return new MarkupString(isAscending ? "<i class='bi bi-chevron-up'></i>" : "<i class='bi bi-chevron-down'></i>");
             }
-            return string.Empty;
+            return new MarkupString(string.Empty);
         }
-
     }
+    // Uden brug af MarkupString ville de specifikke pile fra blazor bootsrap ikke kunne indlæses ordentligt på vores websted. 
 }

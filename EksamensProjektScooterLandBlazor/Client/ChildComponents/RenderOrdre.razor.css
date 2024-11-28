@@ -1,68 +1,25 @@
-﻿/* Table Styling */
-.table-container {
-    margin-top: 20px;
-}
-
-.table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-    .table th, .table td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .table th {
-        background-color: #0288d1;
-        color: white;
-    }
-
-.table-striped tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
-}
-
-.table-striped tbody tr:nth-child(even) {
-    background-color: #fff;
-}
-
-/* Responsive table */
-@media (max-width: 768px) {
-    .table {
-        font-size: 14px;
-    }
-
-        .table th, .table td {
-            padding: 8px;
-        }
-}
-
-/* Button styling for order line button */
-.btn-info {
-    background-color: #0288d1;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
+﻿/* Styling for the order rows */
+.order-row {
+    background-color: #fff; /* Standard white background */
     cursor: pointer;
-    text-align: center;
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
 }
 
-    .btn-info:hover {
-        background-color: #0277bd;
+    .order-row:hover {
+        background-color: #f1f1f1; /* Change to #f1f1f1 when hovered */
+        cursor: default;
     }
 
-/* Styling for the checkbox column (Afsluttet) */
-input[type="checkbox"] {
-    transform: scale(1.2);
+.btn {
+    background-color: transparent;
+    color: #0056b3;
+    border: 1px #0056b3;
+    border-radius: 10px;
 }
 
-/* Error message */
-.alert-danger {
-    background-color: #f44336;
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    margin-top: 20px;
-}
+    .btn:hover {
+        background-color: #ddd;
+        color: black;
+        transition: 0.3s ease;
+        transform: scale(1.05);
+    }
