@@ -32,6 +32,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         // sortings parametre
         private string currentSortColumn;
         private bool isAscending = true;
+        private string UiValue { get; set; } = "";
 
         private void SortByColumn(string column)
         {
@@ -49,6 +50,15 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
             kundeListe = isAscending
                 ? kundeListe.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
                 : kundeListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
+        }
+
+        private string GetSortIndicator(string columnName)
+        {
+            if (currentSortColumn == columnName)
+            {
+                return isAscending ? "↑" : "↓"; // Arrows to indicate sort direction
+            }
+            return string.Empty;
         }
 
     }

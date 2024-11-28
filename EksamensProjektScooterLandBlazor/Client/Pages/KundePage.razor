@@ -9,12 +9,12 @@
     <table class="table">
         <thead>
             <tr class="Kunde-Tabel-Række">
-                <th @onclick="() => SortByColumn(nameof(Kunde.KundeID))"> ID </th>
-                <th @onclick="() => SortByColumn(nameof(Kunde.Fornavn))"> Navn </th>
-                <th @onclick="() => SortByColumn(nameof(Kunde.Email))"> Email </th>
-                <th @onclick="() => SortByColumn(nameof(Kunde.TelefonNummer))"> Tlf </th>
-                <th @onclick="() => SortByColumn(nameof(Kunde.PreferetMekanikerCprNummer))"> Pref. M </th>
-                <th @onclick="() => SortByColumn(nameof(Kunde.ScooterBrandID))"> Scooter </th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.KundeID))">ID @GetSortIndicator("KundeID")</th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.Fornavn))">Navn @GetSortIndicator("Fornavn")</th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.Email))">Email @GetSortIndicator("Email")</th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.TelefonNummer))">Tlf @GetSortIndicator("TelefonNummer")</th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.PreferetMekanikerCprNummer))">Pref. M @GetSortIndicator("PreferetMekanikerCprNummer")</th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.ScooterBrandID))">Scooter @GetSortIndicator("ScooterBrandID")</th>
                 <th>Action</th>
             </tr>
         </thead>
