@@ -102,7 +102,7 @@ else
 
 
 
-@if (showModal)
+@if (showMessageBoxBool)
 {
 	<div class="message-box">
 		<div class="message-content">
@@ -279,20 +279,19 @@ else
 	}
 
 
-	// pop op box kode til afslut ordre med betaling
-	private bool showModal = false;
+	// message box kode til afslut ordre med betaling
+	private bool showMessageBoxBool = false;
 
 	private async void AfslutOrdreKnap()
 	{
-		// Show the modal to confirm the action
-		showModal = true;
+		showMessageBoxBool = true;
 		StateHasChanged();
 	}
 
 	private async void ConfirmAfslutOrdre()
 	{
-		// Proceed with the action after confirmation
-		showModal = false;
+		// hvis der bliver trykket på at betaling er modtaget, køre denne metode
+		showMessageBoxBool = false;
 		currentOrdre.Afsluttet = true;
 		currentOrdre.BetalingsSum = BeregnSum();
 
@@ -312,8 +311,8 @@ else
 
 	private void CancelAfslutOrdre()
 	{
-		// luk pop up uden at afslut ordre
-		showModal = false;
+		// hvis der bliver trykket på nej til modtaget betaling
+		showMessageBoxBool = false;
 		Console.WriteLine("Afslutning cancelled.");
 	}
 
