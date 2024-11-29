@@ -5,7 +5,7 @@
 
 <tr class="hoverable-row">
 	<td>@kunde.KundeID</td>
-	<td>@kunde.Fornavn @kunde.Efternavn</td>
+	<td @onclick="() => NavigateToOrdreOversigtComponent(kunde.KundeID)">@kunde.Fornavn @kunde.Efternavn</td>
 	<td>@kunde.Email</td>
 	<td>+45 @kunde.TelefonNummer</td>
 	<td>@kunde.Mekaniker.Fornavn @kunde.Mekaniker.Efternavn</td>
