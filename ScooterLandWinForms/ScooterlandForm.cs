@@ -2,10 +2,10 @@ using ScooterLandWinForms.Serivces;
 
 namespace ScooterLandWinForms
 {
-    public partial class Form1 : Form
+    public partial class FormScooterLand : Form
     {
         private readonly BackupKopieringService backupKopieringService;
-        public Form1()
+        public FormScooterLand()
         {
             InitializeComponent();
             backupKopieringService = new BackupKopieringService();

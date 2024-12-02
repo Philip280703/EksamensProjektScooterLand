@@ -11,7 +11,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
 		// IActionResult er et Interface som angiver, at metoden kan returnere et hvilket som helst HTTP-svar. 
 		public IActionResult ÅbnBackupForm()
 		{
-            Console.WriteLine("Åbnbackupform kaldet");
+            Console.WriteLine("Openbackupform kaldet");
 			try
 			{
 				// henter directory

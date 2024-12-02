@@ -1,6 +1,6 @@
 ﻿namespace ScooterLandWinForms
 {
-    partial class Form1
+    partial class FormScooterLand
     {
         /// <summary>
         ///  Required designer variable.
