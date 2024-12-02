@@ -9,6 +9,7 @@ namespace ScooterLandWinForms
         {
             InitializeComponent();
             backupKopieringService = new BackupKopieringService();
+            ViewLastUsedUsb();
         }
 
         private void buttonSelectFolder_Click(object sender, EventArgs e)
@@ -26,7 +27,7 @@ namespace ScooterLandWinForms
             string sourcePath = backupKopieringService.SelectFolder("vælg placering for back-up");
             if (sourcePath != null)
             {
-                if(backupKopieringService.PathVerify(sourcePath) == false)
+                if (backupKopieringService.PathVerify(sourcePath) == false)
                 {
                     MessageBox.Show("Der skal vælges en mappe på et usb-stik som back-up skal ligge på", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -35,7 +36,7 @@ namespace ScooterLandWinForms
                     backupKopieringService.SetDestinationFolderPath(sourcePath);
                     textBoxUSB.Text = sourcePath;
                 }
-            
+
             }
         }
 
@@ -43,23 +44,23 @@ namespace ScooterLandWinForms
         {
             if (backupKopieringService.CreateBatFil())
             {
-                if (backupKopieringService.CheckUsbstickName())
-                {
-					MessageBox.Show("Back-up er nu gennemført :).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					backupKopieringService.ExecuteBatchFile();
-				}
-                else
-                {
-                    MessageBox.Show("Backup ikke gennemført, usb-stikket er det samme som det sidst brugte", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                
+                backupKopieringService.ExecuteBatchFile();
+                MessageBox.Show("Back-up er nu gennemført :).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ViewLastUsedUsb();
             }
-            else
+
+        }
+
+        private void ViewLastUsedUsb()
+        {
+            if (backupKopieringService.UsbList[0].LastUsed == true)
             {
-                MessageBox.Show("Fejl! Sikre at begge destinationer passer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                labelSenestBrugtUSB.Text = backupKopieringService.UsbList[0].Name;
             }
-
-
+            else if (backupKopieringService.UsbList[1].LastUsed == true)
+            {
+                labelSenestBrugtUSB.Text = backupKopieringService.UsbList[1].Name;
+            }
         }
     }
 }
