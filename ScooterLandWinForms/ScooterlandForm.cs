@@ -45,8 +45,8 @@ namespace ScooterLandWinForms
             {
                 if (backupKopieringService.CheckUsbstickName())
                 {
-					MessageBox.Show("Back-up er nu gennemført :).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					backupKopieringService.ExecuteBatchFile();
+					MessageBox.Show("Back-up er nu gennemført :).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				}
                 else
                 {
