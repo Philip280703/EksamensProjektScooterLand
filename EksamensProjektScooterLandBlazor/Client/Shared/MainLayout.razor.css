@@ -1,12 +1,17 @@
 .page {
-    position: relative;
     display: flex;
     flex-direction: column;
+    min-height: 100vh; /* Sørger for, at siden tager hele skærmhøjden */
 }
 
 main {
-    color: black;
-    flex: 1;
+    flex-grow: 1; /* Fylder alt tilgængelig plads */
+    margin-bottom: 100px; /* Skaber plads til footeren, så den ikke overlapper */
+}
+
+body {
+    overflow-x: hidden;
+    margin: 0; /* Fjerner standard margin */
 }
 
 .sidebar {
@@ -79,12 +84,14 @@ main {
 }
 
 .footer {
-    background-color: #f0f0f0; /* Light grey background */
-    text-align: center; /* Center-align text */
-    padding: 20px 0; /* Add padding around the footer */
-    font-size: 0.9rem; /* Slightly smaller text */
-    color: #6c757d; /* Muted text color */
-    border-top: 1px solid #dee2e6; /* Border to separate from the rest of the page */
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    color: #6c757d;
+    border-top: 1px solid #dee2e6;
+    position: relative; /* Sørger for at footeren ikke er fast i bunden */
+    width: 100%; /* Fylder hele bredden */
 }
 
 .footer-line {

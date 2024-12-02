@@ -32,6 +32,7 @@ namespace EksamensProjektScooterLandBlazor.Client.ChildComponents
 		private async Task DeleteKunde()
 		{
 			await deleteKunde.InvokeAsync(kunde);
+			showmodal = !showmodal;
 		}
 
 
