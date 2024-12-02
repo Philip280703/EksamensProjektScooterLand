@@ -31,9 +31,7 @@ namespace ScooterLandWinForms.Serivces
 
         //private string filePath;
 
-        private List<UsbClass> UsbList;
-
-        string ConnectionString;
+      
 
         /// <summary>
         /// null-constructor instansiere bat-filens path, henter system mappe og kombinere de to, så batfilen kan placeres
@@ -57,24 +55,10 @@ namespace ScooterLandWinForms.Serivces
             //filePath = disc + backslash + user + backslash + name + backslash + sorce + backslash + repo + backslash + cl + backslash + classl + backslash + folder +  backslash + fil;
             //UsbList = GetTextFile(filePath);
 
-            ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["default"].ToString();
         }
 
 
-        internal List<UsbClass> GetUsbList()
-        {
-            UsbList = new List<UsbClass>();
-
-            string command = "select * from UsbTable";
-
-            using SqlConnection conn = new SqlConnection(ConnectionString);
-
-            try
-            {
-                conn.Open();
-            }
-
-        }
+       
 
         /// <summary>
         /// vælger folder eller element som skal til kopiering. Den string som skal med er stien til det valgte element/folder
