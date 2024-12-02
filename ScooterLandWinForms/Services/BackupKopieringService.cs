@@ -31,6 +31,7 @@ namespace ScooterLandWinForms.Serivces
 
         public BackupKopieringService()
         {
+            BatFilPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "copy_to_usb.bat");
             db = new DbHandler();
             UsbList = db.GetUsbList();
         }
@@ -116,7 +117,7 @@ namespace ScooterLandWinForms.Serivces
         /// <summary>
         /// setter en bool af hvilket usb stik som sidder i computeren
         /// </summary>
-        public bool CheckUsbstickName()
+        private bool CheckUsbstickName()
         {
 
             DriveInfo[] drives = DriveInfo.GetDrives();

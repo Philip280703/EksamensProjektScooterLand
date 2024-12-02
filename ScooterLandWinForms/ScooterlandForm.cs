@@ -43,16 +43,8 @@ namespace ScooterLandWinForms
         {
             if (backupKopieringService.CreateBatFil())
             {
-                if (backupKopieringService.CheckUsbstickName())
-                {
-					backupKopieringService.ExecuteBatchFile();
-					MessageBox.Show("Back-up er nu gennemført :).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				}
-                else
-                {
-                    MessageBox.Show("Backup ikke gennemført, usb-stikket er det samme som det sidst brugte", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                
+				backupKopieringService.ExecuteBatchFile();
+				MessageBox.Show("Back-up er nu gennemført :).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
