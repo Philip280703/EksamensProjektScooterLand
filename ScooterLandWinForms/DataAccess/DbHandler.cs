@@ -60,5 +60,34 @@ namespace ScooterLandWinForms.DataAccess
             return UsbList;
 
         }
+
+
+        internal bool UpdateUsbList(UsbClass usbObjekt)
+        {
+            string command = "update UsbTable set LastUsed = (@LastUsed) where id = (@id)";
+
+            using SqlConnection conn = new SqlConnection(ConnectionString);
+
+            SqlCommand cmd = new SqlCommand(command, conn);
+
+            cmd.Parameters.AddWithValue("@LastUsed", usbObjekt.LastUsed);
+            cmd.Parameters.AddWithValue("@id", usbObjekt.id);
+
+            int rows = 0;
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { conn.Close(); }
+
+            if (rows == 0) { return false; }
+            else { return true; }
+
+        }
     }
 }
