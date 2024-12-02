@@ -1,0 +1,59 @@
+﻿/* Styling af faktura-container */
+.invoice-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+/* Styling af overskrifter */
+h1.company-name {
+    font-size: 24px;
+    margin: 0;
+}
+
+h6 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Styling af tabeller */
+.table, .ydelseogproduct-table, .ScooterLeje-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+    .table th, .ydelseogproduct-table th, .ScooterLeje-table th,
+    .table td, .ydelseogproduct-table td, .ScooterLeje-table td {
+        padding: 8px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    .table th, .ydelseogproduct-table th, .ScooterLeje-table th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Styling af link til email */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* Styling af logo */
+.company-logo {
+    max-width: 150px;
+    height: auto;
+}

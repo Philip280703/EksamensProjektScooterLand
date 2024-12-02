@@ -3,6 +3,8 @@
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents;
 @page "/OrdreLinjePage/{OrdreID:int}"
 
+@inject NavigationManager NavigationManager;
+
 <h3>OrdreLinjePage</h3>
 
 <table class="table">
@@ -69,8 +71,8 @@
 
 @if(currentOrdre.Afsluttet == true)
 {
-	<button class="btn btn-primary">Faktura</button>
-}
+	<button class="btn btn-primary" @onclick="() => NavigateToFakturaComponent(OrdreId)"> Faktura</button>
+ }
 else
 {
 	<button class="btn btn-primary" @onclick="AddProduktKnap">Tilføj produkt</button>
@@ -141,6 +143,10 @@ else
 	[Parameter]
 	public int OrdreId { get; set; }
 
+	[Parameter]
+	public int KundeId { get; set; }
+
+
 	private int ErrorCode { get; set; }
 
 	private bool ProduktKnap = false;
@@ -152,6 +158,9 @@ else
 	private bool ListContainsScooterLejeBool = false;
 
 	private bool selvrisikoBool { get; set; }
+
+	private Kunde kunde;
+	private Ordre ordre;
 
 
 	protected override async Task OnInitializedAsync()
@@ -238,7 +247,7 @@ else
 
 			sum += pris * antal * (1 - (rabat / 100.0));
 
-			
+
 		}
 
 		return sum;
@@ -316,6 +325,10 @@ else
 		Console.WriteLine("Afslutning cancelled.");
 	}
 
+	private void NavigateToFakturaComponent(int OrdreID)
+	{
+		NavigationManager.NavigateTo($"/FakturaPage/{OrdreID}");
 
+	}
 
 }
