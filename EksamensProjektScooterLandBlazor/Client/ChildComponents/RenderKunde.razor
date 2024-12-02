@@ -3,13 +3,13 @@
 @inject NavigationManager NavigationManager;
 
 
-<tr class="hoverable-row">
-	<td>@kunde.KundeID</td>
-	<td>@kunde.Fornavn @kunde.Efternavn</td>
-	<td>@kunde.Email</td>
-	<td>+45 @kunde.TelefonNummer</td>
-	<td>@kunde.Mekaniker.Fornavn @kunde.Mekaniker.Efternavn</td>
-	<td>@kunde.Mekaniker.scooterBrand.ScooterBrandNavn</td>
+<tr class="hoverable-row" style="cursor: pointer;" onclick="NavigateToOrdreOversigtComponent(@kunde.KundeID)">
+	<td @onclick="() => NavigateToOrdreOversigtComponent(kunde.KundeID)">@kunde.KundeID</td>
+	<td @onclick="() => NavigateToOrdreOversigtComponent(kunde.KundeID)">@kunde.Fornavn @kunde.Efternavn</td>
+	<td @onclick="() => NavigateToOrdreOversigtComponent(kunde.KundeID)">@kunde.Email</td>
+	<td @onclick="() => NavigateToOrdreOversigtComponent(kunde.KundeID)">+45 @kunde.TelefonNummer</td>
+	<td @onclick="() => NavigateToOrdreOversigtComponent(kunde.KundeID)">@kunde.Mekaniker.Fornavn @kunde.Mekaniker.Efternavn</td>
+	<td @onclick="() => NavigateToOrdreOversigtComponent(kunde.KundeID)">@kunde.Mekaniker.scooterBrand.ScooterBrandNavn</td>
 	<td>
 		<button class="Rediger-knap" style="border: none;" @onclick="() => NavigateToEditKundeComponenet(kunde.KundeID)">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">

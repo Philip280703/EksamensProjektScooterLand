@@ -31,5 +31,10 @@ namespace EksamensProjektScooterLandBlazor.Client.ChildComponents
 		{
 			NavigationManager.NavigateTo($"/Editkundepage/{kundeID}");
 		}
+
+		private void NavigateToOrdreOversigtComponent(int KundeID)
+		{
+			NavigationManager.NavigateTo($"/KundeOrdreOversigtPage/{KundeID}");
+		}
 	}
 }

@@ -1,0 +1,15 @@
+﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
+@using EksamensProjektScooterLandBlazor.Client.Services;
+@using EksamensProjektScooterLandBlazor.Client.ChildComponents;
+
+@page "/KundeOrdreOversigtPage/{kundeID:int}"
+
+
+<OrdrePage kundeId = "@KundeId" />
+
+@code {
+
+	[Parameter]
+	public int KundeId { get; set; }
+
+}

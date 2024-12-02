@@ -48,10 +48,24 @@
         <label for="Placering">Placering</label>
         <InputText id="Placering" @bind-Value="KundeModel.Placering" class="form-control" />
         <ValidationMessage For="@(() => KundeModel.Placering)" />
-    </div>
-       <div class="col-2 mb-3">
+     </div>
+    @* <div class="col-2 mb-3">
         <label for="Postnummer">Postnummer</label>
         <InputNumber id="PostNummer" @bind-Value="KundeModel.PostNummer" @oninput="UpdateBynavn" class="form-control" />
+    </div> *@
+    <div class="col-2 mb-3">
+        <label for="Postnummer">Postnummer</label>
+        <input type="number" id="PostNummer"
+               @bind="KundeModel.PostNummer"
+               pattern="\d{4}"
+               maxlength="4"
+               class="form-control"
+                   @oninput="UpdateBynavn" />
+
+        @if (!string.IsNullOrEmpty(ValidationMessage))
+        {
+            <span class="text-danger">@ValidationMessage</span>
+        }
     </div>
 
     <div class="col-3 mb-3">
@@ -158,6 +172,8 @@
 
     public int ErrorCode { get; set; }
 
+    private string ValidationMessage { get; set; } = string.Empty;
+ 
     private bool ValidPostnrBool = false;
 
     protected override async Task OnInitializedAsync()
@@ -216,22 +232,23 @@
             KundeModel.PostNummer = postNummer;
 
             var match = postNummerOgByListe.FirstOrDefault(x => x.Postnummer == postNummer);
-            if(match != null)
+            if (match != null)
             {
-                Bynavn = match?.ByNavn;
-                ValidPostnrBool = true;
+                Bynavn = match.ByNavn;
+                ValidationMessage = string.Empty; // Clear error message when valid
             }
             else
             {
-                Bynavn = "Ikke gyldigt postnummer";
-                ValidPostnrBool = false;
+                Bynavn = null;
+                ValidationMessage = "Gyldigt dansk posnummer påkrævet";
             }
             Console.WriteLine($"PostNummer: {postNummer}, ByNavn: {Bynavn}");
         }
         else
         {
-            Bynavn = string.Empty;
-            Console.WriteLine("Indtastet postnummer kan ikke parses til int.");
+            Bynavn = null;
+            ValidationMessage = "Skal være 4 cifre.";
+            Console.WriteLine("Invalid postnummer input.");
         }
     }
 

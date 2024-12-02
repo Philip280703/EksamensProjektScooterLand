@@ -1,5 +1,8 @@
 ﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
 @using EksamensProjektScooterLandBlazor.Client.Services;
+@using EksamensProjektScooterLandBlazor.Client.ChildComponents;
+
+
 @page "/Editkundepage/{kundeID:int}"
 
 @if (kunde == null)
@@ -88,11 +91,9 @@ else
             </div>
        
     </EditForm>
+
+
 }
-
-
-
-
 @if (ShowError)
 {
     <div class="message-box">
@@ -138,9 +139,14 @@ else
     public int KundeId { get; set; }
 
     private Kunde? kunde;
+    private OrdreLinje? ordreLinje;
 
     private List<PostNummerOgBy> postNummerOgByListe = new List<PostNummerOgBy>();
 
+    private List<Ordre> ordreListe = new List<Ordre>();
+
+
+ 
     private EditContext editContext;
     public int ErrorCode { get; set; }
     private string ErrorMessage;

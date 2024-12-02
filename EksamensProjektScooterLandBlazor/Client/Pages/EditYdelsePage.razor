@@ -62,6 +62,7 @@ else
     </EditForm>
 }
 
+<h3>EditYdelsePage</h3>
 
 
 
@@ -75,27 +76,49 @@ else
 
 else
 {
-    <div class="table-container">
-    <table class="ydelse-table">
-        <thead>
-            <tr>
-                <th>YdelseID</th>
-                <th>Ydelsesnavn</th>
-                <th>Estimeret Tid</th>
-                <th>Pris</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-            <tbody>
-                <tr>
-                    <td>@ydelse.YdelseID</td>
-                    <td><InputText @bind-Value="ydelse.YdelseNavn" /></td>
-                    <td><InputNumber @bind-Value="ydelse.EstimeretTid" /></td>
-                    <td><InputNumber @bind-Value="ydelse.Pris" /></td>
-                </tr>
-            </tbody>
-      </table>
-</div>
+    <EditForm EditContext="@EditContext"
+              OnValidSubmit="@HandleValidSubmit"
+              OnInvalidSubmit="@HandleInvalidSubmit"
+              class="row p-3">
+        <DataAnnotationsValidator />
+
+        <div class="col-md-12 p-3 border-green bg-light rounded">
+            <!-- Use row for input fields -->
+            <div class="row mb-3">
+                <div class="col-md-4 mb-3">
+                    <label for="Name" class="form-label">Name</label>
+                    <InputText id="Name" @bind-Value="ydelse.YdelseNavn" class="form-control form-control-sm" />
+                    <ValidationMessage For="@(() => ydelse.YdelseNavn)" class="text-danger" />
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="Pris" class="form-label">Pris</label>
+                    <InputNumber id="Pris" @bind-Value="ydelse.Pris" class="form-control form-control-sm"
+                                 ParsingErrorMessage="The {0} field has an invalid value." />
+                    <ValidationMessage For="@(() => ydelse.Pris)" class="text-danger" />
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="EstimeretTid" class="form-label">Estimeret Tid</label>
+                    <InputNumber id="EstimeretTid" @bind-Value="ydelse.EstimeretTid" class="form-control form-control-sm"
+                                 ParsingErrorMessage="The {0} field has an invalid value." />
+                    <ValidationMessage For="@(() => ydelse.EstimeretTid)" class="text-danger" />
+                </div>
+            </div>
+
+            <!-- Opdater button -->
+            <div class="col-12 mb-3">
+                <button type="submit" class="btn btn-primary col-12">Opdater</button>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(ErrorMessage))
+            {
+                <div class="alert alert-danger mt-3">
+                    @ErrorMessage
+                </div>
+            }
+        </div>
+    </EditForm>
     
 } *@
 
