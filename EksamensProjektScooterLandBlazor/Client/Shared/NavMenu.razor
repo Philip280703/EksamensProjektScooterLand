@@ -117,7 +117,7 @@
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" @onclick="ÅbnBackupPage">
+            <NavLink class="nav-link" @onclick="OpenBackupPage">
                 <span aria-hidden="true" class="bi bi-list-nested-nav-menu"></span> Backup
             </NavLink>
         </div>
@@ -144,7 +144,7 @@
         }
     }
 
-    private async Task ÅbnBackupPage()
+    private async Task OpenBackupPage()
     {
         var response = await httpClient.GetAsync("api/winform");
     }

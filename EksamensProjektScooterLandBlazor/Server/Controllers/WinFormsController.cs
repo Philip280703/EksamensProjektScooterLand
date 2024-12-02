@@ -7,9 +7,9 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
 	[Route("api/winform")] // Denne rute siger, at alt som starter med "api/WinForms", går til den her controller
 	public class WinFormsController : ControllerBase
 	{
-		[HttpGet] //skal være en GET-anmodning med ruten "api/WinForms/åbnbackupform"
+		[HttpGet] //skal være en GET-anmodning med ruten "api/WinForms/OpenBackupForm"
 		// IActionResult er et Interface som angiver, at metoden kan returnere et hvilket som helst HTTP-svar. 
-		public IActionResult ÅbnBackupForm()
+		public IActionResult OpenBackupForm()
 		{
             Console.WriteLine("Openbackupform kaldet");
 			try
