@@ -15,7 +15,7 @@
                 Lille Lisevej 12, Odense<br />
                 Danmark<br />
                 Telefon: 12345678<br />
-                Email: <a href="mailto:Scooterland@gmail.com">Scooterland@gmail.com</a>
+                Email:Scooterland@gmail.com
             </p>
         </div>
         <div style="width: 30%; text-align: right;">
@@ -42,12 +42,16 @@
                         <td>@ordre.OrdreID</td>
                     </tr>
                     <tr>
-                        <td><strong>Dato</strong></td>
-                        <td>@ordre.SalgsDato.ToString("dd-MM-yyyy")</td>
+                        <td><strong>OrdreDato</strong></td>
+                        <td>@ordre.SalgsDato.ToShortDateString()</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FakturaDato</strong></td>
+                        <td>@DateTime.Now.ToShortDateString()</td>
                     </tr>
                     <tr>
                         <td><strong>BetalingsDato</strong></td>
-                        <td>@ordre.SalgsDato.AddDays(8).ToString("dd-MM-yyyy")</td>
+                        <td>@DateTime.Now.AddDays(8).ToShortDateString()</td>
                     </tr>
                             
                 </table>
@@ -85,8 +89,8 @@
                     <th>OrdreLinje ID</th>
                     <th>Type</th>
                     <th>Navn</th>
-                    <th>Pris</th>
                     <th>Dato</th>
+                    <th>Pris pr.stk</th>
                     <th>Antal</th>
                     <th>Rabat</th>
                     <th>Total</th>
@@ -109,34 +113,80 @@
         <hr />
 
         <!-- Sektion med scooterleje linjer -->
-        <h6><strong>ScooterLeje</strong></h6>
-        <table class="ScooterLeje-table table table-bordered">
-            <thead>
-                <tr>
-                    <th>OrdreLinje ID</th>
-                    <th>Type</th>
-                    <th>Dagspris</th>
-                    <th>Antal Dage</th>
-                    <th>Km Pris</th>
-                    <th>Km Kørt</th>
-                    <th>Selvrisiko</th>
-                    <th>Rabat Procent</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in ordreLinjeListe)
-                {
-                    @if (item.ScooterLejeID != null)
-                    {
-                        <RenderScooterLejeOrdreLinje ordreLinje="@item" currentOrdre="@ordre" />
-                        ListContainsScooterLejeBool = true;
-                    }
-                }
-            </tbody>
-        </table>
+
+        foreach( var linje in ordreLinjeListe)
+        {
+            if (linje.ScooterLejeID != null)
+            {
+                <h6><strong>ScooterLeje</strong></h6>
+                <table class="ScooterLeje-table table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>OrdreLinje ID</th>
+                            <th>Type</th>
+                            <th>Dagspris</th>
+                            <th>Antal Dage</th>
+                            <th>Km Pris</th>
+                            <th>Km Kørt</th>
+                            <th>Selvrisiko</th>
+                            <th>Rabat Procent</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ordreLinjeListe)
+                        {
+                            @if (item.ScooterLejeID != null)
+                            {
+                                <RenderScooterLejeOrdreLinje ordreLinje="@item" currentOrdre="@ordre" />
+                                ListContainsScooterLejeBool = true;
+                                item.SelvrisikoBool = selvrisikoBool;
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            }
+        }
+       
+        <hr />
+        <br />
+
+        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+           
+            <div style="width: 45%; padding-right: 20px;">
+                <h5><strong>Bemærkninger</strong></h5>
+                <p>
+                    <strong>Betalingsbetingelser:</strong> Netto 08 dage - forfald
+                    @DateTime.Now.AddDays(8).ToShortDateString()
+                </p>
+                <p>
+                    <strong>Betaling:</strong> Brug følgende FI-Indbetalingskode til betaling via netbank <code>+71 &lt;xxxxxxxxxx + xxxxxxx &lt;</code>
+                </p>
+            </div>
+
+            <div style="width: 45%; text-align: right;">
+                <table class="table table-bordered" style="width: 100%; margin-left: auto;">
+                    <tr>
+                        <td><strong>Subtotal:</strong></td>
+                        <td>@BeregnSubtotal()</td>
+                    </tr>
+                    <tr>
+                        <td><strong> 25,00% Moms:</strong></td>
+                        <td>@BeregnMoms()</td>
+                    </tr>
+                    <tr style="border-bottom: 3px solid black;">
+                        <td><strong>Samlet Beløb:</strong></td>
+                        <td>@BeregnSum()</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
     }
 </div>
+
+<button class="btn btn-primary" @onclick="PrintFactura">Print faktura</button>
 
 <br />
 
@@ -145,8 +195,10 @@
 @code {
     [Parameter]
     public int OrdreId { get; set; }
+
     private Ordre ordre;
     private Kunde kunde;
+    private bool selvrisikoBool = false;
 
     private List<OrdreLinje> ordreLinjeListe = new List<OrdreLinje>();
     private ScooterLeje scooterLeje = new ScooterLeje();
@@ -176,4 +228,67 @@
         scooterLeje = await scooterLejeService.GetSingle(4);
         ordreLinjeListe = (await ordreLinjeService.GetAllOrdreLinjer()).Where (od => od.OrdreID == OrdreId).ToList();
     }
+
+
+    public double BeregnSum()
+    {
+        double sum = 0;
+
+        foreach (var linje in ordreLinjeListe)
+        {
+            double pris = 0;
+
+            if (linje.ScooterLejeID != null)
+            {
+                double dagsPrisXDage = scooterLeje.DagsLejePris * linje.Antal;
+                double KmPrisXAntal = scooterLeje.ForsikringPrKm * linje.AntalEkstra ?? 0;
+                double selvrisiko = 0;
+                if (selvrisikoBool == true)
+                {
+                    selvrisiko = scooterLeje.SelvRisiko;
+                }
+                pris = dagsPrisXDage + KmPrisXAntal + selvrisiko;
+            }
+
+            if (linje.ProduktID != null)
+                pris = linje.produkt.ProduktPris;
+            else if (linje.YdelseID != null)
+                pris = linje.ydelse.Pris;
+
+
+
+            int antal = 0;
+            if (linje.ScooterLejeID != null)
+            {
+                antal = 1;
+            }
+            else
+            {
+                antal = linje.Antal;
+            }
+            int rabat = linje.RabatProcent ?? 0; ;
+
+            sum += pris * antal * (1 - (rabat / 100.0));
+
+        }
+
+        return sum;
+    }
+
+
+    private double BeregnMoms()
+    {
+        return BeregnSum() * 0.25;
+    }
+
+    private double BeregnSubtotal()
+    {
+        return BeregnSum() - BeregnMoms();
+    }
+
+    public void PrintFactura()
+    {
+       
+    }
+
 }

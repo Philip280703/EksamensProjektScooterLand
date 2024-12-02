@@ -78,17 +78,18 @@
     <td>
         <b>@BeregnOrdreLinjeSum().ToString("N0") kr.</b>
     </td>
-    <td>
+    
         @if(currentOrdre.Afsluttet == false)
-        {
+        { 
+            <td>
             <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit">
-                <button type="submit" class="btn btn-primary">Opdater</button>
+            <button type="submit" class="btn btn-primary">Opdater</button>
             </EditForm>
-
             <button class="btn btn-primary" @onclick="@FjernOrdrelinje">Fjern</button>
+            </td>
+  
         }
-        
-    </td>
+       
     
 </tr>
 
