@@ -9,6 +9,8 @@ namespace EksamensProjektScooterLandBlazor.Client.ChildComponents
 		[Parameter]
 		public Kunde kunde { get; set; }
 
+		public bool showmodal { get; set; } = false;
+
 		private List<Mekaniker> mekanikerListe { get; set; }
 
 		[Inject]
@@ -22,10 +24,16 @@ namespace EksamensProjektScooterLandBlazor.Client.ChildComponents
 			mekanikerListe = (await Service.GetAllMekaniker()).ToList();
 		}
 
+		private async Task Showmodal()
+		{
+			showmodal = !showmodal;
+		}
+
 		private async Task DeleteKunde()
 		{
 			await deleteKunde.InvokeAsync(kunde);
 		}
+
 
 		private void NavigateToEditKundeComponenet(int kundeID)
 		{
