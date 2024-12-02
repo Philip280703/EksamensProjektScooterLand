@@ -49,25 +49,12 @@
         <InputText id="Placering" @bind-Value="KundeModel.Placering" class="form-control" />
         <ValidationMessage For="@(() => KundeModel.Placering)" />
      </div>
-    @* <div class="col-2 mb-3">
-        <label for="Postnummer">Postnummer</label>
-        <InputNumber id="PostNummer" @bind-Value="KundeModel.PostNummer" @oninput="UpdateBynavn" class="form-control" />
-    </div> *@
     <div class="col-2 mb-3">
         <label for="Postnummer">Postnummer</label>
-        <input type="number" id="PostNummer"
-               @bind="KundeModel.PostNummer"
-               pattern="\d{4}"
-               maxlength="4"
-               class="form-control"
-                   @oninput="UpdateBynavn" />
-
-        @if (!string.IsNullOrEmpty(ValidationMessage))
-        {
-            <span class="text-danger">@ValidationMessage</span>
-        }
+        <InputNumber id="PostNummer" @bind-Value="KundeModel.PostNummer" @oninput="UpdateBynavn" class="form-control" />
+        <ValidationMessage For="@(() => KundeModel.PostNummer)" />
     </div>
-
+  
     <div class="col-3 mb-3">
         <label for="Bynavn">By</label>
         <input id="Bynavn" type="text" value="@Bynavn" class="form-control" readonly />
@@ -172,8 +159,7 @@
 
     public int ErrorCode { get; set; }
 
-    private string ValidationMessage { get; set; } = string.Empty;
- 
+
     private bool ValidPostnrBool = false;
 
     protected override async Task OnInitializedAsync()
@@ -235,19 +221,17 @@
             if (match != null)
             {
                 Bynavn = match.ByNavn;
-                ValidationMessage = string.Empty; // Clear error message when valid
+                ValidPostnrBool = true;
             }
             else
             {
                 Bynavn = null;
-                ValidationMessage = "Gyldigt dansk posnummer påkrævet";
             }
             Console.WriteLine($"PostNummer: {postNummer}, ByNavn: {Bynavn}");
         }
         else
         {
-            Bynavn = null;
-            ValidationMessage = "Skal være 4 cifre.";
+          
             Console.WriteLine("Invalid postnummer input.");
         }
     }
