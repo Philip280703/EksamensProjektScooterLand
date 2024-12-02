@@ -1,8 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.DirectoryServices;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
+using Microsoft.Extensions.Options;
+using ScooterLandWinForms.Models;
 using ScooterLandWinForms.Serivces;
 using static System.Windows.Forms.LinkLabel;
 
@@ -17,31 +27,53 @@ namespace ScooterLandWinForms.Serivces
         private bool usb1;
         private bool usb2;
 
-        private List<string> UsbList;
+        //private List<string> UsbList;
 
-        private string filePath;
+        //private string filePath;
+
+        private List<UsbClass> UsbList;
+
+        string ConnectionString;
 
         /// <summary>
         /// null-constructor instansiere bat-filens path, henter system mappe og kombinere de to, så batfilen kan placeres
         /// </summary>
         public BackupKopieringService()
         {
-            BatFilPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "copy_to_usb.bat");
+            //BatFilPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "copy_to_usb.bat");
 
-            string vp = Directory.GetCurrentDirectory();
-            char backslash = '\\';
-            string disc = vp.Split(backslash)[0];
-            string user = vp.Split(backslash)[1];
-            string name = vp.Split(backslash)[2];
-            string sorce = vp.Split(backslash)[3];
-            string repo = vp.Split(backslash)[4];
-            string cl = vp.Split(backslash)[5];
-            string classl = "ScooterLandWinForms";
-            string folder = "Services";
-            string fil = "UsbListBool.txt";
+            //string vp = Directory.GetCurrentDirectory();
+            //char backslash = '\\';
+            //string disc = vp.Split(backslash)[0];
+            //string user = vp.Split(backslash)[1];
+            //string name = vp.Split(backslash)[2];
+            //string sorce = vp.Split(backslash)[3];
+            //string repo = vp.Split(backslash)[4];
+            //string cl = vp.Split(backslash)[5];
+            //string classl = "ScooterLandWinForms";
+            //string folder = "Services";
+            //string fil = "UsbListBool.txt";
 
-            filePath = disc + backslash + user + backslash + name + backslash + sorce + backslash + repo + backslash + cl + backslash + classl + backslash + folder +  backslash + fil;
-            UsbList = GetTextFile(filePath);
+            //filePath = disc + backslash + user + backslash + name + backslash + sorce + backslash + repo + backslash + cl + backslash + classl + backslash + folder +  backslash + fil;
+            //UsbList = GetTextFile(filePath);
+
+            ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["default"].ToString();
+        }
+
+
+        internal List<UsbClass> GetUsbList()
+        {
+            UsbList = new List<UsbClass>();
+
+            string command = "select * from UsbTable";
+
+            using SqlConnection conn = new SqlConnection(ConnectionString);
+
+            try
+            {
+                conn.Open();
+            }
+
         }
 
         /// <summary>
@@ -126,46 +158,47 @@ namespace ScooterLandWinForms.Serivces
         {
             
             DriveInfo[] drives = DriveInfo.GetDrives();
-            SetUsbStikBools();
+            //SetUsbStikBools();
             foreach (DriveInfo drive in drives)
             {
                 if(drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel == "USB-DRIVE")
                 {
-                    if(usb1 == false)
-                    {
-                        // her opdatere der bool for hvilken er brugt, både i de private bools til usb1 og usb2, men også i txt-filen
-                        usb1 = true;
-                        usb2 = false;
-                      
-                        using(StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.Create)))
-                        {
-                            writer.WriteLine("USB-1 er sidst brugte");
-                            writer.WriteLine("1");
-                            writer.WriteLine("0");
-                        }
 
-                        return true;
-                    }
+                    //if(usb1 == false)
+                    //{
+                    //    // her opdatere der bool for hvilken er brugt, både i de private bools til usb1 og usb2, men også i txt-filen
+                    //    usb1 = true;
+                    //    usb2 = false;
+                      
+                    //    using(StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.Create)))
+                    //    {
+                    //        writer.WriteLine("USB-1 er sidst brugte");
+                    //        writer.WriteLine("1");
+                    //        writer.WriteLine("0");
+                    //    }
+
+                    //    return true;
+                    //}
 
                     MessageBox.Show("Dette usb stik er der den seneste backup ligger på. brug derfor det andet usb stik", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     
                 }
                 if (drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel == "UsbStik")
                 {
-                    if(usb2 == false)
-                    {
-                        // her opdatere der bool for hvilken er brugt, både i de private bools til usb1 og usb2, men også i txt-filen
-                        usb2 = true;
-                        usb1 = false;
+                    //if(usb2 == false)
+                    //{
+                    //    // her opdatere der bool for hvilken er brugt, både i de private bools til usb1 og usb2, men også i txt-filen
+                    //    usb2 = true;
+                    //    usb1 = false;
 
-                        using (StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.Create)))
-                        {
-                            writer.WriteLine("USB-2 er sidst brugte");
-                            writer.WriteLine("0");
-                            writer.WriteLine("1");
-                        }
-                        return true;
-                    }
+                    //    using (StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.Create)))
+                    //    {
+                    //        writer.WriteLine("USB-2 er sidst brugte");
+                    //        writer.WriteLine("0");
+                    //        writer.WriteLine("1");
+                    //    }
+                    //    return true;
+                    //}
                     MessageBox.Show("Dette usb stik er der den seneste backup ligger på. brug derfor det andet usb stik", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
@@ -194,52 +227,52 @@ namespace ScooterLandWinForms.Serivces
         /// <param name="filename"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        static List<string> GetTextFile(string filename) 
-        { 
-            List<string> result = new List<string>();
-            try
-            {
-                if (!File.Exists(filename))
-                {
-                    throw new FileNotFoundException("The specified file was not found.", filename);
-                }
+        //static List<string> GetTextFile(string filename) 
+        //{ 
+        //    List<string> result = new List<string>();
+        //    try
+        //    {
+        //        if (!File.Exists(filename))
+        //        {
+        //            throw new FileNotFoundException("The specified file was not found.", filename);
+        //        }
 
-                result.AddRange(File.ReadAllLines(filename));
-            }
-            catch (Exception e)
-            {
-                throw new ArgumentException(e.Message);
-            }
+        //        result.AddRange(File.ReadAllLines(filename));
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new ArgumentException(e.Message);
+        //    }
                 
-            return result;
+        //    return result;
 
 
-        }
+        //}
 
         /// <summary>
         /// Denne metode går ind og sætter de lokale bools til at være den tilsvarende værdi, som står i txt-filen
         /// </summary>
-        private void SetUsbStikBools()
-        {
-            if (UsbList[1] == "0")
-            {
-                usb1 = false;
-            }
-            else if (UsbList[2] == "1")
-			{ 
-                usb1 = true;
-            }
+   //     private void SetUsbStikBools()
+   //     {
+   //         if (UsbList[1] == "0")
+   //         {
+   //             usb1 = false;
+   //         }
+   //         else if (UsbList[2] == "1")
+			//{ 
+   //             usb1 = true;
+   //         }
 
-            if (UsbList[2] == "0")
-            {
-                usb1 = false;
-            }
-            else if (UsbList[2] == "1")
-			{
-                usb1 = true;
-            }
+   //         if (UsbList[2] == "0")
+   //         {
+   //             usb1 = false;
+   //         }
+   //         else if (UsbList[2] == "1")
+			//{
+   //             usb1 = true;
+   //         }
 
-        }
+   //     }
 
         
     }
