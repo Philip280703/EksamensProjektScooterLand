@@ -25,7 +25,7 @@ namespace ScooterLandWinForms.Serivces
         public string DestinationPath { get; private set; }
         public string BatFilPath { get; set; }
 
-        private List<UsbClass> UsbList;
+        public List<UsbClass> UsbList;
 
         private DbHandler db;
 
