@@ -17,7 +17,7 @@
 				<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
 			</svg>
 		</button>
-		<button class="Slet-knap" style="border: none;" onclick="@DeleteKunde">
+		<button class="Slet-knap" style="border: none;" onclick="@Showmodal">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash">
 				<polyline points="3 6 5 6 21 6"></polyline>
 				<path d="M19 6L19 19a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L5 6"></path>
@@ -28,5 +28,20 @@
 	</td>
 </tr>	
 
+@if(showmodal == true)
+{
+	<div id="confirmBox" class="modal hidden">
+		<div class="modal-content">
+			<h4>Fjern kundeoplysninger</h4>
+			<p>Er du sikker på, at du vil slette kundeoplysningerne?</p>
+			<p>Kundens id: @kunde.KundeID, kundens navn: @kunde.Fornavn @kunde.Efternavn</p>
+			<div class="modal-actions">
+				<button class="btn btn-success" onclick="@DeleteKunde">Ja</button>
+				<button class="btn btn-danger" onclick="@Showmodal">Nej</button>
+			</div>
+		</div>
+	</div>
+
+}
 
 
