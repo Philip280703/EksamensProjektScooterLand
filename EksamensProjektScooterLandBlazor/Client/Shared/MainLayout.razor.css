@@ -77,3 +77,20 @@ main {
         padding-right: 1.5rem !important;
     }
 }
+
+.footer {
+    background-color: #f0f0f0; /* Light grey background */
+    text-align: center; /* Center-align text */
+    padding: 20px 0; /* Add padding around the footer */
+    font-size: 0.9rem; /* Slightly smaller text */
+    color: #6c757d; /* Muted text color */
+    border-top: 1px solid #dee2e6; /* Border to separate from the rest of the page */
+}
+
+.footer-line {
+    margin-bottom: 5px; /* Space between lines */
+}
+
+.footer h6 {
+    margin: 0; /* Remove default margin from headings */
+}
