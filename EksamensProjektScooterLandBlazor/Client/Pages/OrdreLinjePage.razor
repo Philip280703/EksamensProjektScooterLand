@@ -65,8 +65,9 @@
 <h5><b>Ingen ordrelinjer i ordren</b></h5>
 }
 
-<h4><b>sum: @BeregnSum().ToString("N2") kr.</b></h4>
+<h4><b>Sum: @BeregnSum().ToString("N2") kr.</b></h4>
 <br />
+<h4><b>Arbejdstimer: @BeregnMandetimer() timer.</b></h4>
 
 
 @if(currentOrdre.Afsluttet == true)
@@ -250,6 +251,20 @@ else
 
 		}
 
+		return sum;
+	}
+
+	public double BeregnMandetimer()
+	{
+		double sum = 0;
+		foreach(var item in ordreLinjeListe)
+		{
+			if(item.YdelseID != null)
+			{
+				double value = item.ydelse.EstimeretTid * item.Antal;
+				sum += value;
+			}
+		}
 		return sum;
 	}
 
