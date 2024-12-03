@@ -146,7 +146,11 @@
 
     private async Task OpenBackupPage()
     {
-        var response = await httpClient.GetAsync("api/winform");
+        var kørendeProgram = await httpClient.GetAsync($"api/kørprogram/{"ScooterLandWinForms"}");
+        if(kørendeProgram.IsSuccessStatusCode != true)
+        {
+            var response = await httpClient.GetAsync("api/winform");    
+        }
     }
 
 }
