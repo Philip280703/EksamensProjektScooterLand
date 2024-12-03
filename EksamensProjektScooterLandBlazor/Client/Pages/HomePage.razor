@@ -54,5 +54,14 @@
 
 		filteretListe = ordreLinjeListe.Where(ol => ordreIds.Contains(ol.OrdreID) && ol.YdelseID != null).ToList();
 
+        List<OrdreLinje> OrdrelinjeListe = new List<OrdreLinje>
+            {
+                new OrdreLinje { YdelseID = 1, ydelse = new Ydelse { YdelseID = 1, EstimeretTid = 3 }, Antal = 1 },
+                new OrdreLinje { YdelseID = 2 ,ydelse = new Ydelse { YdelseID = 2, EstimeretTid = 1 }, Antal = 1 },
+                new OrdreLinje { YdelseID = 3, ydelse = new Ydelse { YdelseID = 3, EstimeretTid = 2 }, Antal = 2 }
+            };
+
+            OrdreLinjePage ordreLinjePage = new OrdreLinjePage();
+            double value = ordreLinjePage.BeregnMandetimer(OrdrelinjeListe);
 	}
 }
