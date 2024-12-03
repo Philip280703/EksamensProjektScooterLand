@@ -16,7 +16,11 @@
 	<th>Antal</th>
 	<th>Rabat</th>
 	<th>Total</th>
-	<th>Action</th>
+	@if(currentOrdre.Afsluttet == false)
+	{
+		<th>Action</th>
+	}
+	
 	@if(ordreLinjeListe.Count > 0)
 	{
 		@foreach (var item in ordreLinjeListe)
