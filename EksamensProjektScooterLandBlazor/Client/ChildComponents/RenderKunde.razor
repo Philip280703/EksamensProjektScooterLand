@@ -3,7 +3,7 @@
 @inject NavigationManager NavigationManager;
 
 
-<tr class="hoverable-row" style="cursor: pointer;" onclick="NavigateToOrdreOversigtComponent(@kunde.KundeID)">
+<tr class="hoverable-row">
 	<td @onclick="() => NavigateToOrdreOversigtComponent(kunde.KundeID)">@kunde.KundeID</td>
 	<td @onclick="() => NavigateToOrdreOversigtComponent(kunde.KundeID)">@kunde.Fornavn @kunde.Efternavn</td>
 	<td @onclick="() => NavigateToOrdreOversigtComponent(kunde.KundeID)">@kunde.Email</td>
