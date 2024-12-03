@@ -83,10 +83,11 @@
         {
             <td>
             <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit">
-            <button type="submit" class="btn btn-primary">Opdater</button>
+            <button type="submit" class="btn btn-opdater">Opdater</button>
             </EditForm>
-            <button class="btn btn-primary" @onclick="@FjernOrdrelinje">Fjern</button>
-
+            <EditForm Model="@ordreLinje">
+            <button class="btn btn-fjern" @onclick="@FjernOrdrelinje">Fjern</button>
+            </EditForm>
             </td>
          
         }

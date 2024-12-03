@@ -100,7 +100,6 @@ else
 @if (ScooterLejeKnap == true)
 {
 	<ScooterLejePage scootertilføjet="Scootertilføjet" OrdreAddBool="@ScooterLejeKnap" Ordreid="@OrdreId" />
-
 }
 
 
@@ -188,6 +187,7 @@ else
 	public async void Scootertilføjet()
 	{
 		await GetOrdreLinjeList();
+		ScooterLejeKnap = false;
 		StateHasChanged();
 	}
 
@@ -200,6 +200,7 @@ else
 	public async void SlettetScooterLeje()
 	{
 		await GetOrdreLinjeList();
+		ListContainsScooterLejeBool = false;
 		StateHasChanged();
 	}
 
