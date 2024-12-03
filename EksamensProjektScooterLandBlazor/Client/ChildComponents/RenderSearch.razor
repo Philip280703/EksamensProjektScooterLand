@@ -1,0 +1,50 @@
+﻿@typeparam TEntity
+
+<div class="input-group">
+	<!-- Inputfelt til søgning -->
+	<input class="form-control" style="max-width: 600px" placeholder="Search..."
+		   @bind="searchItem" />
+
+	<!-- Kryds til at rydde inputfeltet -->
+	@if (!string.IsNullOrEmpty(searchItem))
+	{
+		<button class="btn-clear" @onclick="ClearSearch" type="button">
+			&#x2716; <!-- Unicode kryds -->
+		</button>
+	}
+</div>
+
+
+
+<!-- Søgeknap -->
+<button class="btn btn-primary" @onclick="onSearchClicked">
+	Search
+</button>
+
+
+
+
+@code {
+	[Parameter]
+	public List<TEntity> Items { get; set; }
+
+
+
+	[Parameter]
+	public EventCallback<string> onSearch { get; set; }
+
+	private string searchItem;
+
+	private async Task onSearchClicked()
+	{
+
+		await onSearch.InvokeAsync(searchItem);
+
+	}
+
+	private async Task ClearSearch()
+	{
+		searchItem = string.Empty;
+		await onSearch.InvokeAsync(searchItem);
+	}
+}
