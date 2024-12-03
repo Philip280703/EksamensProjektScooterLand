@@ -16,7 +16,11 @@
 	<th>Antal</th>
 	<th>Rabat</th>
 	<th>Total</th>
-	<th>Action</th>
+	@if(currentOrdre.Afsluttet == false)
+	{
+		<th>Action</th>
+	}
+	
 	@if(ordreLinjeListe.Count > 0)
 	{
 		@foreach (var item in ordreLinjeListe)
@@ -67,7 +71,7 @@
 
 <h4><b>Sum: @BeregnSum().ToString("N2") kr.</b></h4>
 <br />
-<h4><b>Arbejdstimer: @BeregnMandetimer() timer.</b></h4>
+<h4><b>Arbejdstimer: @BeregnMandetimer(ordreLinjeListe) timer.</b></h4>
 
 
 @if(currentOrdre.Afsluttet == true)
@@ -255,10 +259,10 @@ else
 		return sum;
 	}
 
-	public double BeregnMandetimer()
+	public double BeregnMandetimer(List<OrdreLinje> ordrelinjeListe)
 	{
 		double sum = 0;
-		foreach(var item in ordreLinjeListe)
+		foreach(var item in ordrelinjeListe)
 		{
 			if(item.YdelseID != null)
 			{
