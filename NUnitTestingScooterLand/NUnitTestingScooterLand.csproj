@@ -20,6 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EksamensProjektScooterLandBlazor\Client\EksamensProjektScooterLandBlazor.Client.csproj" />
+    <ProjectReference Include="..\EksamensProjektScooterLandBlazor\Server\EksamensProjektScooterLandBlazor.Server.csproj" />
+    <ProjectReference Include="..\EksamensProjektScooterLandBlazor\Shared\EksamensProjektScooterLandBlazor.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 
