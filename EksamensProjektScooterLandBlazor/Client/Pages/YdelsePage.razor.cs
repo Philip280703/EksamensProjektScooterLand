@@ -110,5 +110,10 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 				: YdelsesList.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
 		}
 
+        private string SearchText = string.Empty;
+
+        private List<Ydelse> FilteretYdelseList => string.IsNullOrWhiteSpace(SearchText) 
+            ? YdelsesList : YdelsesList.Where(y=>y.YdelseNavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
+
 	}
 }
