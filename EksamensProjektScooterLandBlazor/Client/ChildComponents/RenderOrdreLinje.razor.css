@@ -1,0 +1,159 @@
+﻿/* Grundlæggende styling for knapperne */
+.btn {
+    display: inline-flex;
+    align-items: center; /* Centerer indholdet vertikalt */
+    justify-content: center; /* Centerer indholdet horisontalt */
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 2px solid transparent;
+    border-radius: 50px; /* Runde kanter */
+    cursor: pointer;
+    background-color: transparent;
+    color: #333;
+    transition: background-color 0.5s, border-color 0.5s, transform 0.5s;
+    outline: none;
+}
+
+    /* Hover-effekt for både opdater og slet knapperne */
+    .btn:hover {
+        background-color: #ddd; /* Gør baggrunden #ddd når man hover */
+        border-color: #ddd; /* Kantfarven bliver den samme som baggrunden */
+        color: #000; /* Ændrer tekstfarven ved hover */
+        transform: scale(1.05); /* Let forstørrelse af knappen ved hover */
+    }
+
+/* For at sikre at knapperne er tydelige under hover */
+.btn-primary:hover {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+/* Styling af SVG-ikonerne i knapperne */
+.btn svg {
+    width: 18px; /* Juster ikonet, hvis nødvendigt */
+    height: 18px; /* Juster ikonet, hvis nødvendigt */
+    margin-right: 0px; /* Fjern margen, hvis ikonet skal være tættere på teksten */
+    transition: transform 0.5s; /* Effekt på ikonets størrelse ved hover */
+}
+
+/* Hover-effekt på SVG-ikoner */
+.btn:hover svg {
+    transform: scale(1.2); /* Øger størrelsen på ikonet ved hover */
+}
+
+/* Tabel Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse; /* Fjerner mellemrum mellem celler */
+    margin-top: 20px;
+    font-family: Arial, sans-serif; /* Ensartet skrifttype */
+}
+
+    /* Tabel header */
+    .table th {
+        background-color: #f2f2f2; /* Lys baggrundsfarve for header */
+        text-align: left;
+        padding: 10px;
+        font-weight: bold;
+        border-bottom: 2px solid #ddd; /* Tynd linje under header */
+        color: #333; /* Mørk skriftfarve */
+    }
+
+    /* Tabel celler */
+    .table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd; /* Tynd linje mellem rækker */
+        text-align: left;
+        vertical-align: middle; /* Centrerer indhold vertikalt */
+    }
+
+        /* Styling for rækkens hovedelementer */
+        .table td h7 {
+            margin: 0;
+            font-size: 14px;
+            color: #666; /* Mørk grå farve for mindre tekst */
+        }
+
+    /* Knapper i tabellen */
+    .table .action-buttons {
+        display: flex;
+        justify-content: center; /* Centrerer knapperne horisontalt */
+        gap: 10px; /* Afstand mellem knapperne */
+    }
+
+        .table .action-buttons button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: 2px solid #ddd; /* Lys kant rundt om knappen */
+            transition: background-color 0.3s, transform 0.2s ease; /* Blød overgang for hover-effekter */
+        }
+
+            .table .action-buttons button:hover {
+                background-color: #ddd; /* Gør baggrunden grå ved hover */
+                transform: scale(1.1); /* Let zoom-effekt ved hover */
+            }
+
+            .table .action-buttons button svg {
+                width: 18px;
+                height: 18px;
+                stroke: currentColor;
+                transition: stroke 0.3s ease;
+            }
+
+            .table .action-buttons button:hover svg {
+                stroke: #333; /* Mørkere farve på ikonet ved hover */
+            }
+
+/* Styling for success besked (i tilfælde af succesopdatering) */
+.alert-success {
+    background-color: #e8f5e9;
+    border: 1px solid #c8e6c9;
+    padding: 15px;
+    margin-top: 20px;
+    color: #388e3c; /* Grøn farve for succesbesked */
+    border-radius: 5px;
+}
+
+    .alert-success strong {
+        font-weight: bold;
+    }
+
+/* Styling for input felterne (Antal, Rabat Procent) */
+.table input[type="number"] {
+    width: 80px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+    .table input[type="number"]:focus {
+        border-color: #5e9e6b; /* Grønt skær ved fokus */
+        outline: none;
+    }
+
+/* Hvis rækken er afsluttet, gråtoner den ud */
+.table tr.afsluttet {
+    background-color: #f5f5f5; /* Lys grå baggrund */
+    color: #bbb; /* Lys grå tekst */
+}
+
+/* Tilpasse store tal (sum) */
+.table td b {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
