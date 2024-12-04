@@ -16,7 +16,7 @@
 <div class="produkt-page">
 	
 	
-
+<div class="table-wrapper">
 	<table class="table">
 		<thead>
 			<tr class="Produkt-tabel-række">
@@ -34,6 +34,15 @@
 		</tbody>
 	</table>
 </div>
+</div>
+
+<button class="tilføj-produkt" @onclick="visTilføjProduktSide">Tilføj Produkt</button>
+
+@if(visTilføjProdukt == true)
+{
+	<AddProduktPage></AddProduktPage>
+}
+
 
 
 
