@@ -118,17 +118,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 				: produktListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
 		}
 
-		void UpdateFilteredProdukt(string SearchTerm)
-		{
-			if (string.IsNullOrEmpty(SearchTerm))
-			{
-				Filtreretprodukter = produktListe.ToList();
-			}
-			else
-			{
-				Filtreretprodukter = produktListe.Where(p => p.ProduktNavn.Contains(SearchTerm,StringComparison.OrdinalIgnoreCase)).ToList();
-			}
-		}
+		
 
 
 	}
