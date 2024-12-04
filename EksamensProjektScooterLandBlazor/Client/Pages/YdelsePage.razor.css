@@ -100,3 +100,53 @@ p {
 .button-container {
     margin-bottom: 30px;
 }
+
+
+
+
+/* Container for the entire form */
+.form-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background color */
+    border-radius: 8px; /* Rounded corners */
+    display: flex;
+    align-items: center; /* Align elements vertically in the center */
+    justify-content: space-between; /* Space between items */
+}
+
+/* Label styling */
+label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-right: 10px; /* Space between label and input */
+    display: block; /* Ensure label is on its own line */
+}
+
+/* InputSelect (Dropdown) Styling - Small size */
+#Scooter {
+    padding: 5px 10px; /* Smaller padding */
+    font-size: 0.9rem; /* Smaller font size */
+    width: 200px; /* Fixed small width */
+    border-radius: 4px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light border */
+    margin-right: 10px; /* Space between input and button */
+}
+
+/* Button Styling */
+button.btn {
+    padding: 8px 15px; /* Smaller padding */
+    font-size: 0.9rem; /* Smaller font size */
+    font-weight: 600;
+    background-color: #0056b3; /* Secondary button color */
+    color: grey;
+    border: solid;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+    /* Button hover effect */
+    button.btn:hover {
+        background-color: #5a6268; /* Darker shade on hover */
+    }
