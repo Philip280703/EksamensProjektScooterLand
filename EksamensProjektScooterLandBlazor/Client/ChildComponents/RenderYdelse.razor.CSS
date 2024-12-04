@@ -1,15 +1,24 @@
-﻿/* Styling for tabelrækker */
-.hoverable-row {
-    transition: background-color 0.3s ease, transform 0.2s ease;
+﻿tr{
+    background-color: white;
 }
 
-    .hoverable-row:hover {
-        background-color: #f5f5f5;
+    tr:hover{
+        background-color: #f1f1f1;
     }
 
-.ydelse-table td {
+td{
     padding: 12px;
-    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 4px;
+    transition: transform 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 /* Knapper - Rediger og Slet */
@@ -19,27 +28,35 @@
     cursor: pointer;
     padding: 10px;
     border-radius: 50%;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.5s ease, transform 0.3s ease;
 }
 
+    /* Hover-effekt: Baggrund ændres ved hover */
     .Rediger-knap:hover, .Slet-knap:hover {
         background-color: #ddd;
         transform: scale(1.1);
     }
 
-/* Knapper - Tilføj til ordrelinje */
-.btn-primary {
-    background-color: #0288d1;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
+/* Ikon farver */
+button svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.5s ease, fill 0.5s ease;
 }
 
-    .btn-primary:hover {
-        background-color: #0277bd;
-    }
+/* Hover-effekt på ikoner: Gør dem større og ændrer farve */
+.Rediger-knap:hover svg {
+    transform: scale(1.1); /* Gør ikonet større */
+}
+
+.Slet-knap:hover svg {
+    transform: scale(1.1); /* Gør ikonet større */
+}
+
+/* Tilføj skyggeeffekt til knapperne ved hover */
+.Rediger-knap:hover, .Slet-knap:hover {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
 
 /* Ikonfarver for rediger og slet */
 .feather.feather-edit {
@@ -57,3 +74,18 @@
 .feather.feather-trash:hover {
     stroke: #d32f2f;
 }
+
+.btn-tilføjydelse {
+    background-color: transparent;
+    color: #0056b3;
+    border: 1px #0056b3;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+    .btn-tilføjydelse:hover {
+        background-color: #ddd;
+        color: black;
+        transition: 0.5s ease;
+        transform: scale(1.05);
+    }

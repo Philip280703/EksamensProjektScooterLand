@@ -10,9 +10,8 @@
 
     <input @bind="SearchText" @bind:event="oninput" placeholder="Søg"/>
 }
-
-<div class="table-container">
-    <table class="ydelse-table">
+<div class="table-wrapper">
+    <table class="table">
         <thead>
             <tr>
                 <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseID))">ID</th>
@@ -29,7 +28,7 @@
             }
         </tbody>
     </table>
-</div>
+    </div>
 
 <br />
 @if (Ordreid == 0)

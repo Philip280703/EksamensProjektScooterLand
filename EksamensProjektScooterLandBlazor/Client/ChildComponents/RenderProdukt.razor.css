@@ -1,91 +1,14 @@
-﻿/* Page Styling */
-.produkt-page {
-    margin: 40px auto;
-    padding: 20px;
-    max-width: 1200px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
-    color: #333;
+﻿tr {
+    background-color: white;
 }
 
-/* Page Header */
-.produkt-page h3 {
-    font-size: 28px;
-    color: #0056b3;
-    margin-bottom: 12px;
-    font-weight: bold;
-}
-
-.produkt-page p {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 30px;
-}
-
-/* Table Styling */
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-    /* Table Header Styling */
-    .table th {
-        background-color: #0056b3;
-        color: white;
-        padding: 12px;
-        text-align: left;
-        font-size: 16px;
-        text-transform: uppercase;
-        font-weight: bold;
-    }
-
-    /* Table Body Styling */
-    .table td {
-        background-color: #fff;
-        color: #333;
-        padding: 12px;
-        text-align: left;
-        font-size: 14px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    /* Hover effect for rows */
-    .table tr:hover {
+    tr:hover{
         background-color: #f1f1f1;
-        cursor: pointer;
     }
 
-/* Responsive Table Styling */
-@media (max-width: 768px) {
-    .table th, .table td {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
-
-    .table {
-        overflow-x: auto;
-        display: block;
-    }
-
-        .table th, .table td {
-            display: block;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-            .table td:before {
-                content: attr(data-label);
-                font-weight: bold;
-                text-transform: uppercase;
-                color: #777;
-                display: block;
-            }
+td{
+    padding: 12px;
+    vertical-align: middle;
 }
 
 /* Grundlæggende styling for knapperne */
@@ -126,11 +49,11 @@ button svg {
 
 /* Hover-effekt på ikoner: Gør dem større og ændrer farve */
 .Rediger-knap:hover svg {
-    transform: scale(1.2); /* Gør ikonet større */
+    transform: scale(1.1); /* Gør ikonet større */
 }
 
 .Slet-knap:hover svg {
-    transform: scale(1.2); /* Gør ikonet større */
+    transform: scale(1.1); /* Gør ikonet større */
 }
 
 /* Tilføj skyggeeffekt til knapperne ved hover */
@@ -155,5 +78,19 @@ button svg {
     stroke: #d32f2f;
 }
 
+.btn-tilføjprodukt {
+    background-color: transparent;
+    color: #0056b3;
+    border: 1px #0056b3;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+    .btn-tilføjprodukt:hover {
+        background-color: #ddd;
+        color: black;
+        transition: 0.5s ease;
+        transform: scale(1.05);
+    }
 
 

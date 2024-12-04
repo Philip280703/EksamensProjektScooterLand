@@ -15,7 +15,9 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		// Nyt item som oprettes gennem formen
 		private Produkt newProdukt = new Produkt();
 
-		private int ErrorCode { get; set; } = 0;
+		public bool visTilføjProdukt { get; set; } = false;
+
+		public int ErrorCode { get; set; } = 0;
 
 		private EditContext EditContext;
 
@@ -49,7 +51,10 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 			// ErrorCode = await Service.DeleteProdukt(produkt.ProduktID);
 		}
 
-
+		public void visTilføjProduktSide()
+		{
+			visTilføjProdukt = !visTilføjProdukt;
+		}
 
 		protected override async Task OnInitializedAsync()
 		{
@@ -113,17 +118,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 				: produktListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
 		}
 
-		void UpdateFilteredProdukt(string SearchTerm)
-		{
-			if (string.IsNullOrEmpty(SearchTerm))
-			{
-				Filtreretprodukter = produktListe.ToList();
-			}
-			else
-			{
-				Filtreretprodukter = produktListe.Where(p => p.ProduktNavn.Contains(SearchTerm,StringComparison.OrdinalIgnoreCase)).ToList();
-			}
-		}
+		
 
 
 	}
