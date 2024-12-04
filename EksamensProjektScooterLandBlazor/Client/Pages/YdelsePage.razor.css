@@ -144,7 +144,7 @@ button.btn {
     font-size: 0.9rem; /* Smaller font size */
     font-weight: 600;
     background-color: #0056b3; /* Secondary button color */
-    color: grey;
+    color: white;
     border: solid;
     border-radius: 4px;
     cursor: pointer;
