@@ -54,6 +54,14 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
             }
         }
 
+        private string SearchText = string.Empty;
+
+        private List<Kunde> FilteretKundeList => string.IsNullOrWhiteSpace(SearchText)
+            ? FilteretKundeListe : FilteretKundeListe.Where(k =>
+            k.Fornavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+            k.Efternavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+        ).ToList();
+
 
 
         // sortings parametre
