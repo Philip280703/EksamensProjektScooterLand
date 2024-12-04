@@ -54,7 +54,22 @@
     </td>
     
     <td>
-        <InputCheckbox @bind-Value="SelvrisikoBool" @onclick="AddedSelvRisiko" />
+        
+        @if(currentOrdre.Afsluttet == false)
+        {
+            <InputCheckbox @bind-Value="SelvrisikoBool" @onclick="AddedSelvRisiko" />
+        }
+        else
+        {
+            if(ordreLinje.SelvrisikoBool == true)
+            {
+                @("ja")
+            }
+            else
+            {
+                @("nej")
+            }
+        }
 
     </td>
     <td>
@@ -79,18 +94,18 @@
     </td>
     
     
-        @if (currentOrdre.Afsluttet == false)
-        {
-            <td>
-            <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit">
-            <button type="submit" class="btn btn-opdater">Opdater</button>
-            </EditForm>
-            <EditForm Model="@ordreLinje">
-            <button class="btn btn-fjern" @onclick="@FjernOrdrelinje">Fjern</button>
-            </EditForm>
-            </td>
+    @if (currentOrdre.Afsluttet == false)
+    {
+        <td>
+        <EditForm Model="@ordreLinje" OnValidSubmit="@HandleValidSubmit">
+        <button type="submit" class="btn btn-opdater">Opdater</button>
+        </EditForm>
+        <EditForm Model="@ordreLinje">
+        <button class="btn btn-fjern" @onclick="@FjernOrdrelinje">Fjern</button>
+        </EditForm>
+        </td>
          
-        }
+    }
 
 
 
