@@ -9,6 +9,14 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		[Inject]
 		public IKundeService KundeService { get; set; }
 
+        [Inject]
+        public IScooterBrandService ScooterBrandService { get; set; }
+
+        private Kunde KundeModel = new Kunde();
+        private List<ScooterBrand> scooterBrandListe = new List<ScooterBrand>();
+        private List<Kunde> FilteretKundeListe = new List<Kunde>();
+
+        private int ?sortedScooterBrandID {  get; set; } 
         
         private List<Kunde> kundeListe = new List<Kunde>();
 		public int ErrorCode { get; set; }
@@ -16,6 +24,9 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		protected override async Task OnInitializedAsync()
 		{
 			kundeListe = (await KundeService.GetAllKunder()).ToList();
+            scooterBrandListe = (await ScooterBrandService.GetAll()).ToList();
+            FilteretKundeListe = kundeListe;
+
 		}
 
 		public async void DeleteKunde(Kunde kunde)
@@ -28,6 +39,30 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		{
 
 		}
+
+        private void FilterKundeListeByScooter()
+        {
+            if (sortedScooterBrandID.HasValue && sortedScooterBrandID > 0)
+            {
+                // Filter the list based on the selected ScooterBrandID
+                FilteretKundeListe = kundeListe.Where(k => k.ScooterBrandID == sortedScooterBrandID).ToList();
+            }
+            else
+            {
+                // Reset to the full list if no valid ScooterBrandID is selected
+                FilteretKundeListe = kundeListe;
+            }
+        }
+
+        private string SearchText = string.Empty;
+
+        private List<Kunde> FilteretKundeList => string.IsNullOrWhiteSpace(SearchText)
+            ? FilteretKundeListe : FilteretKundeListe.Where(k =>
+            k.Fornavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+            k.Efternavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+        ).ToList();
+
+
 
         // sortings parametre
         private string currentSortColumn;
@@ -64,4 +99,6 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         }
     }
     // Uden brug af MarkupString ville de specifikke pile fra blazor bootsrap ikke kunne indlæses ordentligt på vores websted. 
+
+
 }

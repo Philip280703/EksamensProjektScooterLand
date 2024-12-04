@@ -8,8 +8,11 @@
 {
 	<h3 class="header">Produkt Oversigt</h3>
 	<p class="description">Her kan du se en oversigt over alle produkter som er i systemet.</p>
+
+	
 }
 
+<input @bind="SearchText" @bind:event="oninput" placeholder="Søg" />
 
 <div class="produkt-page">
 	
@@ -25,7 +28,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach(var produkt in Filtreretprodukter)
+				@foreach (var produkt in FilteretProduktList)
 			{
 				<RenderProdukt produkt="produkt" OrdreAddBool="AddingOrdreBool" Produkttilføjet="Produkttilføjet" deleteProdukt="DeleteProdukt" OrdreId="OrdreID"/>
 			}
