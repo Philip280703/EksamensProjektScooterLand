@@ -108,3 +108,7 @@ button {
     cursor: pointer;
     background-color: #4d82c4;
 }
+
+.nav-link:hover{
+    cursor: pointer;
+}

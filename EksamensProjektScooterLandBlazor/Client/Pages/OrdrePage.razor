@@ -2,13 +2,16 @@
 @using EksamensProjektScooterLandBlazor.Shared.Models;
 @using EksamensProjektScooterLandBlazor.Client.Services;
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents;
-
+@inject NavigationManager navigationsManager
+@inject HttpClient httpClient
 
 <h3>Ordre oversigt</h3>
 <p>Her kan du finde en liste over alle ordrer og deres detaljer.</p>
-
+<NavLink class="nav-link" style="cursor: pointer;" @onclick="() => TjekForKundeId(kundeId)" Match="NavLinkMatch.All">Opret en ny ordre</NavLink>
 <!-- Ordre Table Section -->
 <div class="table-container">
+
+
     <table class="table">
         <thead>
             <tr>
@@ -31,12 +34,12 @@
 </div>
 
 <!-- Error Notification (for failed orders loading) -->
-@if (ErrorCode != 0)
+@* @if (ErrorCode != 0)
 {
     <div class="alert alert-danger" role="alert">
         Der opstod en fejl under indlæsning af ordrer. Fejlkode: @ErrorCode
     </div>
-}
+} *@
 
 <br />
 
@@ -47,15 +50,26 @@
     [Inject]
     public IOrdreService ordreService { get; set; }
 
+    [Inject]
+    public IKundeService kundeService { get; set; }
+
     private int ErrorCode { get; set; } = 0;
 
     [Parameter]
     public int kundeId { get; set; }
 
+    [Parameter]
+    public Ordre ordreModel { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         try
         {
+
+            if(ordreModel == null)
+            {
+                Console.WriteLine("Ordren er null");
+            }
             // Hent ordrer
             if (kundeId == 0)
             { ordreListe = (await ordreService.GetAllOrdrer()).ToList(); }
@@ -63,7 +77,7 @@
             else if (kundeId > 0)
             {
                 ordreListe = (await ordreService.GetAllOrdrer()).Where (kID => kID.KundeiD == kundeId).ToList();
-       
+
             }
         }
         catch (Exception ex)
@@ -104,5 +118,43 @@
             return new MarkupString(isAscending ? "<i class='bi bi-chevron-up'></i>" : "<i class='bi bi-chevron-down'></i>");
         }
         return new MarkupString(string.Empty);
+    }
+
+    private async void TjekForKundeId(int kundeid)
+    {
+        if (kundeId == 0)
+        {
+            navigationsManager.NavigateTo("OpretOrdre");
+        }
+        else
+        {
+            await OpretOrdreMedKundeId(kundeid);
+        }
+    }
+
+    private async Task OpretOrdreMedKundeId(int kundeid)
+    {
+        ordreModel = new Ordre();
+        var kunde = await kundeService.GetKunde(kundeid);
+        this.ordreModel.MedarbejderCpr = kunde.Mekaniker.CprNummer;
+        this.ordreModel.KundeiD = kundeid;
+        this.ordreModel.Afsluttet = false;
+        this.ordreModel.BetalingsSum = 0;
+        this.ordreModel.SalgsDato = DateTime.Now;
+        ErrorCode = await ordreService.AddOrdre(ordreModel);
+        await ReloadOrdeLinjeListe();
+    }
+
+    private async Task ReloadOrdeLinjeListe()
+    {
+        try
+        {
+            ordreListe = (await ordreService.GetAllOrdrer()).Where(kID => kID.KundeiD == kundeId).ToList();
+            StateHasChanged();
+        }
+        catch(Exception ex)
+        {
+            ErrorCode = 500;
+        }
     }
 }

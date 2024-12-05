@@ -15,6 +15,8 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         private EditContext EditContext;
 
         private bool btnVisibility = true;
+
+        public bool visAddYdelse { get; set; } = false;
       
         private Ydelse YdelseModel = new Ydelse();
 
@@ -35,6 +37,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         {
             EditContext = new EditContext(YdelseModel);
             YdelsesList = (await Service.GetAllYdelser()).ToList();
+            visAddYdelse = false;
         }
 
         private async void HandleValidSubmit()
@@ -84,7 +87,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
         private void OpenAddYdelse()
         {
-            AddingOrdreBool = !AddingOrdreBool;
+            visAddYdelse = !visAddYdelse;
         }
 
 

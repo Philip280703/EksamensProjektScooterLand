@@ -60,7 +60,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		{
 			produktListe = (await Service.GetAllProdukt()).ToList();
 			Filtreretprodukter = produktListe.ToList();
-
+			visTilføjProdukt = false;
 		}
 
 		private void EnsureNonNegative(ChangeEventArgs e)

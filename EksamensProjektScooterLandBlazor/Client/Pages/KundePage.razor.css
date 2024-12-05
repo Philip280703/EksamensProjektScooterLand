@@ -82,7 +82,7 @@ p {
 
 /* Scrollable Table */
 .table-wrapper {
-    max-height: 500px; /* Juster max-height til den ønskede højde */
+    max-height: 400px; /* Juster max-height til den ønskede højde */
     overflow-y: auto; /* Tilføjer scrollbar når indholdet er for stort */
     margin-top: 20px;
     border: 1px solid #0056b3;
