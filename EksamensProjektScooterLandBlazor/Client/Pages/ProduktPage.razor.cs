@@ -84,11 +84,17 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 			ErrorCode = await Service.AddProdukt(newProdukt);
 			Console.WriteLine("Shopping item added: return code: " + ErrorCode);
 
+			
+			await tilføjetProdukt();
+
 			// Ryd formen efter tilføjelse
 			newProdukt = new Produkt();
 			EditContext = new EditContext(newProdukt);
 			StateHasChanged();
 		}
+
+
+		
 
 
 		public async Task HandleInvalidSubmit()
@@ -118,7 +124,11 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 				: produktListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
 		}
 
-		
+		private string SearchText = string.Empty;
+
+		private List<Produkt> FilteretProduktList => string.IsNullOrWhiteSpace(SearchText)
+			? produktListe : produktListe.Where(p => p.ProduktNavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
+
 
 
 	}

@@ -7,7 +7,9 @@
 
 <h3>Ordre oversigt</h3>
 <p>Her kan du finde en liste over alle ordrer og deres detaljer.</p>
-<NavLink class="nav-link" style="cursor: pointer;" @onclick="() => TjekForKundeId(kundeId)" Match="NavLinkMatch.All">Opret en ny ordre</NavLink>
+
+<input @bind="SearchText" @bind:event="oninput" placeholder="Søg" />
+
 <!-- Ordre Table Section -->
 <div class="table-container">
 
@@ -25,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in ordreListe)
+            @foreach (var item in FilteretOrdreListe)
             {
                 <RenderOrdre ordre="@item" />
             }
@@ -157,4 +159,15 @@
             ErrorCode = 500;
         }
     }
+
+
+    private string SearchText = string.Empty;
+
+    private List<Ordre> FilteretOrdreListe => string.IsNullOrWhiteSpace(SearchText)
+        ? ordreListe : ordreListe.Where(k=>
+            k.kunde.Fornavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+            k.kunde.Efternavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+        ).ToList();
+
 }
+

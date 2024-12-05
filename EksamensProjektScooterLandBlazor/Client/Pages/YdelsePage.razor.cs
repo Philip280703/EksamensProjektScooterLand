@@ -60,7 +60,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         // Nyt ydelse oprettes
        private async Task ydelseTilføj()
         {
-            await ydelseTilføjet.InvokeAsync();
+                await ydelseTilføjet.InvokeAsync();
         }
 
         public async Task AddYdelseHandler()
@@ -118,5 +118,6 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         private List<Ydelse> FilteretYdelseList => string.IsNullOrWhiteSpace(SearchText) 
             ? YdelsesList : YdelsesList.Where(y=>y.YdelseNavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
 
+ 
 	}
 }
