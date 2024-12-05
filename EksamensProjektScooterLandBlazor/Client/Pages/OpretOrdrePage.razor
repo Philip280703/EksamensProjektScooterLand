@@ -85,7 +85,7 @@
     private async void NavigerTilOrdre()
     {
         List<Ordre> ordreliste = (await ordreService.GetAllOrdrer()).ToList();
-        var ordre = ordrer.Last();
+        var ordre = ordreliste.Last();
         navigationManager.NavigateTo($"OrdreLinjePage/{ordre.OrdreID}");
     }
 }
