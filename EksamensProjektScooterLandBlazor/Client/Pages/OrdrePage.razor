@@ -7,6 +7,7 @@
 
 <h3>Ordre oversigt</h3>
 <p>Her kan du finde en liste over alle ordrer og deres detaljer.</p>
+<NavLink class="nav-link" style="cursor: pointer;" @onclick="() => TjekForKundeId(kundeId)" Match="NavLinkMatch.All">Opret en ordre</NavLink>
 
 <input @bind="SearchText" @bind:event="oninput" placeholder="Søg" />
 
@@ -36,12 +37,12 @@
 </div>
 
 <!-- Error Notification (for failed orders loading) -->
-@* @if (ErrorCode != 0)
+@if (ErrorCode != 200 && ErrorCode != 0)
 {
     <div class="alert alert-danger" role="alert">
         Der opstod en fejl under indlæsning af ordrer. Fejlkode: @ErrorCode
     </div>
-} *@
+}
 
 <br />
 
