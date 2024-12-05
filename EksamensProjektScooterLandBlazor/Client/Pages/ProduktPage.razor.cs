@@ -84,11 +84,17 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 			ErrorCode = await Service.AddProdukt(newProdukt);
 			Console.WriteLine("Shopping item added: return code: " + ErrorCode);
 
+			
+			await tilføjetProdukt();
+
 			// Ryd formen efter tilføjelse
 			newProdukt = new Produkt();
 			EditContext = new EditContext(newProdukt);
 			StateHasChanged();
 		}
+
+
+		
 
 
 		public async Task HandleInvalidSubmit()
