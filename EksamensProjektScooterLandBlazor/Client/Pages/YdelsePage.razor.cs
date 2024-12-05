@@ -44,9 +44,12 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
             YdelsesList.Add(YdelseModel);
             YdelseModel = new Ydelse();
             EditContext = new EditContext(YdelseModel);
+            StateHasChanged();
+
+           
+
             await AddYdelseHandler();
 
-            StateHasChanged();
         }
         private void HandleInvalidSubmit()
         {
@@ -57,7 +60,8 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         // Nyt ydelse oprettes
        private async Task ydelseTilføj()
         {
-                await ydelseTilføjet.InvokeAsync();
+            YdelsesList = (await Service.GetAllYdelser()).ToList();
+            StateHasChanged();
         }
 
         public async Task AddYdelseHandler()
@@ -115,6 +119,6 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         private List<Ydelse> FilteretYdelseList => string.IsNullOrWhiteSpace(SearchText) 
             ? YdelsesList : YdelsesList.Where(y=>y.YdelseNavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
 
- 
+  
 	}
 }

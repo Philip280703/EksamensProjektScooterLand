@@ -35,7 +35,6 @@
                              ParsingErrorMessage="The {0} field has an invalid value." />
                 <ValidationMessage For="@(() => YdelseModel.Pris)" class="text-danger" />
             </div>
-       
         </div>
 
         <!-- Submit button -->
@@ -85,6 +84,8 @@
             // Ryder formen efter tilføjelse
             YdelseModel = new Ydelse();
             StateHasChanged();
+
+            //callback for at informere om opdateirngen. 
             await ydelseTilføjet.InvokeAsync();
         }
         private void HandleInvalidSubmit()

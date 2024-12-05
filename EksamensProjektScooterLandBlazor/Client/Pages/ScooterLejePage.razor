@@ -10,8 +10,9 @@
     <p class="Tabel-Header-Text">Scooter Leje</p>
 </div>
 
-<div class="table-container">
-    <table class="ScooterLeje-table">
+
+<div class="table-wrapper">
+    <table class="table">
         <thead>
             <tr>
                 <th>ScooterID</th>
@@ -22,25 +23,24 @@
             </tr>
         </thead>
         <tbody>
-                @foreach (var Leje in scooterLejeList)
-                {
-                    <tr>
-                        <td>@Leje.ScooterID</td>
-                        <td>@Leje.SelvRisiko kr.</td>
-                        <td>@Leje.ForsikringPrKm kr/km.</td>
-                        <td>@Leje.DagsLejePris kr.</td>
-                        <td>
+            @foreach (var Leje in scooterLejeList)
+            {
+                <tr>
+                    <td>@Leje.ScooterID</td>
+                    <td>@Leje.SelvRisiko kr.</td>
+                    <td>@Leje.ForsikringPrKm kr/km.</td>
+                    <td>@Leje.DagsLejePris kr.</td>
+                    <td>
                         @if (OrdreAddBool == false)
                         {
-
                         }
                         else if (OrdreAddBool == true)
                         {
                             <button class="btn btn-primary" @onclick="() => AddScooterLejeToOrdre(Leje.ScooterID)">Tilføj til ordrelinje</button>
                         }
-                        </td>
-                    </tr>
-                }
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
