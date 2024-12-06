@@ -67,7 +67,7 @@
     private int ErrorCode { get; set; } = 0;
 
     [Parameter]
-    public EventCallback ydelseTilføjet { get; set; }
+    public EventCallback OnYdelseAdded { get; set; }
 
 
 
@@ -86,7 +86,7 @@
             StateHasChanged();
 
             //callback for at informere om opdateirngen. 
-            await ydelseTilføjet.InvokeAsync();
+            await OnYdelseAdded.InvokeAsync();
         }
         private void HandleInvalidSubmit()
         {

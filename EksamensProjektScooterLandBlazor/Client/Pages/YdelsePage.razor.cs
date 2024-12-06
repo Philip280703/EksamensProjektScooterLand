@@ -46,8 +46,6 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
             EditContext = new EditContext(YdelseModel);
             StateHasChanged();
 
-           
-
             await AddYdelseHandler();
 
         }
@@ -57,7 +55,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
         }
 
-        // Nyt ydelse oprettes
+        // Nyt ydelse og opdateres automatisk 
        private async Task ydelseTilføj()
         {
             YdelsesList = (await Service.GetAllYdelser()).ToList();
