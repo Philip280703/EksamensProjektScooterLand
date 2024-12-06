@@ -177,7 +177,7 @@
                     </tr>
                     <tr style="border-bottom: 3px solid black;">
                         <td><strong>Samlet Beløb:</strong></td>
-                        <td>@BeregnSum()</td>
+                        <td>@BeregnTotal()</td>
                     </tr>
                 </table>
             </div>
@@ -283,12 +283,17 @@
 
     private double BeregnMoms()
     {
-        return BeregnSum() * 0.25;
+        return BeregnSubtotal() * 0.25;
     }
 
     private double BeregnSubtotal()
     {
-        return BeregnSum() - BeregnMoms();
+        return BeregnSum();
+    }
+
+    private double BeregnTotal()
+    {
+        return BeregnSubtotal() * 1.25;
     }
 
     public void PrintFactura()
