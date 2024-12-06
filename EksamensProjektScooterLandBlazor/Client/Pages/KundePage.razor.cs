@@ -65,23 +65,22 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
 
         // sortings parametre
-        private string currentSortColumn;
+        private string currentSortingColumn;
         private bool isAscending = true;
-        private string UiValue { get; set; } = "";
 
         private void SortByColumn(string column)
         {
-            if (currentSortColumn == column)
+            if (currentSortingColumn == column)
             {
-                isAscending = !isAscending; // Toggle sorting direction
+                isAscending = !isAscending; // set til modsat af sidst
             }
             else
             {
-                currentSortColumn = column;
-                isAscending = true; // Default to ascending for new column
+                currentSortingColumn = column;
+                isAscending = true; // Default til ascending for ny kolonne
             }
 
-            // Sort the list dynamically based on the column name
+            // Sorter listen baseret på den valgte kolonne
             FilteretKundeListe = isAscending
                 ? FilteretKundeListe.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
                 : FilteretKundeListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
@@ -90,7 +89,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         // der bruges MarkupString til at rendere HTML i blazor kode. Det bliver brugt i ønsket om at bruge blazor bootsratp ikonerne 
         private MarkupString GetSortIndicator(string columnName)
         {
-            if (currentSortColumn == columnName)
+            if (currentSortingColumn == columnName)
             {
                 // Returnere MarkupString som enten er bi bi-chevron-up eller bi bi-chevron-down, som er pilene. Bootstrap ikonerne
                 return new MarkupString(isAscending ? "<i class='bi bi-chevron-up'></i>" : "<i class='bi bi-chevron-down'></i>");
