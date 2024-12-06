@@ -8,7 +8,7 @@ namespace EksamensProjektScooterLandBlazor.Server.Controllers
 	public class WinFormsController : ControllerBase
 	{
 		[HttpGet] //skal være en GET-anmodning med ruten "api/WinForms/OpenBackupForm"
-		// IActionResult er et Interface som angiver, at metoden kan returnere et hvilket som helst HTTP-svar. 
+		// IActionResult er et Interface som angiver, at metoden kan returnere et hvilket som helst HTTP-svar.
 		public IActionResult OpenBackupForm()
 		{
             Console.WriteLine("Openbackupform kaldet");
