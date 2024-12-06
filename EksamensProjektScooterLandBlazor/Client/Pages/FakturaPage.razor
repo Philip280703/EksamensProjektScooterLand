@@ -6,7 +6,7 @@
 @page "/FakturaPage/{OrdreId:int}"
 
 <div class="invoice-container">
-    <!-- Øverste sektion med ScooterLands oplysninger og logo -->
+   
     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
         <div style="width: 70%;">
             <h1 class="company-name">ScooterLand</h1>
@@ -25,7 +25,7 @@
 
     <hr />
 
-    <!-- Sektion med faktura og kundens oplysninger -->
+  
     @if (ordre == null || kunde == null)
     {
         <p>Loading...</p>
@@ -33,7 +33,6 @@
     else
     {
         <div style="display: flex; justify-content: space-between;">
-            <!-- Fakturainformationer -->
             <div style="width: 48%;">
                 <h6>Fakturaoplysninger</h6>
                 <table class="table table-bordered">
@@ -57,7 +56,7 @@
                 </table>
             </div>
 
-            <!-- Kundeinformationer -->
+         
             <div style="width: 48%;">
                 <h6>Kundeoplysninger</h6>
                 <table class="table table-bordered">
@@ -81,7 +80,7 @@
 
         <hr />
 
-        <!-- Sektion med ordrelinjer -->
+      
         <h6><strong>Ydelser og Produkter</strong></h6>
         <table class="ydelseogproduct-table table table-bordered">
             <thead>
@@ -112,7 +111,7 @@
 
         <hr />
 
-        <!-- Sektion med scooterleje linjer -->
+       
 
         foreach( var linje in ordreLinjeListe)
         {
@@ -150,11 +149,13 @@
         }
        
         <hr />
-        <br />
-
         <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-           
-            <div style="width: 45%; padding-right: 20px;">
+            <div style="width: 45%; padding-right: 20px; text-align: left;">
+                <div>
+                    <span><strong>Arbejdstimer:</strong></span>
+                    <span style="text-decoration: underline;">@BeregnMandetimer(ordreLinjeListe)</span>
+                </div>
+                <br />
                 <h5><strong>Bemærkninger</strong></h5>
                 <p>
                     <strong>Betalingsbetingelser:</strong> Netto 08 dage - forfald
@@ -165,7 +166,10 @@
                 </p>
             </div>
 
+            
             <div style="width: 45%; text-align: right;">
+                <br />
+                <br />
                 <table class="table table-bordered" style="width: 100%; margin-left: auto;">
                     <tr>
                         <td><strong>Subtotal:</strong></td>
@@ -182,6 +186,8 @@
                 </table>
             </div>
         </div>
+
+
 
     }
 </div>
@@ -201,6 +207,7 @@
     [Parameter]
     public int OrdreId { get; set; }
 
+
     private Ordre ordre;
     private Kunde kunde;
     private bool selvrisikoBool = false;
@@ -219,6 +226,8 @@
     public IKundeService kundeservice { get; set; }
     [Inject]
     public IOrdreLinjeService ordreLinjeService { get; set; }
+
+
 
 
     bool ListContainsScooterLejeBool = false;
@@ -277,6 +286,20 @@
 
         }
 
+        return sum;
+    }
+
+    public double BeregnMandetimer(List<OrdreLinje> ordrelinjeListe)
+    {
+        double sum = 0;
+        foreach (var item in ordrelinjeListe)
+        {
+            if (item.YdelseID != null)
+            {
+                double value = item.ydelse.EstimeretTid * item.Antal;
+                sum += value;
+            }
+        }
         return sum;
     }
 
