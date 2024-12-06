@@ -3,9 +3,6 @@
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href=""></a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
     </div>
 </div>
 
@@ -16,25 +13,11 @@
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-
         <div class="nav-item px-3 d-flex align-items-center justify-content-between">
             <NavLink class="nav-link flex-grow-1" href="Ordre" Match="NavLinkMatch.All">
                 <span class="bi bi-order-nav-menu" aria-hidden="true"></span> Ordre
             </NavLink>
-            <button class="btn btn-sm btn-link p-0" @onclick="() => ToggleSubMenu(1)" title="Toggle submenu">
-                <span class="bi @(showSubMenu[1] ? "bi-chevron-up" : "bi-chevron-down") text-white fw-bold" aria-hidden="true"></span>
-            </button>
         </div>
-        @if (showSubMenu[1])
-        {
-            <ul class="nav flex-column">
-                <li class="nav-item px-3">
-                    <NavLink class="nav-link" href="OpretOrdre" Match="NavLinkMatch.All">
-                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Opret ordre
-                    </NavLink>
-                </li>
-            </ul>
-        }
         <div class="nav-item px-3 d-flex align-items-center justify-content-between">
             <NavLink class="nav-link flex-grow-1" href="Mekaniker" Match="NavLinkMatch.All">
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Mekaniker
@@ -80,14 +63,6 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
-    }
-
-    private void ToggleSubMenu(int index)
-    {
-        for (int i = 0; i < showSubMenu.Length; i++)
-        {
-            showSubMenu[i] = i == index ? !showSubMenu[i] : false;
-        }
     }
 
     private async Task HandleBackupClicked()

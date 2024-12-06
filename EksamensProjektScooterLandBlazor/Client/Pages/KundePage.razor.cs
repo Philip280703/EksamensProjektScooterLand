@@ -82,9 +82,9 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
             }
 
             // Sort the list dynamically based on the column name
-            kundeListe = isAscending
-                ? kundeListe.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
-                : kundeListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
+            FilteretKundeListe = isAscending
+                ? FilteretKundeListe.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
+                : FilteretKundeListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
         }
 
         // der bruges MarkupString til at rendere HTML i blazor kode. Det bliver brugt i ønsket om at bruge blazor bootsratp ikonerne 

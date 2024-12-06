@@ -91,9 +91,13 @@ button {
         transform: scale(1.05); /* Gør knappen lidt større */
     }
 
-    .btn-primary:active {
-        background-color: #003366; /* Endnu mørkere blå ved klik */
-        transform: scale(1); /* Stop med at skalere knappen ved klik */
+    /* Style the table header */
+    .ScooterLeje-table thead th {
+        background-color: #0056b3;
+        color: #fff;
+        text-align: left;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
     }
 
     .btn-primary:focus {

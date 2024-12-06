@@ -34,9 +34,9 @@
 {
     <div class="button-container">
         <button class="btn btn-primary" @onclick="OpenAddYdelse"> Tilføj Ydelse</button>
-        @if (AddingOrdreBool == true)
+        @if(visAddYdelse == true)
         {
-            <AddYdelsePage AddYdelsebtn="AddingOrdreBool == true" />
+            <AddYdelsePage />
         }
     </div>
 }
