@@ -43,6 +43,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		public async Task tilføjetProdukt()
 		{
 			await Produkttilføjet.InvokeAsync();
+			StateHasChanged();
 		}
 
 		public async void DeleteProdukt(Produkt produkt)
@@ -81,20 +82,21 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		public async Task HandleValidSubmit()
 		{
 
+			produktListe.Add(new Produkt());
 			ErrorCode = await Service.AddProdukt(newProdukt);
 			Console.WriteLine("Shopping item added: return code: " + ErrorCode);
 
-			
-			await tilføjetProdukt();
 
 			// Ryd formen efter tilføjelse
 			newProdukt = new Produkt();
 			EditContext = new EditContext(newProdukt);
+			await tilføjetProdukt();
+
 			StateHasChanged();
 		}
 
-
 		
+
 
 
 		public async Task HandleInvalidSubmit()
