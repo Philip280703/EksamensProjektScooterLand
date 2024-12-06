@@ -38,60 +38,72 @@ else
             </table>
         </div>
 
-    <EditForm EditContext="@editContext" class="row p-3"
-               OnValidSubmit="@HandleValidSubmit"
-               OnInvalidSubmit="@HandleInvalidSubmit">
-        <DataAnnotationsValidator />
-        <div class="Rediger-kunde">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="Fornavn" class="form-label">Fornavn</label>
-                    <InputText id="Fornavn" @bind-Value="kunde.Fornavn" placeholder="@kunde.Fornavn" class="form-input" />
-                    <ValidationMessage For ="@(() => kunde.Fornavn)" />
-                </div>
-                <div class="form-group">
-                    <label for="Efternavn" class="form-label">Efternavn</label>
-                    <InputText id="Efternavn" @bind-Value="kunde.Efternavn" placeholder="@kunde.Efternavn" class="form-input" />
-                    <ValidationMessage For ="@(() => kunde.Efternavn)" />
-                </div>
+    <div class="group-box">
+        <EditForm EditContext="@editContext"
+                  OnValidSubmit="@HandleValidSubmit"
+                  OnInvalidSubmit="@HandleInvalidSubmit">
+            <DataAnnotationsValidator />
+
+            <div class="col-6 mb-3 fornavn">
+                <label for="fornavn">Fornavn</label>
+                <InputText id="fornavn" @bind-Value="kunde.Fornavn" class="form-control" />
+                <ValidationMessage For="@(() => kunde.Fornavn)" />
             </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="Email" class="form-label">Email</label>
-                    <InputText id="Email" @bind-Value="kunde.Email" placeholder="@kunde.Email" class="form-input" />
-                    <ValidationMessage For="@(() => kunde.Email)" />
-                </div>
+            <div class="col-6 mb-3 efternavn">
+                <label for="efternavn">Efternavn</label>
+                <InputText id="efternavn" @bind-Value="kunde.Efternavn" class="form-control" />
+                <ValidationMessage For="@(() => kunde.Efternavn)" />
             </div>
 
-            <div class="col-2 mb-3">
-                <label for="Postnummer">Postnummer</label>
-                <InputNumber id="PostNummer" @bind-Value="kunde.PostNummer" @oninput="UpdateBynavn" class="form-control" />
+            <div class="col-6 mb-3 telefonnummer">
+                <label for="TelefonNummer">TelefonNummer</label>
+                <InputText id="TelefonNummer" @bind-Value="kunde.TelefonNummer" class="form-control" />
+                <ValidationMessage For="@(() => kunde.TelefonNummer)" />
             </div>
 
-            <div class="col-3 mb-3">
-                <label for="Bynavn">By</label>
-                <input id="Bynavn" type="text" value="@Bynavn" class="form-control" readonly />
+            <div class="col-6 mb-3 email">
+                <label for="Email">Email</label>
+                <InputText id="Email" @bind-Value="kunde.Email" class="form-control" />
+                <ValidationMessage For="@(() => kunde.Email)" />
             </div>
 
-                <div class="form-group">
-                    <label for="Vejnavn" class="form-label">Vejnavn</label>
-                    <InputText id="Vejnavn" @bind-Value="kunde.VejNavn" placeholder="@kunde.VejNavn" class="form-input" />
+            <div class="row mb-3">
+                <div class="col-8 vejnavn">
+                    <label for="VejNavn">Vejnavn</label>
+                    <InputText id="VejNavn" @bind-Value="kunde.VejNavn" class="form-control" />
                     <ValidationMessage For="@(() => kunde.VejNavn)" />
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="Husnummer" class="form-label">Husnummer</label>
-                    <InputText id="Husnummer" @bind-Value="kunde.HusNummer" placeholder="@kunde.HusNummer" class="form-input" />
+                <div class="col-2 husnummer">
+                    <label for="HusNummer">Husnummer</label>
+                    <InputText id="HusNummer" @bind-Value="kunde.HusNummer" class="form-control" />
                     <ValidationMessage For="@(() => kunde.HusNummer)" />
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="button-save">Gem</button>
+                <div class="col-2 etage">
+                    <label for="Etage">Etage</label>
+                    <InputText id="Etage" @bind-Value="kunde.Etage" class="form-control" />
+                    <ValidationMessage For="@(() => kunde.Etage)" />
                 </div>
             </div>
-       
-    </EditForm>
 
+            <div class="row mb-3">
+                <div class="col-4 postnummer">
+                    <label for="Postnummer">Postnummer</label>
+                    <InputNumber id="PostNummer" @bind-Value="kunde.PostNummer" @oninput="UpdateBynavn" class="form-control" />
+                    <ValidationMessage For="@(() => kunde.PostNummer)" />
+                </div>
+                <div class="col-4 bynavn">
+                    <label for="Bynavn">By</label>
+                    <input id="Bynavn" type="text" value="@Bynavn" class="form-control" readonly />
+                </div>
+            </div>
+
+
+            <br />
+            <div class="d-block">
+                <button type="submit" class="btn btn-primary">Gem ændringer</button>
+            </div>
+        </EditForm>
+    </div>
 
 }
 @if (ShowError)
