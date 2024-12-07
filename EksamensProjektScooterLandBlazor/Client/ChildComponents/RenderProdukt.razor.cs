@@ -20,12 +20,6 @@ namespace EksamensProjektScooterLandBlazor.Client.ChildComponents
 		[Parameter]
 		public int OrdreId { get; set; }
 
-		[Parameter]
-		public List<OrdreLinje> ordreLinjeList { get; set; }
-
-		[Inject]
-		public IProduktService Service { get; set; }
-
 		[Inject]
 		public IOrdreLinjeService ordreLinjeService { get; set; }
 
