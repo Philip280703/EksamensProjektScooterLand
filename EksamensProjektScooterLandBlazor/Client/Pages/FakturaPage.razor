@@ -214,7 +214,6 @@
 
     private List<OrdreLinje> ordreLinjeListe = new List<OrdreLinje>();
     private ScooterLeje scooterLeje = new ScooterLeje();
-    private OrdreLinjePage ordreLinjePage = new OrdreLinjePage();
 
 
     [Inject]
@@ -292,7 +291,16 @@
 
     public double BeregnMandetimer(List<OrdreLinje> ordrelinjeListe)
     {
-        return ordreLinjePage.BeregnMandetimer(ordrelinjeListe);
+        double sum = 0;
+        foreach (var item in ordrelinjeListe)
+        {
+            if (item.YdelseID != null)
+            {
+                double value = item.ydelse.EstimeretTid * item.Antal;
+                sum += value;
+            }
+        }
+        return sum;
     }
 
 
