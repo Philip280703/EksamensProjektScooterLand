@@ -7,10 +7,11 @@
 {
     <h3>Ydelse oversigt</h3>
     <p>Her kan du se en liste over alle ydelser vi tilbyder</p>
-}
 
-<div class="table-container">
-    <table class="ydelse-table">
+    <input @bind="SearchText" @bind:event="oninput" placeholder="Søg på navn" />
+}
+<div class="table-wrapper">
+    <table class="table">
         <thead>
             <tr>
                 <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseID))">ID</th>
@@ -21,22 +22,21 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var ydelse in YdelsesList)
+            @foreach (var ydelse in FilteretYdelseList)
             {
-                <RenderYdelse ydelseTilføjet="ydelseTilføj" ydelser="ydelse" OrdreAddBool="AddingOrdreBool" Ordreid="@Ordreid"/>
+                <RenderYdelse ydelseTilføjet="ydelseTilføj" ydelser="ydelse" OrdreAddBool="AddingOrdreBool" Ordreid="@Ordreid" />
             }
         </tbody>
     </table>
-</div>
+    </div>
 
-<br />
 @if (Ordreid == 0)
 {
     <div class="button-container">
         <button class="btn btn-primary" @onclick="OpenAddYdelse"> Tilføj Ydelse</button>
-        @if (AddingOrdreBool == true)
+        @if(visAddYdelse == true)
         {
-            <AddYdelsePage AddYdelsebtn="AddingOrdreBool == true" />
+            <AddYdelsePage />
         }
     </div>
 }

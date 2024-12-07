@@ -1,68 +1,133 @@
-﻿
-.Tabel-Header h4 {
-    background-color: #f8f9fa;
-    font-size: 16px;
-    font-weight: bold;
-    color: #343a40;
-    text-align: left;
-    vertical-align: middle;
-    padding: 5px 15px;
-    margin: 0;
-
-}
-
-/* Style the table container */
-.table-container {
-    max-width: 100%;
-    overflow-x: auto;
-    margin: 20px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Style the table */
-.ScooterLeje-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+﻿/* Generelle stilindstillinger */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
     color: #333;
+    margin: 0;
+    padding: 0;
 }
+
+/* Header med Scooter Leje */
+.Tabel-Header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.Tabel-Header-Text {
+    font-size: 28px;
+    color: #0056b3; /* Blå farve */
+    font-weight: bold;
+}
+
+/* Tabel container */
+.table-wrapper {
+    max-height: 400px; /* Begræns højden på tabellen */
+    overflow-y: auto; /* Scrollbar til vertikal scroll */
+    margin-top: 20px;
+    border: 1px solid #0056b3; /* Blå kant */
+    border-radius: 8px; /* Rundede hjørner */
+}
+
+/* Tabel stil */
+.table {
+    width: 100%;
+    border-collapse: collapse; /* Sammenlægger bordlinjerne */
+    background-color: #f9f9f9; /* Lys baggrund */
+    border-radius: 8px;
+    overflow: hidden; /* Fjerner eventuel overflow */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Skygge for at fremhæve tabellen */
+}
+
+    .table th {
+        background-color: #0056b3;
+        color: white;
+        padding: 12px;
+        text-align: left;
+        font-size: 16px;
+        text-transform: uppercase; /* Øger læsbarheden */
+        font-weight: bold;
+    }
+
+    .table td {
+        background-color: #fff;
+        color: #333;
+        padding: 12px;
+        text-align: left;
+        font-size: 14px;
+        border-bottom: 1px solid #ddd; /* Tynd linje mellem rækker */
+    }
+
+/* Table Row Hover Effect */
+tr:hover {
+    background-color: #f1f1f1; /* Lyd farve når du hover på rækker */
+}
+
+/* Action Buttons */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+    button:hover {
+        transform: scale(1.1); /* Gør knappen lidt større ved hover */
+    }
+
+/* Tilføj til ordreknap */
+.btn-primary {
+    background-color: #0056b3;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #004085; /* Mørkere blå ved hover */
+        transform: scale(1.05); /* Gør knappen lidt større */
+    }
 
     /* Style the table header */
     .ScooterLeje-table thead th {
-        background-color: #4CAF50;
+        background-color: #0056b3;
         color: #fff;
         text-align: left;
         padding: 12px 15px;
         border: 1px solid #ddd;
     }
 
-    /* Style the table body rows */
-    .ScooterLeje-table tbody tr {
-        border-bottom: 1px solid #ddd;
-        transition: background-color 0.3s ease;
+    .btn-primary:focus {
+        outline: none; /* Fjern standard fokusramme */
+        box-shadow: 0 0 0 4px rgba(0, 86, 179, 0.5); /* Tilføj en blå ramme ved fokus */
     }
 
-        /* Add hover effect for rows */
-        .ScooterLeje-table tbody tr:hover {
-            background-color: #f1f1f1;
+/* Responsive Table Styling */
+@media (max-width: 768px) {
+    .table th, .table td {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    .table {
+        overflow-x: auto;
+        display: block;
+    }
+
+        .table th, .table td {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-    /* Style table data cells */
-    .ScooterLeje-table tbody td {
-        padding: 12px 15px;
-        text-align: left;
-    }
-
-    /* Add alternating row colors for better readability */
-    .ScooterLeje-table tbody tr:nth-child(odd) {
-        background-color: #fdfdfd;
-    }
-
-    /* Make sure the last row's border is removed */
-    .ScooterLeje-table tbody tr:last-child {
-        border-bottom: none;
-    }
+            .table td:before {
+                content: attr(data-label);
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #777;
+                display: block;
+            }
+}

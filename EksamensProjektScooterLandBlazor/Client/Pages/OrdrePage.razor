@@ -2,13 +2,19 @@
 @using EksamensProjektScooterLandBlazor.Shared.Models;
 @using EksamensProjektScooterLandBlazor.Client.Services;
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents;
-
+@inject NavigationManager navigationsManager
+@inject HttpClient httpClient
 
 <h3>Ordre oversigt</h3>
 <p>Her kan du finde en liste over alle ordrer og deres detaljer.</p>
+<NavLink class="nav-link" style="cursor: pointer;" @onclick="() => TjekForKundeId(kundeId)" Match="NavLinkMatch.All">Opret en ordre</NavLink>
+
+<input @bind="SearchText" @bind:event="oninput" placeholder="Søg på navn" />
 
 <!-- Ordre Table Section -->
 <div class="table-container">
+
+
     <table class="table">
         <thead>
             <tr>
@@ -22,7 +28,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in ordreListe)
+            @foreach (var item in FilteretOrdreListe)
             {
                 <RenderOrdre ordre="@item" />
             }
@@ -31,7 +37,7 @@
 </div>
 
 <!-- Error Notification (for failed orders loading) -->
-@if (ErrorCode != 0)
+@if (ErrorCode != 200 && ErrorCode != 0)
 {
     <div class="alert alert-danger" role="alert">
         Der opstod en fejl under indlæsning af ordrer. Fejlkode: @ErrorCode
@@ -47,15 +53,26 @@
     [Inject]
     public IOrdreService ordreService { get; set; }
 
+    [Inject]
+    public IKundeService kundeService { get; set; }
+
     private int ErrorCode { get; set; } = 0;
 
     [Parameter]
     public int kundeId { get; set; }
 
+    [Parameter]
+    public Ordre ordreModel { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         try
         {
+
+            if(ordreModel == null)
+            {
+                Console.WriteLine("Ordren er null");
+            }
             // Hent ordrer
             if (kundeId == 0)
             { ordreListe = (await ordreService.GetAllOrdrer()).ToList(); }
@@ -63,7 +80,7 @@
             else if (kundeId > 0)
             {
                 ordreListe = (await ordreService.GetAllOrdrer()).Where (kID => kID.KundeiD == kundeId).ToList();
-       
+
             }
         }
         catch (Exception ex)
@@ -105,4 +122,53 @@
         }
         return new MarkupString(string.Empty);
     }
+
+    private async void TjekForKundeId(int kundeid)
+    {
+        if (kundeId == 0)
+        {
+            navigationsManager.NavigateTo("OpretOrdre");
+        }
+        else
+        {
+            await OpretOrdreMedKundeId(kundeid);
+        }
+    }
+
+    private async Task OpretOrdreMedKundeId(int kundeid)
+    {
+        ordreModel = new Ordre();
+        var kunde = await kundeService.GetKunde(kundeid);
+        this.ordreModel.MedarbejderCpr = kunde.Mekaniker.CprNummer;
+        this.ordreModel.KundeiD = kundeid;
+        this.ordreModel.Afsluttet = false;
+        this.ordreModel.BetalingsSum = 0;
+        this.ordreModel.SalgsDato = DateTime.Now;
+        ErrorCode = await ordreService.AddOrdre(ordreModel);
+        await ReloadOrdeLinjeListe();
+    }
+
+    private async Task ReloadOrdeLinjeListe()
+    {
+        try
+        {
+            ordreListe = (await ordreService.GetAllOrdrer()).Where(kID => kID.KundeiD == kundeId).ToList();
+            StateHasChanged();
+        }
+        catch(Exception ex)
+        {
+            ErrorCode = 500;
+        }
+    }
+
+
+    private string SearchText = string.Empty;
+
+    private List<Ordre> FilteretOrdreListe => string.IsNullOrWhiteSpace(SearchText)
+        ? ordreListe : ordreListe.Where(k=>
+            k.kunde.Fornavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+            k.kunde.Efternavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+        ).ToList();
+
 }
+

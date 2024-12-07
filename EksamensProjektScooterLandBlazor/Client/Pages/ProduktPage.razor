@@ -8,11 +8,16 @@
 {
 	<h3 class="header">Produkt Oversigt</h3>
 	<p class="description">Her kan du se en oversigt over alle produkter som er i systemet.</p>
+
+	
 }
+
+<input @bind="SearchText" @bind:event="oninput" placeholder="Søg på navn" />
 
 <div class="produkt-page">
 	
-
+	
+<div class="table-wrapper">
 	<table class="table">
 		<thead>
 			<tr class="Produkt-tabel-række">
@@ -23,13 +28,22 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach(var produkt in produktListe)
+				@foreach (var produkt in FilteretProduktList)
 			{
-				<RenderProdukt produkt="produkt" OrdreAddBool="AddingOrdreBool" Produkttilføjet="Produkttilføjet" deleteProdukt="DeleteProdukt"/>
+					<RenderProdukt produkt="produkt" OrdreAddBool="AddingOrdreBool" Produkttilføjet="tilføjetProdukt" deleteProdukt="DeleteProdukt" OrdreId="OrdreID" />
 			}
 		</tbody>
 	</table>
 </div>
+</div>
+
+<button class="tilføj-produkt" @onclick="visTilføjProduktSide">Tilføj Produkt</button>
+
+@if(visTilføjProdukt == true)
+{
+	<AddProduktPage></AddProduktPage>
+}
+
 
 
 

@@ -23,17 +23,17 @@
             </div>
 
             <div class="col-md-4 mb-3">
-                <label for="Pris" class="form-label">Pris</label>
-                <InputNumber id="Pris" @bind-Value="YdelseModel.Pris" class="form-control form-control-sm"
-                             ParsingErrorMessage="The {0} field has an invalid value." />
-                <ValidationMessage For="@(() => YdelseModel.Pris)" class="text-danger" />
-            </div>
-
-            <div class="col-md-4 mb-3">
                 <label for="EstimeretTid" class="form-label">Estimeret Tid</label>
                 <InputNumber id="EstimeretTid" @bind-Value="YdelseModel.EstimeretTid" class="form-control form-control-sm"
                              ParsingErrorMessage="The {0} field has an invalid value." />
                 <ValidationMessage For="@(() => YdelseModel.EstimeretTid)" class="text-danger" />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="Pris" class="form-label">Pris</label>
+                <InputNumber id="Pris" @bind-Value="YdelseModel.Pris" class="form-control form-control-sm"
+                             ParsingErrorMessage="The {0} field has an invalid value." />
+                <ValidationMessage For="@(() => YdelseModel.Pris)" class="text-danger" />
             </div>
         </div>
 
@@ -47,7 +47,7 @@
 
 @if (ErrorCode != 0)
 {
-    <p>@(ErrorCode == 200 ? "Ydelse successfully added!" : $"Error adding Ydelse. Code: {ErrorCode}")</p>
+    <p>@(ErrorCode == 200 ? "Ydelsen er blevet tilføjet!" : $"Error Det var ike muligt at tilføje en Ydelse. Code: {ErrorCode}")</p>
 }
 
 @code{
@@ -55,16 +55,21 @@
     public bool AddYdelsebtn { get; set; }
 
 
-        [Inject]
-        public IYdelseService Service { get; set; }
+    [Inject]
+    public IYdelseService Service { get; set; }
 
-        private List<Ydelse> YdelsesList = new List<Ydelse>();
+    private List<Ydelse> YdelsesList = new List<Ydelse>();
 
-        private EditContext EditContext;
+    private EditContext EditContext;
 
-        private Ydelse YdelseModel = new Ydelse();
+    private Ydelse YdelseModel = new Ydelse();
 
-        private int ErrorCode { get; set; } = 0;
+    private int ErrorCode { get; set; } = 0;
+
+    [Parameter]
+    public EventCallback OnYdelseAdded { get; set; }
+
+
 
         protected override async Task OnInitializedAsync()
         {
@@ -79,6 +84,9 @@
             // Ryder formen efter tilføjelse
             YdelseModel = new Ydelse();
             StateHasChanged();
+
+            //callback for at informere om opdateirngen. 
+            await OnYdelseAdded.InvokeAsync();
         }
         private void HandleInvalidSubmit()
         {

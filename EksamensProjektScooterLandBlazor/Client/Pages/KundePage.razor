@@ -4,6 +4,25 @@
 
 <h3>Kunde oversigt</h3>
 <p>Her kan du se en oversigt over alle kunder som er registreret i systemet.</p>
+<NavLink class="nav-link" style="width: 140px; overflow-x: hidden;" href="AddKundePage" Match="NavLinkMatch.All">Tilføj en kunde</NavLink>
+
+
+<div class="form-container">
+    <label for="Scooter">Søg på scooterbrand</label>
+
+    <InputSelect id="Scooter" @bind-Value="sortedScooterBrandID">
+        <option value="">- Vælg -</option>
+        @foreach (var item in scooterBrandListe)
+        {
+            <option value="@item.ScooterBrandID">@item.ScooterBrandNavn</option>
+        }
+    </InputSelect>
+
+    <button class="btn" @onclick="FilterKundeListeByScooter">Søg på scootermærke</button>
+</div>
+
+<input @bind="SearchText" @bind:event="oninput" placeholder="Søg på navn" />
+
 
 <div class="table-wrapper">
     <table class="table">
@@ -20,7 +39,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var kunde in kundeListe)
+            @foreach (var kunde in FilteretKundeList)
             {
                 <RenderKunde kunde="kunde" deleteKunde="DeleteKunde" />
             }

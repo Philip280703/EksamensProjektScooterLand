@@ -16,7 +16,11 @@
 	<th>Antal</th>
 	<th>Rabat</th>
 	<th>Total</th>
-	<th>Action</th>
+	@if(currentOrdre.Afsluttet == false)
+	{
+		<th>Action</th>
+	}
+	
 	@if(ordreLinjeListe.Count > 0)
 	{
 		@foreach (var item in ordreLinjeListe)
@@ -65,8 +69,9 @@
 <h5><b>Ingen ordrelinjer i ordren</b></h5>
 }
 
-<h4><b>sum: @BeregnSum().ToString("N2") kr.</b></h4>
+<h4><b>Sum: @BeregnSum().ToString("N2") kr.</b></h4>
 <br />
+<h4><b>Arbejdstimer: @BeregnMandetimer(ordreLinjeListe) timer.</b></h4>
 
 
 @if(currentOrdre.Afsluttet == true)
@@ -99,7 +104,6 @@ else
 @if (ScooterLejeKnap == true)
 {
 	<ScooterLejePage scootertilføjet="Scootertilføjet" OrdreAddBool="@ScooterLejeKnap" Ordreid="@OrdreId" />
-
 }
 
 
@@ -168,7 +172,7 @@ else
 		await GetOrdreLinjeList();
 		currentOrdre = (await ordreService.GetOrdre(OrdreId));
 		scooterLeje = await scooterLejeService.GetSingle(4);
-		// ordreLinjeModel.scooterLeje = scooterLeje; // Initialize scooterLeje in ordreLinje
+
 
 	}
 
@@ -187,6 +191,7 @@ else
 	public async void Scootertilføjet()
 	{
 		await GetOrdreLinjeList();
+		ScooterLejeKnap = false;
 		StateHasChanged();
 	}
 
@@ -199,6 +204,7 @@ else
 	public async void SlettetScooterLeje()
 	{
 		await GetOrdreLinjeList();
+		ListContainsScooterLejeBool = false;
 		StateHasChanged();
 	}
 
@@ -250,6 +256,20 @@ else
 
 		}
 
+		return sum;
+	}
+
+	public double BeregnMandetimer(List<OrdreLinje> ordrelinjeListe)
+	{
+		double sum = 0;
+		foreach(var item in ordrelinjeListe)
+		{
+			if(item.YdelseID != null)
+			{
+				double value = item.ydelse.EstimeretTid * item.Antal;
+				sum += value;
+			}
+		}
 		return sum;
 	}
 

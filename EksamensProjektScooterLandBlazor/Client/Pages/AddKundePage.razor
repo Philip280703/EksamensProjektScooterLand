@@ -3,9 +3,10 @@
 @using EksamensProjektScooterLandBlazor.Shared.Models;
 @using EksamensProjektScooterLandBlazor.Client.Services;
 
-<h2>Tilføj kunde</h2>
+<h3>Tilføj kunde</h3>
 
-<EditForm EditContext="@editContext" class="row p-3"
+<div class="group-box">
+<EditForm EditContext="@editContext"
           OnValidSubmit="@HandleValidSubmit"
           OnInvalidSubmit="@HandleInvalidSubmit">
     <DataAnnotationsValidator />
@@ -49,17 +50,18 @@
         <InputText id="Placering" @bind-Value="KundeModel.Placering" class="form-control" />
         <ValidationMessage For="@(() => KundeModel.Placering)" />
      </div>
-    <div class="col-2 mb-3">
+     <div class="postnummer-group">
+    <div class="col-2 mb-3 postnummer">
         <label for="Postnummer">Postnummer</label>
-        <InputNumber id="PostNummer" @bind-Value="KundeModel.PostNummer" @oninput="UpdateBynavn" class="form-control" />
+        <InputNumber id="PostNummer"  @bind-Value="KundeModel.PostNummer" @oninput="UpdateBynavn" class="form-control" />
         <ValidationMessage For="@(() => KundeModel.PostNummer)" />
     </div>
-  
-    <div class="col-3 mb-3">
+    <div class="col-2 mb-3 postnummer">
         <label for="Bynavn">By</label>
         <input id="Bynavn" type="text" value="@Bynavn" class="form-control" readonly />
-    </div>
-
+        </div>
+        <span class="validation-message"></span>
+        </div>
     <div class="d-block">
         <label for="Scooter" class="col-sm-2 col-form-label">Scooter</label>
         <div class="col-sm-5"> 
@@ -73,8 +75,8 @@
         </div>
     </div>
 
-    <div>
-        <button class="btn btn-primary" @onclick="FilterMekaniker">load</button>
+    <div class="d-block">
+        <button class="btn btn-primary" @onclick="FilterMekaniker">Søg efter mekaniker</button>
     </div>
 
 
@@ -95,42 +97,40 @@
     <div>
 
     </div>
-    <div class="col-6 mb-3">
+    <div class="d-block">
         <button type="submit" class="btn btn-primary">Tilføj kunde</button>
-    </div>
-
+        </div>
 </EditForm>
+</div>
 
-
-@if (ShowError)
-{
-    <div class="message-box">
-        <div class="message-content">
-            <h4>Fejl</h4>
-            <p>Ugylidgt indtastet postnummer</p>
-            <div class="message-actions">
-                <button class="btn btn-danger" @onclick="OkayToError">OK</button>
+    @if (ShowError)
+    {
+        <div class="message-box">
+            <div class="message-content">
+                <h4>Fejl</h4>
+                <p>Ugylidgt indtastet postnummer</p>
+                <div class="message-actions">
+                    <button class="btn btn-danger" @onclick="OkayToError">OK</button>
+                </div>
             </div>
         </div>
-    </div>
-}
+    }
 
 
-@if (showModal)
-{
-    <div class="message-box">
-        <div class="message-content">
-            <h4>Succes!</h4>
-            <p>Kunden er nu oprettet i systemet</p>
-            <div class="message-actions">
-                <button class="btn btn-success" @onclick="OkayToComplete">OK</button>
+    @if (showModal)
+    {
+        <div class="message-box">
+            <div class="message-content">
+                <h4>Succes!</h4>
+                <p>Kunden er nu oprettet i systemet</p>
+                <div class="message-actions">
+                    <button class="btn btn-success" @onclick="OkayToComplete">OK</button>
+                </div>
             </div>
         </div>
-    </div>
-}
+    }
 
-<br />
-<div></div>
+    <br />
 
 
 

@@ -134,3 +134,44 @@ button {
     .Slet-knap:hover svg {
         fill: #c82333;
     }
+
+.table-wrapper {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 20px;
+    border: 1px solid #0056b3;
+}
+
+/* Styling for Tilføj Produkt-knappen */
+.tilføj-produkt {
+    background-color: #0056b3; /* Blå baggrund */
+    color: white; /* Hvid tekstfarve */
+    font-size: 16px; /* Størrelse på teksten */
+    padding: 12px 20px; /* Polstring omkring teksten */
+    border-radius: 8px; /* Rundede hjørner for knappen */
+    border: none; /* Fjern standard kant */
+    cursor: pointer; /* Ændre markøren til en hånd */
+    font-weight: bold; /* Gør teksten fed */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Tilføj overgangseffekter */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Skab en skygge under knappen */
+    margin-top: 20px; /* Giver knappen lidt afstand fra tabel-wrapperen */
+    margin-bottom: 20px;
+}
+
+    /* Hover-effekt for knappen */
+    .tilføj-produkt:hover {
+        background-color: #004085; /* Mørkere blå ved hover */
+        transform: scale(1.05); /* Gør knappen lidt større */
+    }
+
+    /* Aktiv tilstand (når knappen trykkes) */
+    .tilføj-produkt:active {
+        background-color: #003366; /* Endnu mørkere blå ved klik */
+        transform: scale(1); /* Stop med at skalere knappen ved klik */
+    }
+
+    /* Fokusstil (for tastaturinteraktion) */
+    .tilføj-produkt:focus {
+        outline: none; /* Fjern standard fokusramme */
+        box-shadow: 0 0 0 4px rgba(0, 86, 179, 0.5); /* Tilføj en blå ramme ved fokus */
+    }

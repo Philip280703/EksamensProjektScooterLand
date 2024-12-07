@@ -1,5 +1,6 @@
 ﻿@using EksamensProjektScooterLandBlazor.Shared.Models;
 @using EksamensProjektScooterLandBlazor.Client.Services;
+@inject NavigationManager navigationManager;
 
 @page "/OpretOrdre"
 
@@ -71,11 +72,20 @@
         ordreModel.BetalingsSum = 0;
         ordreModel.SalgsDato = DateTime.Now;
         ErrorCode = (await ordreService.AddOrdre(ordreModel));
+
+        NavigerTilOrdre();
     }
 
     private async void HandleInValidSubmit()
     {
         Console.WriteLine("HandeInValidSubmit called...");
-        
+
+    }
+
+    private async void NavigerTilOrdre()
+    {
+        List<Ordre> ordreliste = (await ordreService.GetAllOrdrer()).ToList();
+        var ordre = ordreliste.Last();
+        navigationManager.NavigateTo($"OrdreLinjePage/{ordre.OrdreID}");
     }
 }

@@ -15,6 +15,8 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         private EditContext EditContext;
 
         private bool btnVisibility = true;
+
+        public bool visAddYdelse { get; set; } = false;
       
         private Ydelse YdelseModel = new Ydelse();
 
@@ -35,6 +37,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         {
             EditContext = new EditContext(YdelseModel);
             YdelsesList = (await Service.GetAllYdelser()).ToList();
+            visAddYdelse = false;
         }
 
         private async void HandleValidSubmit()
@@ -44,9 +47,10 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
             YdelsesList.Add(YdelseModel);
             YdelseModel = new Ydelse();
             EditContext = new EditContext(YdelseModel);
+            StateHasChanged();
+
             await AddYdelseHandler();
 
-            StateHasChanged();
         }
         private void HandleInvalidSubmit()
         {
@@ -54,10 +58,11 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
         }
 
-        // Nyt ydelse oprettes
+        // Nyt ydelse og opdateres automatisk 
        private async Task ydelseTilføj()
         {
-            await ydelseTilføjet.InvokeAsync();
+            YdelsesList = (await Service.GetAllYdelser()).ToList();
+            StateHasChanged();
         }
 
         public async Task AddYdelseHandler()
@@ -84,7 +89,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
         private void OpenAddYdelse()
         {
-            AddingOrdreBool = !AddingOrdreBool;
+            visAddYdelse = !visAddYdelse;
         }
 
 
@@ -110,5 +115,11 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 				: YdelsesList.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
 		}
 
+        private string SearchText = string.Empty;
+
+        private List<Ydelse> FilteretYdelseList => string.IsNullOrWhiteSpace(SearchText) 
+            ? YdelsesList : YdelsesList.Where(y=>y.YdelseNavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
+
+  
 	}
 }

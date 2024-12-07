@@ -15,7 +15,9 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		// Nyt item som oprettes gennem formen
 		private Produkt newProdukt = new Produkt();
 
-		private int ErrorCode { get; set; } = 0;
+		public bool visTilføjProdukt { get; set; } = false;
+
+		public int ErrorCode { get; set; } = 0;
 
 		private EditContext EditContext;
 
@@ -31,6 +33,8 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		[Parameter]
 		public EventCallback Produkttilføjet { get; set; }
 
+		List<Produkt> Filtreretprodukter = new();
+
 		protected override void OnInitialized()
 		{
 			EditContext = new EditContext(newProdukt);
@@ -39,6 +43,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		public async Task tilføjetProdukt()
 		{
 			await Produkttilføjet.InvokeAsync();
+			StateHasChanged();
 		}
 
 		public async void DeleteProdukt(Produkt produkt)
@@ -47,12 +52,16 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 			// ErrorCode = await Service.DeleteProdukt(produkt.ProduktID);
 		}
 
-
+		public void visTilføjProduktSide()
+		{
+			visTilføjProdukt = !visTilføjProdukt;
+		}
 
 		protected override async Task OnInitializedAsync()
 		{
 			produktListe = (await Service.GetAllProdukt()).ToList();
-
+			Filtreretprodukter = produktListe.ToList();
+			visTilføjProdukt = false;
 		}
 
 		private void EnsureNonNegative(ChangeEventArgs e)
@@ -73,14 +82,21 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		public async Task HandleValidSubmit()
 		{
 
+			produktListe.Add(new Produkt());
 			ErrorCode = await Service.AddProdukt(newProdukt);
 			Console.WriteLine("Shopping item added: return code: " + ErrorCode);
+
 
 			// Ryd formen efter tilføjelse
 			newProdukt = new Produkt();
 			EditContext = new EditContext(newProdukt);
+			await tilføjetProdukt();
+
 			StateHasChanged();
 		}
+
+		
+
 
 
 		public async Task HandleInvalidSubmit()
@@ -88,26 +104,35 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 			Console.WriteLine("HandleInvalidSubmit Called...");
 		}
 
-        // sortings parametre
-        private string currentSortColumn;
-        private bool isAscending = true;
+		// sortings parametre
+		private string currentSortColumn;
+		private bool isAscending = true;
 
-        private void SortByColumn(string column)
-        {
-            if (currentSortColumn == column)
-            {
-                isAscending = !isAscending; // Toggle sorting direction
-            }
-            else
-            {
-                currentSortColumn = column;
-                isAscending = true; // Default to ascending for new column
-            }
+		private void SortByColumn(string column)
+		{
+			if (currentSortColumn == column)
+			{
+				isAscending = !isAscending; // Toggle sorting direction
+			}
+			else
+			{
+				currentSortColumn = column;
+				isAscending = true; // Default to ascending for new column
+			}
 
-            // Sort the list dynamically based on the column name
-            produktListe = isAscending
-                ? produktListe.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
-                : produktListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
-        }
-    }
+			// Sort the list dynamically based on the column name
+			produktListe = isAscending
+				? produktListe.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
+				: produktListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
+		}
+
+		private string SearchText = string.Empty;
+
+		private List<Produkt> FilteretProduktList => string.IsNullOrWhiteSpace(SearchText)
+			? produktListe : produktListe.Where(p => p.ProduktNavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
+
+
+
+	}
 }
+

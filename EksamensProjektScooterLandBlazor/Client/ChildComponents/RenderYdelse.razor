@@ -31,7 +31,9 @@
         }
         else if(OrdreAddBool == true)
         {
-            <button class="btn btn-primary" @onclick="AddYdelseToOrdrelinje">Tilføj til ordrelinje</button>
+            <button class="btn btn-tilføjydelse" @onclick="AddYdelseToOrdrelinje">
+                Tilføj til ordrelinje
+                </button>
         }
 
     </td>
@@ -53,6 +55,7 @@
 
     [Parameter]
     public EventCallback ydelseTilføjet { get; set; }
+
 
     private void DeleteYdelseHandler(int YdelseID)
     {
@@ -83,6 +86,7 @@
         ordreLinje.OrdreID = Ordreid;
         Errorcode = await ordreLinjeService.AddOrdreLinje(ordreLinje);
 
+        // callback til YdelsePage
         await ydelseTilføjet.InvokeAsync();
     }
 }

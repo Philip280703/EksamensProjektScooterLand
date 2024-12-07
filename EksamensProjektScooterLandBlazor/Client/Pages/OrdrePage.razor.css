@@ -56,6 +56,8 @@ p {
 .table-container {
     max-height: 500px;
     overflow-y: auto;
+    margin-top: 20px;
+    border: 1px solid #0056b3;
 }
 
 /* Hover effect for rows */
@@ -105,4 +107,8 @@ button {
 .table th:hover {
     cursor: pointer;
     background-color: #4d82c4;
+}
+
+.nav-link:hover{
+    cursor: pointer;
 }
