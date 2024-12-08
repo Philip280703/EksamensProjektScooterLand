@@ -99,7 +99,7 @@ namespace NUnitTestingScooterLand
 
 
         [Test]
-        public void TestBeregnSum()
+        public void TestBeregnCorrectSum()
         {
             OrdreLinjePage ordreLinjePage = new OrdreLinjePage();
 
@@ -111,9 +111,33 @@ namespace NUnitTestingScooterLand
             };
 
 
-            double ExpectResult = (300 * 2 * 0.9) + 
-                         (200 * 1 * 0.9) +
-                         ((100 * 3 + 2 * 50 + 50));
+            // forventet resultat: (300 * 2 * 0.9) + (200 * 1 * 0.9) + ((100 * 3 + 2 * 50 + 50))
+
+            double ExpectResult = 1170;
+
+            double AcutalResult = ordreLinjePage.BeregnSum();
+            Assert.AreEqual(ExpectResult, AcutalResult, "BeregnSum skal returnere sum baseret på ordrelinjer.");
+
+        }
+
+
+
+        [Test]
+        public void TestBeregnInCorrectSum()
+        {
+            OrdreLinjePage ordreLinjePage = new OrdreLinjePage();
+
+            List<OrdreLinje> OrdrelinjeListe = new List<OrdreLinje>
+            {
+              new OrdreLinje { ProduktID = 1, produkt = new Produkt { ProduktPris = 300 }, Antal = 2, RabatProcent = 10 },
+              new OrdreLinje { YdelseID = 2, ydelse = new Ydelse { Pris = 200 }, Antal = 1, RabatProcent = 10 },
+              new OrdreLinje { ScooterLejeID = 3, Antal = 3, AntalEkstra = 50, RabatProcent = 0}
+            };
+
+
+            // forventet resultat: (300 * 2 * 0.9) + (200 * 1 * 0.9) + ((100 * 3 + 2 * 50 + 50))
+
+            double ExpectResult = 1;
 
             double AcutalResult = ordreLinjePage.BeregnSum();
             Assert.AreEqual(ExpectResult, AcutalResult, "BeregnSum skal returnere sum baseret på ordrelinjer.");
