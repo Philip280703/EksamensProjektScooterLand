@@ -7,35 +7,42 @@ body {
     padding: 0;
 }
 
-/* Header med Scooter Leje */
-.Tabel-Header {
+/* Header Styling */
+.Tabel-Header, .Tabel-Header-Text {
     text-align: center;
     margin-top: 20px;
 }
 
 .Tabel-Header-Text {
     font-size: 28px;
-    color: #0056b3; /* Blå farve */
+    color: #0056b3;
     font-weight: bold;
+}
+
+.description {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 10px;
 }
 
 /* Tabel container */
 .table-wrapper {
-    max-height: 400px; /* Begræns højden på tabellen */
-    overflow-y: auto; /* Scrollbar til vertikal scroll */
+    max-height: 400px;
+    overflow-y: auto;
     margin-top: 20px;
-    border: 1px solid #0056b3; /* Blå kant */
-    border-radius: 8px; /* Rundede hjørner */
+    border: 1px solid #0056b3;
+    border-radius: 8px;
 }
 
-/* Tabel stil */
+/* Tabel Styling */
 .table {
     width: 100%;
-    border-collapse: collapse; /* Sammenlægger bordlinjerne */
-    background-color: #f9f9f9; /* Lys baggrund */
+    border-collapse: collapse;
+    background-color: #f9f9f9;
     border-radius: 8px;
-    overflow: hidden; /* Fjerner eventuel overflow */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Skygge for at fremhæve tabellen */
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
     .table th {
@@ -44,7 +51,7 @@ body {
         padding: 12px;
         text-align: left;
         font-size: 16px;
-        text-transform: uppercase; /* Øger læsbarheden */
+        text-transform: uppercase;
         font-weight: bold;
     }
 
@@ -54,12 +61,12 @@ body {
         padding: 12px;
         text-align: left;
         font-size: 14px;
-        border-bottom: 1px solid #ddd; /* Tynd linje mellem rækker */
+        border-bottom: 1px solid #ddd;
     }
 
-/* Table Row Hover Effect */
+/* Hover effect on rows */
 tr:hover {
-    background-color: #f1f1f1; /* Lyd farve når du hover på rækker */
+    background-color: #f1f1f1;
 }
 
 /* Action Buttons */
@@ -73,10 +80,10 @@ button {
 }
 
     button:hover {
-        transform: scale(1.1); /* Gør knappen lidt større ved hover */
+        transform: scale(1.1);
     }
 
-/* Tilføj til ordreknap */
+/* Primary button style */
 .btn-primary {
     background-color: #0056b3;
     color: white;
@@ -87,22 +94,13 @@ button {
 }
 
     .btn-primary:hover {
-        background-color: #004085; /* Mørkere blå ved hover */
-        transform: scale(1.05); /* Gør knappen lidt større */
-    }
-
-    /* Style the table header */
-    .ScooterLeje-table thead th {
-        background-color: #0056b3;
-        color: #fff;
-        text-align: left;
-        padding: 12px 15px;
-        border: 1px solid #ddd;
+        background-color: #004085;
+        transform: scale(1.05);
     }
 
     .btn-primary:focus {
-        outline: none; /* Fjern standard fokusramme */
-        box-shadow: 0 0 0 4px rgba(0, 86, 179, 0.5); /* Tilføj en blå ramme ved fokus */
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(0, 86, 179, 0.5);
     }
 
 /* Responsive Table Styling */

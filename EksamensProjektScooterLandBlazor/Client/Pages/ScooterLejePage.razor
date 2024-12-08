@@ -6,10 +6,15 @@
 
 @page "/ScooterLejePage"
 
-<div class="Tabel-Header h4">
-    <p class="Tabel-Header-Text">Scooter Leje</p>
-</div>
 
+@if (NavigationsManager.Uri.EndsWith("/ScooterLejePage"))
+{
+    <h3 class="Tabel-Header-Text">ScooterLeje Oversigt</h3>
+    <p class="description">Her kan du se en oversigt over priser på ScooterLeje</p>
+ 
+}
+
+<br />
 
 <div class="table-wrapper">
     <table class="table">
