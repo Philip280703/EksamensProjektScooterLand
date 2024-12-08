@@ -1,10 +1,12 @@
 ﻿@inject HttpClient httpClient
 
 <div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
+    <div class="container-fluid d-flex justify-content-center align-items-center">
         <a class="navbar-brand" href=""></a>
+        <img src="ScooterLogo.png" style="max-width: 23%; height: auto;" />
     </div>
 </div>
+
 
 <div class="@NavMenuCssClass nav-scrollable">
     <nav class="flex-column">
@@ -15,37 +17,37 @@
         </div>
         <div class="nav-item px-3 d-flex align-items-center justify-content-between">
             <NavLink class="nav-link flex-grow-1" href="Ordre" Match="NavLinkMatch.All">
-                <span class="bi bi-order-nav-menu" aria-hidden="true"></span> Ordre
+                <span class="bi bi-order-nav-menu" aria-hidden="true"></span> Ordrer
             </NavLink>
         </div>
         <div class="nav-item px-3 d-flex align-items-center justify-content-between">
             <NavLink class="nav-link flex-grow-1" href="Mekaniker" Match="NavLinkMatch.All">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Mekaniker
+                <span class="bi bi-mekaniker-nav-menu" aria-hidden="true"></span> Mekaniker
             </NavLink>
         </div>
         <div class="nav-item px-3 d-flex align-items-center justify-content-between">
             <NavLink class="nav-link flex-grow-1" href="Kundepage" Match="NavLinkMatch.All">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Kunde
+                <span class="bi bi-kunde-nav-menu" aria-hidden="true"></span> Kunder
             </NavLink>
         </div>
        <div class="nav-item px-3 d-flex align-items-center justify-content-between">
             <NavLink class="nav-link flex-grow-1" href="YdelsePage" Match="NavLinkMatch.All">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Ydelse
+                <span class="bi bi-ydelse-nav-menu" aria-hidden="true"></span> Ydelser
             </NavLink>
             </div>
          <div class="nav-item px-3 d-flex align-items-center justify-content-between">
             <NavLink class="nav-link flex-grow-1" href="Produkt" Match="NavLinkMatch.All">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Produkt
+                <span class="bi bi-produkt-nav-menu" aria-hidden="true"></span> Produkter
             </NavLink>
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="ScooterLejePage">
-                <span aria-hidden="true"></span> &#128757; Scooter Leje
+                <span class="bi bi-scooterleje-nav-menu" aria-hidden="true"></span> Scooterleje
             </NavLink>
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" @onclick="HandleBackupClicked" disbled="@AwaitTenSeconds">
-                <span aria-hidden="true" class="bi bi-list-nested-nav-menu"></span> Backup
+                <span aria-hidden="true" class="bi bi-backup-nav-menu"></span> Backup
             </NavLink>
         </div>
     </nav>
