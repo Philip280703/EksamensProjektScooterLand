@@ -107,14 +107,13 @@ namespace NUnitTestingScooterLand
             {
               new OrdreLinje { ProduktID = 1, produkt = new Produkt { ProduktPris = 300 }, Antal = 2, RabatProcent = 10 },
               new OrdreLinje { YdelseID = 2, ydelse = new Ydelse { Pris = 200 }, Antal = 1, RabatProcent = 10 },
+              new OrdreLinje { ScooterLejeID = 1, scooterLeje = new ScooterLeje {DagsLejePris = 100, ForsikringPrKm = 0.53 }, Antal = 3, AntalEkstra = 50, RabatProcent = 0 }
             };
 
             //tilføj mock data til OrdrelinjeListen. Jeg var nødt til at sætte OrdrelinjeListe public på OrdreLinjePage. 
             ordreLinjePage.ordreLinjeListe = OrdrelinjeListe;
 
-            // forventet resultat: (300 * 2 * 0.9) + (200 * 1 * 0.9) + ((100 * 3 + 2 * 50 + 50))
-
-            double ExpectResult = (300 * 2 * 0.9) + (200 * 1 * 0.9);
+            double ExpectResult = (300 * 2 * 0.9) + (200 * 1 * 0.9) + ((100 * 3) + (50 * 0.53));
 
             double AcutalResult = ordreLinjePage.BeregnSum();
 
@@ -126,10 +125,10 @@ namespace NUnitTestingScooterLand
         [Test]
         public void TestBeregnInCorrectSum()
         {
-            // Arrange: Create an instance of OrdreLinjePage
+    
             OrdreLinjePage ordreLinjePage = new OrdreLinjePage();
 
-            // Create the test data for OrdreLinje
+         
             List<OrdreLinje> OrdrelinjeListe = new List<OrdreLinje>
             {
                 new OrdreLinje { ProduktID = 1, produkt = new Produkt { ProduktPris = 300 }, Antal = 2, RabatProcent = 10 },
@@ -141,7 +140,6 @@ namespace NUnitTestingScooterLand
 
             double ExpectResult = 1; 
 
-           
             double ActualResult = ordreLinjePage.BeregnSum();
             Assert.AreEqual(ExpectResult, ActualResult, "BeregnSum should return the correct sum based on the order lines.");
         }
