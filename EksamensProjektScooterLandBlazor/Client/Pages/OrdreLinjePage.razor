@@ -225,28 +225,28 @@ else
 		{
 			double pris = 0;
 
-			if (linje.ScooterLejeID != null)
+			if (linje.ScooterLejeID != null && linje.scooterLeje != null)
 			{
-				double dagsPrisXDage = scooterLeje.DagsLejePris * linje.Antal;
-				double KmPrisXAntal = scooterLeje.ForsikringPrKm  * linje.AntalEkstra ?? 0;
-				// hvis selvrisiko er true, så sæt selvrisiko til scooterlejemodel.selvrisiko, ellers sæt den til 0
-				double selvrisiko = linje.SelvrisikoBool == true ? scooterLeje.SelvRisiko : 0;
+				double dagsPrisXDage = linje.scooterLeje.DagsLejePris * linje.Antal;
+				double KmPrisXAntal = linje.scooterLeje.ForsikringPrKm * (linje.AntalEkstra ?? 0);
+				double selvrisiko = (linje.SelvrisikoBool ?? false) ? linje.scooterLeje.SelvRisiko : 0;
 				pris = dagsPrisXDage + KmPrisXAntal + selvrisiko;
 			}
 			else if (linje.ProduktID != null)
 			{
-				pris = linje.produkt.ProduktPris * linje.Antal;	
+				pris = linje.produkt.ProduktPris * linje.Antal;
 			}
 			else if (linje.YdelseID != null)
 			{
 				pris = linje.ydelse.Pris * linje.Antal;
 			}
 
-			int rabat = linje.RabatProcent ?? 0; ;
+			int rabat = linje.RabatProcent ?? 0;
 			sum += pris * (1 - (rabat / 100.0));
 		}
 		return sum;
 	}
+
 
 	public double BeregnMandetimer(List<OrdreLinje> ordrelinjeListe)
 	{
