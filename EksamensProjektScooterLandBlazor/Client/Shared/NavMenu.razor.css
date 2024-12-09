@@ -131,3 +131,13 @@
             padding: 0.25rem 0.75rem; /* Mindre padding for at gøre den kompakt */
             font-size:
         }
+
+
+.bottom-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding: 15px 0;
+    text-align: center;
+}
