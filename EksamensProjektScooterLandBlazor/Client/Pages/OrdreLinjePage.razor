@@ -312,6 +312,9 @@ else
 		showMessageBoxBool = false;
 		currentOrdre.Afsluttet = true;
 		currentOrdre.BetalingsSum = BeregnSum();
+		ProduktKnap = false;
+		YdelseKnap = false;
+		ScooterLejeKnap = false;
 
 		ErrorCode = await ordreService.UpdateOrdre(currentOrdre);
 
