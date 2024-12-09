@@ -76,7 +76,7 @@
 
 @if(currentOrdre.Afsluttet == true)
 {
-	<button class="btn btn-primary" @onclick="() => NavigateToFakturaComponent(OrdreId, BeregnSum())"> Faktura</button>
+	<button class="btn btn-primary" @onclick="() => NavigateToFakturaComponent(OrdreId)"> Faktura</button>
  }
 else
 {
@@ -229,6 +229,7 @@ else
 			{
 				double dagsPrisXDage = linje.scooterLeje.DagsLejePris * linje.Antal;
 				double KmPrisXAntal = linje.scooterLeje.ForsikringPrKm * (linje.AntalEkstra ?? 0);
+				// hvis selvrisiko er true, så sæt selvrisiko til scooterlejemodel.selvrisiko, ellers sæt den til 0
 				double selvrisiko = (linje.SelvrisikoBool ?? false) ? linje.scooterLeje.SelvRisiko : 0;
 				pris = dagsPrisXDage + KmPrisXAntal + selvrisiko;
 			}
@@ -246,7 +247,6 @@ else
 		}
 		return sum;
 	}
-
 
 	public double BeregnMandetimer(List<OrdreLinje> ordrelinjeListe)
 	{
@@ -337,9 +337,9 @@ else
 		Console.WriteLine("Afslutning cancelled.");
 	}
 
-	private void NavigateToFakturaComponent(int OrdreID, double Sum)
+	private void NavigateToFakturaComponent(int OrdreID)
 	{
-		NavigationManager.NavigateTo($"/FakturaPage/{OrdreID}/{Sum}");
+		NavigationManager.NavigateTo($"/FakturaPage/{OrdreID}");
 
 	}
 }
