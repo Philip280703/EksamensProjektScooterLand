@@ -27,7 +27,7 @@ namespace EksamensProjektScooterLandBlazor.Shared.Models
         public int ?AntalEkstra { get; set; }
 
         // bruges til scooterleje selvrisiko
-        public bool ?SelvrisikoBool { get; set; }
+        public bool? SelvrisikoBool { get; set; } = false;
 
 
         [Range(0, 99, ErrorMessage ="Rabat skal være mellem 0 og 99 procent, skrives i hele tal")]

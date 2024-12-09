@@ -116,7 +116,6 @@
 
 
 
-
 @code {
     [Parameter]
     public OrdreLinje ordreLinje { get; set; }
@@ -128,6 +127,9 @@
 
     [Parameter]
     public EventCallback slettetScooterleje { get; set; }
+
+    [Parameter]
+    public EventCallback opdateretScooterleje { get; set; }
 
     [Inject]
     public IOrdreLinjeService ordreLinjeService { get; set; }
@@ -148,26 +150,23 @@
         {
             scooterLejeModel = await scooterLejeService.GetSingle((int)ordreLinje.ScooterLejeID);
             ordreLinje.scooterLeje = scooterLejeModel; // Initialize scooterLeje in ordreLinje
+                                                       // ?? hvis ordrelinje.Selvrisikobool ikke har en værdi defaulter den til false
+            SelvrisikoBool = ordreLinje.SelvrisikoBool ?? false;
         }
     }
 
     private double BeregnOrdreLinjeSum()
     {
-        if (ordreLinje == null) return 0; // Return 0 if ordreLinje is null
-
+        if (ordreLinje == null)
+        {
+            return 0;
+        }
         double pris = 0;
         int antalKm = ordreLinje.AntalEkstra ?? 0;
         int antalDage = ordreLinje.Antal;
         int rabat = ordreLinje.RabatProcent ?? 0;
-        double selvrisiko;
-        if (SelvrisikoBool == true)
-        {
-            selvrisiko = scooterLejeModel.SelvRisiko;
-        }
-        else
-        {
-            selvrisiko = 0;
-        }
+        // hvis Selvrisikobool er true, så sæt selvrisiko til scooterlejemodel.selvrisiko, ellers sæt den til 0
+        double selvrisiko = SelvrisikoBool ? scooterLejeModel.SelvRisiko : 0;
 
         pris = (scooterLejeModel.DagsLejePris * antalDage) + (scooterLejeModel.ForsikringPrKm * antalKm) + selvrisiko;
 
@@ -177,6 +176,7 @@
 
     private async void HandleValidSubmit()
     {
+        ordreLinje.SelvrisikoBool = SelvrisikoBool;
         Console.WriteLine("HandeValidSubmit Called ...");
         ErrorCode = (await ordreLinjeService.UpdateOrdreLinje(ordreLinje));
         StateHasChanged();
@@ -195,10 +195,11 @@
         await slettetScooterleje.InvokeAsync();
     }
 
-    private void AddedSelvRisiko()
+    private async void AddedSelvRisiko()
     {
         SelvrisikoBool = !SelvrisikoBool;
+        ordreLinje.SelvrisikoBool = SelvrisikoBool;
         StateHasChanged();
+        await opdateretScooterleje.InvokeAsync();
     }
-
 }
