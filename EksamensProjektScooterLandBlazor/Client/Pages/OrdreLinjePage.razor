@@ -55,7 +55,7 @@
 					{
 						@if(item.ScooterLejeID != null)
 						{
-							<RenderScooterLejeOrdreLinje slettetScooterleje="SlettetScooterLeje" ordreLinje="@item" currentOrdre="@currentOrdre" />
+							<RenderScooterLejeOrdreLinje opdateretScooterleje="ToggleSelvrisiko" slettetScooterleje="SlettetScooterLeje" ordreLinje="@item" currentOrdre="@currentOrdre" />
 							ListContainsScooterLejeBool = true;
 						}
 						
@@ -76,7 +76,7 @@
 
 @if(currentOrdre.Afsluttet == true)
 {
-	<button class="btn btn-primary" @onclick="() => NavigateToFakturaComponent(OrdreId)"> Faktura</button>
+	<button class="btn btn-primary" @onclick="() => NavigateToFakturaComponent(OrdreId, BeregnSum())"> Faktura</button>
  }
 else
 {
@@ -172,8 +172,12 @@ else
 		await GetOrdreLinjeList();
 		currentOrdre = (await ordreService.GetOrdre(OrdreId));
 		scooterLeje = await scooterLejeService.GetSingle(4);
+	}
 
-
+	public async void ToggleSelvrisiko()
+	{
+		selvrisikoBool = !selvrisikoBool;
+		StateHasChanged();
 	}
 
 	public async void Produkttilføjet()
@@ -225,37 +229,22 @@ else
 			{
 				double dagsPrisXDage = scooterLeje.DagsLejePris * linje.Antal;
 				double KmPrisXAntal = scooterLeje.ForsikringPrKm  * linje.AntalEkstra ?? 0;
-				double selvrisiko = 0;
-				if(selvrisikoBool == true)
-				{
-					selvrisiko = scooterLeje.SelvRisiko;
-				}
+				// hvis selvrisiko er true, så sæt selvrisiko til scooterlejemodel.selvrisiko, ellers sæt den til 0
+				double selvrisiko = linje.SelvrisikoBool == true ? scooterLeje.SelvRisiko : 0;
 				pris = dagsPrisXDage + KmPrisXAntal + selvrisiko;
 			}
-
-			if (linje.ProduktID != null)
-				pris = linje.produkt.ProduktPris;
+			else if (linje.ProduktID != null)
+			{
+				pris = linje.produkt.ProduktPris * linje.Antal;	
+			}
 			else if (linje.YdelseID != null)
-				pris = linje.ydelse.Pris;
-
-
-
-			int antal = 0;
-			if (linje.ScooterLejeID != null)
 			{
-				antal = 1;
+				pris = linje.ydelse.Pris * linje.Antal;
 			}
-			else
-			{
-				antal = linje.Antal;
-			}
+
 			int rabat = linje.RabatProcent ?? 0; ;
-
-			sum += pris * antal * (1 - (rabat / 100.0));
-
-
+			sum += pris * (1 - (rabat / 100.0));
 		}
-
 		return sum;
 	}
 
@@ -323,6 +312,9 @@ else
 		showMessageBoxBool = false;
 		currentOrdre.Afsluttet = true;
 		currentOrdre.BetalingsSum = BeregnSum();
+		ProduktKnap = false;
+		YdelseKnap = false;
+		ScooterLejeKnap = false;
 
 		ErrorCode = await ordreService.UpdateOrdre(currentOrdre);
 
@@ -345,10 +337,9 @@ else
 		Console.WriteLine("Afslutning cancelled.");
 	}
 
-	private void NavigateToFakturaComponent(int OrdreID)
+	private void NavigateToFakturaComponent(int OrdreID, double Sum)
 	{
-		NavigationManager.NavigateTo($"/FakturaPage/{OrdreID}");
+		NavigationManager.NavigateTo($"/FakturaPage/{OrdreID}/{Sum}");
 
 	}
-
 }

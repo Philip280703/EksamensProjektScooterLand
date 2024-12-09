@@ -61,9 +61,9 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         // Nyt ydelse og opdateres automatisk 
        private async Task ydelseTilføj()
         {
-            YdelsesList = (await Service.GetAllYdelser()).ToList();
-            StateHasChanged();
-        }
+			await ydelseTilføjet.InvokeAsync();
+			StateHasChanged();
+		}
 
         public async Task AddYdelseHandler()
         {
@@ -76,7 +76,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
         public async Task DeleteYdelseHandler()
         {
-
+            // Gør ydelse inaktiv
         }
 
         public async Task UpdateYdelseHandler()
