@@ -86,18 +86,14 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
                 : FilteretKundeListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
         }
 
-        // der bruges MarkupString til at rendere HTML i blazor kode. Det bliver brugt i ønsket om at bruge blazor bootsratp ikonerne 
-        private MarkupString GetSortIndicator(string columnName)
+
+        private string GetSortIndicator(string columnName)
         {
             if (currentSortingColumn == columnName)
             {
-                // Returnere MarkupString som enten er bi bi-chevron-up eller bi bi-chevron-down, som er pilene. Bootstrap ikonerne
-                return new MarkupString(isAscending ? "<i class='bi bi-chevron-up'></i>" : "<i class='bi bi-chevron-down'></i>");
+                return new string(isAscending ? "⬆" : "⬇");
             }
-            return new MarkupString(string.Empty);
+            return new string(string.Empty);
         }
     }
-    // Uden brug af MarkupString ville de specifikke pile fra blazor bootsrap ikke kunne indlæses ordentligt på vores websted. 
-
-
 }

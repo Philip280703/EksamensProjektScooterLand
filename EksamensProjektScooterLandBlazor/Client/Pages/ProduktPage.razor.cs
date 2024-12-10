@@ -131,8 +131,15 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		private List<Produkt> FilteretProduktList => string.IsNullOrWhiteSpace(SearchText)
 			? produktListe : produktListe.Where(p => p.ProduktNavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
 
+        private string GetSortIndicator(string column)
+        {
+            if (currentSortColumn == column)
+            {
+                return new string(isAscending ? "⬆" : "⬇");
+            }
+            return new string(string.Empty);
+        }
 
-
-	}
+    }
 }
 

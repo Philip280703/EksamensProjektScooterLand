@@ -14,10 +14,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseID))">ID</th>
-                <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseNavn))">Ydelsesnavn</th>
-                <th @onclick="() => SortByColumn(nameof(Ydelse.EstimeretTid))">Estimeret Tid</th>
-                <th @onclick="() => SortByColumn(nameof(Ydelse.Pris))">Pris</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseID))">ID @GetSortIndicator("YdelseID")</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseNavn))">Ydelsesnavn @GetSortIndicator("YdelseNavn")</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.EstimeretTid))">Estimeret Tid @GetSortIndicator("EstimeretTid")</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.Pris))">Pris @GetSortIndicator("Pris")</th>
                 <th>Action</th>
             </tr>
         </thead>

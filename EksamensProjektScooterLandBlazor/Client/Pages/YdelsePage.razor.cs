@@ -2,6 +2,7 @@
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace EksamensProjektScooterLandBlazor.Client.Pages
 {
@@ -120,6 +121,13 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         private List<Ydelse> FilteretYdelseList => string.IsNullOrWhiteSpace(SearchText) 
             ? YdelsesList : YdelsesList.Where(y=>y.YdelseNavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
 
-  
-	}
+        private string GetSortIndicator(string column) 
+        {
+            if (currentSortColumn == column)
+            {
+                return new string(isAscending ? "⬆" : "⬇");
+            }
+            return new string(string.Empty);
+        }
+    }
 }
