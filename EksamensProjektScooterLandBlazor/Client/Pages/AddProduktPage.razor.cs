@@ -38,8 +38,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 				
 				editContext = new EditContext(ProduktModel);
 
-				//callback for at informere om opdateirngen. 
-				await OnProduktAdded.InvokeAsync();
+				
 
 				navigationManager.NavigateTo("/Produkt");
 				TilføjProdukt.InvokeAsync();
