@@ -37,6 +37,9 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 			{
 				
 				editContext = new EditContext(ProduktModel);
+
+				
+
 				navigationManager.NavigateTo("/Produkt");
 				TilføjProdukt.InvokeAsync();
 			}
