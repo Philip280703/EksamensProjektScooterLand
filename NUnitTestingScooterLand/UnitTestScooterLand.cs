@@ -101,9 +101,12 @@ namespace NUnitTestingScooterLand
         [Test]
         public void TestBeregnCorrectSum()
         {
-            OrdreLinjePage ordreLinjePage = new OrdreLinjePage();
+			// Arrange
 
-            List<OrdreLinje> OrdrelinjeListe = new List<OrdreLinje>
+			OrdreLinjePage ordreLinjePage = new OrdreLinjePage();
+
+			// her opstilles mock-data til at teste metoden
+			List<OrdreLinje> OrdrelinjeListe = new List<OrdreLinje>
             {
               new OrdreLinje { ProduktID = 1, produkt = new Produkt { ProduktPris = 300 }, Antal = 2, RabatProcent = 10 },
               new OrdreLinje { YdelseID = 2, ydelse = new Ydelse { Pris = 200 }, Antal = 1, RabatProcent = 10 },
@@ -116,9 +119,11 @@ namespace NUnitTestingScooterLand
 
             double ExpectResult = (300 * 2 * 0.9) + (200 * 1 * 0.9) + ((100 * 3) + (50 * 0.53)+1000);
 
-            double AcutalResult = ordreLinjePage.BeregnSum();
+			// Act
+			double AcutalResult = ordreLinjePage.BeregnSum();
 
-            Assert.AreEqual(ExpectResult, AcutalResult, "BeregnSum skal returnere sum baseret på ordrelinjer.");
+			// Assert
+			Assert.AreEqual(ExpectResult, AcutalResult, "BeregnSum skal returnere sum baseret på ordrelinjer.");
         }
 
 
@@ -126,9 +131,11 @@ namespace NUnitTestingScooterLand
         [Test]
         public void TestBeregnInCorrectSum()
         {
+			// Arrange
 
 			OrdreLinjePage ordreLinjePage = new OrdreLinjePage();
 
+			// her opstilles mock-data til at teste metoden
 			List<OrdreLinje> OrdrelinjeListe = new List<OrdreLinje>
 			{
 			  new OrdreLinje { ProduktID = 1, produkt = new Produkt { ProduktPris = 300 }, Antal = 2, RabatProcent = 10 },
@@ -136,12 +143,15 @@ namespace NUnitTestingScooterLand
 			  new OrdreLinje { ScooterLejeID = 1, scooterLeje = new ScooterLeje {DagsLejePris = 100,ForsikringPrKm = 0.53, SelvRisiko = 1000},Antal = 3,AntalEkstra = 50, SelvrisikoBool = true, RabatProcent = 0}
 			};
 
-			//tilføj mock data til OrdrelinjeListen. Jeg var nødt til at sætte OrdrelinjeListe public på OrdreLinjePage. 
+			//tilføj mock data til OrdrelinjeListen. 
 			ordreLinjePage.ordreLinjeListe = OrdrelinjeListe;
 
             double ExpectResult = 10;
 
+
+			// Act
 			double ActualResult = ordreLinjePage.BeregnSum();
+			// Assert
 			Assert.AreNotEqual(ExpectResult, ActualResult, "BeregnSum should return the correct sum based on the order lines.");
         }
 
