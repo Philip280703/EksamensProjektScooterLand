@@ -140,6 +140,12 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
             return new string(string.Empty);
         }
 
+		private async void ProduktCallback()
+		{
+			produktListe = (await Service.GetAllProdukt()).ToList();
+            StateHasChanged();
+		}
+
     }
 }
 

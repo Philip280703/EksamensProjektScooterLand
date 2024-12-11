@@ -18,14 +18,14 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         private bool btnVisibility = true;
 
         public bool visAddYdelse { get; set; } = false;
-      
+
         private Ydelse YdelseModel = new Ydelse();
 
         [Parameter]
         public bool AddingOrdreBool { get; set; }
 
         [Parameter]
-        public int Ordreid {  get; set; }
+        public int Ordreid { get; set; }
 
         [Parameter]
         public EventCallback ydelseTilføjet { get; set; }
@@ -60,11 +60,11 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         }
 
         // Nyt ydelse og opdateres automatisk 
-       private async Task ydelseTilføj()
+        private async Task ydelseTilføj()
         {
-			await ydelseTilføjet.InvokeAsync();
-			StateHasChanged();
-		}
+            await ydelseTilføjet.InvokeAsync();
+            StateHasChanged();
+        }
 
         public async Task AddYdelseHandler()
         {
@@ -94,40 +94,46 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         }
 
 
-		// sortings parametre
-		private string currentSortColumn;
-		private bool isAscending = true;
+        // sortings parametre
+        private string currentSortColumn;
+        private bool isAscending = true;
 
-		private void SortByColumn(string column)
-		{
-			if (currentSortColumn == column)
-			{
-				isAscending = !isAscending; // Toggle sorting direction
-			}
-			else
-			{
-				currentSortColumn = column;
-				isAscending = true; // Default to ascending for new column
-			}
+        private void SortByColumn(string column)
+        {
+            if (currentSortColumn == column)
+            {
+                isAscending = !isAscending; // Toggle sorting direction
+            }
+            else
+            {
+                currentSortColumn = column;
+                isAscending = true; // Default to ascending for new column
+            }
 
-			// Sort the list dynamically based on the column name
-			YdelsesList = isAscending
-				? YdelsesList.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
-				: YdelsesList.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
-		}
+            // Sort the list dynamically based on the column name
+            YdelsesList = isAscending
+                ? YdelsesList.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
+                : YdelsesList.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
+        }
 
         private string SearchText = string.Empty;
 
-        private List<Ydelse> FilteretYdelseList => string.IsNullOrWhiteSpace(SearchText) 
-            ? YdelsesList : YdelsesList.Where(y=>y.YdelseNavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
+        private List<Ydelse> FilteretYdelseList => string.IsNullOrWhiteSpace(SearchText)
+            ? YdelsesList : YdelsesList.Where(y => y.YdelseNavn.Contains(SearchText, StringComparison.OrdinalIgnoreCase)).ToList();
 
-        private string GetSortIndicator(string column) 
+        private string GetSortIndicator(string column)
         {
             if (currentSortColumn == column)
             {
                 return new string(isAscending ? "⬆" : "⬇");
             }
             return new string(string.Empty);
+        }
+
+        private async void YdelseCallback()
+        {
+            YdelsesList = (await Service.GetAllYdelser()).ToList();
+            StateHasChanged();
         }
     }
 }

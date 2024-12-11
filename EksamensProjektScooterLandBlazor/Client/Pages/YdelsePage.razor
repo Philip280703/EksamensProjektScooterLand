@@ -36,7 +36,7 @@
         <button class="btn btn-primary" @onclick="OpenAddYdelse"> Tilføj Ydelse</button>
         @if(visAddYdelse == true)
         {
-            <AddYdelsePage />
+            <AddYdelsePage TilføjYdelseTilDB="YdelseCallback"/>
         }
     </div>
 }
