@@ -12,6 +12,8 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		public NavigationManager navigationManager { get; set; }
 
 
+		[Parameter]
+		public EventCallback OnProduktAdded { get; set; }
 
 		private Produkt ProduktModel = new Produkt();
 		private EditContext editContext;
@@ -36,6 +38,10 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 			{
 				
 				editContext = new EditContext(ProduktModel);
+
+				//callback for at informere om opdateirngen. 
+				await OnProduktAdded.InvokeAsync();
+
 				navigationManager.NavigateTo("/Produkt");
 
 			}

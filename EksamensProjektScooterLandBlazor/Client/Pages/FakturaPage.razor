@@ -9,9 +9,9 @@
    
     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
         <div style="width: 70%;">
-            <h1 class="company-name">ScooterLand</h1>
+            <h1 class="company-name">Scooterland</h1>
             <p>
-                <strong>ScooterFiktiv AS</strong><br />
+                <strong>Scooterfiktiv AS</strong><br />
                 Lille Lisevej 12, Odense<br />
                 Danmark<br />
                 Telefon: 12345678<br />
@@ -41,15 +41,15 @@
                         <td>@ordre.OrdreID</td>
                     </tr>
                     <tr>
-                        <td><strong>OrdreDato</strong></td>
+                        <td><strong>Ordredato</strong></td>
                         <td>@ordre.SalgsDato.ToShortDateString()</td>
                     </tr>
                     <tr>
-                        <td><strong>FakturaDato</strong></td>
+                        <td><strong>Fakturadato</strong></td>
                         <td>@DateTime.Now.ToShortDateString()</td>
                     </tr>
                     <tr>
-                        <td><strong>BetalingsDato</strong></td>
+                        <td><strong>Betalingsdato</strong></td>
                         <td>@DateTime.Now.AddDays(14).ToShortDateString()</td>
                     </tr>
                             
@@ -65,7 +65,7 @@
                         <td>@kunde.KundeID</td>
                     </tr>
                     <tr>
-                        <td><strong>Kunde Navn:</strong></td>
+                        <td><strong>Kunde navn:</strong></td>
                         <td>@kunde.Fornavn @kunde.Efternavn</td>
                     </tr>
                     <tr>
@@ -81,11 +81,11 @@
         <hr />
 
       
-        <h6><strong>Ydelser og Produkter</strong></h6>
+        <h6><strong>Ydelser og produkter</strong></h6>
         <table class="ydelseogproduct-table table table-bordered">
             <thead>
                 <tr>
-                    <th>OrdreLinje ID</th>
+                    <th>Ordrelinje ID</th>
                     <th>Type</th>
                     <th>Navn</th>
                     <th>Dato</th>
@@ -121,14 +121,14 @@
                 <table class="ScooterLeje-table table table-bordered">
                     <thead>
                         <tr>
-                            <th>OrdreLinje ID</th>
+                            <th>Ordrelinje ID</th>
                             <th>Type</th>
                             <th>Dagspris</th>
                             <th>Antal Dage</th>
                             <th>Km Pris</th>
                             <th>Km Kørt</th>
                             <th>Selvrisiko</th>
-                            <th>Rabat Procent</th>
+                            <th>Rabat procent</th>
                             <th>Total</th>
                         </tr>
                     </thead>
@@ -180,7 +180,7 @@
                         <td>@BeregnMoms() kr.</td>
                     </tr>
                     <tr style="border-bottom: 3px solid black;">
-                        <td><strong>Samlet Beløb:</strong></td>
+                        <td><strong>Samlet beløb:</strong></td>
                         <td>@BeregnTotal() kr.</td>
                     </tr>
                 </table>

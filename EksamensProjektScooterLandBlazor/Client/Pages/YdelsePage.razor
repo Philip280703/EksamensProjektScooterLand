@@ -15,8 +15,8 @@
         <thead>
             <tr>
                 <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseID))">ID</th>
-                <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseNavn))">Ydelsesnavn</th>
-                <th @onclick="() => SortByColumn(nameof(Ydelse.EstimeretTid))">Estimeret Tid</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.YdelseNavn))">Ydelse</th>
+                <th @onclick="() => SortByColumn(nameof(Ydelse.EstimeretTid))">Estimeret tid</th>
                 <th @onclick="() => SortByColumn(nameof(Ydelse.Pris))">Pris</th>
                 <th>Action</th>
             </tr>
@@ -33,7 +33,7 @@
 @if (Ordreid == 0)
 {
     <div class="button-container">
-        <button class="btn btn-primary" @onclick="OpenAddYdelse"> Tilføj Ydelse</button>
+        <button class="btn btn-primary" @onclick="OpenAddYdelse"> Tilføj ydelse</button>
         @if(visAddYdelse == true)
         {
             <AddYdelsePage />
