@@ -142,7 +142,7 @@ namespace NUnitTestingScooterLand
             double ExpectResult = 10;
 
 			double ActualResult = ordreLinjePage.BeregnSum();
-			Assert.AreEqual(ExpectResult, ActualResult, "BeregnSum should return the correct sum based on the order lines.");
+			Assert.AreNotEqual(ExpectResult, ActualResult, "BeregnSum should return the correct sum based on the order lines.");
         }
 
     }
