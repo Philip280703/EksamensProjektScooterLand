@@ -54,6 +54,8 @@
     [Parameter]
     public bool AddYdelsebtn { get; set; }
 
+    [Parameter]
+    public EventCallback TilføjYdelseTilDB { get; set; }
 
     [Inject]
     public IYdelseService Service { get; set; }
@@ -87,6 +89,7 @@
 
             //callback for at informere om opdateirngen. 
             await OnYdelseAdded.InvokeAsync();
+            await TilføjYdelseTilDB.InvokeAsync();
         }
         private void HandleInvalidSubmit()
         {

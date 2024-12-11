@@ -21,9 +21,9 @@
 	<table class="table">
 		<thead>
 			<tr class="Produkt-tabel-række">
-				<th @onclick="() => SortByColumn(nameof(Produkt.ProduktID))">Id</th>
-				<th @onclick="() => SortByColumn(nameof(Produkt.ProduktNavn))">Produkt</th>
-				<th @onclick="() => SortByColumn(nameof(Produkt.ProduktPris))">Pris</th>
+					<th @onclick="() => SortByColumn(nameof(Produkt.ProduktID))">Id @GetSortIndicator("ProduktID")</th>
+					<th @onclick="() => SortByColumn(nameof(Produkt.ProduktNavn))">Produkt @GetSortIndicator("ProduktNavn")</th>
+					<th @onclick="() => SortByColumn(nameof(Produkt.ProduktPris))">Pris @GetSortIndicator("ProduktPris")</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -41,7 +41,7 @@
 
 @if(visTilføjProdukt == true)
 {
-	<AddProduktPage></AddProduktPage>
+	<AddProduktPage TilføjProdukt="ProduktCallback"></AddProduktPage>
 }
 
 

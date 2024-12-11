@@ -64,16 +64,21 @@
     {
         Console.WriteLine("HandeValidSubmit called...");
 
-        var kunde = kundeListe.Single(k => k.KundeID == ordreModel.KundeiD);
+        if(ordreModel.KundeiD == null)
+        {
+            NavigerTilAddKunde();
+        }
+        else
+        {        
+            var kunde = kundeListe.Single(k => k.KundeID == ordreModel.KundeiD);
+            ordreModel.MedarbejderCpr = kunde.Mekaniker.CprNummer;
 
-        ordreModel.MedarbejderCpr = kunde.Mekaniker.CprNummer;
-
-        ordreModel.Afsluttet = false;
-        ordreModel.BetalingsSum = 0;
-        ordreModel.SalgsDato = DateTime.Now;
-        ErrorCode = (await ordreService.AddOrdre(ordreModel));
-
-        NavigerTilOrdre();
+            ordreModel.Afsluttet = false;
+            ordreModel.BetalingsSum = 0;
+            ordreModel.SalgsDato = DateTime.Now;
+            ErrorCode = (await ordreService.AddOrdre(ordreModel));
+            NavigerTilOrdre();
+        }
     }
 
     private async void HandleInValidSubmit()
@@ -88,4 +93,9 @@
         var ordre = ordreliste.Last();
         navigationManager.NavigateTo($"OrdreLinjePage/{ordre.OrdreID}");
     }
+
+    private void NavigerTilAddKunde()
+	{
+		navigationManager.NavigateTo("AddKundePage");
+	}
 }
