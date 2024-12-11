@@ -109,6 +109,20 @@ button {
     background-color: #4d82c4;
 }
 
-.nav-link:hover{
-    cursor: pointer;
+.opret-ordre {
+    font-weight: bold;
+    color: #0056b3;
+    text-decoration: none;
+    font-size: 20px;
+    border: 2px solid #0056b3;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    padding-left: 5px;
+    padding-right: 5px;
 }
+
+    .opret-ordre:hover {
+        border-color: #4d83c4;
+        color: #4d83c4;
+        transform: scale(1.1);
+    }

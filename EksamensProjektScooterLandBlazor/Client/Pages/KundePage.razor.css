@@ -97,20 +97,6 @@ td {
     vertical-align: middle; /* Centrerer indholdet vertikalt */
 }
 
-/* Action Buttons */
-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    margin-right: 10px;
-    transition: transform 0.3s ease;
-}
-
-    button:hover {
-        transform: scale(1.1);
-    }
-
 /* Rediger og Slet knap styling */
 .Rediger-knap, .Slet-knap {
     padding: 10px;
@@ -133,4 +119,22 @@ button {
 
     .Slet-knap:hover svg {
         fill: #c82333;
+    }
+
+.tilføj-kunde{
+    font-weight: bold;
+    color: #0056b3;
+    text-decoration: none;
+    font-size: 20px;
+    border: 2px solid #0056b3;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+    .tilføj-kunde:hover{
+        border-color: #4d83c4;
+        color: #4d83c4;
+        transform: scale(1.1);
     }
