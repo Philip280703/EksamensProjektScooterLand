@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components;
 @using EksamensProjektScooterLandBlazor.Client.ChildComponents;
 @layout NoMenuLayout
+@inject NavigationManager NavigationManager
 
 @page "/FakturaPage/{OrdreId:int}"
 
@@ -193,7 +194,7 @@
     }
 </div>
 
-
+<button @onclick="GåTilbage">X</button>
 
 @code {
     [Parameter]
@@ -309,5 +310,10 @@
     private double BeregnTotal()
     {
         return BeregnSubtotal() * 1.25;
+    }
+
+    private void GåTilbage()
+    {
+        NavigationManager.NavigateTo($"/OrdreLinjePage/{OrdreId}");
     }
 }

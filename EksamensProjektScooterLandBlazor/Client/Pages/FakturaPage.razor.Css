@@ -57,3 +57,13 @@ a {
     max-width: 150px;
     height: auto;
 }
+
+button {
+    text-transform: none;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    background-color: transparent;
+    border-color: red;
+    color: red;
+}
