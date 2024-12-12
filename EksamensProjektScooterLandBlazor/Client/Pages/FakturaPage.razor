@@ -174,15 +174,15 @@
                 <table class="table table-bordered" style="width: 100%; margin-left: auto;">
                     <tr>
                         <td><strong>Subtotal:</strong></td>
-                        <td>@BeregnSubtotal() kr.</td>
+                        <td>@BeregnSubtotal().ToString("0.00") kr.</td>
                     </tr>
                     <tr>
                         <td><strong> 25,00% Moms:</strong></td>
-                        <td>@BeregnMoms() kr.</td>
+                        <td>@BeregnMoms().ToString("0.00") kr.</td>
                     </tr>
                     <tr style="border-bottom: 3px solid black;">
                         <td><strong>Samlet beløb:</strong></td>
-                        <td>@BeregnTotal() kr.</td>
+                        <td>@BeregnTotal().ToString("0.00") kr.</td>
                     </tr>
                 </table>
             </div>
