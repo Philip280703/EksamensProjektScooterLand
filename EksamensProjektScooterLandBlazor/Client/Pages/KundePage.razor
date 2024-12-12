@@ -4,8 +4,8 @@
 
 <h3>Kunde oversigt</h3>
 <p>Her kan du se en oversigt over alle kunder som er registreret i systemet.</p>
-<NavLink class="nav-link" style="width: 140px; overflow-x: hidden;" href="AddKundePage" Match="NavLinkMatch.All">Tilføj en kunde</NavLink>
 
+<a class="tilføj-kunde" href="AddKundePage">Opret en kunde</a>
 
 <div class="form-container">
     <label for="Scooter">Søg på scooterbrand</label>
@@ -18,7 +18,11 @@
         }
     </InputSelect>
 
-    <button class="btn" @onclick="FilterKundeListeByScooter">Søg på scootermærke</button>
+    <button class="btn" @onclick="FilterKundeListeByScooter" style="background-color: #0056b3; color: white; border: none; padding: 8px 12px; border-radius: 4px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zm-5.442 1.398a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z" />
+        </svg>
+    </button>
 </div>
 
 <input @bind="SearchText" @bind:event="oninput" placeholder="Søg på navn" />
@@ -31,7 +35,7 @@
                 <th @onclick="() => SortByColumn(nameof(Kunde.KundeID))">ID @GetSortIndicator("KundeID")</th>
                 <th @onclick="() => SortByColumn(nameof(Kunde.Fornavn))">Navn @GetSortIndicator("Fornavn")</th>
                 <th @onclick="() => SortByColumn(nameof(Kunde.Email))">Email @GetSortIndicator("Email")</th>
-                <th @onclick="() => SortByColumn(nameof(Kunde.TelefonNummer))">Tlf @GetSortIndicator("TelefonNummer")</th>
+                <th @onclick="() => SortByColumn(nameof(Kunde.TelefonNummer))">Tlf. @GetSortIndicator("TelefonNummer")</th>
                 <th @onclick="() => SortByColumn(nameof(Kunde.PreferetMekanikerCprNummer))">Pref. M @GetSortIndicator("PreferetMekanikerCprNummer")</th>
                 <th @onclick="() => SortByColumn(nameof(Kunde.ScooterBrandID))">Scooter @GetSortIndicator("ScooterBrandID")</th>
 

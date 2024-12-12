@@ -7,7 +7,7 @@
 
 <h3>Ordre oversigt</h3>
 <p>Her kan du finde en liste over alle ordrer og deres detaljer.</p>
-<NavLink class="nav-link" style="cursor: pointer;" @onclick="() => TjekForKundeId(kundeId)" Match="NavLinkMatch.All">Opret en ordre</NavLink>
+<a class="opret-ordre" @onclick="() => TjekForKundeId(kundeId)" Match="NavLinkMatch.All">Opret en ordre</a>
 
 <input @bind="SearchText" @bind:event="oninput" placeholder="Søg på navn" />
 
@@ -113,14 +113,13 @@
             : ordreListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();
     }
 
-    // Der bruges MarkupString til at rendre HTML i Blazor kode
-    private MarkupString GetSortIndicator(string columnName)
+    private string GetSortIndicator(string columnName)
     {
         if (currentSortColumn == columnName)
         {
-            return new MarkupString(isAscending ? "<i class='bi bi-chevron-up'></i>" : "<i class='bi bi-chevron-down'></i>");
+            return new string(isAscending ? "⬆" : "⬇");
         }
-        return new MarkupString(string.Empty);
+        return new string(string.Empty);
     }
 
     private async void TjekForKundeId(int kundeid)
