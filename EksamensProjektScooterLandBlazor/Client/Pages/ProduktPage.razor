@@ -37,11 +37,17 @@
 </div>
 </div>
 
-<button class="tilføj-produkt" @onclick="visTilføjProduktSide">Tilføj Produkt</button>
-
-@if(visTilføjProdukt == true)
+@if(OrdreID == 0)
 {
-	<AddProduktPage TilføjProdukt="ProduktCallback"></AddProduktPage>
+	<div class="button-container">
+		<button class="tilføj-produkt" @onclick="visTilføjProduktSide">Tilføj Produkt</button>
+
+		@if (visTilføjProdukt == true)
+		{
+			<AddProduktPage TilføjProdukt="ProduktCallback"></AddProduktPage>
+		}
+	</div>
+
 }
 
 
