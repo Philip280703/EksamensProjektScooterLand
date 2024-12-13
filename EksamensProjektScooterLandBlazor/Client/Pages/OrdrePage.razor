@@ -11,7 +11,7 @@
 
 <input @bind="SearchText" @bind:event="oninput" placeholder="Søg på navn" />
 
-<!-- Ordre Table Section -->
+
 <div class="table-container">
 
 
@@ -36,7 +36,7 @@
     </table>
 </div>
 
-<!-- Error Notification (for failed orders loading) -->
+
 @if (ErrorCode != 200 && ErrorCode != 0)
 {
     <div class="alert alert-danger" role="alert">
@@ -99,15 +99,16 @@
     {
         if (currentSortColumn == column)
         {
-            isAscending = !isAscending; // Toggle sorting direction
+            isAscending = !isAscending; 
         }
         else
         {
             currentSortColumn = column;
-            isAscending = true; // Default to ascending for new column
+            isAscending = true; // Default til ascending for en ny kolonne
         }
 
-        // Sort the list dynamically based on the column name
+        
+        //Sortere listen dynamisk basered på kolonnenavnet
         ordreListe = isAscending
             ? ordreListe.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
             : ordreListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();

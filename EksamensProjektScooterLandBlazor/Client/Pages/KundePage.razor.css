@@ -1,6 +1,4 @@
-﻿/* Page Styling */
-
-/* Page Header */
+﻿
 h3 {
     font-size: 28px;
     color: #0056b3;
@@ -22,7 +20,6 @@ p {
     background-color: #4d82c4;
 }
 
-/* Table Styling */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -32,7 +29,7 @@ p {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-    /* Table Header Styling */
+    
     .table th {
         background-color: #0056b3;
         color: white;
@@ -43,7 +40,7 @@ p {
         font-weight: bold;
     }
 
-    /* Table Body Styling */
+ 
     .table td {
         background-color: #fff;
         color: #333;
@@ -53,7 +50,7 @@ p {
         border-bottom: 1px solid #ddd;
     }
 
-/* Responsive Table Styling */
+
 @media (max-width: 768px) {
     .table th, .table td {
         font-size: 12px;
@@ -80,10 +77,9 @@ p {
             }
 }
 
-/* Scrollable Table */
 .table-wrapper {
-    max-height: 400px; /* Juster max-height til den ønskede højde */
-    overflow-y: auto; /* Tilføjer scrollbar når indholdet er for stort */
+    max-height: 400px; 
+    overflow-y: auto;
     margin-top: 20px;
     border: 1px solid #0056b3;
 }
@@ -92,12 +88,11 @@ tr:hover{
     background-color: #f1f1f1;
 }
 
-/* Vertikal og horisontal centrering af indhold i celler */
+
 td {
-    vertical-align: middle; /* Centrerer indholdet vertikalt */
+    vertical-align: middle; 
 }
 
-/* Rediger og Slet knap styling */
 .Rediger-knap, .Slet-knap {
     padding: 10px;
     background-color: transparent;

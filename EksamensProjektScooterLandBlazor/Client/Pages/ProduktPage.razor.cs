@@ -112,15 +112,16 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 		{
 			if (currentSortColumn == column)
 			{
-				isAscending = !isAscending; // Toggle sorting direction
+				isAscending = !isAscending; 
 			}
 			else
 			{
 				currentSortColumn = column;
-				isAscending = true; // Default to ascending for new column
+				isAscending = true; // Default til ascending for ny kolonne
 			}
 
-			// Sort the list dynamically based on the column name
+			
+			//Sortere listen dynamisk baseret på kolonne navnet
 			produktListe = isAscending
 				? produktListe.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
 				: produktListe.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();

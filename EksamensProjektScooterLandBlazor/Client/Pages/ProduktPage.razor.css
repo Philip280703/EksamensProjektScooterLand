@@ -1,6 +1,4 @@
-﻿/* Page Styling */
-
-/* Page Header */
+﻿
 h3 {
     font-size: 28px;
     color: #0056b3;
@@ -22,7 +20,7 @@ p {
     background-color: #4d82c4;
 }
 
-/* Table Styling */
+
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -32,7 +30,7 @@ p {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-    /* Table Header Styling */
+  
     .table th {
         background-color: #0056b3;
         color: white;
@@ -43,7 +41,7 @@ p {
         font-weight: bold;
     }
 
-    /* Table Body Styling */
+    
     .table td {
         background-color: #fff;
         color: #333;
@@ -53,7 +51,7 @@ p {
         border-bottom: 1px solid #ddd;
     }
 
-/* Responsive Table Styling */
+
 @media (max-width: 768px) {
     .table th, .table td {
         font-size: 12px;
@@ -80,24 +78,23 @@ p {
             }
 }
 
-/* Scrollable Table */
 .table-wrapper {
-    max-height: 500px; /* Juster max-height til den ønskede højde */
-    overflow-y: auto; /* Tilføjer scrollbar når indholdet er for stort */
+    max-height: 500px; 
+    overflow-y: auto; 
     margin-top: 20px;
 }
 
-/* Table Row Hover Effect */
+
 tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Vertikal og horisontal centrering af indhold i celler */
+
 td {
-    vertical-align: middle; /* Centrerer indholdet vertikalt */
+    vertical-align: middle; 
 }
 
-/* Action Buttons */
+
 button {
     background: none;
     border: none;
@@ -111,7 +108,7 @@ button {
         transform: scale(1.1);
     }
 
-/* Rediger og Slet knap styling */
+
 .Rediger-knap, .Slet-knap {
     padding: 10px;
     background-color: transparent;
@@ -142,36 +139,35 @@ button {
     border: 1px solid #0056b3;
 }
 
-/* Styling for Tilføj Produkt-knappen */
+
 .tilføj-produkt {
-    background-color: #0056b3; /* Blå baggrund */
-    color: white; /* Hvid tekstfarve */
-    font-size: 16px; /* Størrelse på teksten */
-    padding: 12px 20px; /* Polstring omkring teksten */
-    border-radius: 8px; /* Rundede hjørner for knappen */
-    border: none; /* Fjern standard kant */
-    cursor: pointer; /* Ændre markøren til en hånd */
-    font-weight: bold; /* Gør teksten fed */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Tilføj overgangseffekter */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Skab en skygge under knappen */
-    margin-top: 20px; /* Giver knappen lidt afstand fra tabel-wrapperen */
+    background-color: #0056b3; 
+    color: white; 
+    font-size: 16px; 
+    padding: 12px 20px; 
+    border-radius: 8px; 
+    border: none; 
+    cursor: pointer; 
+    font-weight: bold; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    margin-top: 20px; 
     margin-bottom: 20px;
 }
 
-    /* Hover-effekt for knappen */
+    
     .tilføj-produkt:hover {
-        background-color: #004085; /* Mørkere blå ved hover */
-        transform: scale(1.05); /* Gør knappen lidt større */
+        background-color: #004085; 
+        transform: scale(1.05); 
     }
 
-    /* Aktiv tilstand (når knappen trykkes) */
+  
     .tilføj-produkt:active {
-        background-color: #003366; /* Endnu mørkere blå ved klik */
-        transform: scale(1); /* Stop med at skalere knappen ved klik */
+        background-color: #003366; 
+        transform: scale(1); 
     }
 
-    /* Fokusstil (for tastaturinteraktion) */
     .tilføj-produkt:focus {
-        outline: none; /* Fjern standard fokusramme */
-        box-shadow: 0 0 0 4px rgba(0, 86, 179, 0.5); /* Tilføj en blå ramme ved fokus */
+        outline: none; 
+        box-shadow: 0 0 0 4px rgba(0, 86, 179, 0.5); 
     }

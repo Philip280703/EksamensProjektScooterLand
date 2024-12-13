@@ -1,5 +1,4 @@
-﻿/* Form styling */
-.form-container {
+﻿.form-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -48,7 +47,6 @@ label {
     font-size: 12px;
 }
 
-/* Button styling */
 .btn-submit {
     padding: 12px 20px;
     font-size: 16px;
@@ -66,7 +64,7 @@ label {
         background-color: #0056b3;
     }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
     .form-row {
         flex-direction: column;

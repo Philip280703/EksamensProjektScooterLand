@@ -1,4 +1,4 @@
-﻿/* Page Header */
+﻿
 h3 {
     font-size: 28px;
     color: #0056b3;
@@ -15,7 +15,7 @@ p {
     text-align: center;
 }
 
-/* Table Styling */
+
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -25,7 +25,7 @@ p {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-    /* Table Header Styling */
+    
     .table th {
         background-color: #0056b3;
         color: white;
@@ -52,7 +52,7 @@ p {
         vertical-align: middle;
     }
 
-/* Add scrollbar to the table container */
+
 .table-container {
     max-height: 500px;
     overflow-y: auto;
@@ -60,12 +60,12 @@ p {
     border: 1px solid #0056b3;
 }
 
-/* Hover effect for rows */
+
 .table tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Styling for the action buttons */
+
 button {
     background: none;
     border: none;
@@ -94,7 +94,7 @@ button {
         background-color: #138496;
     }
 
-/* Table Row for RenderOrdre */
+
 .order-row {
     cursor: pointer;
     transition: background-color 0.3s ease;

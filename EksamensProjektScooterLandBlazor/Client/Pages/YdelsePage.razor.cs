@@ -59,7 +59,6 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
         }
 
-        // Nyt ydelse og opdateres automatisk 
         private async Task ydelseTilføj()
         {
             await ydelseTilføjet.InvokeAsync();
@@ -102,15 +101,15 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         {
             if (currentSortColumn == column)
             {
-                isAscending = !isAscending; // Toggle sorting direction
+                isAscending = !isAscending; 
             }
             else
             {
                 currentSortColumn = column;
-                isAscending = true; // Default to ascending for new column
+                isAscending = true; 
             }
 
-            // Sort the list dynamically based on the column name
+            
             YdelsesList = isAscending
                 ? YdelsesList.OrderBy(x => x.GetType().GetProperty(column).GetValue(x)).ToList()
                 : YdelsesList.OrderByDescending(x => x.GetType().GetProperty(column).GetValue(x)).ToList();

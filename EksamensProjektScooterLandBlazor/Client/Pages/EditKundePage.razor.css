@@ -92,7 +92,7 @@ button {
     margin-top: 5px;
 }
 
-/* Layout Styling */
+
 .mb-3 {
     margin-bottom: 1rem !important;
 }
@@ -131,11 +131,11 @@ button {
 }
 
 .vejnavn {
-    flex-basis: 66.66%; /* For wider Vejnavn */
+    flex-basis: 66.66%; 
 }
 
 .postnummer, .bynavn {
-    margin-top: 1rem; /* Adds spacing between rows */
+    margin-top: 1rem; 
 }
 
 .row{
@@ -165,7 +165,7 @@ button {
 }
 
 .validation-message {
-    min-height: 1.5rem; /* Ensures space is always reserved */
+    min-height: 1.5rem;
     color: #dc3545;
     font-size: 0.875rem;
     margin-top: 5px;

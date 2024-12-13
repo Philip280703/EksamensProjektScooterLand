@@ -64,7 +64,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
 
 
-        // sortings parametre
+        
         private string currentSortingColumn;
         private bool isAscending = true;
 

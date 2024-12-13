@@ -1,4 +1,4 @@
-﻿/* Generelle stilindstillinger */
+﻿
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f9;
@@ -7,7 +7,7 @@ body {
     padding: 0;
 }
 
-/* Header med Ydelse oversigt */
+
 h3 {
     font-size: 28px;
     color: #0056b3;
@@ -37,7 +37,6 @@ table th:hover{
     border: 1px solid #0056b3;
 }
 
-/* Ydelsestabelen */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -47,7 +46,7 @@ table th:hover{
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-    /* Table Header Styling */
+   
     .table th {
         background-color: #0056b3;
         color: white;
@@ -58,7 +57,7 @@ table th:hover{
         font-weight: bold;
     }
 
-    /* Table Body Styling */
+   
     .table td {
         background-color: #fff;
         color: #333;
@@ -69,7 +68,7 @@ table th:hover{
     }
 
 
-/* Knappen til at tilføje ydelse */
+
 .btn {
     padding: 12px 24px;
     background-color: #0056b3;
@@ -84,12 +83,11 @@ table th:hover{
     margin-top: 20px;
 }
 
-    /* Hover effekt på knappen */
     .btn:hover {
         background-color: #0277bd;
     }
 
-/* Sektion for tilføjelse af ydelse */
+
 .AddYdelsePage {
     background-color: #ffffff;
     padding: 20px;
@@ -110,49 +108,49 @@ td{
 
 
 
-/* Container for the entire form */
+
 .form-container {
     margin: 20px;
     padding: 20px;
-    background-color: #f8f9fa; /* Light background color */
-    border-radius: 8px; /* Rounded corners */
+    background-color: #f8f9fa; 
+    border-radius: 8px; 
     display: flex;
-    align-items: center; /* Align elements vertically in the center */
-    justify-content: space-between; /* Space between items */
+    align-items: center; 
+    justify-content: space-between; 
 }
 
-/* Label styling */
+
 label {
     font-size: 1.2rem;
     font-weight: 600;
-    margin-right: 10px; /* Space between label and input */
-    display: block; /* Ensure label is on its own line */
+    margin-right: 10px; 
+    display: block; 
 }
 
-/* InputSelect (Dropdown) Styling - Small size */
+
 #Scooter {
-    padding: 5px 10px; /* Smaller padding */
-    font-size: 0.9rem; /* Smaller font size */
-    width: 200px; /* Fixed small width */
-    border-radius: 4px; /* Rounded corners */
-    border: 1px solid #ccc; /* Light border */
-    margin-right: 10px; /* Space between input and button */
+    padding: 5px 10px; 
+    font-size: 0.9rem; 
+    width: 200px; 
+    border-radius: 4px; 
+    border: 1px solid #ccc; 
+    margin-right: 10px; 
 }
 
-/* Button Styling */
+
 button.btn {
-    padding: 8px 15px; /* Smaller padding */
-    font-size: 0.9rem; /* Smaller font size */
+    padding: 8px 15px; 
+    font-size: 0.9rem; 
     font-weight: 600;
-    background-color: #0056b3; /* Secondary button color */
+    background-color: #0056b3; 
     color: white;
     border: solid;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition */
+    transition: background-color 0.3s ease; 
 }
 
-    /* Button hover effect */
+   
     button.btn:hover {
-        background-color: #5a6268; /* Darker shade on hover */
+        background-color: #5a6268; 
     }

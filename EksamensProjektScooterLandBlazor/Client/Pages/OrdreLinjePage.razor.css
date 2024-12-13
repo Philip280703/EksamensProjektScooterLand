@@ -1,4 +1,4 @@
-﻿/* Generel tabel styling */
+﻿
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -7,7 +7,7 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-    /* Styling for tabelhovedet */
+    
     .table th {
         background-color: #f5f5f5;
         color: #333;
@@ -17,14 +17,14 @@
         border-bottom: 2px solid #ddd;
     }
 
-    /* Styling for tabelceller */
+ 
     .table td {
         padding: 12px 15px;
         text-align: left;
         border-bottom: 1px solid #ddd;
     }
 
-        /* Styling for detaljeret ordrelinje visning (f.eks. scooterleje eller produkt) */
+        
         .table td.details {
             font-size: 14px;
             color: #555;
@@ -35,13 +35,12 @@
             color: #333;
         }
 
-    /* Styling for afsluttede ordrelinjer */
+ 
     .table tr.afsluttet {
         background-color: #f0f0f0;
         color: #bbb;
     }
 
-    /* Styling for knapperne i tabellen */
     .table .action-buttons {
         display: flex;
         gap: 10px;
@@ -67,7 +66,7 @@
                 margin-right: 8px;
             }
 
-/* Styling for sum og arbejdstimer sektionen */
+
 .summary {
     font-size: 18px;
     margin-top: 20px;
@@ -78,7 +77,6 @@
         color: #007bff;
     }
 
-/* Styling for knapper udenfor tabellen */
 .buttons-section {
     display: flex;
     gap: 20px;
@@ -145,7 +143,6 @@
     width: 150px;
 }
 
-/* Styling for tabelen, når ingen ordrelinjer er tilgængelige */
 .no-orders {
     font-size: 18px;
     color: #888;

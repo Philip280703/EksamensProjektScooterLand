@@ -1,4 +1,4 @@
-﻿/* Wrapper styling */
+﻿
 .Enkelt-kunde {
     margin: 20px auto;
     padding: 10px;
@@ -8,7 +8,7 @@
     border-radius: 8px;
 }
 
-/* Table styling */
+
 .styled-table {
     width: 100%;
     border-collapse: collapse;
@@ -34,17 +34,17 @@
         border-bottom: 1px solid #ddd;
     }
 
-        /* Row hover effect */
+        
         .styled-table tbody tr:hover {
             background-color: #f1f1f1;
         }
 
-        /* Alternate row colors */
+       
         .styled-table tbody tr:nth-of-type(even) {
             background-color: #f3f3f3;
         }
 
-    /* Action button styling */
+ 
     .styled-table td:last-child {
         text-align: center;
     }
@@ -62,7 +62,7 @@
             background-color: #45a049;
         }
 
-/* Responsive table */
+
 @media (max-width: 768px) {
     .styled-table {
         font-size: 14px;
@@ -74,9 +74,9 @@
         }
 }
 
-/* Container styling */
+
 .Rediger-kunde {
-    max-width: 80%; /* Matches table width */
+    max-width: 80%; 
     margin: 20px auto;
     padding: 20px;
     background-color: #f9f9f9;
@@ -84,7 +84,7 @@
     border-radius: 8px;
 }
 
-/* Row styling */
+
 .form-row {
     display: flex;
     flex-wrap: wrap;
@@ -93,10 +93,10 @@
     margin-bottom: 15px;
 }
 
-/* Group styling */
+
 .form-group {
-    flex: 1; /* Allow fields to scale evenly */
-    min-width: 200px; /* Prevent fields from shrinking too small */
+    flex: 1; 
+    min-width: 200px; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -104,7 +104,7 @@
     margin-top: auto;
 }
 
-/* Label styling */
+
 .form-label {
     font-size: 16px;
     font-weight: 600;
@@ -112,7 +112,7 @@
     margin-bottom: 5px;
 }
 
-/* Input styling */
+
 .form-input {
     border-radius: 10px;
     padding: 10px 12px;
@@ -128,10 +128,10 @@
         box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
     }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
     .form-row {
-        flex-direction: column; /* Stack inputs vertically on smaller screens */
+        flex-direction: column; 
     }
 
     .form-group {
@@ -148,31 +148,31 @@
     }
 }
 
-/* Button styling */
+
 .button-save {
-    padding: 12px 20px; /* Polstring for knappen */
-    font-size: 16px; /* Størrelse af teksten */
-    background-color: #0056b3; /* blå baggrund */
-    color: white; /* Hvid tekst */
-    border: none; /* Fjern kantlinje */
-    border-radius: 4px; /* Rundede hjørner */
-    cursor: pointer; /* Skift musemarkør */
-    transition: background-color 0.3s ease; /* Smidig overgang ved hover */
-    width: 100%; /* Sørg for at knappen fylder hele bredden af form-group */
+    padding: 12px 20px; 
+    font-size: 16px; 
+    background-color: #0056b3; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+    width: 100%; 
     margin-top: auto;
 }
 
-    /* Hover effekt på knappen */
+    
     .button-save:hover {
-        background-color: #0056b3; /* Mørkere blå ved hover */
+        background-color: #0056b3; 
     }
 
-    /* Fokus effekt på knappen */
+    
     .button-save:focus {
-        outline: none; /* Fjern standard kant ved fokus */
-        box-shadow: 0 0 5px rgba(76, 175, 80, 0.6); /* Grøn skygge ved fokus */
+        outline: none; 
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.6); 
     }
 
     .button-save:hover {
-        background-color: #0056b3; /* Ændrer baggrundsfarven når man hover */
+        background-color: #0056b3; 
     }

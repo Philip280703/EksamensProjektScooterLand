@@ -7,7 +7,7 @@
     margin: 20px 0;
 }
 
-/* Global Styling */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
@@ -21,7 +21,7 @@ h3 {
     margin-bottom: 1rem;
 }
 
-/* Form Styling */
+
 form {
     max-width: 800px;
     margin: 20px auto;
@@ -74,7 +74,7 @@ button {
     margin-top: 5px;
 }
 
-/* Layout Styling */
+
 .mb-3 {
     margin-bottom: 1rem !important;
 }
@@ -111,7 +111,7 @@ button {
     }
 }
 
-/* Modal Styling */
+
 .message-box {
     position: fixed;
     top: 0;
@@ -150,13 +150,13 @@ button {
 }
 
 .group-box {
-    border: 1px solid #0056b3; /* Fremhæv kant med primærfarven */
+    border: 1px solid #0056b3; 
     border-radius: 8px;
     padding: 20px;
     background: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
-    max-width: 900px; /* Tilpas bredden */
+    max-width: 900px;
 }
 
 .postnummer-group{
@@ -165,20 +165,20 @@ button {
 
 .postnummer-group {
     display: flex;
-    gap: 10px; /* Afstand mellem felterne */
-    align-items: flex-start; /* Justerer inputfelterne i toppen */
+    gap: 10px; 
+    align-items: flex-start; 
 }
 
     .postnummer-group > div {
-        flex: 1; /* Sørger for, at felterne deler plads ligeligt */
-        min-width: 120px; /* Forhindrer felter i at blive for små */
+        flex: 1; 
+        min-width: 120px;
     }
 
     .postnummer-group .validation-message {
-        display: block; /* Tving beskeden til en ny linje */
-        height: 1.5em; /* Reserver plads til besked, selv når den ikke vises */
+        display: block; 
+        height: 1.5em; 
         color: red;
         font-size: 0.9em;
         margin-top: 5px;
-        white-space: nowrap; /* Forhindrer teksten i at brydes */
+        white-space: nowrap; 
     }

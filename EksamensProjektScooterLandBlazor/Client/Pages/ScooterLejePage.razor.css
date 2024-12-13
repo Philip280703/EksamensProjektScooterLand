@@ -1,4 +1,4 @@
-﻿/* Generelle stilindstillinger */
+﻿
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f9;
@@ -7,7 +7,6 @@ body {
     padding: 0;
 }
 
-/* Header Styling */
 .Tabel-Header, .Tabel-Header-Text {
     text-align: center;
     margin-top: 20px;
@@ -26,7 +25,7 @@ body {
     margin-top: 10px;
 }
 
-/* Tabel container */
+
 .table-wrapper {
     max-height: 400px;
     overflow-y: auto;
@@ -35,7 +34,7 @@ body {
     border-radius: 8px;
 }
 
-/* Tabel Styling */
+
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -64,12 +63,12 @@ body {
         border-bottom: 1px solid #ddd;
     }
 
-/* Hover effect on rows */
+
 tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Action Buttons */
+
 button {
     background: none;
     border: none;
@@ -83,7 +82,6 @@ button {
         transform: scale(1.1);
     }
 
-/* Primary button style */
 .btn-primary {
     background-color: #0056b3;
     color: white;
@@ -103,7 +101,7 @@ button {
         box-shadow: 0 0 0 4px rgba(0, 86, 179, 0.5);
     }
 
-/* Responsive Table Styling */
+
 @media (max-width: 768px) {
     .table th, .table td {
         font-size: 12px;

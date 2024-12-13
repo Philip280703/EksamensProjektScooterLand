@@ -1,4 +1,4 @@
-﻿/* Generelle indstillinger */
+﻿
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -14,7 +14,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Header-styling */
 .header {
     font-size: 28px;
     text-align: center;
@@ -22,7 +21,6 @@ body {
     color: #0056b3;
 }
 
-/* Tabel styling */
 .table-modern {
     width: 80%;
     margin: 20px auto;
@@ -55,7 +53,7 @@ body {
         transition: 0.3s ease;
     }
 
-/* Mobilvenlig styling */
+
 @media (max-width: 768px) {
     .table-modern {
         font-size: 0.9rem;
@@ -70,7 +68,7 @@ h3{
     font-weight: bold;
 }
 
-/* NotePage og knapper */
+
 .note-container {
     display: flex;
     flex-direction: column;
