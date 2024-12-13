@@ -1,20 +1,19 @@
-﻿/* Grundlæggende styling for tr */
+﻿
 tr {
     background-color: white;
 }
 
-    /* Hover-effekt for tr */
+
     tr:hover {
         background-color: #f1f1f1;
     }
 
-/* Justering af celler - gør cellerne fleksible med vertikal centreringsregel */
+
 td {
-    padding: 12px; /* Juster padding for at give cellerne lidt luft */
-    vertical-align: middle; /* Centrerer indholdet vertikalt i cellerne */
+    padding: 12px; 
+    vertical-align: middle; 
 }
 
-/* Grundlæggende styling for knapperne */
 button {
     background: none;
     border: none;
@@ -25,7 +24,6 @@ button {
     transition: transform 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease;
 }
 
-/* Knapperne har samme farve som table row */
 .Rediger-knap, .Slet-knap {
     background: transparent;
     border: none;
@@ -35,34 +33,29 @@ button {
     transition: background-color 0.5s ease, transform 0.3s ease;
 }
 
-    /* Hover-effekt: Baggrund ændres ved hover */
     .Rediger-knap:hover, .Slet-knap:hover {
         background-color: #ddd;
         transform: scale(1.1);
     }
 
-/* Ikon farver */
 button svg {
     width: 24px;
     height: 24px;
     transition: transform 0.5s ease, fill 0.5s ease;
 }
 
-/* Hover-effekt på ikoner: Gør dem større og ændrer farve */
 .Rediger-knap:hover svg {
-    transform: scale(1.1); /* Gør ikonet større */
+    transform: scale(1.1);
 }
 
 .Slet-knap:hover svg {
-    transform: scale(1.1); /* Gør ikonet større */
+    transform: scale(1.1);
 }
 
-/* Tilføj skyggeeffekt til knapperne ved hover */
 .Rediger-knap:hover, .Slet-knap:hover {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Ikonfarver for rediger og slet */
 .feather.feather-edit {
     stroke: #0288d1;
 }
@@ -79,7 +72,6 @@ button svg {
     stroke: #d32f2f;
 }
 
-/* General styles for modal */
 .hidden {
     display: none;
 }
@@ -150,7 +142,6 @@ button svg {
         background-color: #c82333;
     }
 
-/* Modal animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
