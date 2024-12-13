@@ -14,35 +14,18 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 			this.httpClient = httpClient;
 		}
 
-	 /// <summary>
-	 /// from produktService
-	 /// </summary>
-	 /// <returns></returns>
 	public async Task<Produkt[]?> GetAllProdukt()
 		{
 			var result = await httpClient.GetFromJsonAsync<Produkt[]?>(path);
 			return result;
 		}
 
-
-
-		/// <summary>
-		/// from produktService
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
 		public async Task<Produkt> GetSingleProdukt(int id)
 		{
 			var result = await httpClient.GetFromJsonAsync<Produkt>(path + "/" + id);
 			return result;
 		}
 
-
-		/// <summary>
-		/// from produktService
-		/// </summary>
-		/// <param name="produkt"></param>
-		/// <returns></returns>
 		public async Task<int> AddProdukt(Produkt produkt)
 		{
 			var result = await httpClient.PostAsJsonAsync(path,produkt);
@@ -50,11 +33,6 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 			return (int)resultStatusCode;
 		}
 
-		/// <summary>
-		/// from produktService
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
 		public async Task<int> DeleteProdukt(int id)
 		{
 			var result = await httpClient.DeleteAsync(path + "/" + id);
@@ -62,11 +40,6 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 			return (int)resultStatusCode;
 		}
 
-		/// <summary>
-		/// from produktService
-		/// </summary>
-		/// <param name="produkt"></param>
-		/// <returns></returns>
 		public async Task<int> UpdateProdukt(Produkt produkt)
 		{
 			var response = await httpClient.PutAsJsonAsync($"api/produktapi",produkt);
