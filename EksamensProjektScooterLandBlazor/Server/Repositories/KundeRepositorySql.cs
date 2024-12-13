@@ -78,13 +78,6 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
         {
             Kundeliste = new List<Kunde>();
             Kundeliste.Clear();
-            InsertTestData();
-            
-        }
-
-        public static void InsertTestData()
-        {
-            //Kundeliste.Add(new Kunde { KundeID = 1, Fornavn = "Mark", Efternavn = "Ruge", Email = "Mark.ruge5@gmail.com", Etage = "1", HusNummer = "14", Placering = "Venstre", PostNummer = 8000, PreferetMekanikerCprNummer = "123", ScooterBrandID = 1, TelefonNummer = "29906377", VejNavn = "Chr jensensvej 14", postNummerOgBy = new PostNummerOgBy {Postnummer = 6064, ByNavn ="jordrup" });
         }
     }
 }

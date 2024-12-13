@@ -100,38 +100,14 @@
     }
 
     .collapse {
-        /* Never collapse the sidebar for wide screens */
         display: block;
     }
 
     .nav-scrollable {
-        /* Allow sidebar to scroll for tall menus */
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }
 }
-
-.nav ul.nav {
-    position: relative; /* Sørg for, at den placeres i forhold til supermenuen */
-    margin: 0;
-    padding: 0; /* Fjern standardafstand */
-    background-color: #f8f9fa; /* Lys baggrund for submenu */
-    border-radius: 4px; /* Runde hjørner */
-    border: 1px solid #e9ecef; /* Let kant */
-    width: 90%; /* Gør den lidt mindre end supermenuen */
-    margin-top: 0.5rem; /* Lidt afstand mellem supermenu og submenu */
-    padding-left: 0.5rem; /* Indryk for bedre visuelt layout */
-}
-
-    .nav ul.nav li {
-        margin: 0.25rem 0; /* Reducer afstand mellem punkterne */
-    }
-
-        .nav ul.nav li .nav-link {
-            padding: 0.25rem 0.75rem; /* Mindre padding for at gøre den kompakt */
-            font-size:
-        }
-
 
 .bottom-info {
     position: absolute;
