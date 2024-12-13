@@ -15,22 +15,12 @@ namespace EksamensProjektScooterLandBlazor.Client.Services
 
         }
 
-        /// <summary>
-        /// from ScooterlejeService
-        /// </summary>
-        /// <returns></returns>
         public async Task<ScooterLeje[]?> GetAll()
         {
             var result = await httpClient.GetFromJsonAsync<ScooterLeje[]?>(path);
             return result;
         }
 
-
-        /// <summary>
-        /// from ScooterLejeService
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public async Task<ScooterLeje?> GetSingle(int id)
         {
             var result = await httpClient.GetFromJsonAsync<ScooterLeje>(path + "/" + id);

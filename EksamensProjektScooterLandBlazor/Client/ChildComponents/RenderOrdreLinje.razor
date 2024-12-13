@@ -125,8 +125,10 @@
 
     private double BeregnOrdreLinjeSum()
     {
-        if (ordreLinje == null) return 0; // Return 0 if ordreLinje is null
-
+        if (ordreLinje == null)
+        {
+            return 0;
+        }
         double pris = 0;
         int antal = ordreLinje.Antal; 
         int rabat = ordreLinje.RabatProcent ?? 0;

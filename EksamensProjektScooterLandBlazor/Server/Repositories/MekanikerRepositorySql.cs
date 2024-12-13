@@ -8,20 +8,11 @@ namespace EksamensProjektScooterLandBlazor.Server.Repositories
 	{
 		MyDbContext db = new MyDbContext();
 
-		/// <summary>
-		/// from MekanikerRepositorySql
-		/// </summary>
-		/// <returns></returns>
 		public List<Mekaniker> GetAllMekaniker()
 		{
 			return db.Mekanikere.Include(x=>x.scooterBrand).ToList();
 		}
 
-		/// <summary>
-		/// from MekanikerRepositorySql
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
 		public Mekaniker GetMekaniker(int id) 
 		{ 
 			return db.Mekanikere.Single(i=>int.Parse(i.CprNummer) == id);

@@ -33,8 +33,8 @@ namespace EksamensProjektScooterLandBlazor.Client.ChildComponents
 
 		private async Task DeleteProdukt()
 		{
-			// await deleteProdukt.InvokeAsync(produkt);
-			var placeholder = "intet at se her...";
+            // await deleteProdukt.InvokeAsync(produkt);   //// bliver ikke brugt lige nu da det er WIP
+            var placeholder = "intet at se her...";
 			Console.WriteLine(placeholder);
 
 		}

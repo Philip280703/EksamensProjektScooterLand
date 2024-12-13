@@ -149,9 +149,8 @@
         if (ordreLinje.ScooterLejeID != null)
         {
             scooterLejeModel = await scooterLejeService.GetSingle((int)ordreLinje.ScooterLejeID);
-            ordreLinje.scooterLeje = scooterLejeModel; // Initialize scooterLeje in ordreLinje
-                                                       // ?? hvis ordrelinje.Selvrisikobool ikke har en værdi defaulter den til false
-            SelvrisikoBool = ordreLinje.SelvrisikoBool ?? false;
+            ordreLinje.scooterLeje = scooterLejeModel;                                                      
+            SelvrisikoBool = ordreLinje.SelvrisikoBool ?? false; // ?? hvis ordrelinje.Selvrisikobool ikke har en værdi defaulter den til false
         }
     }
 

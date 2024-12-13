@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
+// Links til stackoverflow hvor inspiration er taget fra:
+// https://stackoverflow.com/questions/11682470/run-another-local-application-in-asp-net-website/11682671
+// https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.process.start?view=net-9.0&redirectedfrom=MSDN#overloads
+
 namespace EksamensProjektScooterLandBlazor.Server.Controllers
 {
 	[ApiController]
