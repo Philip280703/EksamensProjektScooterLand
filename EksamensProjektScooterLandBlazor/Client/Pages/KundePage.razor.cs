@@ -44,12 +44,12 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         {
             if (sortedScooterBrandID.HasValue && sortedScooterBrandID > 0)
             {
-                // Filter the list based on the selected ScooterBrandID
+                //Filtrere listen baseret på den valgte scooterBrandID
                 FilteretKundeListe = kundeListe.Where(k => k.ScooterBrandID == sortedScooterBrandID).ToList();
             }
             else
             {
-                // Reset to the full list if no valid ScooterBrandID is selected
+                //Nulstilller til den fulde liste hvis der ikk er valgt nogen valide ScooterbrandID
                 FilteretKundeListe = kundeListe;
             }
         }
