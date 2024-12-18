@@ -11,17 +11,27 @@ namespace EksamensProjektScooterLandBlazor.Client.ChildComponents
 
 		public bool showmodal { get; set; } = false;
 
+		public bool showmodal2 { get; set; } = false;
+
+		public string fejlmeddelelse { get; set; }
+
 		private List<Mekaniker> mekanikerListe { get; set; }
 
+		private List<Ordre> ordreListe { get; set; }
+
 		[Inject]
-		public IMekanikerService Service { get; set; }
+		public IMekanikerService mekanikerService { get; set; }
+
+		[Inject]
+		public IOrdreService ordreService { get; set; }
 
 		[Parameter]
 		public EventCallback<Kunde> deleteKunde { get; set; }
 
 		protected override async Task OnInitializedAsync()
 		{
-			mekanikerListe = (await Service.GetAllMekaniker()).ToList();
+			mekanikerListe = (await mekanikerService.GetAllMekaniker()).ToList();
+			ordreListe = (await ordreService.GetAllOrdrer()).ToList();
 		}
 
 		private async Task Showmodal()
@@ -29,10 +39,25 @@ namespace EksamensProjektScooterLandBlazor.Client.ChildComponents
 			showmodal = !showmodal;
 		}
 
+		private async Task Showmodal2()
+		{
+			showmodal2 = !showmodal2;
+		}
+
 		private async Task DeleteKunde()
 		{
-			await deleteKunde.InvokeAsync(kunde);
-			showmodal = !showmodal;
+			Ordre ordre = ordreListe.Find(o => o.KundeiD == kunde.KundeID);
+
+            if(ordre == null)
+            {
+				await deleteKunde.InvokeAsync(kunde);
+				showmodal = !showmodal;  
+            }
+			else
+			{
+				showmodal = !showmodal;
+				Showmodal2();
+			}
 		}
 
 

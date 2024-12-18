@@ -41,7 +41,19 @@
 			</div>
 		</div>
 	</div>
+}
 
+@if(showmodal2 == true)
+{
+	<div id="confirmBox" class="modal hidden">
+		<div class="modal-content">
+			<p>Der er sket en fejl, vær opmærksom på at kunden ikke kan slettes hvis tilkoblet til en ordre</p>
+			<p>@fejlmeddelelse</p>
+			<div class="modal-actions">
+				<button class="btn btn-success" onclick="@Showmodal2">Ok</button>
+			</div>
+		</div>
+	</div>
 }
 
 
