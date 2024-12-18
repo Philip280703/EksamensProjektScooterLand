@@ -14,6 +14,7 @@
             <th>Ydelse</th>
             <th>Estimeret tid</th>
             <th>Dato</th>
+            <th>Forslået mekaniker</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +25,14 @@
                 <td>@item.ydelse.YdelseNavn</td>
                 <td>@item.ydelse.EstimeretTid timer.</td>
                 <td>@item.OrdreLinjeDato.ToShortDateString()</td>
+                @foreach(var ordre in ordreListe)
+                {
+                    if(ordre.OrdreID == item.OrdreID)
+                    {
+                        <td>@ordre.medarbejder.Fornavn @ordre.medarbejder.Efternavn</td>
+                        
+                    }
+                }
             </tr>
         }
     </tbody>
