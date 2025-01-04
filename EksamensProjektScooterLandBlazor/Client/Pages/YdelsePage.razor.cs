@@ -1,4 +1,4 @@
-﻿using EksamensProjektScooterLandBlazor.Client.Services;
+﻿using EksamensProjektScooterLandBlazor.Client.Services.Interfaces;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -77,6 +77,7 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
         public async Task DeleteYdelseHandler()
         {
             // Gør ydelse inaktiv
+            throw new NotImplementedException();
         }
 
         public async Task UpdateYdelseHandler()

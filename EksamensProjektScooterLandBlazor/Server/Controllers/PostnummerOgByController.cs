@@ -1,5 +1,6 @@
 ﻿using EksamensProjektScooterLandBlazor.Client.Services;
 using EksamensProjektScooterLandBlazor.Server.Repositories;
+using EksamensProjektScooterLandBlazor.Server.Repositories.Interfaces;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,8 +1,8 @@
 ﻿using System.Net.Http.Json;
-using EksamensProjektScooterLandBlazor.Client.Services;
+using EksamensProjektScooterLandBlazor.Client.Services.Interfaces;
 namespace EksamensProjektScooterLandBlazor.Shared.Models;
 
-	public class KundeService : IKundeService
+public class KundeService : IKundeService
 	{
     private readonly HttpClient httpClient;
     public KundeService(HttpClient httpClient)

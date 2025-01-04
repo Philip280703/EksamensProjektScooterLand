@@ -1,11 +1,11 @@
 ﻿using EksamensProjektScooterLandBlazor.Shared.Models;
-using EksamensProjektScooterLandBlazor.Client.Services;
 using Microsoft.AspNetCore.Components;
 using static System.Net.WebRequestMethods;
 using Microsoft.AspNetCore.Components.Forms;
+using EksamensProjektScooterLandBlazor.Client.Services.Interfaces;
 namespace EksamensProjektScooterLandBlazor.Client.Pages
 {
-	public partial class EditYdelsePage
+    public partial class EditYdelsePage
 	{
 		[Inject]
 		public IYdelseService YdelseService { get; set; }

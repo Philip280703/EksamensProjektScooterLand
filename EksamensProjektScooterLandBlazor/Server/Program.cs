@@ -1,4 +1,5 @@
 using EksamensProjektScooterLandBlazor.Server.Repositories;
+using EksamensProjektScooterLandBlazor.Server.Repositories.Interfaces;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 

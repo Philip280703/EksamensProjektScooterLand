@@ -2,6 +2,7 @@
 using System.Net.Http.Json;
 using Microsoft.Extensions;
 using Microsoft.EntityFrameworkCore;
+using EksamensProjektScooterLandBlazor.Client.Services.Interfaces;
 
 
 namespace EksamensProjektScooterLandBlazor.Client.Services

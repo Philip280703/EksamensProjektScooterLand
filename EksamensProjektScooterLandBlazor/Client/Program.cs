@@ -1,6 +1,7 @@
 using Blazored.LocalStorage;
 using EksamensProjektScooterLandBlazor.Client;
 using EksamensProjektScooterLandBlazor.Client.Services;
+using EksamensProjektScooterLandBlazor.Client.Services.Interfaces;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

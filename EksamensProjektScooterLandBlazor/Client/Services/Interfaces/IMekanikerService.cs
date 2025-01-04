@@ -1,6 +1,6 @@
 ﻿using EksamensProjektScooterLandBlazor.Shared.Models;
 
-namespace EksamensProjektScooterLandBlazor.Client.Services
+namespace EksamensProjektScooterLandBlazor.Client.Services.Interfaces
 {
     public interface IMekanikerService
     {

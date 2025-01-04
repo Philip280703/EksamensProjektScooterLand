@@ -1,10 +1,10 @@
 ﻿using EksamensProjektScooterLandBlazor.Shared.Models;
-using EksamensProjektScooterLandBlazor.Client.Services;
 using Microsoft.AspNetCore.Components;
 using static System.Net.WebRequestMethods;
+using EksamensProjektScooterLandBlazor.Client.Services.Interfaces;
 namespace EksamensProjektScooterLandBlazor.Client.Pages
 {
-	public partial class KundePage
+    public partial class KundePage
 	{
 		[Inject]
 		public IKundeService KundeService { get; set; }
@@ -35,10 +35,6 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 			ErrorCode = await KundeService.DeleteKunde(kunde.KundeID);
 		}
 
-		public async void UpdateKunde(Kunde kunde)
-		{
-
-		}
 
         private void FilterKundeListeByScooter()
         {

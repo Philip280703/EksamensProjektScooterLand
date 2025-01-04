@@ -1,11 +1,11 @@
-﻿using EksamensProjektScooterLandBlazor.Client.Services;
+﻿using EksamensProjektScooterLandBlazor.Client.Services.Interfaces;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.AspNetCore.Components;
 
 
 namespace EksamensProjektScooterLandBlazor.Client.ChildComponents
 {
-	public partial class RenderProdukt
+    public partial class RenderProdukt
 	{
 		[Parameter]
 		public Produkt produkt { get; set; }

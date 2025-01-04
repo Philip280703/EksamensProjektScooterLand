@@ -1,10 +1,11 @@
 ﻿using EksamensProjektScooterLandBlazor.Server.DataAccess;
+using EksamensProjektScooterLandBlazor.Server.Repositories.Interfaces;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace EksamensProjektScooterLandBlazor.Server.Repositories
 {
-	public class MekanikerRepositorySql : IMekanikerRepository
+    public class MekanikerRepositorySql : IMekanikerRepository
 	{
 		MyDbContext db = new MyDbContext();
 

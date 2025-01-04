@@ -1,4 +1,4 @@
-﻿using EksamensProjektScooterLandBlazor.Client.Services;
+﻿using EksamensProjektScooterLandBlazor.Client.Services.Interfaces;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using System.Net.Http.Json;
 

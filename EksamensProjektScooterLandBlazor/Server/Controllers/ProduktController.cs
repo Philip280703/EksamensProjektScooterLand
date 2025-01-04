@@ -1,4 +1,5 @@
 ﻿using EksamensProjektScooterLandBlazor.Server.Repositories;
+using EksamensProjektScooterLandBlazor.Server.Repositories.Interfaces;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -6,7 +7,7 @@ using System.Net;
 
 namespace EksamensProjektScooterLandBlazor.Server.Controllers
 {
-	[ApiController]
+    [ApiController]
 	[Route("api/produktapi")]
 	public class ProduktController : ControllerBase
 	{

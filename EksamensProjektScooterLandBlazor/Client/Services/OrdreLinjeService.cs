@@ -1,9 +1,10 @@
-﻿using EksamensProjektScooterLandBlazor.Shared.Models;
+﻿using EksamensProjektScooterLandBlazor.Client.Services.Interfaces;
+using EksamensProjektScooterLandBlazor.Shared.Models;
 using System.Net.Http.Json;
 
 namespace EksamensProjektScooterLandBlazor.Client.Services
 {
-	public class OrdreLinjeService : IOrdreLinjeService
+    public class OrdreLinjeService : IOrdreLinjeService
 	{
 		private readonly HttpClient httpClient;
 

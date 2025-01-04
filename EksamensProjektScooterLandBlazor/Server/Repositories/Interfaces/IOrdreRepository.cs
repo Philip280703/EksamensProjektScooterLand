@@ -1,6 +1,6 @@
 ﻿using EksamensProjektScooterLandBlazor.Shared.Models;
 
-namespace EksamensProjektScooterLandBlazor.Server.Repositories
+namespace EksamensProjektScooterLandBlazor.Server.Repositories.Interfaces
 {
     public interface IOrdreRepository
     {

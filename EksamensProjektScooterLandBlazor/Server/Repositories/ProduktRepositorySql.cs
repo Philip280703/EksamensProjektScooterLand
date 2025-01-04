@@ -1,9 +1,10 @@
 ﻿using EksamensProjektScooterLandBlazor.Server.DataAccess;
+using EksamensProjektScooterLandBlazor.Server.Repositories.Interfaces;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 
 namespace EksamensProjektScooterLandBlazor.Server.Repositories
 {
-	public class ProduktRepositorySql : IProduktRepository
+    public class ProduktRepositorySql : IProduktRepository
 	{
 		MyDbContext db = new MyDbContext();
 

@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using EksamensProjektScooterLandBlazor.Shared.Models;
+using EksamensProjektScooterLandBlazor.Server.Repositories.Interfaces;
 
 namespace EksamensProjektScooterLandBlazor.Server.Controllers
 {
-	[ApiController]
+    [ApiController]
 	[Route("api/OrdreLinjeapi")]
 	public class OrdreLinjeController : ControllerBase
 	{

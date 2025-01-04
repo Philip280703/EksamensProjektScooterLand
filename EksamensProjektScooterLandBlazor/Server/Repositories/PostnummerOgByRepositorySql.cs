@@ -1,4 +1,5 @@
 ﻿using EksamensProjektScooterLandBlazor.Server.DataAccess;
+using EksamensProjektScooterLandBlazor.Server.Repositories.Interfaces;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 
 namespace EksamensProjektScooterLandBlazor.Server.Repositories

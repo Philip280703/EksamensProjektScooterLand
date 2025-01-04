@@ -2,13 +2,13 @@
 using EksamensProjektScooterLandBlazor.Client.Services;
 
 
-namespace EksamensProjektScooterLandBlazor.Server.Repositories
+namespace EksamensProjektScooterLandBlazor.Server.Repositories.Interfaces
 {
     public interface IYdelseRepository
     {
         List<Ydelse> GetAllYdelser();
         Ydelse GetYdelse(int id);
-        
+
         void AddYdelse(Ydelse ydelse);
         bool DeleteYdelse(int id);
         bool UpdateYdelse(Ydelse ydelse);

@@ -1,14 +1,14 @@
 ﻿using EksamensProjektScooterLandBlazor.Shared.Models;
-using EksamensProjektScooterLandBlazor.Client.Services;
 using Microsoft.AspNetCore.Components;
 using static System.Net.WebRequestMethods;
 using Microsoft.AspNetCore.Components.Forms;
+using EksamensProjektScooterLandBlazor.Client.Services.Interfaces;
 
 
 
 namespace EksamensProjektScooterLandBlazor.Client.Pages
 {
-	public partial class ProduktPage
+    public partial class ProduktPage
 	{
 		private List<Produkt> produktListe = new List<Produkt>();
 
@@ -48,8 +48,10 @@ namespace EksamensProjektScooterLandBlazor.Client.Pages
 
 		public async void DeleteProdukt(Produkt produkt)
 		{
+			// ønsker ikke hard delete som denne
 			// produktListe.Remove(produkt);
 			// ErrorCode = await Service.DeleteProdukt(produkt.ProduktID);
+			throw new NotImplementedException();
 		}
 
 		public void visTilføjProduktSide()

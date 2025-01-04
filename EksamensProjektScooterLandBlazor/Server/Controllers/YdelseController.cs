@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using EksamensProjektScooterLandBlazor.Shared.Models;
 using EksamensProjektScooterLandBlazor.Server.Controllers;
 using System.Net;
+using EksamensProjektScooterLandBlazor.Server.Repositories.Interfaces;
 
 namespace EksamensProjektScooterLandBlazor.Server.Controllers
 
